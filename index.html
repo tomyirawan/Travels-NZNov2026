@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>South Island Itinerary · Nov 2026</title>
-<meta name="description" content="A multi-day journey through New Zealand's South Island — from Christchurch to the dark skies of Lake Tekapo and beyond." />
+<title>The South Island Odyssey · Nov 2026</title>
+<meta name="description" content="A four-day journey through New Zealand's South Island — from Christchurch to the dark skies of Lake Tekapo, the foot of Aoraki/Mt Cook, and on to Queenstown." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -36,8 +36,8 @@
   /* ============== HERO ============== */
   .hero {
     position: relative;
-    min-height: 78vh;
-    padding: 60px 7vw 80px;
+    min-height: 90vh;
+    padding: 60px 7vw 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -83,16 +83,17 @@
   .hero-main {
     position: relative;
     z-index: 2;
-    margin-top: 8vh;
+    margin-top: 7vh;
+    max-width: 1100px;
   }
   .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: clamp(44px, 8vw, 108px);
-    line-height: 0.96;
+    font-size: clamp(48px, 9vw, 124px);
+    line-height: 0.95;
     letter-spacing: -0.025em;
     color: var(--ink);
-    max-width: 14ch;
+    max-width: 16ch;
   }
   .hero h1 em {
     font-style: italic;
@@ -100,44 +101,49 @@
     color: var(--green);
   }
   .hero .sub {
-    margin-top: 32px;
-    max-width: 620px;
-    font-size: 19px;
-    line-height: 1.65;
+    margin-top: 40px;
+    max-width: 640px;
+    font-size: 17.5px;
+    line-height: 1.7;
     color: #3d3a30;
+    column-rule: 1px solid var(--line);
   }
-  .hero .sub strong { color: var(--ink); font-weight: 600; }
-
-  .meta-strip {
-    margin-top: 56px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    border-top: 1px solid rgba(30, 24, 12, 0.18);
-    padding-top: 26px;
-    position: relative;
-    z-index: 2;
+  .hero .sub p {
+    margin-bottom: 16px;
   }
-  .meta-strip .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .meta-strip .value {
+  /* Drop-cap on the first paragraph */
+  .hero .sub p:first-of-type::first-letter {
     font-family: 'Fraunces', serif;
-    font-size: 24px;
     font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-  .meta-strip .value em {
     font-style: italic;
-    color: var(--gold);
+    font-size: 4.4em;
+    float: left;
+    line-height: 0.85;
+    margin: 0.05em 0.12em 0 0;
+    color: var(--green);
   }
+  .hero .sub p.closing {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(30, 24, 12, 0.18);
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 0;
+    max-width: 30ch;
+  }
+  .hero .sub p.closing em {
+    font-style: italic;
+    color: var(--green);
+    font-weight: 500;
+  }
+
   @media (max-width: 720px) {
-    .meta-strip { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .hero { min-height: auto; padding-bottom: 70px; }
+    .hero .sub { font-size: 16px; }
+    .hero .sub p:first-of-type::first-letter { font-size: 3.6em; }
+    .hero .sub p.closing { font-size: 18px; }
   }
 
   /* ============== SECTION FRAME ============== */
@@ -352,39 +358,26 @@
     <li><a href="index.html" class="active">Overview</a></li>
     <li><a href="day1.html">Day 1</a></li>
     <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
   </ul>
 </nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-top">
-    <div><span class="dot"></span>Trip planner · Nov 2026</div>
+    <div><span class="dot"></span>An itinerary · November 2026</div>
     <div>South Island · Aotearoa NZ</div>
   </div>
 
   <div class="hero-main">
-    <h1>From Garden City to <em>dark skies</em>.</h1>
-    <p class="sub">
-      A <strong>South Island</strong> journey beginning in Christchurch on a Saturday spring afternoon and rolling south into the Mackenzie Basin's UNESCO Dark Sky Reserve. Each day below opens its own page — full timeline, costs, fuel notes, and the small print that makes the difference.
-    </p>
-
-    <div class="meta-strip">
-      <div>
-        <div class="label">Start</div>
-        <div class="value">7 <em>Nov</em></div>
-      </div>
-      <div>
-        <div class="label">Days planned</div>
-        <div class="value">2 <em>of N</em></div>
-      </div>
-      <div>
-        <div class="label">Route</div>
-        <div class="value">CHC <em>→</em> Tekapō</div>
-      </div>
-      <div>
-        <div class="label">Hemisphere</div>
-        <div class="value">Spring <em>‘26</em></div>
-      </div>
+    <h1>The South Island <em>Odyssey</em>.</h1>
+    <div class="sub">
+      <p>Leave the world behind where the tarmac meets the sky, and follow the road that wanders through the spine of the South Island. This is a land where ancient ferns bow to wind-swept coasts, and roaring oceans tell secrets to the sun-bleached driftwood.</p>
+      <p>Dawn brings the mist over jagged peaks — the Southern Alps — dusted in snow that sparkles against the turquoise lakes of Tekapo and Pukaki. Your heart moves to the rhythm of adventure, with the sharp scent of cedar and the rush of distant, thunderous falls.</p>
+      <p>By midday, you are navigating the west coast, where green stone lies hidden on misty shores, and the air hums with the song of a wilder world. Here, the road twists through forgotten rainforests, where the only traffic is the call of the Tūī bird.</p>
+      <p>When the sun dips low, turning mountains into silhouettes of charcoal and violet, you find yourself on a quiet beach, watching the last golden light reflect off the water. In the South Island, you don't just take a trip — you slow down to the pace of nature.</p>
+      <p class="closing"><em>Adventure is not just found here. It wakes you up.</em></p>
     </div>
   </div>
 </section>
@@ -433,14 +426,50 @@
       </div>
     </a>
 
+    <a href="day3.html" class="day-card day2">
+      <div class="banner">
+        <div class="tag">Day 03 · Mon 9 Nov</div>
+      </div>
+      <div class="body">
+        <h3>Tekapō → <em>Aoraki / Mt Cook</em></h3>
+        <div class="date">Mon · 9 Nov 2026 · 165 km</div>
+        <p>South on SH8 along the milk-blue Lake Pukaki, into Aoraki/Mount Cook National Park. The Hooker Valley swing-bridge walk to an iceberg-dotted glacial lake. Sleep at Glentanner under the year's truly dark sky — exact night of the new moon.</p>
+        <div class="stats">
+          <span>165 km</span>
+          <span>~25 L diesel</span>
+          <span>10.6 km hike</span>
+          <span>0% moon</span>
+        </div>
+        <div class="cta">Open Day 3</div>
+      </div>
+    </a>
+
+    <a href="day4.html" class="day-card day2">
+      <div class="banner">
+        <div class="tag">Day 04 · Tue 10 Nov</div>
+      </div>
+      <div class="body">
+        <h3>Aoraki → <em>Queenstown</em></h3>
+        <div class="date">Tue · 10 Nov 2026 · 263 km</div>
+        <p>Out of the alpine basin into Central Otago: salmon fishing in the Wairepo canals, the otherworldly Lindis Pass climb, honesty-box honey in Cromwell, the Kawarau bungy bridge, Gibbston Valley wine country, then into Queenstown for the night.</p>
+        <div class="stats">
+          <span>263 km</span>
+          <span>~39 L diesel</span>
+          <span>3 regions</span>
+          <span>43 m bungy</span>
+        </div>
+        <div class="cta">Open Day 4</div>
+      </div>
+    </a>
+
     <div class="day-card future">
       <div class="banner">
-        <div class="tag" style="color: rgba(30,24,12,0.4)">Day 03+ · TBD</div>
+        <div class="tag" style="color: rgba(30,24,12,0.4)">Day 05+ · TBD</div>
       </div>
       <div class="body">
         <h3>More days <em>to come</em></h3>
         <div class="date">Add them as you plan</div>
-        <p>Drop a new <code>dayN.html</code> into the site folder, add a card here, and add a link in the nav. Suggested next legs: Tekapo → Aoraki/Mount Cook, Cook → Wānaka, Wānaka → Queenstown, Te Anau → Milford.</p>
+        <p>Drop a new <code>dayN.html</code> into the site folder, add a card here, and add a link in the nav. Suggested next legs from Queenstown: Glenorchy day trip, Te Anau → Milford Sound, the Catlins coast, or back north via Wānaka and the West Coast.</p>
         <div class="cta" style="color: var(--muted)">Coming soon</div>
       </div>
     </div>
@@ -454,7 +483,7 @@
         <span class="num">§ 02 / About</span>
       </div>
       <p class="lead">
-        Two days, two moods. Day one walks; <em>day two drives</em>. Each page keeps its own rhythm — the colours, the typography, the level of detail — because the days themselves don't feel alike.
+        Four days, four moods. From garden-city arrival to alpine basin to wine country — each page keeps its own rhythm, its own <em>colours and typography</em>, because the days themselves don't feel alike.
       </p>
     </div>
     <div class="body">
