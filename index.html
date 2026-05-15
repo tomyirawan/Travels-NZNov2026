@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>South Island Itinerary · Nov 2026</title>
+<meta name="description" content="A multi-day journey through New Zealand's South Island — from Christchurch to the dark skies of Lake Tekapo and beyond." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css" />
+<style>
+  :root {
+    --bg: #f5efe2;
+    --paper: #ffffff;
+    --ink: #1d2421;
+    --muted: #6b6356;
+    --green: #2c6e49;
+    --gold: #c89a47;
+    --rose: #d97e6b;
+    --lake: #3a8aa0;
+    --line: #e3dcc8;
+    --shadow: 0 6px 32px rgba(30, 24, 12, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    position: relative;
+    min-height: 78vh;
+    padding: 60px 7vw 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 80% 15%, rgba(200, 154, 71, 0.18), transparent 55%),
+      radial-gradient(ellipse at 10% 90%, rgba(58, 138, 160, 0.16), transparent 55%),
+      linear-gradient(180deg, #f5efe2 0%, #ede4cf 100%);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(135deg,
+        rgba(28, 36, 33, 0.025) 0,
+        rgba(28, 36, 33, 0.025) 1px,
+        transparent 1px,
+        transparent 8px);
+    pointer-events: none;
+  }
+
+  .hero-top {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-top .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .hero-main {
+    position: relative;
+    z-index: 2;
+    margin-top: 8vh;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(44px, 8vw, 108px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--green);
+  }
+  .hero .sub {
+    margin-top: 32px;
+    max-width: 620px;
+    font-size: 19px;
+    line-height: 1.65;
+    color: #3d3a30;
+  }
+  .hero .sub strong { color: var(--ink); font-weight: 600; }
+
+  .meta-strip {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    border-top: 1px solid rgba(30, 24, 12, 0.18);
+    padding-top: 26px;
+    position: relative;
+    z-index: 2;
+  }
+  .meta-strip .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .meta-strip .value {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .meta-strip .value em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  @media (max-width: 720px) {
+    .meta-strip { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  }
+
+  /* ============== SECTION FRAME ============== */
+  main {
+    padding: 80px 7vw 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: -0.015em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--green); }
+
+  /* ============== DAY CARDS ============== */
+  .days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .day-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .day-card .banner {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card.day1 .banner {
+    background: linear-gradient(135deg, #2c6e49 0%, #4c956c 70%, #6db58a 100%);
+  }
+  .day-card.day2 .banner {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(232,184,106,0.35), transparent 60%),
+      linear-gradient(180deg, #050817 0%, #11183a 100%);
+  }
+  .day-card.day2 .banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, #fff8d6 50%, transparent 100%),
+      radial-gradient(1px 1px at 60% 50%, #fff8d6 50%, transparent 100%),
+      radial-gradient(1px 1px at 80% 20%, #fff8d6 50%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 75%, #fff8d6 50%, transparent 100%),
+      radial-gradient(1px 1px at 90% 70%, #fff8d6 50%, transparent 100%),
+      radial-gradient(1px 1px at 15% 85%, #fff8d6 50%, transparent 100%);
+    opacity: 0.9;
+  }
+  .day-card .banner .tag {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+  }
+  .day-card .body {
+    padding: 22px 22px 24px;
+  }
+  .day-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .day-card h3 em { font-style: italic; color: var(--green); }
+  .day-card.day2 h3 em { color: var(--gold); }
+  .day-card .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .day-card p {
+    font-size: 14.5px;
+    color: #4a4639;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .day-card .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .day-card .stats span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(44, 110, 73, 0.08);
+    color: var(--green);
+  }
+  .day-card.day2 .stats span {
+    background: rgba(200, 154, 71, 0.12);
+    color: #8a6320;
+  }
+  .day-card .cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-card.day2 .cta { color: var(--gold); }
+  .day-card .cta::after {
+    content: "→";
+    transition: transform 0.25s ease;
+  }
+  .day-card:hover .cta::after { transform: translateX(4px); }
+
+  /* Coming soon card */
+  .day-card.future {
+    border-style: dashed;
+    background: transparent;
+    opacity: 0.65;
+    cursor: default;
+  }
+  .day-card.future:hover { transform: none; box-shadow: none; }
+  .day-card.future .banner {
+    background: repeating-linear-gradient(45deg, #e8e0c8, #e8e0c8 8px, #ede4cf 8px, #ede4cf 16px);
+  }
+
+  /* ============== ROUTE / ABOUT ============== */
+  .about {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .about { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .about .lead {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+  }
+  .about .lead em { font-style: italic; color: var(--green); }
+  .about .body p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #3d3a30;
+    margin-bottom: 14px;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    margin-top: 100px;
+    padding: 40px 7vw;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  footer .credit { margin-top: 8px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<!-- ============ SHARED NAV ============ -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">
+    SI · Nov 2026 <span class="sub">— Itinerary</span>
+  </a>
+  <ul>
+    <li><a href="index.html" class="active">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-top">
+    <div><span class="dot"></span>Trip planner · Nov 2026</div>
+    <div>South Island · Aotearoa NZ</div>
+  </div>
+
+  <div class="hero-main">
+    <h1>From Garden City to <em>dark skies</em>.</h1>
+    <p class="sub">
+      A <strong>South Island</strong> journey beginning in Christchurch on a Saturday spring afternoon and rolling south into the Mackenzie Basin's UNESCO Dark Sky Reserve. Each day below opens its own page — full timeline, costs, fuel notes, and the small print that makes the difference.
+    </p>
+
+    <div class="meta-strip">
+      <div>
+        <div class="label">Start</div>
+        <div class="value">7 <em>Nov</em></div>
+      </div>
+      <div>
+        <div class="label">Days planned</div>
+        <div class="value">2 <em>of N</em></div>
+      </div>
+      <div>
+        <div class="label">Route</div>
+        <div class="value">CHC <em>→</em> Tekapō</div>
+      </div>
+      <div>
+        <div class="label">Hemisphere</div>
+        <div class="value">Spring <em>‘26</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DAY CARDS ============ -->
+<main>
+
+  <div class="section-head">
+    <span class="num">§ 01 / The Days</span>
+    <h2>Pick a day, <em>open the plan</em></h2>
+  </div>
+
+  <div class="days">
+
+    <a href="day1.html" class="day-card day1">
+      <div class="banner">
+        <div class="tag">Day 01 · Sat 7 Nov</div>
+      </div>
+      <div class="body">
+        <h3>Christchurch — <em>Arrival</em></h3>
+        <div class="date">Sat · 7 Nov 2026 · Land 14:55</div>
+        <p>Land, drop bags at LyLo, then a Route 29 bus into the city: Botanic Gardens at peak spring bloom, New Regent Street's pastel arcade, Cathedral Square, dinner at Riverside Market, dusk along the Avon.</p>
+        <div class="stats">
+          <span>~ 7 km walking</span>
+          <span>NZ$6 transport</span>
+          <span>No driving</span>
+        </div>
+        <div class="cta">Open Day 1</div>
+      </div>
+    </a>
+
+    <a href="day2.html" class="day-card day2">
+      <div class="banner">
+        <div class="tag">Day 02 · Sun 8 Nov</div>
+      </div>
+      <div class="body">
+        <h3>Christchurch <em>→ Tekapō</em></h3>
+        <div class="date">Sun · 8 Nov 2026 · 227 km</div>
+        <p>Pick up the Maui River motorhome and head south on SH1/SH8 — Geraldine cheese, Fairlie pork-belly pies, alpacas at Burkes Pass, and a 1%-lit waning crescent for stargazing under Bortle 2 skies.</p>
+        <div class="stats">
+          <span>227 km · ~3h</span>
+          <span>~36 L diesel</span>
+          <span>Bortle 2 sky</span>
+        </div>
+        <div class="cta">Open Day 2</div>
+      </div>
+    </a>
+
+    <div class="day-card future">
+      <div class="banner">
+        <div class="tag" style="color: rgba(30,24,12,0.4)">Day 03+ · TBD</div>
+      </div>
+      <div class="body">
+        <h3>More days <em>to come</em></h3>
+        <div class="date">Add them as you plan</div>
+        <p>Drop a new <code>dayN.html</code> into the site folder, add a card here, and add a link in the nav. Suggested next legs: Tekapo → Aoraki/Mount Cook, Cook → Wānaka, Wānaka → Queenstown, Te Anau → Milford.</p>
+        <div class="cta" style="color: var(--muted)">Coming soon</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about">
+    <div>
+      <div class="section-head" style="margin-bottom: 24px;">
+        <span class="num">§ 02 / About</span>
+      </div>
+      <p class="lead">
+        Two days, two moods. Day one walks; <em>day two drives</em>. Each page keeps its own rhythm — the colours, the typography, the level of detail — because the days themselves don't feel alike.
+      </p>
+    </div>
+    <div class="body">
+      <p>The itinerary is opinionated: <em>must-do</em> stops are flagged, <em>optional</em> stops are clearly labelled, and every fuel decision is costed against the nearest cheaper alternative. The aim is to remove decision fatigue without making the day feel rigid.</p>
+      <p>Times are local NZDT. Prices in NZ dollars. Bus schedules and fuel prices were current at planning time — verify on the day, especially around public holidays.</p>
+      <p>This site is static HTML, no build step. Add a new day by duplicating an existing file, swapping in the content, and linking it from the nav and the cards above.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>South Island Itinerary · November 2026 · NZDT</div>
+  <div class="credit">Hosted on GitHub Pages · No tracking, no analytics</div>
+</footer>
+
+</body>
+</html>
