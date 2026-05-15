@@ -33,21 +33,22 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ============== HERO ============== */
-  .hero {
+  /* ============== SPLIT LAYOUT — hero left, cards right ============== */
+  .split {
     position: relative;
-    min-height: 90vh;
-    padding: 60px 7vw 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: 100vh;
+    padding: 40px 5vw 60px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 64px;
+    align-items: start;
     overflow: hidden;
     background:
-      radial-gradient(ellipse at 80% 15%, rgba(200, 154, 71, 0.18), transparent 55%),
-      radial-gradient(ellipse at 10% 90%, rgba(58, 138, 160, 0.16), transparent 55%),
+      radial-gradient(ellipse at 80% 15%, rgba(200, 154, 71, 0.16), transparent 55%),
+      radial-gradient(ellipse at 10% 90%, rgba(58, 138, 160, 0.14), transparent 55%),
       linear-gradient(180deg, #f5efe2 0%, #ede4cf 100%);
   }
-  .hero::after {
+  .split::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -60,40 +61,38 @@
     pointer-events: none;
   }
 
+  /* --- LEFT: hero --- */
+  .hero {
+    position: sticky;
+    top: 80px;
+    z-index: 2;
+  }
   .hero-top {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--muted);
     display: flex;
     justify-content: space-between;
-    position: relative;
-    z-index: 2;
+    margin-bottom: 28px;
   }
   .hero-top .dot {
     display: inline-block;
-    width: 7px; height: 7px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--gold);
-    margin-right: 10px;
+    margin-right: 8px;
     vertical-align: middle;
-  }
-
-  .hero-main {
-    position: relative;
-    z-index: 2;
-    margin-top: 7vh;
-    max-width: 1100px;
   }
   .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 300;
-    font-size: clamp(48px, 9vw, 124px);
-    line-height: 0.95;
-    letter-spacing: -0.025em;
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
     color: var(--ink);
-    max-width: 16ch;
+    max-width: 14ch;
   }
   .hero h1 em {
     font-style: italic;
@@ -101,33 +100,31 @@
     color: var(--green);
   }
   .hero .sub {
-    margin-top: 40px;
-    max-width: 640px;
-    font-size: 17.5px;
-    line-height: 1.7;
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.65;
     color: #3d3a30;
-    column-rule: 1px solid var(--line);
+    max-width: 46ch;
   }
   .hero .sub p {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
-  /* Drop-cap on the first paragraph */
   .hero .sub p:first-of-type::first-letter {
     font-family: 'Fraunces', serif;
     font-weight: 400;
     font-style: italic;
-    font-size: 4.4em;
+    font-size: 3.4em;
     float: left;
     line-height: 0.85;
-    margin: 0.05em 0.12em 0 0;
+    margin: 0.06em 0.1em 0 0;
     color: var(--green);
   }
   .hero .sub p.closing {
-    margin-top: 28px;
-    padding-top: 20px;
+    margin-top: 20px;
+    padding-top: 16px;
     border-top: 1px solid rgba(30, 24, 12, 0.18);
     font-family: 'Fraunces', serif;
-    font-size: 22px;
+    font-size: 17px;
     line-height: 1.45;
     color: var(--ink);
     margin-bottom: 0;
@@ -139,14 +136,204 @@
     font-weight: 500;
   }
 
-  @media (max-width: 720px) {
-    .hero { min-height: auto; padding-bottom: 70px; }
-    .hero .sub { font-size: 16px; }
-    .hero .sub p:first-of-type::first-letter { font-size: 3.6em; }
-    .hero .sub p.closing { font-size: 18px; }
+  /* --- RIGHT: cards column --- */
+  .cards-col {
+    position: relative;
+    z-index: 2;
+  }
+  .cards-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cards-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cards-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(20px, 2.4vw, 30px);
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .cards-head h2 em { font-style: italic; color: var(--green); }
+  .cards-head .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
-  /* ============== SECTION FRAME ============== */
+  /* ============== COMPACT DAY CARDS ============== */
+  .days {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .day-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 56px 1fr 18px;
+    gap: 14px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    overflow: hidden;
+  }
+  .day-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 24, 12, 0.08);
+    border-color: rgba(30, 24, 12, 0.22);
+  }
+  /* Coloured marker on the left, replaces banner */
+  .day-card .marker {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.92);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card .marker .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .day-card .marker .dow {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    margin-top: 3px;
+    opacity: 0.85;
+  }
+  /* Themed marker variants */
+  .day-card.day1 .marker {
+    background: linear-gradient(135deg, #2c6e49 0%, #4c956c 100%);
+  }
+  .day-card.day2 .marker {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(232, 184, 106, 0.5), transparent 60%),
+      linear-gradient(180deg, #050817 0%, #11183a 100%);
+  }
+  .day-card.day2 .marker::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(0.8px 0.8px at 20% 30%, #fff8d6 50%, transparent),
+      radial-gradient(0.8px 0.8px at 70% 60%, #fff8d6 50%, transparent),
+      radial-gradient(0.8px 0.8px at 40% 80%, #fff8d6 50%, transparent),
+      radial-gradient(0.8px 0.8px at 85% 25%, #fff8d6 50%, transparent);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  .day-card.day1 .marker .num { color: #fff; }
+  .day-card.day2 .marker .num { color: #e8b86a; }
+
+  /* Body inside compact card */
+  .day-card .text {
+    min-width: 0; /* allow text-overflow */
+  }
+  .day-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 15.5px;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .day-card h3 em { font-style: italic; color: var(--green); font-weight: 500; }
+  .day-card.day2 h3 em { color: var(--gold); }
+  .day-card .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .day-card .arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: var(--muted);
+    transition: transform 0.18s ease, color 0.18s ease;
+    flex-shrink: 0;
+  }
+  .day-card:hover .arrow {
+    transform: translateX(3px);
+    color: var(--green);
+  }
+  .day-card.day2:hover .arrow { color: var(--gold); }
+
+  /* Future / placeholder card */
+  .day-card.future {
+    border-style: dashed;
+    background: transparent;
+    cursor: default;
+  }
+  .day-card.future:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+  }
+  .day-card.future .marker {
+    background: repeating-linear-gradient(45deg, #e8e0c8, #e8e0c8 5px, #ede4cf 5px, #ede4cf 10px);
+  }
+  .day-card.future .marker .num,
+  .day-card.future .marker .dow {
+    color: rgba(30, 24, 12, 0.4);
+  }
+  .day-card.future h3 { color: rgba(30, 24, 12, 0.55); }
+  .day-card.future .date { color: rgba(30, 24, 12, 0.35); }
+  .day-card.future:hover .arrow { transform: none; color: var(--muted); }
+
+  /* Responsive: stack on tablet, single column on phone */
+  @media (max-width: 1080px) {
+    .split {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 40px 7vw 60px;
+    }
+    .hero {
+      position: relative;
+      top: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .days { grid-template-columns: 1fr; }
+    .day-card { grid-template-columns: 44px 1fr 16px; gap: 12px; padding: 10px 12px; }
+    .day-card .marker { width: 44px; height: 44px; }
+    .day-card .marker .num { font-size: 20px; }
+    .day-card h3 { font-size: 14px; }
+  }
+
+  /* ============== SECTION FRAME (below the split) ============== */
   main {
     padding: 80px 7vw 40px;
     max-width: 1280px;
@@ -174,137 +361,6 @@
     letter-spacing: -0.015em;
   }
   .section-head h2 em { font-style: italic; color: var(--green); }
-
-  /* ============== DAY CARDS ============== */
-  .days {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-  }
-  .day-card {
-    position: relative;
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .day-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-  }
-  .day-card .banner {
-    height: 160px;
-    position: relative;
-    overflow: hidden;
-  }
-  .day-card.day1 .banner {
-    background: linear-gradient(135deg, #2c6e49 0%, #4c956c 70%, #6db58a 100%);
-  }
-  .day-card.day2 .banner {
-    background:
-      radial-gradient(ellipse at 30% 30%, rgba(232,184,106,0.35), transparent 60%),
-      linear-gradient(180deg, #050817 0%, #11183a 100%);
-  }
-  .day-card.day2 .banner::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(1.5px 1.5px at 20% 30%, #fff8d6 50%, transparent 100%),
-      radial-gradient(1px 1px at 60% 50%, #fff8d6 50%, transparent 100%),
-      radial-gradient(1px 1px at 80% 20%, #fff8d6 50%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 40% 75%, #fff8d6 50%, transparent 100%),
-      radial-gradient(1px 1px at 90% 70%, #fff8d6 50%, transparent 100%),
-      radial-gradient(1px 1px at 15% 85%, #fff8d6 50%, transparent 100%);
-    opacity: 0.9;
-  }
-  .day-card .banner .tag {
-    position: absolute;
-    top: 14px;
-    left: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
-  }
-  .day-card .body {
-    padding: 22px 22px 24px;
-  }
-  .day-card h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 24px;
-    letter-spacing: -0.01em;
-    margin-bottom: 6px;
-  }
-  .day-card h3 em { font-style: italic; color: var(--green); }
-  .day-card.day2 h3 em { color: var(--gold); }
-  .day-card .date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-  }
-  .day-card p {
-    font-size: 14.5px;
-    color: #4a4639;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .day-card .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .day-card .stats span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(44, 110, 73, 0.08);
-    color: var(--green);
-  }
-  .day-card.day2 .stats span {
-    background: rgba(200, 154, 71, 0.12);
-    color: #8a6320;
-  }
-  .day-card .cta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--green);
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .day-card.day2 .cta { color: var(--gold); }
-  .day-card .cta::after {
-    content: "→";
-    transition: transform 0.25s ease;
-  }
-  .day-card:hover .cta::after { transform: translateX(4px); }
-
-  /* Coming soon card */
-  .day-card.future {
-    border-style: dashed;
-    background: transparent;
-    opacity: 0.65;
-    cursor: default;
-  }
-  .day-card.future:hover { transform: none; box-shadow: none; }
-  .day-card.future .banner {
-    background: repeating-linear-gradient(45deg, #e8e0c8, #e8e0c8 8px, #ede4cf 8px, #ede4cf 16px);
-  }
 
   /* ============== ROUTE / ABOUT ============== */
   .about {
@@ -363,120 +419,164 @@
   </ul>
 </nav>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero-top">
-    <div><span class="dot"></span>An itinerary · November 2026</div>
-    <div>South Island · Aotearoa NZ</div>
-  </div>
+<!-- ============ SPLIT: hero left, day cards right ============ -->
+<section class="split">
 
-  <div class="hero-main">
+  <div class="hero">
+    <div class="hero-top">
+      <div><span class="dot"></span>An itinerary · Nov 2026</div>
+      <div>Aotearoa NZ</div>
+    </div>
+
     <h1>The South Island <em>Odyssey</em>.</h1>
     <div class="sub">
-      <p>Leave the world behind where the tarmac meets the sky, and follow the road that wanders through the spine of the South Island. This is a land where ancient ferns bow to wind-swept coasts, and roaring oceans tell secrets to the sun-bleached driftwood.</p>
-      <p>Dawn brings the mist over jagged peaks — the Southern Alps — dusted in snow that sparkles against the turquoise lakes of Tekapo and Pukaki. Your heart moves to the rhythm of adventure, with the sharp scent of cedar and the rush of distant, thunderous falls.</p>
-      <p>By midday, you are navigating the west coast, where green stone lies hidden on misty shores, and the air hums with the song of a wilder world. Here, the road twists through forgotten rainforests, where the only traffic is the call of the Tūī bird.</p>
-      <p>When the sun dips low, turning mountains into silhouettes of charcoal and violet, you find yourself on a quiet beach, watching the last golden light reflect off the water. In the South Island, you don't just take a trip — you slow down to the pace of nature.</p>
+      <p>Leave the world behind where the tarmac meets the sky, and follow the road that wanders through the spine of the South Island. Dawn brings mist over jagged peaks; by midday the road twists through forgotten rainforests; at dusk the mountains become silhouettes of charcoal and violet.</p>
       <p class="closing"><em>Adventure is not just found here. It wakes you up.</em></p>
     </div>
   </div>
-</section>
 
-<!-- ============ DAY CARDS ============ -->
-<main>
-
-  <div class="section-head">
-    <span class="num">§ 01 / The Days</span>
-    <h2>Pick a day, <em>open the plan</em></h2>
-  </div>
-
-  <div class="days">
-
-    <a href="day1.html" class="day-card day1">
-      <div class="banner">
-        <div class="tag">Day 01 · Sat 7 Nov</div>
-      </div>
-      <div class="body">
-        <h3>Christchurch — <em>Arrival</em></h3>
-        <div class="date">Sat · 7 Nov 2026 · Land 14:55</div>
-        <p>Land, drop bags at LyLo, then a Route 29 bus into the city: Botanic Gardens at peak spring bloom, New Regent Street's pastel arcade, Cathedral Square, dinner at Riverside Market, dusk along the Avon.</p>
-        <div class="stats">
-          <span>~ 7 km walking</span>
-          <span>NZ$6 transport</span>
-          <span>No driving</span>
-        </div>
-        <div class="cta">Open Day 1</div>
-      </div>
-    </a>
-
-    <a href="day2.html" class="day-card day2">
-      <div class="banner">
-        <div class="tag">Day 02 · Sun 8 Nov</div>
-      </div>
-      <div class="body">
-        <h3>Christchurch <em>→ Tekapō</em></h3>
-        <div class="date">Sun · 8 Nov 2026 · 227 km</div>
-        <p>Pick up the Maui River motorhome and head south on SH1/SH8 — Geraldine cheese, Fairlie pork-belly pies, alpacas at Burkes Pass, and a 1%-lit waning crescent for stargazing under Bortle 2 skies.</p>
-        <div class="stats">
-          <span>227 km · ~3h</span>
-          <span>~36 L diesel</span>
-          <span>Bortle 2 sky</span>
-        </div>
-        <div class="cta">Open Day 2</div>
-      </div>
-    </a>
-
-    <a href="day3.html" class="day-card day2">
-      <div class="banner">
-        <div class="tag">Day 03 · Mon 9 Nov</div>
-      </div>
-      <div class="body">
-        <h3>Tekapō → <em>Aoraki / Mt Cook</em></h3>
-        <div class="date">Mon · 9 Nov 2026 · 165 km</div>
-        <p>South on SH8 along the milk-blue Lake Pukaki, into Aoraki/Mount Cook National Park. The Hooker Valley swing-bridge walk to an iceberg-dotted glacial lake. Sleep at Glentanner under the year's truly dark sky — exact night of the new moon.</p>
-        <div class="stats">
-          <span>165 km</span>
-          <span>~25 L diesel</span>
-          <span>10.6 km hike</span>
-          <span>0% moon</span>
-        </div>
-        <div class="cta">Open Day 3</div>
-      </div>
-    </a>
-
-    <a href="day4.html" class="day-card day2">
-      <div class="banner">
-        <div class="tag">Day 04 · Tue 10 Nov</div>
-      </div>
-      <div class="body">
-        <h3>Aoraki → <em>Queenstown</em></h3>
-        <div class="date">Tue · 10 Nov 2026 · 263 km</div>
-        <p>Out of the alpine basin into Central Otago: salmon fishing in the Wairepo canals, the otherworldly Lindis Pass climb, honesty-box honey in Cromwell, the Kawarau bungy bridge, Gibbston Valley wine country, then into Queenstown for the night.</p>
-        <div class="stats">
-          <span>263 km</span>
-          <span>~39 L diesel</span>
-          <span>3 regions</span>
-          <span>43 m bungy</span>
-        </div>
-        <div class="cta">Open Day 4</div>
-      </div>
-    </a>
-
-    <div class="day-card future">
-      <div class="banner">
-        <div class="tag" style="color: rgba(30,24,12,0.4)">Day 05+ · TBD</div>
-      </div>
-      <div class="body">
-        <h3>More days <em>to come</em></h3>
-        <div class="date">Add them as you plan</div>
-        <p>Drop a new <code>dayN.html</code> into the site folder, add a card here, and add a link in the nav. Suggested next legs from Queenstown: Glenorchy day trip, Te Anau → Milford Sound, the Catlins coast, or back north via Wānaka and the West Coast.</p>
-        <div class="cta" style="color: var(--muted)">Coming soon</div>
-      </div>
+  <div class="cards-col">
+    <div class="cards-head">
+      <span class="num">§ 01 · The Days</span>
+      <h2>Pick a day, <em>open the plan</em></h2>
+      <span class="count">4 / 14</span>
     </div>
 
+    <div class="days">
+
+      <a href="day1.html" class="day-card day1">
+        <div class="marker"><div class="num">01</div><div class="dow">SAT</div></div>
+        <div class="text">
+          <h3>Christchurch — <em>Arrival</em></h3>
+          <div class="date">7 Nov · Land 14:55 · No driving</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="day2.html" class="day-card day2">
+        <div class="marker"><div class="num">02</div><div class="dow">SUN</div></div>
+        <div class="text">
+          <h3>Christchurch <em>→ Tekapō</em></h3>
+          <div class="date">8 Nov · 227 km · Bortle 2 sky</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="day3.html" class="day-card day2">
+        <div class="marker"><div class="num">03</div><div class="dow">MON</div></div>
+        <div class="text">
+          <h3>Tekapō → <em>Aoraki / Mt Cook</em></h3>
+          <div class="date">9 Nov · 165 km · 0% moon</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a href="day4.html" class="day-card day2">
+        <div class="marker"><div class="num">04</div><div class="dow">TUE</div></div>
+        <div class="text">
+          <h3>Aoraki <em>→ Queenstown</em></h3>
+          <div class="date">10 Nov · 263 km · 3 regions</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">05</div><div class="dow">WED</div></div>
+        <div class="text">
+          <h3>Queenstown — TBD</h3>
+          <div class="date">11 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">06</div><div class="dow">THU</div></div>
+        <div class="text">
+          <h3>Glenorchy / Te Anau — TBD</h3>
+          <div class="date">12 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">07</div><div class="dow">FRI</div></div>
+        <div class="text">
+          <h3>Milford Sound — TBD</h3>
+          <div class="date">13 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">08</div><div class="dow">SAT</div></div>
+        <div class="text">
+          <h3>Wānaka — TBD</h3>
+          <div class="date">14 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">09</div><div class="dow">SUN</div></div>
+        <div class="text">
+          <h3>West Coast — TBD</h3>
+          <div class="date">15 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">10</div><div class="dow">MON</div></div>
+        <div class="text">
+          <h3>Franz Josef — TBD</h3>
+          <div class="date">16 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">11</div><div class="dow">TUE</div></div>
+        <div class="text">
+          <h3>Hokitika — TBD</h3>
+          <div class="date">17 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">12</div><div class="dow">WED</div></div>
+        <div class="text">
+          <h3>Arthur's Pass — TBD</h3>
+          <div class="date">18 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">13</div><div class="dow">THU</div></div>
+        <div class="text">
+          <h3>Kaikōura — TBD</h3>
+          <div class="date">19 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="day-card future">
+        <div class="marker"><div class="num">14</div><div class="dow">FRI</div></div>
+        <div class="text">
+          <h3>Christchurch — <em>Depart</em></h3>
+          <div class="date">20 Nov · Plan in progress</div>
+        </div>
+        <span class="arrow">→</span>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ============ ABOUT ============ -->
+</section>
+
+<!-- ============ ABOUT ============ -->
+<main>
   <section class="about">
     <div>
       <div class="section-head" style="margin-bottom: 24px;">
