@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 · Christchurch to Lake Tekapo · 8 Nov 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+  /* ============ THEME — dawn → afternoon → night ============ */
+  :root {
+    /* Dawn palette (top of page) */
+    --mist:        #f4f1ea;
+    --paper:       #faf8f3;
+    --alpine-pale: #e8eef2;
+    --lupin-blush: #f0d8e0;
+    --lupin-pink:  #d896aa;
+    --lupin-deep:  #8b5a7a;
+    --lupin-violet:#6a5c8b;
+
+    /* Day palette (mid) */
+    --tekapo:      #5fb9c8;
+    --tekapo-deep: #2d8a9a;
+    --tussock:     #c9a96e;
+    --tussock-dark:#8b6f3f;
+
+    /* Night palette (bottom) — lifted for readability while keeping atmosphere */
+    --night:       #1e2a52;
+    --night-deep:  #16204a;
+    --midnight:    #2a3868;
+    --star:        #fff4c4;
+    --milky:       #e0ddff;
+
+    /* Ink */
+    --ink:         #1c1d20;
+    --ink-soft:    #444550;
+    --ink-mute:    #777783;
+    --line:        rgba(28,29,32,0.12);
+
+    /* Type */
+    --display: 'Cormorant Infant', 'Cormorant Garamond', serif;
+    --body:    'Manrope', system-ui, sans-serif;
+    --mono:    'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    color: var(--ink);
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    background: var(--paper);
+    overflow-x: hidden;
+  }
+
+  /* Page-long vertical gradient — dawn at top, lake turquoise mid, deep night at bottom */
+  .page-gradient {
+    position: fixed; inset: 0; z-index: -2;
+    background:
+      linear-gradient(180deg,
+        #faf8f3 0%,
+        #f4f1ea 8%,
+        #e8eef2 18%,
+        #d4e4ea 28%,
+        #a8d4dc 40%,
+        #5fb9c8 52%,
+        #4a92a8 62%,
+        #34547a 72%,
+        #243668 82%,
+        #16204a 100%
+      );
+  }
+
+  /* Subtle grain overlay */
+  .page-gradient::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* ============ TOP META RIBBON ============ */
+  .ribbon {
+    position: relative;
+    z-index: 10;
+    padding: 22px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .ribbon .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--lupin-pink);
+    border-radius: 50%;
+    margin: 0 10px;
+    transform: translateY(-2px);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    padding: 100px 6vw 80px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-text { position: relative; z-index: 5; }
+
+  .day-marker {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--lupin-deep);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .day-marker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--lupin-deep), transparent);
+    max-width: 120px;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(56px, 8vw, 124px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lupin-deep);
+    display: block;
+  }
+  .hero h1 .tekapo-word {
+    color: var(--tekapo-deep);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 600; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 540px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 44px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-num .unit {
+    font-size: 16px;
+    font-family: var(--body);
+    color: var(--ink-mute);
+    margin-left: 4px;
+  }
+  .stat-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    margin-top: 10px;
+  }
+
+  /* ============ HERO ILLUSTRATION (SVG, lupin field with mountains) ============ */
+  .hero-art {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-art svg {
+    width: 100%;
+    height: auto;
+    max-width: 580px;
+    filter: drop-shadow(0 30px 60px rgba(106, 92, 139, 0.18));
+  }
+
+  /* Floating tag overlay */
+  .floating-tag {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 14px 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    font-size: 11px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .floating-tag.tag-top {
+    top: 8%;
+    right: -10px;
+    transform: rotate(2deg);
+  }
+  .floating-tag.tag-bot {
+    bottom: 14%;
+    left: -20px;
+    transform: rotate(-3deg);
+    background: var(--lupin-blush);
+  }
+  .floating-tag .v {
+    display: block;
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+    color: var(--ink);
+  }
+  .floating-tag .v em { font-style: italic; color: var(--lupin-deep); }
+
+  /* ============ SECTION SCAFFOLD ============ */
+  section { position: relative; padding: 100px 6vw; }
+  .container { max-width: 1180px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--lupin-deep);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--lupin-deep); }
+  .section-lead {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 60px;
+  }
+
+  /* ============ MORNING SPLIT ============ */
+  .split-wrap {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-top: 40px;
+  }
+  .split-col {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 44px 38px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(106, 92, 139, 0.08);
+  }
+  .split-col.guys { border-top: 4px solid var(--tekapo-deep); }
+  .split-col.ladies { border-top: 4px solid var(--lupin-deep); }
+  .split-icon {
+    font-family: var(--display);
+    font-size: 80px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--lupin-blush);
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-style: italic;
+  }
+  .split-col.guys .split-icon { color: #d4e8ec; }
+
+  .split-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .split-title {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .split-title em { font-style: italic; color: var(--lupin-deep); }
+  .split-col.guys .split-title em { color: var(--tekapo-deep); }
+
+  .split-meta {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .split-meta strong { color: var(--ink); }
+  .split-list {
+    list-style: none;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  .split-list li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .split-list li::before {
+    content: '·';
+    position: absolute;
+    left: 6px;
+    color: var(--lupin-pink);
+    font-size: 22px;
+    line-height: 1;
+    top: 0;
+  }
+  .split-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--tekapo-deep);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--tekapo-deep);
+    padding-bottom: 2px;
+  }
+  .split-link:hover { color: var(--lupin-deep); border-color: var(--lupin-deep); }
+
+  .split-bridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .split-bridge::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--tekapo-deep), var(--lupin-deep));
+    transform: translateY(-0.5px);
+  }
+  .split-bridge .arrow {
+    width: 44px; height: 44px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--lupin-deep);
+    font-size: 22px;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+  .reunion-box {
+    margin-top: 40px;
+    background: linear-gradient(135deg, var(--lupin-blush), #e0eef0);
+    padding: 28px 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-left: 4px solid var(--lupin-deep);
+  }
+  .reunion-time {
+    font-family: var(--display);
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--lupin-deep);
+    font-style: italic;
+  }
+  .reunion-text {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .reunion-text strong { color: var(--ink); }
+
+  /* ============ GROCERY GRID ============ */
+  .grocery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 30px;
+  }
+  .grocery-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 30px 28px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .grocery-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 30px; height: 30px;
+    border-top: 2px solid var(--lupin-pink);
+    border-left: 2px solid var(--lupin-pink);
+  }
+  .grocery-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+  .grocery-heading {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .grocery-list {
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+  .grocery-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 3px 0;
+    border-bottom: 1px dotted rgba(28,29,32,0.07);
+  }
+  .grocery-list li:last-child { border-bottom: none; }
+  .grocery-list .qty {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    white-space: nowrap;
+  }
+  .grocery-tip {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .budget-banner {
+    margin-top: 50px;
+    padding: 32px 40px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .budget-banner .lbl {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--lupin-pink);
+    margin-bottom: 6px;
+  }
+  .budget-banner .val {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .budget-banner .note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    max-width: 400px;
+  }
+
+  /* ============ TIMELINE ============ */
+  .timeline-section { padding-top: 60px; }
+
+  .timeline {
+    position: relative;
+    margin-top: 60px;
+    padding-left: 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 90px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+      var(--lupin-pink) 0%,
+      var(--lupin-deep) 30%,
+      var(--tekapo-deep) 60%,
+      var(--night) 100%);
+  }
+  .stop {
+    display: grid;
+    grid-template-columns: 90px 30px 1fr;
+    gap: 0;
+    margin-bottom: 56px;
+    align-items: flex-start;
+  }
+  .stop-time {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+    font-style: italic;
+    text-align: right;
+    padding-right: 20px;
+    line-height: 1.1;
+    padding-top: 2px;
+  }
+  .stop-time .dur {
+    display: block;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 10px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .stop-marker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .stop-marker .dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--lupin-deep);
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .stop.must .stop-marker .dot { background: var(--lupin-deep); border-color: var(--lupin-deep); }
+  .stop.optional .stop-marker .dot { background: var(--paper); border-style: dashed; border-color: var(--ink-mute); }
+  .stop.fuel .stop-marker .dot { background: var(--tussock); border-color: var(--tussock-dark); }
+  .stop.drive .stop-marker .dot { background: transparent; border: 2px solid var(--ink-mute); width: 10px; height: 10px; }
+
+  .stop-body {
+    padding-left: 22px;
+  }
+  .stop-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding: 4px 9px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+  }
+  .stop-tag.must { background: var(--lupin-deep); color: var(--paper); }
+  .stop-tag.optional { background: transparent; color: var(--ink-mute); border: 1px solid var(--ink-mute); }
+  .stop-tag.fuel { background: var(--tussock); color: #2d1f0a; }
+  .stop-tag.drive { background: var(--alpine-pale); color: var(--ink-soft); }
+
+  .stop h3 {
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .stop h3 em { font-style: italic; color: var(--lupin-deep); }
+  .stop .where {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+  }
+  .stop p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .stop p strong { color: var(--ink); font-weight: 600; }
+  .stop p em { font-style: italic; }
+
+  .stop-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--tekapo-deep);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .stop-link:hover { color: var(--lupin-deep); }
+
+  .why-callout {
+    background: var(--lupin-blush);
+    border-left: 3px solid var(--lupin-deep);
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    border-radius: 0 2px 2px 0;
+  }
+  .why-callout strong {
+    display: block;
+    color: var(--lupin-deep);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 4px;
+  }
+
+  /* ============ LUPIN HIGHLIGHT (the reality check) ============ */
+  .lupin-feature {
+    background: linear-gradient(135deg, var(--lupin-blush), var(--alpine-pale));
+    padding: 80px 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .lupin-feature::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(216,150,170,0.3) 0%, transparent 70%);
+  }
+  .lupin-feature-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .lupin-svg-wrap {
+    width: 100%;
+  }
+  .lupin-svg-wrap svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(106,92,139,0.15));
+  }
+  .lupin-text h2 {
+    font-family: var(--display);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .lupin-text h2 em { font-style: italic; color: var(--lupin-deep); }
+  .lupin-text p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .lupin-text p strong { color: var(--ink); font-weight: 600; }
+  .bloom-bar {
+    margin-top: 30px;
+    background: var(--paper);
+    padding: 22px 26px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  }
+  .bloom-bar-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+  .bloom-bar-track {
+    position: relative;
+    height: 14px;
+    background: var(--alpine-pale);
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .bloom-bar-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      #f0d8e0 20%,
+      #d896aa 40%,
+      #b06888 50%,
+      #d896aa 70%,
+      #f0d8e0 85%,
+      transparent 100%);
+  }
+  .bloom-marker {
+    position: absolute;
+    top: -4px; bottom: -4px;
+    left: 18%;
+    width: 3px;
+    background: var(--ink);
+    box-shadow: 0 0 0 2px var(--paper);
+  }
+  .bloom-marker::after {
+    content: 'You · 8 Nov';
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .bloom-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+
+  /* ============ FUEL SECTION ============ */
+  .fuel-section { background: rgba(245, 230, 200, 0.25); }
+  .fuel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    margin-top: 40px;
+  }
+  .fuel-calc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 36px;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  }
+  .fuel-calc-title {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px dotted var(--line);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .calc-row:last-of-type { border-bottom: none; }
+  .calc-row .v {
+    font-family: var(--mono);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .calc-total {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .calc-total .lbl {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+  .calc-total .v {
+    font-family: var(--display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--tussock-dark);
+    font-style: italic;
+  }
+
+  .fuel-stations { display: flex; flex-direction: column; gap: 20px; }
+  .station {
+    background: var(--paper);
+    border-left: 4px solid var(--line);
+    padding: 22px 28px;
+    border-radius: 0 4px 4px 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .station:hover { transform: translateX(4px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+  .station.best { border-left-color: var(--tussock-dark); background: linear-gradient(90deg, rgba(201,169,110,0.12), var(--paper) 60%); }
+  .station.backup { border-left-color: var(--ink-mute); }
+  .station.last { border-left-color: var(--lupin-pink); }
+  .station-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .station.best .station-tag { color: var(--tussock-dark); }
+  .station.backup .station-tag { color: var(--ink-mute); }
+  .station.last .station-tag { color: var(--lupin-pink); }
+  .station h4 {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .station .addr {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .station p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* ============ STARGAZING — THE NIGHT SECTION ============ */
+  .stars-section {
+    background: linear-gradient(180deg, #243668 0%, #16204a 60%, #1e2a52 100%);
+    color: #f5f4ff;
+    padding: 120px 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Star field background */
+  .stars-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .stars-bg::before, .stars-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, white, transparent),
+      radial-gradient(1px 1px at 28% 42%, white, transparent),
+      radial-gradient(1.5px 1.5px at 45% 25%, #fef3b8, transparent),
+      radial-gradient(1px 1px at 62% 58%, white, transparent),
+      radial-gradient(1px 1px at 78% 33%, white, transparent),
+      radial-gradient(2px 2px at 88% 72%, #fef3b8, transparent),
+      radial-gradient(1px 1px at 15% 78%, white, transparent),
+      radial-gradient(1px 1px at 35% 85%, white, transparent),
+      radial-gradient(1.5px 1.5px at 55% 12%, white, transparent),
+      radial-gradient(1px 1px at 72% 88%, white, transparent),
+      radial-gradient(1px 1px at 92% 22%, white, transparent),
+      radial-gradient(1px 1px at 5% 55%, white, transparent),
+      radial-gradient(1px 1px at 48% 65%, white, transparent),
+      radial-gradient(1.5px 1.5px at 22% 8%, #fef3b8, transparent),
+      radial-gradient(1px 1px at 67% 5%, white, transparent),
+      radial-gradient(1px 1px at 82% 50%, white, transparent),
+      radial-gradient(1px 1px at 38% 95%, white, transparent),
+      radial-gradient(1px 1px at 95% 92%, white, transparent);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 0.85;
+    animation: twinkle 8s ease-in-out infinite alternate;
+  }
+  .stars-bg::after {
+    animation-delay: 4s;
+    transform: scale(1.5) rotate(45deg);
+    opacity: 0.4;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 0.4; }
+  }
+  /* Milky way diagonal band */
+  .milky-way {
+    position: absolute;
+    top: 10%; bottom: 10%;
+    left: -20%; right: -20%;
+    background: linear-gradient(105deg,
+      transparent 30%,
+      rgba(200, 196, 255, 0.05) 42%,
+      rgba(200, 196, 255, 0.15) 50%,
+      rgba(254, 243, 184, 0.08) 52%,
+      rgba(200, 196, 255, 0.15) 54%,
+      rgba(200, 196, 255, 0.05) 62%,
+      transparent 75%);
+    transform: rotate(-12deg);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
+  .stars-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .stars-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--star);
+    margin-bottom: 18px;
+  }
+  .stars-title {
+    font-family: var(--display);
+    font-size: clamp(48px, 6.5vw, 96px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 30px;
+    color: var(--paper);
+  }
+  .stars-title em {
+    font-style: italic;
+    color: var(--star);
+    font-weight: 400;
+  }
+  .stars-lead {
+    font-size: 19px;
+    line-height: 1.75;
+    color: #eae8ff;
+    max-width: 680px;
+    margin-bottom: 60px;
+  }
+  .stars-lead strong { color: var(--paper); font-weight: 500; }
+
+  .spot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+    margin-bottom: 80px;
+  }
+  .spot-primary {
+    background: rgba(255, 244, 196, 0.08);
+    border: 1px solid rgba(255, 244, 196, 0.28);
+    padding: 44px 40px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    position: relative;
+  }
+  .spot-primary::before {
+    content: '★';
+    position: absolute;
+    top: 24px; right: 28px;
+    font-size: 24px;
+    color: var(--star);
+  }
+  .spot-primary .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--star);
+    margin-bottom: 8px;
+  }
+  .spot-primary h3 {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--paper);
+    margin-bottom: 6px;
+  }
+  .spot-primary h3 em { font-style: italic; color: var(--star); }
+  .spot-primary .where {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #d8d4ff;
+    margin-bottom: 18px;
+    letter-spacing: 0.08em;
+  }
+  .spot-primary p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245, 244, 255, 0.92);
+    margin-bottom: 14px;
+  }
+  .spot-primary p strong { color: var(--paper); }
+  .spot-primary .map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--star);
+    text-decoration: none;
+    border-bottom: 1px solid var(--star);
+    padding-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .spot-secondary {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .star-fact {
+    background: rgba(42, 56, 104, 0.55);
+    border: 1px solid rgba(224, 221, 255, 0.22);
+    padding: 22px 24px;
+    border-radius: 4px;
+  }
+  .star-fact .icon {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--star);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .star-fact h4 {
+    font-family: var(--display);
+    font-size: 19px;
+    color: var(--paper);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .star-fact p {
+    font-size: 13px;
+    color: rgba(224, 221, 255, 0.92);
+    line-height: 1.55;
+  }
+
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .gear-item {
+    border-top: 1px solid rgba(224, 221, 255, 0.3);
+    padding-top: 18px;
+  }
+  .gear-item .num {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--star);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .gear-item h5 {
+    font-family: var(--display);
+    font-size: 18px;
+    color: var(--paper);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .gear-item p {
+    font-size: 13px;
+    color: rgba(224, 221, 255, 0.9);
+    line-height: 1.55;
+  }
+
+  .timing-strip {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(224, 221, 255, 0.28);
+    border: 1px solid rgba(224, 221, 255, 0.28);
+  }
+  .timing-cell {
+    background: rgba(30, 42, 82, 0.85);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .timing-cell .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #d8d4ff;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+  }
+  .timing-cell .v {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--star);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  /* ============ MAP/CHECKLIST FOOTER ============ */
+  .closing-section {
+    background: linear-gradient(180deg, #16204a 0%, #1e2a52 100%);
+    color: var(--paper);
+    padding: 100px 6vw 60px;
+  }
+  .closing-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .checklist h3 {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .check-list {
+    list-style: none;
+  }
+  .check-list li {
+    padding: 12px 0 12px 32px;
+    position: relative;
+    font-size: 15px;
+    color: rgba(245, 244, 255, 0.95);
+    border-bottom: 1px solid rgba(224, 221, 255, 0.18);
+    line-height: 1.5;
+  }
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 16px; height: 16px;
+    border: 1.5px solid #d8d4ff;
+    border-radius: 2px;
+  }
+
+  .map-index h3 {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: var(--paper);
+    font-style: italic;
+  }
+  .map-link-list {
+    list-style: none;
+  }
+  .map-link-list li {
+    border-bottom: 1px solid rgba(224, 221, 255, 0.18);
+  }
+  .map-link-list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    color: rgba(245, 244, 255, 0.95);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s, padding 0.2s;
+  }
+  .map-link-list li a:hover {
+    color: var(--star);
+    padding-left: 8px;
+  }
+  .map-link-list .pin {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #d8d4ff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(224, 221, 255, 0.22);
+    text-align: center;
+  }
+  footer .quote {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: #e8e4ff;
+    max-width: 720px;
+    margin: 0 auto 12px;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  footer .quote em { color: var(--star); }
+  footer .src {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: rgba(216, 212, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 60px 6vw;
+      min-height: auto;
+    }
+    .hero-art { min-height: 360px; }
+    .stat-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .stat-num { font-size: 30px; }
+
+    .split-wrap { grid-template-columns: 1fr; }
+    .split-bridge { padding: 20px 0; flex-direction: row; }
+    .split-bridge::before {
+      top: 50%; left: 30%; right: 30%; bottom: auto;
+      transform: none;
+      height: 1px; width: auto;
+    }
+
+    .lupin-feature-inner { grid-template-columns: 1fr; gap: 40px; }
+    .fuel-grid { grid-template-columns: 1fr; gap: 30px; }
+    .spot-grid { grid-template-columns: 1fr; }
+    .closing-inner { grid-template-columns: 1fr; gap: 50px; }
+
+    .timeline::before { left: 40px; }
+    .stop { grid-template-columns: 40px 30px 1fr; }
+    .stop-time { font-size: 16px; padding-right: 8px; text-align: right; }
+    .stop-time .dur { display: none; }
+    .stop h3 { font-size: 22px; }
+
+    .timing-strip { grid-template-columns: repeat(2, 1fr); }
+    section { padding: 60px 6vw; }
+    .ribbon { font-size: 9px; flex-wrap: wrap; gap: 8px; }
+    .floating-tag.tag-top, .floating-tag.tag-bot { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html" class="active">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+  </ul>
+</nav>
+
+<div class="page-gradient"></div>
+
+<!-- =========== META RIBBON =========== -->
+<div class="ribbon">
+  <span>South Island Odyssey<span class="dot"></span>Day 2 of 10</span>
+  <span>Sunday<span class="dot"></span>8 November 2026</span>
+  <span>Christchurch · Lake Tekapo<span class="dot"></span>258 km</span>
+</div>
+
+<!-- =========== HERO =========== -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="day-marker">Day 02 · The Beginning</div>
+    <h1>
+      Where the road
+      <em>finds its wonder</em>
+      and the sky <span class="tekapo-word">opens.</span>
+    </h1>
+    <p class="hero-sub">
+      The first turn of the wheel on the <strong>South Island Odyssey</strong>. Six travellers, one motorhome, and a road that wanders inland from the Garden City into the Mackenzie Basin — where lupins begin their bloom and the night sky is a UNESCO-protected cathedral.
+    </p>
+
+    <div class="stat-grid">
+      <div>
+        <div class="stat-num">258<span class="unit">km</span></div>
+        <div class="stat-lbl">Total Drive</div>
+      </div>
+      <div>
+        <div class="stat-num">3:55<span class="unit">PM</span></div>
+        <div class="stat-lbl">Tekapo Arrival</div>
+      </div>
+      <div>
+        <div class="stat-num">9:45<span class="unit">PM</span></div>
+        <div class="stat-lbl">Stars Begin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <!-- SVG: Lake Tekapo scene with lupins, lake, church silhouette, mountains -->
+    <svg viewBox="0 0 580 620" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#f8efec"/>
+          <stop offset="60%" stop-color="#e8ddd8"/>
+          <stop offset="100%" stop-color="#f0d8e0"/>
+        </linearGradient>
+        <linearGradient id="mtn" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#6a5c8b"/>
+          <stop offset="100%" stop-color="#9b8aa8"/>
+        </linearGradient>
+        <linearGradient id="mtn2" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#8b7a9c"/>
+          <stop offset="100%" stop-color="#b5a6c0"/>
+        </linearGradient>
+        <linearGradient id="lake" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7ec8d4"/>
+          <stop offset="100%" stop-color="#5fb9c8"/>
+        </linearGradient>
+        <radialGradient id="sun" cx="50%" cy="50%">
+          <stop offset="0%" stop-color="#fef3b8" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#fef3b8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Sky -->
+      <rect width="580" height="380" fill="url(#sky)"/>
+      <!-- Soft sun -->
+      <circle cx="430" cy="140" r="100" fill="url(#sun)"/>
+      <circle cx="430" cy="140" r="32" fill="#fef3b8" opacity="0.7"/>
+
+      <!-- Distant mountains -->
+      <path d="M0,260 L60,200 L120,230 L180,180 L260,210 L340,160 L420,200 L500,170 L580,210 L580,300 L0,300 Z" fill="url(#mtn2)" opacity="0.55"/>
+      <!-- Mid mountains -->
+      <path d="M0,300 L80,240 L140,280 L220,220 L300,260 L380,210 L460,250 L540,220 L580,260 L580,340 L0,340 Z" fill="url(#mtn)" opacity="0.85"/>
+      <!-- Snow caps on mid mountains -->
+      <path d="M75,243 L80,240 L92,250 L88,254 Z M215,222 L220,220 L235,232 L230,236 Z M375,212 L380,210 L394,222 L389,225 Z M535,222 L540,220 L552,230 L548,233 Z" fill="#faf8f3" opacity="0.9"/>
+
+      <!-- Lake -->
+      <rect y="340" width="580" height="100" fill="url(#lake)"/>
+      <!-- Lake reflection lines -->
+      <path d="M40,360 L160,360 M200,380 L340,380 M380,395 L500,395 M60,420 L220,420 M280,410 L420,410" stroke="#a8dce5" stroke-width="1" opacity="0.6" fill="none"/>
+
+      <!-- Mountain reflection on water (faded) -->
+      <path d="M0,340 L80,400 L140,360 L220,420 L300,380 L380,430 L460,390 L540,420 L580,380 L580,340 Z" fill="#6a5c8b" opacity="0.15"/>
+
+      <!-- Church silhouette in middle distance -->
+      <g transform="translate(265, 305)">
+        <rect x="0" y="14" width="32" height="22" fill="#3d3548"/>
+        <polygon points="0,14 16,2 32,14" fill="#3d3548"/>
+        <rect x="14" y="6" width="4" height="4" fill="#fef3b8" opacity="0.7"/>
+        <!-- cross -->
+        <line x1="16" y1="0" x2="16" y2="6" stroke="#3d3548" stroke-width="1.5"/>
+      </g>
+
+      <!-- LUPIN FIELD in foreground -->
+      <rect y="440" width="580" height="180" fill="#e8e0d4"/>
+      <!-- Grass texture base -->
+      <path d="M0,460 Q145,455 290,460 T580,460 L580,620 L0,620 Z" fill="#c9b896"/>
+      <path d="M0,490 Q200,485 380,492 T580,488 L580,620 L0,620 Z" fill="#a89674"/>
+
+      <!-- Lupin stalks (clusters of vertical strokes with rounded flower tops) -->
+      <g id="lupins">
+        <!-- Back row -->
+        <g transform="translate(40,470)">
+          <line x1="0" y1="0" x2="0" y2="22" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="8" fill="#d896aa"/>
+        </g>
+        <g transform="translate(75,468)">
+          <line x1="0" y1="0" x2="0" y2="24" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="9" fill="#b06888"/>
+        </g>
+        <g transform="translate(120,472)">
+          <line x1="0" y1="0" x2="0" y2="20" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="7" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(165,470)">
+          <line x1="0" y1="0" x2="0" y2="22" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="8" fill="#d896aa"/>
+        </g>
+        <g transform="translate(210,468)">
+          <line x1="0" y1="0" x2="0" y2="24" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="10" fill="#6a5c8b"/>
+        </g>
+        <g transform="translate(255,470)">
+          <line x1="0" y1="0" x2="0" y2="22" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="8" fill="#d896aa"/>
+        </g>
+        <g transform="translate(305,468)">
+          <line x1="0" y1="0" x2="0" y2="24" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="9" fill="#b06888"/>
+        </g>
+        <g transform="translate(355,470)">
+          <line x1="0" y1="0" x2="0" y2="22" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="8" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(400,469)">
+          <line x1="0" y1="0" x2="0" y2="23" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="9" fill="#d896aa"/>
+        </g>
+        <g transform="translate(450,471)">
+          <line x1="0" y1="0" x2="0" y2="21" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="7" fill="#6a5c8b"/>
+        </g>
+        <g transform="translate(500,469)">
+          <line x1="0" y1="0" x2="0" y2="23" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="9" fill="#d896aa"/>
+        </g>
+        <g transform="translate(545,470)">
+          <line x1="0" y1="0" x2="0" y2="22" stroke="#5a7a3e" stroke-width="1.2"/>
+          <ellipse cx="0" cy="0" rx="3" ry="8" fill="#b06888"/>
+        </g>
+
+        <!-- Middle row, larger -->
+        <g transform="translate(20,510)">
+          <line x1="0" y1="0" x2="0" y2="34" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="14" fill="#d896aa"/>
+        </g>
+        <g transform="translate(70,506)">
+          <line x1="0" y1="0" x2="0" y2="38" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="16" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(115,510)">
+          <line x1="0" y1="0" x2="0" y2="34" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="14" fill="#b06888"/>
+        </g>
+        <g transform="translate(165,505)">
+          <line x1="0" y1="0" x2="0" y2="40" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="17" fill="#6a5c8b"/>
+        </g>
+        <g transform="translate(220,508)">
+          <line x1="0" y1="0" x2="0" y2="36" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="15" fill="#d896aa"/>
+        </g>
+        <g transform="translate(275,506)">
+          <line x1="0" y1="0" x2="0" y2="38" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="16" fill="#b06888"/>
+        </g>
+        <g transform="translate(330,510)">
+          <line x1="0" y1="0" x2="0" y2="34" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="14" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(385,505)">
+          <line x1="0" y1="0" x2="0" y2="40" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="17" fill="#d896aa"/>
+        </g>
+        <g transform="translate(440,508)">
+          <line x1="0" y1="0" x2="0" y2="36" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="15" fill="#6a5c8b"/>
+        </g>
+        <g transform="translate(495,506)">
+          <line x1="0" y1="0" x2="0" y2="38" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="16" fill="#b06888"/>
+        </g>
+        <g transform="translate(550,510)">
+          <line x1="0" y1="0" x2="0" y2="34" stroke="#4a6a30" stroke-width="1.6"/>
+          <ellipse cx="0" cy="0" rx="5" ry="14" fill="#d896aa"/>
+        </g>
+
+        <!-- Front row, largest -->
+        <g transform="translate(10,560)">
+          <line x1="0" y1="0" x2="0" y2="58" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="24" fill="#b06888"/>
+          <ellipse cx="-3" cy="-10" rx="3" ry="6" fill="#d896aa" opacity="0.7"/>
+        </g>
+        <g transform="translate(60,553)">
+          <line x1="0" y1="0" x2="0" y2="65" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="28" fill="#6a5c8b"/>
+          <ellipse cx="3" cy="-12" rx="3" ry="7" fill="#8b5a7a" opacity="0.7"/>
+        </g>
+        <g transform="translate(120,560)">
+          <line x1="0" y1="0" x2="0" y2="58" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="24" fill="#d896aa"/>
+          <ellipse cx="-3" cy="-10" rx="3" ry="6" fill="#f0d8e0" opacity="0.7"/>
+        </g>
+        <g transform="translate(180,555)">
+          <line x1="0" y1="0" x2="0" y2="63" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="26" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(245,558)">
+          <line x1="0" y1="0" x2="0" y2="60" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="25" fill="#b06888"/>
+          <ellipse cx="3" cy="-10" rx="3" ry="6" fill="#d896aa" opacity="0.7"/>
+        </g>
+        <g transform="translate(305,554)">
+          <line x1="0" y1="0" x2="0" y2="64" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="27" fill="#6a5c8b"/>
+        </g>
+        <g transform="translate(370,560)">
+          <line x1="0" y1="0" x2="0" y2="58" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="24" fill="#d896aa"/>
+          <ellipse cx="-3" cy="-10" rx="3" ry="6" fill="#f0d8e0" opacity="0.7"/>
+        </g>
+        <g transform="translate(435,553)">
+          <line x1="0" y1="0" x2="0" y2="65" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="28" fill="#b06888"/>
+          <ellipse cx="3" cy="-12" rx="3" ry="7" fill="#d896aa" opacity="0.7"/>
+        </g>
+        <g transform="translate(500,558)">
+          <line x1="0" y1="0" x2="0" y2="60" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="25" fill="#8b5a7a"/>
+        </g>
+        <g transform="translate(560,560)">
+          <line x1="0" y1="0" x2="0" y2="58" stroke="#3a5a20" stroke-width="2.4"/>
+          <ellipse cx="0" cy="0" rx="8" ry="24" fill="#d896aa"/>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Floating tags -->
+    <div class="floating-tag tag-top">
+      Bloom Status
+      <span class="v"><em>Early</em> patches</span>
+    </div>
+    <div class="floating-tag tag-bot">
+      Stargazing
+      <span class="v">UNESCO <em>Dark Sky</em></span>
+    </div>
+  </div>
+</section>
+
+<!-- =========== MORNING SPLIT =========== -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">08:00 AM · Divide and Conquer</div>
+    <h2 class="section-title">The morning <em>split.</em></h2>
+    <p class="section-lead">
+      Two teams, two missions, one rendezvous. By 9:30 AM the motorhome is loaded, the fridge is stocked, and the wheels are turning south.
+    </p>
+
+    <div class="split-wrap">
+      <div class="split-col guys">
+        <div class="split-icon">i.</div>
+        <div class="split-tag">Team A · The Drivers</div>
+        <h3 class="split-title">Three guys at the <em>Maui depot.</em></h3>
+        <p class="split-meta">
+          <strong>8:00 AM · 60–90 min handover</strong><br>
+          Maui Motorhome Rental Christchurch<br>
+          159 Orchard Road, Harewood
+        </p>
+        <ul class="split-list">
+          <li>Driver's licences + IDP if needed</li>
+          <li>Credit card for bond (~NZ$7,500 hold)</li>
+          <li>Booking confirmation in hand</li>
+          <li>Record your own walk-around video — every scratch on the body</li>
+          <li>Confirm fuel level on handover sheet</li>
+        </ul>
+        <a class="split-link" href="https://maps.google.com/?cid=496838216823163183" target="_blank">View on Maps →</a>
+      </div>
+
+      <div class="split-bridge">
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="split-col ladies">
+        <div class="split-icon">ii.</div>
+        <div class="split-tag">Team B · The Provisioners</div>
+        <h3 class="split-title">Three ladies at <em>Woolworths.</em></h3>
+        <p class="split-meta">
+          <strong>8:00 AM · grocery run</strong><br>
+          Woolworths Christchurch Airport<br>
+          530 Memorial Avenue
+        </p>
+        <ul class="split-list">
+          <li>Reusable shopping bags (plastic costs extra)</li>
+          <li>Phone with grocery checklist open</li>
+          <li>Use the express trolley — keep things mobile</li>
+          <li>Pay for parking is free; ample motorhome bays</li>
+          <li>Café on-site for coffee while you wait for pickup</li>
+        </ul>
+        <a class="split-link" href="https://maps.google.com/?cid=10785429194396001967" target="_blank">View on Maps →</a>
+      </div>
+    </div>
+
+    <div class="reunion-box">
+      <div class="reunion-time">9:30</div>
+      <div class="reunion-text">
+        <strong>The reunion.</strong> Guys arrive at Woolworths in the freshly-handed-over motorhome. Load groceries — fridge items first. Wheels roll south by 10:00 AM at the latest.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== GROCERIES =========== -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Provisions · 1–3 Days for 6</div>
+    <h2 class="section-title">Stocking the <em>Maui River.</em></h2>
+    <p class="section-lead">
+      Sized to fit the Maui River's 175-litre 3-way fridge. Buy fresh, eat fresh, minimise frozen — there's no real freezer compartment to speak of. Estimated total: <strong>NZ$450–550</strong>.
+    </p>
+
+    <div class="grocery-grid">
+      <div class="grocery-card">
+        <div class="grocery-icon">🥩</div>
+        <h3 class="grocery-heading">Fridge — Chilled</h3>
+        <ul class="grocery-list">
+          <li>Free-range eggs<span class="qty">×18</span></li>
+          <li>Streaky bacon<span class="qty">500 g</span></li>
+          <li>Beehive sausages<span class="qty">×12</span></li>
+          <li>Chicken breast<span class="qty">1 kg</span></li>
+          <li>NZ scotch fillet steak<span class="qty">6 portions</span></li>
+          <li>Sliced ham<span class="qty">500 g</span></li>
+          <li>Mainland tasty (sliced)<span class="qty">500 g</span></li>
+          <li>Colby block cheese<span class="qty">500 g</span></li>
+          <li>Anchor butter<span class="qty">250 g</span></li>
+          <li>Anchor blue milk<span class="qty">2 L</span></li>
+          <li>Greek yoghurt tub<span class="qty">1 kg</span></li>
+          <li>Hummus<span class="qty">1 tub</span></li>
+        </ul>
+        <div class="grocery-tip">Load these first — they need to chill fastest. Dense items on the bottom shelf.</div>
+      </div>
+
+      <div class="grocery-card">
+        <div class="grocery-icon">🥗</div>
+        <h3 class="grocery-heading">Fresh Produce</h3>
+        <ul class="grocery-list">
+          <li>Tomatoes<span class="qty">×6</span></li>
+          <li>Cucumber<span class="qty">×2</span></li>
+          <li>Mixed salad bag<span class="qty">×2</span></li>
+          <li>Avocados (firm-ripe)<span class="qty">×4</span></li>
+          <li>Red onions<span class="qty">×2</span></li>
+          <li>Brown onions<span class="qty">×3</span></li>
+          <li>Carrots<span class="qty">1 kg</span></li>
+          <li>Capsicum (red/yellow)<span class="qty">×3</span></li>
+          <li>Garlic<span class="qty">1 bulb</span></li>
+          <li>Lemons<span class="qty">×3</span></li>
+          <li>Bananas<span class="qty">×8</span></li>
+          <li>Royal Gala apples<span class="qty">×8</span></li>
+          <li>NZ strawberries<span class="qty">1 punnet</span></li>
+          <li>Baby spinach<span class="qty">1 bag</span></li>
+        </ul>
+        <div class="grocery-tip">Use within 48 hours — produce wilts fast at touring temperatures.</div>
+      </div>
+
+      <div class="grocery-card">
+        <div class="grocery-icon">🍞</div>
+        <h3 class="grocery-heading">Bakery & Pantry</h3>
+        <ul class="grocery-list">
+          <li>Vogel's mixed grain loaf<span class="qty">×2</span></li>
+          <li>Bagels or English muffins<span class="qty">1 pack</span></li>
+          <li>Tortilla wraps<span class="qty">×8</span></li>
+          <li>Penne or spaghetti<span class="qty">500 g ×2</span></li>
+          <li>Wattie's pasta sauce<span class="qty">×2 jars</span></li>
+          <li>Microwave rice pouches<span class="qty">×4</span></li>
+          <li>Weet-Bix or muesli<span class="qty">×1 box</span></li>
+          <li>Instant coffee (Nescafé Gold)<span class="qty">1 jar</span></li>
+          <li>Bell tea bags<span class="qty">1 box</span></li>
+          <li>Olive oil (small)<span class="qty">500 mL</span></li>
+          <li>Salt & pepper grinders<span class="qty">×1 each</span></li>
+          <li>Tomato sauce, mayo, soy<span class="qty">small</span></li>
+        </ul>
+        <div class="grocery-tip">Confirm at handover whether the motorhome includes a coffee plunger before choosing ground vs instant.</div>
+      </div>
+
+      <div class="grocery-card">
+        <div class="grocery-icon">🍫</div>
+        <h3 class="grocery-heading">Road Snacks</h3>
+        <ul class="grocery-list">
+          <li>Whittaker's Creamy Milk<span class="qty">×1 block</span></li>
+          <li>Whittaker's Hazelnut<span class="qty">×1 block</span></li>
+          <li>Pineapple Lumps<span class="qty">1 bag</span></li>
+          <li>Mixed nuts / trail mix<span class="qty">large</span></li>
+          <li>Muesli bars<span class="qty">×12</span></li>
+          <li>Bluebird Originals chips<span class="qty">×2</span></li>
+          <li>Toffee Pops or Krispies<span class="qty">×1 pack</span></li>
+          <li>Cherry tomatoes<span class="qty">1 punnet</span></li>
+        </ul>
+        <div class="grocery-tip">Pineapple Lumps are non-negotiable. It's a Kiwi road-trip tradition.</div>
+      </div>
+
+      <div class="grocery-card">
+        <div class="grocery-icon">🍷</div>
+        <h3 class="grocery-heading">Drinks</h3>
+        <ul class="grocery-list">
+          <li>Bottled water 600 mL<span class="qty">×12</span></li>
+          <li>UHT milk (backup)<span class="qty">1 L</span></li>
+          <li>Orange juice<span class="qty">2 L</span></li>
+          <li>Speight's or Steinlager<span class="qty">×12 pack</span></li>
+          <li>Marlborough Sauv Blanc<span class="qty">×1 bottle</span></li>
+          <li>Central Otago Pinot Noir<span class="qty">×1 bottle</span></li>
+          <li>Sparkling water 500 mL<span class="qty">×4</span></li>
+        </ul>
+        <div class="grocery-tip">Save the wine for the stargazing nights. Pinot Noir under a Mackenzie sky — there's nothing quite like it.</div>
+      </div>
+
+      <div class="grocery-card">
+        <div class="grocery-icon">🧴</div>
+        <h3 class="grocery-heading">Essentials</h3>
+        <ul class="grocery-list">
+          <li>Dish liquid (small)<span class="qty">×1</span></li>
+          <li>Dishcloth + scourer<span class="qty">×2</span></li>
+          <li>Paper towels<span class="qty">1 roll</span></li>
+          <li>Toilet paper (top-up)<span class="qty">1 pack</span></li>
+          <li>Rubbish bags<span class="qty">small roll</span></li>
+          <li>Hand sanitiser<span class="qty">×1</span></li>
+          <li>SPF50+ sunscreen<span class="qty">×1</span></li>
+          <li>Insect repellent (sandflies!)<span class="qty">×1</span></li>
+          <li>SPF lip balm<span class="qty">×1</span></li>
+          <li>Wet wipes<span class="qty">1 pack</span></li>
+          <li>Foil + cling film<span class="qty">small</span></li>
+        </ul>
+        <div class="grocery-tip">NZ sun is fierce even in spring. SPF50+ is the only acceptable rating.</div>
+      </div>
+    </div>
+
+    <div class="budget-banner">
+      <div>
+        <div class="lbl">Estimated Spend</div>
+        <div class="val">NZ$450 — 550</div>
+      </div>
+      <div class="note">For 6 adults across 1–3 days of meals, snacks, drinks, and essentials. Padded for the Whittaker's chocolate that will inevitably get added to the trolley.</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== TIMELINE =========== -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="section-eyebrow">10:00 AM — 11:15 PM · Hour by Hour</div>
+    <h2 class="section-title">The road south, <em>stop by stop.</em></h2>
+    <p class="section-lead">
+      258 kilometres along the <strong>Inland Scenic Route 72</strong> — through the Rakaia Gorge, past Mount Hutt, into Geraldine and over Burkes Pass into the Mackenzie Basin. The pace builds slowly — gorge, bakery, fuel, lupins, lake — until the day ends under the most protected dark sky on Earth.
+    </p>
+
+    <div class="timeline">
+
+      <div class="stop drive">
+        <div class="stop-time">10:00<span class="dur">DEPART</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag drive">Departure</span>
+          <h3>Leaving Christchurch <em>behind.</em></h3>
+          <div class="where">Woolworths CHC Airport → SH73 → SH77 → SH72 (Inland Scenic Route)</div>
+          <p>Take the inland scenic route — SH73 west out of Christchurch, dropping south onto SH77 then SH72. Slower than SH1 by half an hour, but trades flat coastal plains for the foothills of the Southern Alps and the canyon ahead.</p>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">11:20<span class="dur">30 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Lookout</span>
+          <h3>Rakaia Gorge <em>Lookout.</em></h3>
+          <div class="where">6587 Arundel Rakaia Gorge Road, Mount Hutt · SH72 at the bridge</div>
+          <p>The first jaw-dropper of the trip. A braided turquoise river cuts through dark rock and wide valleys — <em>the kind of place that makes you pause mid-sentence.</em> 4.7 stars from nearly 300 reviews; locals call it the best stop on the inland route.</p>
+          <p><strong>What to do (30 min):</strong> View from the lookout above the road, then take the short bushwalk down to the riverbed and under the historic Rakaia Gorge Bridge. On clear days the snowy Southern Alps frame the canyon behind. Watch for jet boats and rafters on the river below.</p>
+          <p><strong>Parking warning:</strong> The pull-off is right beside a 70 km/h road with limited space. Indicate well in advance, slow gradually, and back the motorhome in carefully. There's a second pull-off 100 metres closer to the bridge on the opposite side — easier for larger vehicles.</p>
+          <div class="why-callout">
+            <strong>Why detour here</strong>
+            Adds 30 min and 30 km to the day, but transforms the morning drive. The braided river is one of Canterbury's signature landscapes — and after Tekapo, you won't pass another one this dramatic.
+          </div>
+          <a class="stop-link" href="https://maps.google.com/?cid=125860266940523755" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop drive">
+        <div class="stop-time">11:50<span class="dur">45 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag drive">Drive</span>
+          <h3>Rakaia Gorge → <em>Geraldine.</em></h3>
+          <div class="where">SH72 (Inland Scenic Route) · 70 km</div>
+          <p>SH72 continues south through Mount Hutt country and the rolling Canterbury foothills. A pretty drive — Mt Hutt visible on the right for much of the way. Light traffic, gentle curves.</p>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">12:35<span class="dur">10 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Admin</span>
+          <h3>Geraldine TOP 10 · <em>card pickup.</em></h3>
+          <div class="where">39 Hislop Street, Geraldine · Reception 8 AM – 8 PM</div>
+          <p>A quick in-and-out to collect your <strong>TOP 10 membership card</strong>. 10% off accommodation across 40+ parks nationwide, plus partner discounts. Plenty of motorhome turning room at the entrance.</p>
+          <a class="stop-link" href="https://maps.google.com/?cid=12204394224643563413" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop optional">
+        <div class="stop-time">12:45<span class="dur">15 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag optional">Optional · Shop</span>
+          <h3>Barkers of <em>Geraldine.</em></h3>
+          <div class="where">71 Talbot Street · 3-min walk from TOP 10</div>
+          <p>Iconic Kiwi preserve maker with a free tasting bar. Anathoth Mixed Berry, Plum & Star Anise Chutney, Boysenberry Coulis — small, packable, and welcome through Singapore customs as gifts.</p>
+          <div class="why-callout">
+            <strong>Skip if</strong>
+            You spent extra time at Rakaia Gorge or want to hit Fairlie Bakehouse before the queue gets ridiculous.
+          </div>
+        </div>
+      </div>
+
+      <div class="stop drive">
+        <div class="stop-time">1:00<span class="dur">35 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag drive">Drive</span>
+          <h3>Geraldine → <em>Fairlie.</em></h3>
+          <div class="where">SH79 · 43 km</div>
+          <p>Open farmland through Four Peaks country. Peak lambing season — expect to spot newborn lambs in the paddocks. Speed limits drop near small townships; stick to them.</p>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">1:35<span class="dur">45 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Lunch</span>
+          <h3>Fairlie Bakehouse <em>— the legend.</em></h3>
+          <div class="where">74 Main Street, Fairlie · Open 6 AM – 4:30 PM</div>
+          <p>Widely accepted as the <strong>best pie in New Zealand</strong>. The salmon-bacon is the cult favourite; the pork-belly with apple sauce is the dark horse. 4.7 stars from 6,500+ reviews — the praise is earned.</p>
+          <p><strong>Strategy:</strong> Arriving at 1:35 means you'll miss the noon lunch rush. One person joins the queue while another grabs an outdoor table. Order extra pies for tomorrow's roadside lunch — they reheat beautifully on the motorhome stove.</p>
+          <p><strong>Budget:</strong> ~NZ$10–13 per pie + coffees; ~<strong>NZ$90–110</strong> for the group.</p>
+          <a class="stop-link" href="https://maps.google.com/?cid=1635648868671496566" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop fuel">
+        <div class="stop-time">2:25<span class="dur">10 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag fuel">Fuel · Critical</span>
+          <h3>NPD Fairlie <em>— fill here.</em></h3>
+          <div class="where">16 Main Street, Fairlie · 200 m from the Bakehouse</div>
+          <p>NPD is consistently <strong>15–30 c/L cheaper</strong> than the only fuel station in Tekapo, and the Fairlie pumps have a wide-bay forecourt designed for trucks and motorhomes. Pay-at-pump available 24/7. Brim the tank — next reliable diesel is at NPD Twizel on Day 3.</p>
+          <div class="why-callout">
+            <strong>Why not in Tekapo?</strong>
+            Challenge Tekapo is the only station in town. Smaller forecourt, higher prices, and it gets congested in summer. Fill here, save the headache.
+          </div>
+        </div>
+      </div>
+
+      <div class="stop optional">
+        <div class="stop-time">2:55<span class="dur">15 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag optional">Optional · Photo</span>
+          <h3>Burkes Pass <em>Historic Village.</em></h3>
+          <div class="where">SH8 at 709 m elevation · Mackenzie gateway</div>
+          <p>The landscape transforms here — green pasture gives way to tussock gold. A quirky restored 1850s settlement with old Americana memorabilia, vintage petrol pumps, and a coffee truck. The <strong>"Welcome to Mackenzie Country"</strong> sign just past the village is the classic photo op.</p>
+          <a class="stop-link" href="https://maps.google.com/?cid=3568480342842017580" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">3:25<span class="dur">15 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Photo</span>
+          <h3>Lake Tekapo <em>Lupin Field.</em></h3>
+          <div class="where">SH8 approach, 2 min before Tekapo town</div>
+          <p>A large lupin field appears on the left as you approach Tekapo from the north — informal pull-off parking, known to photographers. <strong>Stay on worn paths.</strong> Don't pick — lupins are invasive and trampling reduces the bloom for the rest of the season.</p>
+          <div class="why-callout">
+            <strong>November 8 reality check</strong>
+            Expect early-season patches with some colour, not the dense purple sea on the postcards. Peak bloom is late November to early December. See the bloom calendar below.
+          </div>
+          <a class="stop-link" href="https://maps.google.com/?cid=5812740126711864399" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">3:55<span class="dur">Check-in</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Base Camp</span>
+          <h3>Lakes Edge Holiday Park <em>— home for the night.</em></h3>
+          <div class="where">2 Lakeside Drive, Lake Tekapo · Check-in opens 3 PM</div>
+          <p>Reception is on the left as you descend Lakeside Drive from SH8. Reception 9 AM – 7 PM. Drop the motorhome on your assigned <strong>powered site</strong> (you'll want 230 V hookup). Phone +64 3 680 6825 if arriving later than 7 PM — they leave check-in info out.</p>
+          <p><strong>On site:</strong> Two kitchens, hot showers, laundry, dump station, free Wi-Fi, BBQ area, playground. The grounds are gravel — set up your outdoor mat to keep dust out of the motorhome.</p>
+          <a class="stop-link" href="https://maps.google.com/?cid=13129675543215114521" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="stop-time">5:00<span class="dur">2 hours</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag drive">Rest · Optional Soak</span>
+          <h3>Settle in. <em>Optional hot pools.</em></h3>
+          <div class="where">Tekapo Springs · 5-min walk from Lakes Edge</div>
+          <p>Rest, prep dinner, or treat the group to <strong>Tekapo Springs hot pools</strong> (~NZ$35 pp, open till 9 PM). A 90-minute soak before stargazing is a perfect alpine ritual. Steam room and plunge pool on site.</p>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">7:45<span class="dur">60 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · Sunset</span>
+          <h3>Church of the <em>Good Shepherd.</em></h3>
+          <div class="where">Pioneer Drive · 10-min walk from Lakes Edge</div>
+          <p><strong>Sunset on 8 Nov: ~8:15 PM.</strong> The most photographed stone church in the Southern Hemisphere, silhouetted against the turquoise lake with the Southern Alps behind. Early-season lupins along the foreshore make excellent foreground.</p>
+          <p>Walk from the holiday park — saves parking hassles and means no one has to be DD on the way back. Respect the active church — quiet voices, no leaning on the stonework.</p>
+          <a class="stop-link" href="https://maps.google.com/?cid=17909182768382725122" target="_blank">View on Maps →</a>
+        </div>
+      </div>
+
+      <div class="stop must">
+        <div class="stop-time">9:45<span class="dur">90 min</span></div>
+        <div class="stop-marker"><div class="dot"></div></div>
+        <div class="stop-body">
+          <span class="stop-tag must">Must · The Reason You Came</span>
+          <h3>The stars <em>come on.</em></h3>
+          <div class="where">Lakefront beside the Church · Free, 24/7</div>
+          <p>Astronomical darkness arrives. The Milky Way core lifts into the south-eastern sky. Give your eyes 20 minutes to adapt. Full stargazing brief in the night section below.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========== LUPIN FEATURE =========== -->
+<section class="lupin-feature">
+  <div class="lupin-feature-inner">
+    <div class="lupin-svg-wrap">
+      <!-- Detailed lupin botanical illustration -->
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lupinFlower" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0d8e0"/>
+            <stop offset="40%" stop-color="#d896aa"/>
+            <stop offset="100%" stop-color="#8b5a7a"/>
+          </linearGradient>
+          <linearGradient id="lupinFlower2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c8c4ff"/>
+            <stop offset="50%" stop-color="#8b7ab8"/>
+            <stop offset="100%" stop-color="#5a4d8a"/>
+          </linearGradient>
+          <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7ba858"/>
+            <stop offset="100%" stop-color="#4a6a30"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Tall lupin spike, center -->
+        <g transform="translate(200,80)">
+          <!-- stem -->
+          <line x1="0" y1="0" x2="0" y2="380" stroke="#4a6a30" stroke-width="3"/>
+
+          <!-- Pink lupin spike, layered petals -->
+          <g>
+            <ellipse cx="0" cy="20" rx="10" ry="14" fill="url(#lupinFlower)"/>
+            <ellipse cx="-7" cy="35" rx="9" ry="11" fill="#d896aa"/>
+            <ellipse cx="7" cy="38" rx="9" ry="11" fill="#b06888"/>
+            <ellipse cx="-8" cy="55" rx="10" ry="12" fill="#d896aa"/>
+            <ellipse cx="8" cy="58" rx="10" ry="12" fill="#8b5a7a"/>
+            <ellipse cx="-9" cy="75" rx="11" ry="13" fill="#b06888"/>
+            <ellipse cx="9" cy="78" rx="11" ry="13" fill="#d896aa"/>
+            <ellipse cx="-10" cy="98" rx="12" ry="14" fill="#8b5a7a"/>
+            <ellipse cx="10" cy="100" rx="12" ry="14" fill="#b06888"/>
+            <ellipse cx="-11" cy="122" rx="12" ry="15" fill="#d896aa"/>
+            <ellipse cx="11" cy="124" rx="12" ry="15" fill="#8b5a7a"/>
+            <ellipse cx="-11" cy="148" rx="13" ry="15" fill="#b06888"/>
+            <ellipse cx="11" cy="150" rx="13" ry="15" fill="#d896aa"/>
+            <ellipse cx="-12" cy="175" rx="13" ry="16" fill="#8b5a7a"/>
+            <ellipse cx="12" cy="178" rx="13" ry="16" fill="#b06888"/>
+            <ellipse cx="0" cy="195" rx="15" ry="14" fill="#d896aa"/>
+          </g>
+
+          <!-- Lupin leaves -->
+          <g transform="translate(0,220)">
+            <!-- Palmate leaves -->
+            <g>
+              <ellipse cx="-30" cy="0" rx="20" ry="6" fill="url(#leaf)" transform="rotate(-30)"/>
+              <ellipse cx="-10" cy="-12" rx="22" ry="7" fill="url(#leaf)" transform="rotate(-60)"/>
+              <ellipse cx="10" cy="-18" rx="22" ry="7" fill="url(#leaf)" transform="rotate(60)"/>
+              <ellipse cx="30" cy="-12" rx="22" ry="7" fill="url(#leaf)" transform="rotate(30)"/>
+              <ellipse cx="40" cy="5" rx="20" ry="6" fill="url(#leaf)" transform="rotate(75)"/>
+              <ellipse cx="-40" cy="5" rx="20" ry="6" fill="url(#leaf)" transform="rotate(-75)"/>
+              <ellipse cx="0" cy="-22" rx="22" ry="7" fill="url(#leaf)"/>
+              <circle cx="0" cy="0" r="3" fill="#3a5020"/>
+            </g>
+          </g>
+
+          <g transform="translate(0,300)">
+            <g>
+              <ellipse cx="-25" cy="0" rx="18" ry="5" fill="url(#leaf)" transform="rotate(-30)" opacity="0.85"/>
+              <ellipse cx="-8" cy="-10" rx="20" ry="6" fill="url(#leaf)" transform="rotate(-60)" opacity="0.85"/>
+              <ellipse cx="8" cy="-15" rx="20" ry="6" fill="url(#leaf)" transform="rotate(60)" opacity="0.85"/>
+              <ellipse cx="25" cy="-10" rx="20" ry="6" fill="url(#leaf)" transform="rotate(30)" opacity="0.85"/>
+              <ellipse cx="35" cy="3" rx="18" ry="5" fill="url(#leaf)" transform="rotate(75)" opacity="0.85"/>
+              <ellipse cx="-35" cy="3" rx="18" ry="5" fill="url(#leaf)" transform="rotate(-75)" opacity="0.85"/>
+              <circle cx="0" cy="0" r="2.5" fill="#3a5020"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Smaller purple lupin, left -->
+        <g transform="translate(80,200)">
+          <line x1="0" y1="0" x2="0" y2="270" stroke="#4a6a30" stroke-width="2"/>
+          <g>
+            <ellipse cx="-5" cy="20" rx="6" ry="8" fill="#8b7ab8"/>
+            <ellipse cx="5" cy="22" rx="6" ry="8" fill="#6a5c8b"/>
+            <ellipse cx="-6" cy="38" rx="7" ry="9" fill="#c8c4ff"/>
+            <ellipse cx="6" cy="40" rx="7" ry="9" fill="#8b7ab8"/>
+            <ellipse cx="-7" cy="58" rx="8" ry="10" fill="#6a5c8b"/>
+            <ellipse cx="7" cy="60" rx="8" ry="10" fill="#5a4d8a"/>
+            <ellipse cx="-7" cy="80" rx="8" ry="11" fill="#8b7ab8"/>
+            <ellipse cx="7" cy="82" rx="8" ry="11" fill="#6a5c8b"/>
+            <ellipse cx="0" cy="100" rx="10" ry="10" fill="#5a4d8a"/>
+          </g>
+          <g transform="translate(0,140)">
+            <ellipse cx="-20" cy="0" rx="14" ry="4" fill="url(#leaf)" transform="rotate(-30)"/>
+            <ellipse cx="-5" cy="-8" rx="15" ry="5" fill="url(#leaf)" transform="rotate(-60)"/>
+            <ellipse cx="5" cy="-12" rx="15" ry="5" fill="url(#leaf)" transform="rotate(60)"/>
+            <ellipse cx="20" cy="-8" rx="14" ry="4" fill="url(#leaf)" transform="rotate(30)"/>
+            <circle cx="0" cy="0" r="2" fill="#3a5020"/>
+          </g>
+        </g>
+
+        <!-- Smaller pink lupin, right -->
+        <g transform="translate(320,230)">
+          <line x1="0" y1="0" x2="0" y2="240" stroke="#4a6a30" stroke-width="2"/>
+          <g>
+            <ellipse cx="-5" cy="20" rx="6" ry="8" fill="#d896aa"/>
+            <ellipse cx="5" cy="22" rx="6" ry="8" fill="#b06888"/>
+            <ellipse cx="-6" cy="38" rx="7" ry="9" fill="#f0d8e0"/>
+            <ellipse cx="6" cy="40" rx="7" ry="9" fill="#d896aa"/>
+            <ellipse cx="-7" cy="58" rx="8" ry="10" fill="#b06888"/>
+            <ellipse cx="7" cy="60" rx="8" ry="10" fill="#8b5a7a"/>
+            <ellipse cx="0" cy="78" rx="10" ry="9" fill="#d896aa"/>
+          </g>
+          <g transform="translate(0,120)">
+            <ellipse cx="-20" cy="0" rx="14" ry="4" fill="url(#leaf)" transform="rotate(-30)" opacity="0.9"/>
+            <ellipse cx="-5" cy="-8" rx="15" ry="5" fill="url(#leaf)" transform="rotate(-60)" opacity="0.9"/>
+            <ellipse cx="5" cy="-12" rx="15" ry="5" fill="url(#leaf)" transform="rotate(60)" opacity="0.9"/>
+            <ellipse cx="20" cy="-8" rx="14" ry="4" fill="url(#leaf)" transform="rotate(30)" opacity="0.9"/>
+            <circle cx="0" cy="0" r="2" fill="#3a5020"/>
+          </g>
+        </g>
+
+        <!-- Latin label -->
+        <text x="200" y="490" text-anchor="middle" font-family="Cormorant Infant, serif" font-style="italic" font-size="18" fill="#8b5a7a">Lupinus polyphyllus</text>
+      </svg>
+    </div>
+
+    <div class="lupin-text">
+      <div class="section-eyebrow">A Necessary Reality Check</div>
+      <h2>You're arriving <em>early.</em></h2>
+      <p>The lupins around Lake Tekapo are one of the most photographed scenes in New Zealand — but they don't run on a tourist schedule. The Russell lupin (<em>Lupinus polyphyllus</em>) flowers from late November to early January, with <strong>peak colour around early December</strong>.</p>
+      <p>On <strong>8 November</strong> you're at the front edge of the season. Expect <strong>early patches starting to colour up</strong> — pinks and purples beginning to show against the tussock — rather than the dense purple sea you've seen on Instagram. Patience and a low shooting angle will still get you beautiful frames.</p>
+
+      <div class="bloom-bar">
+        <div class="bloom-bar-lbl">Lupin Bloom · 2026 Estimate</div>
+        <div class="bloom-bar-track">
+          <div class="bloom-bar-fill"></div>
+          <div class="bloom-marker"></div>
+        </div>
+        <div class="bloom-scale">
+          <span>Late Oct</span>
+          <span>Mid Nov</span>
+          <span>Early Dec</span>
+          <span>Late Dec</span>
+          <span>Mid Jan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FUEL SECTION =========== -->
+<section class="fuel-section">
+  <div class="container">
+    <div class="section-eyebrow">The Maui River · Diesel · 75 L Tank</div>
+    <h2 class="section-title">Fuel <em>strategy.</em></h2>
+    <p class="section-lead">
+      The Maui River runs on a Mercedes-Benz Sprinter 3.0 L V6 turbo-diesel. Brochure figures say 11–13 L/100 km — loaded for six with gear, plan on <strong>15 L/100 km</strong>. Fill at Fairlie, not Tekapo.
+    </p>
+
+    <div class="fuel-grid">
+      <div class="fuel-calc">
+        <h3 class="fuel-calc-title">Day 2 burn estimate</h3>
+        <div class="calc-row"><span>Distance</span><span class="v">258 km</span></div>
+        <div class="calc-row"><span>Consumption (loaded)</span><span class="v">15 L / 100 km</span></div>
+        <div class="calc-row"><span>Diesel required</span><span class="v">~39 L</span></div>
+        <div class="calc-row"><span>Diesel price (Fairlie)</span><span class="v">~NZ$2.10 / L</span></div>
+        <div class="calc-row"><span>Tank starting point</span><span class="v">Full · from depot</span></div>
+        <div class="calc-total">
+          <span class="lbl">Day 2 fuel cost</span>
+          <span class="v">~NZ$82</span>
+        </div>
+      </div>
+
+      <div class="fuel-stations">
+        <div class="station best">
+          <div class="station-tag">★ Best · Fill here at 2:25 PM</div>
+          <h4>NPD Fairlie</h4>
+          <div class="addr">16 Main Street, Fairlie · 200 m from the Bakehouse</div>
+          <p>NPD is consistently the cheapest diesel chain in NZ. Wide-bay forecourt, easy for the 7 m motorhome to navigate. Pay-at-pump for 24/7 access. <strong>Brim the tank here.</strong> Next reliable fuel is NPD Twizel on Day 3.</p>
+        </div>
+
+        <div class="station backup">
+          <div class="station-tag">Backup · Only if needed</div>
+          <h4>Z Rolleston</h4>
+          <div class="addr">SH1 south of Christchurch · Before SH79 turnoff</div>
+          <p>If the depot didn't hand over a full tank (verify on the handover sheet), Z Rolleston is your first reliable stop heading south. Large forecourt, big-truck-friendly.</p>
+        </div>
+
+        <div class="station last">
+          <div class="station-tag">Last Resort · 25–35 c/L pricier</div>
+          <h4>Challenge Tekapo</h4>
+          <div class="addr">7a State Highway 8, Lake Tekapo · 7 AM – 8 PM</div>
+          <p>The <em>only</em> fuel in Tekapo. Helpful staff, but small forecourt that congests in summer, and prices reliably 25–35 c/L above NPD Fairlie. Use only if you genuinely need a top-up before Day 3.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== STARGAZING SECTION =========== -->
+<section class="stars-section">
+  <div class="stars-bg"></div>
+  <div class="milky-way"></div>
+
+  <div class="stars-inner">
+    <div class="stars-eyebrow">9:45 PM Onwards · The Reason You Came</div>
+    <h1 class="stars-title">A sky <em>without limit.</em></h1>
+    <p class="stars-lead">
+      Lake Tekapo sits inside the <strong>Aoraki Mackenzie International Dark Sky Reserve</strong> — one of fewer than two dozen in the world, with strict lighting controls enforced by district bylaw. On a clear November night, the Milky Way is visible to the naked eye in a band so bright it casts a shadow.
+    </p>
+
+    <div class="spot-grid">
+      <div class="spot-primary">
+        <div class="lbl">Best Free Spot</div>
+        <h3>The lakefront <em>beside the church.</em></h3>
+        <div class="where">Pioneer Drive · 10-min walk from Lakes Edge</div>
+        <p><strong>Why here:</strong> No fences, no fee, no driving required. You can walk from the holiday park — important after dinner with a drink. The stone church silhouetted against the Milky Way is the iconic shot.</p>
+        <p><strong>Arrive 9:45 PM</strong> for full astronomical darkness. The Milky Way core climbs in the south-east. Give your eyes a full 20 minutes to adapt — no phone screens at full brightness.</p>
+        <p><strong>Public toilets</strong> at the church carpark. <strong>Avoid the church carpark lights themselves</strong> — walk 30 metres along the foreshore for proper darkness.</p>
+        <a class="map-link" href="https://maps.google.com/?cid=17909182768382725122" target="_blank">View on Maps →</a>
+      </div>
+
+      <div class="spot-secondary">
+        <div class="star-fact">
+          <div class="icon">✦</div>
+          <h4>Why not Mt John?</h4>
+          <p>The summit road gates close at sunset. You cannot drive the motorhome up after dark. The lakefront delivers 95% of the experience — for free, on foot.</p>
+        </div>
+        <div class="star-fact">
+          <div class="icon">✦</div>
+          <h4>Backup spot</h4>
+          <p>If the church is crowded with photographers, walk 5 min further along Lakeside Drive to the Lake Tekapo Lookout. Wide unobstructed southern sky.</p>
+        </div>
+        <div class="star-fact">
+          <div class="icon">✦</div>
+          <h4>Spending money?</h4>
+          <p>The Dark Sky Project's Mt John summit tour (~NZ$159 pp) includes telescope time. Worth it for serious astronomers — not necessary for great naked-eye and camera viewing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gear-grid">
+      <div class="gear-item">
+        <div class="num">i.</div>
+        <h5>Red light only</h5>
+        <p>White light destroys night vision and ruins everyone else's photos. Use red cellophane over a phone torch, or set your phone to red-screen mode.</p>
+      </div>
+      <div class="gear-item">
+        <div class="num">ii.</div>
+        <h5>Dress for 3°C</h5>
+        <p>Even in November, Tekapo nights drop to 3–6°C with windchill on the lakefront. Fleece, beanie, gloves. Worth a trip back to the motorhome to layer up properly.</p>
+      </div>
+      <div class="gear-item">
+        <div class="num">iii.</div>
+        <h5>Camera settings</h5>
+        <p>ISO 3200–6400, f/2.8 (or your widest), 20–25 sec exposure, manual focus on a bright star, shoot RAW. A tripod is non-negotiable.</p>
+      </div>
+      <div class="gear-item">
+        <div class="num">iv.</div>
+        <h5>Phone shooters</h5>
+        <p>iPhone 12+ / Pixel 6+ / Galaxy S22+ have astro modes. Brace on a rock or mini-tripod and hold still 30 seconds. The results genuinely surprise.</p>
+      </div>
+    </div>
+
+    <div class="timing-strip">
+      <div class="timing-cell">
+        <div class="lbl">Sunset</div>
+        <div class="v">8:15 PM</div>
+      </div>
+      <div class="timing-cell">
+        <div class="lbl">Civil Twilight Ends</div>
+        <div class="v">8:50 PM</div>
+      </div>
+      <div class="timing-cell">
+        <div class="lbl">Astronomical Dark</div>
+        <div class="v">9:45 PM</div>
+      </div>
+      <div class="timing-cell">
+        <div class="lbl">Milky Way Peak</div>
+        <div class="v">10:30 PM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== CLOSING — CHECKLIST + MAP INDEX =========== -->
+<section class="closing-section">
+  <div class="closing-inner">
+    <div class="checklist">
+      <h3>Before you sleep.</h3>
+      <ul class="check-list">
+        <li>Driving licences + IDP collected for all drivers</li>
+        <li>Maui booking confirmation + bond credit card to hand</li>
+        <li>Walk-around video of motorhome recorded at handover</li>
+        <li>Groceries packed: fridge first, pantry second, drinks last</li>
+        <li>TOP 10 membership card collected at Geraldine</li>
+        <li>Diesel topped up at NPD Fairlie (not Tekapo!)</li>
+        <li>Lakes Edge reception checked-in before 7 PM</li>
+        <li>Camera batteries charged, tripod packed</li>
+        <li>Warm layers ready: fleece, beanie, gloves</li>
+        <li>Phones set to red-screen / night mode</li>
+        <li>Sunset photos shot — then back for warm clothes</li>
+        <li>Stargazing done — Milky Way frames captured</li>
+      </ul>
+    </div>
+
+    <div class="map-index">
+      <h3>Every place, on the map.</h3>
+      <ul class="map-link-list">
+        <li><a href="https://maps.google.com/?cid=496838216823163183" target="_blank"><span>Maui Motorhome Rental, Christchurch</span><span class="pin">8 AM</span></a></li>
+        <li><a href="https://maps.google.com/?cid=10785429194396001967" target="_blank"><span>Woolworths Christchurch Airport</span><span class="pin">8 AM</span></a></li>
+        <li><a href="https://maps.google.com/?cid=125860266940523755" target="_blank"><span>Rakaia Gorge Lookout</span><span class="pin">11:20</span></a></li>
+        <li><a href="https://maps.google.com/?cid=12204394224643563413" target="_blank"><span>Geraldine TOP 10 Holiday Park</span><span class="pin">12:35</span></a></li>
+        <li><a href="https://maps.google.com/?q=Barkers+of+Geraldine" target="_blank"><span>Barkers of Geraldine</span><span class="pin">12:45</span></a></li>
+        <li><a href="https://maps.google.com/?cid=1635648868671496566" target="_blank"><span>Fairlie Bakehouse</span><span class="pin">1:35</span></a></li>
+        <li><a href="https://maps.google.com/?q=NPD+Fairlie" target="_blank"><span>NPD Fairlie (fuel)</span><span class="pin">2:25</span></a></li>
+        <li><a href="https://maps.google.com/?cid=3568480342842017580" target="_blank"><span>Burkes Pass Historic Village</span><span class="pin">2:55</span></a></li>
+        <li><a href="https://maps.google.com/?cid=5812740126711864399" target="_blank"><span>Lake Tekapo Lupin Field</span><span class="pin">3:25</span></a></li>
+        <li><a href="https://maps.google.com/?cid=13129675543215114521" target="_blank"><span>Lakes Edge Holiday Park</span><span class="pin">3:55</span></a></li>
+        <li><a href="https://maps.google.com/?cid=17238688300775081484" target="_blank"><span>Challenge Tekapo (backup fuel)</span><span class="pin">—</span></a></li>
+        <li><a href="https://maps.google.com/?cid=17909182768382725122" target="_blank"><span>Church of the Good Shepherd</span><span class="pin">7:45</span></a></li>
+        <li><a href="https://maps.google.com/?cid=8161931661247162251" target="_blank"><span>Mt John Observatory (reference)</span><span class="pin">closed</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <p class="quote">
+      The Mackenzie sky is so dark that on a clear new-moon night you can read a watch face <em>by the light of the Milky Way alone.</em> There are only a handful of places on Earth where that is still true — and tonight you are standing in one of them.
+    </p>
+    <div class="src">— Field note · Aoraki Mackenzie International Dark Sky Reserve</div>
+  </footer>
+</section>
+
+</body>
+</html>

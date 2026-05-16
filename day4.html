@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 4 · Mt Cook → Queenstown · 10 Nov 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css">
+
+<style>
+/* ---------- Theme ---------- */
+:root{
+  /* Honey + Otago tussock palette */
+  --honey-100:#FFF8E5;     /* pale honey, page bg */
+  --honey-200:#FCEFC4;     /* light honey wash */
+  --honey-300:#F7DC8C;     /* honey gold */
+  --honey-500:#E8A12C;     /* deep honey */
+  --honey-700:#A8650C;     /* dark honey, ink-like */
+  --tussock-300:#D8C68A;   /* dry summer tussock */
+  --tussock-500:#9C7B3A;   /* deep tussock brown */
+  --vine-500:#5E7B3D;      /* gibbston vine */
+  --vine-700:#3E5527;
+  --cherry-500:#C8385C;    /* central otago cherry */
+  --cherry-700:#7E1F37;
+  --sky-200:#E6F0F0;       /* alpine pale sky */
+  --sky-600:#5C8B8E;       /* lindis pass blue-grey */
+  --bridge-500:#B53A2B;    /* kawarau bridge red */
+  --ink:#2A1E0B;           /* deep brown ink */
+  --paper:#FFF8E5;
+  --paper-2:#FBF1D3;
+  --rule:rgba(168,101,12,0.18);
+  --rule-strong:rgba(168,101,12,0.35);
+
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Inter',-apple-system,system-ui,sans-serif;
+  --font-mono:'DM Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* honeycomb hex pattern overlay */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.04;
+  background-image:
+    radial-gradient(circle at 30% 20%, var(--honey-500) 0, transparent 40%),
+    radial-gradient(circle at 80% 60%, var(--cherry-500) 0, transparent 35%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='84' height='48' viewBox='0 0 84 48'><path fill='none' stroke='%23A8650C' stroke-width='1.2' d='M0 12L12 0L36 0L48 12L36 24L12 24Z M48 12L60 0L84 0L84 24L60 24L48 12Z M0 36L12 24L36 24L48 36L36 48L12 48Z M48 36L60 24L84 24L84 48L60 48L48 36Z'/></svg>");
+  z-index:0;
+}
+
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 32px;
+  position:relative;
+  z-index:1;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding:80px 0 60px;
+  position:relative;
+  border-bottom:2px solid var(--rule);
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:48px;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--honey-700);
+}
+.hero-top .crumb{display:flex;gap:24px;align-items:center}
+.hero-top .crumb span{opacity:0.5}
+.hero-top .badge{
+  background:var(--honey-700);
+  color:var(--honey-100);
+  padding:6px 14px;
+  border-radius:2px;
+  letter-spacing:0.22em;
+}
+
+.hero-eyebrow{
+  font-family:var(--font-mono);
+  font-size:12px;
+  letter-spacing:0.32em;
+  text-transform:uppercase;
+  color:var(--cherry-700);
+  margin-bottom:24px;
+}
+
+h1.hero-title{
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:clamp(48px, 8vw, 104px);
+  line-height:0.96;
+  letter-spacing:-0.025em;
+  color:var(--ink);
+  margin-bottom:32px;
+  font-variation-settings:"opsz" 144;
+}
+h1.hero-title em{
+  font-style:italic;
+  color:var(--honey-700);
+  font-weight:400;
+}
+h1.hero-title .ampersand{
+  font-style:italic;
+  color:var(--cherry-500);
+  font-weight:400;
+}
+
+.hero-lede{
+  max-width:760px;
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:clamp(18px, 1.5vw, 22px);
+  line-height:1.55;
+  color:var(--tussock-500);
+  margin-bottom:48px;
+  font-variation-settings:"opsz" 36;
+}
+.hero-lede strong{
+  color:var(--honey-700);
+  font-weight:500;
+}
+
+.hero-meta{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:32px;
+  padding-top:32px;
+  border-top:1px solid var(--rule);
+}
+.hero-meta div .label{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--tussock-500);
+  margin-bottom:8px;
+}
+.hero-meta div .value{
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:400;
+  color:var(--ink);
+  font-variation-settings:"opsz" 36;
+}
+.hero-meta div .value em{
+  font-size:14px;
+  color:var(--tussock-500);
+  font-style:italic;
+  margin-left:4px;
+}
+
+/* hex emblem decoration */
+.hex-emblem{
+  position:absolute;
+  top:60px;
+  right:32px;
+  width:140px;
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:0.25em;
+  color:var(--honey-700);
+  text-align:center;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='25,5 75,5 95,50 75,95 25,95 5,50' fill='none' stroke='%23E8A12C' stroke-width='1.5'/><polygon points='30,12 70,12 88,50 70,88 30,88 12,50' fill='none' stroke='%23E8A12C' stroke-width='0.6' opacity='0.4'/></svg>") center/contain no-repeat;
+  animation:spin 60s linear infinite;
+}
+.hex-emblem::before{
+  content:'TUSSOCK · HONEY · LAKE';
+  position:absolute;
+  transform:translateY(-2px);
+  font-weight:500;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (max-width:740px){
+  .hex-emblem{display:none}
+  .hero-meta{grid-template-columns:repeat(2,1fr);gap:24px}
+  .wrap{padding:0 20px}
+}
+
+/* ---------- Route Map ---------- */
+.route-strip{
+  padding:48px 0;
+  background:linear-gradient(180deg, transparent, var(--paper-2));
+  border-bottom:2px solid var(--rule);
+}
+.route-svg-wrap{
+  position:relative;
+  overflow-x:auto;
+  padding:0 8px;
+}
+.route-svg{
+  display:block;
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  height:auto;
+}
+
+/* ---------- Section ---------- */
+.section{padding:80px 0;border-bottom:1px solid var(--rule)}
+.section-eyebrow{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--cherry-700);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.section-eyebrow::before{
+  content:'';
+  width:36px;
+  height:1px;
+  background:var(--cherry-500);
+  display:inline-block;
+}
+.section h2{
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:clamp(36px, 5vw, 56px);
+  line-height:1.05;
+  letter-spacing:-0.018em;
+  color:var(--ink);
+  margin-bottom:24px;
+  font-variation-settings:"opsz" 96;
+}
+.section h2 em{font-style:italic;color:var(--honey-700);font-weight:400}
+
+.section-lede{
+  max-width:680px;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--tussock-500);
+  margin-bottom:48px;
+}
+
+/* ---------- Stop card ---------- */
+.stop{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:48px;
+  padding:36px 0;
+  border-top:1px solid var(--rule);
+  position:relative;
+}
+.stop:last-child{border-bottom:1px solid var(--rule)}
+
+.stop-time .clock{
+  font-family:var(--font-display);
+  font-weight:300;
+  font-size:44px;
+  line-height:1;
+  color:var(--honey-700);
+  letter-spacing:-0.02em;
+  font-variation-settings:"opsz" 72;
+}
+.stop-time .duration{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--tussock-500);
+  margin-top:8px;
+}
+.tag{
+  display:inline-block;
+  margin-top:14px;
+  font-family:var(--font-mono);
+  font-size:9.5px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  padding:5px 10px;
+  border-radius:2px;
+  white-space:nowrap;
+}
+.tag.must{background:var(--honey-500);color:#fff}
+.tag.opt{background:transparent;color:var(--tussock-500);border:1px solid var(--rule-strong)}
+.tag.drive{background:var(--sky-600);color:#fff}
+.tag.honey{background:var(--honey-700);color:var(--honey-200)}
+.tag.fruit{background:var(--cherry-500);color:#fff}
+.tag.vine{background:var(--vine-500);color:#fff}
+.tag.bungy{background:var(--bridge-500);color:#fff}
+.tag.fuel{background:#2a2a2a;color:#fff}
+.tag.lookout{background:transparent;color:var(--sky-600);border:1px solid var(--sky-600)}
+.tag.lunch{background:transparent;color:var(--cherry-700);border:1px solid var(--cherry-500)}
+.tag.checkin{background:var(--tussock-500);color:#fff}
+
+.stop-body h3{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:30px;
+  line-height:1.15;
+  color:var(--ink);
+  margin-bottom:6px;
+  letter-spacing:-0.015em;
+  font-variation-settings:"opsz" 48;
+}
+.stop-body h3 .place{
+  color:var(--honey-700);
+  font-style:italic;
+  font-weight:400;
+}
+.stop-body .where{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--tussock-500);
+  margin-bottom:18px;
+}
+.stop-body .where a{
+  color:var(--honey-700);
+  text-decoration:underline;
+  text-decoration-color:var(--rule-strong);
+  text-underline-offset:3px;
+  transition:color 0.2s;
+}
+.stop-body .where a:hover{color:var(--cherry-500)}
+.stop-body p{
+  font-size:16px;
+  line-height:1.72;
+  color:#3a2c12;
+  margin-bottom:14px;
+  max-width:680px;
+}
+.stop-body p strong{color:var(--honey-700);font-weight:600}
+
+.why{
+  margin-top:16px;
+  padding:18px 22px;
+  background:var(--honey-200);
+  border-left:3px solid var(--honey-500);
+  font-size:14.5px;
+  line-height:1.65;
+  color:#3a2c12;
+  max-width:680px;
+}
+.why strong{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--honey-700);
+  margin-bottom:6px;
+}
+
+.why.warning{
+  background:rgba(200,56,92,0.08);
+  border-left-color:var(--cherry-500);
+}
+.why.warning strong{color:var(--cherry-700)}
+
+.why.tip{
+  background:rgba(94,123,61,0.08);
+  border-left-color:var(--vine-500);
+}
+.why.tip strong{color:var(--vine-700)}
+
+@media (max-width:740px){
+  .stop{grid-template-columns:1fr;gap:18px;padding:28px 0}
+  .stop-time .clock{font-size:36px}
+}
+
+/* ---------- Fuel & Logistics Panel ---------- */
+.panel{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:48px;
+  margin-top:48px;
+}
+.panel-card{
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  padding:36px 36px 32px;
+  position:relative;
+}
+.panel-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--honey-500),var(--cherry-500));
+}
+.panel-card h3{
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:24px;
+  margin-bottom:18px;
+  color:var(--ink);
+  font-variation-settings:"opsz" 36;
+}
+.panel-card .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:10px 0;
+  border-bottom:1px dotted var(--rule);
+  font-size:14px;
+}
+.panel-card .row:last-child{border-bottom:none}
+.panel-card .row .k{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--tussock-500);
+}
+.panel-card .row .v{
+  font-family:var(--font-display);
+  font-size:18px;
+  color:var(--ink);
+}
+.panel-card .row .v em{color:var(--honey-700);font-style:italic;font-size:14px;margin-left:6px}
+.panel-card p{font-size:14.5px;line-height:1.7;color:#3a2c12;margin-bottom:12px}
+.panel-card p a{
+  color:var(--honey-700);
+  text-decoration:underline;
+  text-decoration-color:var(--rule-strong);
+  text-underline-offset:3px;
+}
+
+@media (max-width:740px){
+  .panel{grid-template-columns:1fr;gap:24px}
+  .panel-card{padding:28px 24px}
+}
+
+/* ---------- Footer ---------- */
+footer{
+  padding:60px 0 80px;
+  background:var(--ink);
+  color:var(--honey-200);
+  position:relative;
+}
+footer .wrap{position:relative}
+footer .quote{
+  font-family:var(--font-display);
+  font-weight:300;
+  font-style:italic;
+  font-size:clamp(20px, 2.4vw, 28px);
+  line-height:1.45;
+  max-width:780px;
+  margin-bottom:20px;
+  color:var(--honey-300);
+  font-variation-settings:"opsz" 60;
+}
+footer .src{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--tussock-300);
+}
+footer .foot-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:48px;
+  padding-top:24px;
+  border-top:1px solid rgba(216,198,138,0.2);
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--tussock-300);
+}
+
+/* small bee */
+.bee{
+  display:inline-block;
+  width:14px;
+  height:14px;
+  vertical-align:-2px;
+  margin:0 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html" class="active">Day 4</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+
+<!-- ====== HERO ====== -->
+<header class="hero">
+  <div class="hero-top">
+    <div class="crumb">
+      <span>Day 03</span>
+      <span>·</span>
+      <span style="opacity:1;color:var(--honey-700)">▸ Day 04</span>
+      <span>·</span>
+      <span>Day 05</span>
+    </div>
+    <div class="badge">10 NOV 2026 · TUE</div>
+  </div>
+
+  <div class="hex-emblem"></div>
+
+  <div class="hero-eyebrow">South Island Odyssey · Leg Four · ≈263 km</div>
+
+  <h1 class="hero-title">
+    Tussock, Honey<br>
+    <span class="ampersand">&amp;</span> the <em>Big Drop</em>
+  </h1>
+
+  <p class="hero-lede">
+    Roll out of the alpine basin and trade glaciers for golden tussock. Crest the
+    otherworldly <strong>971-metre Lindis Pass</strong>, graze the Central Otago fruit
+    belt at Jones Family Fruit Stall, taste honesty-box <strong>Viper's Bugloss honey</strong>
+    in Bannockburn, watch strangers leap 43 metres off the world's first commercial
+    bungy bridge, sneak a Gibbston pinot, and roll into Queenstown by way of a
+    converted shearing-shed honey centre. Sleep two minutes from the lakefront.
+  </p>
+
+  <div class="hero-meta">
+    <div>
+      <div class="label">Route</div>
+      <div class="value">Glentanner <em>→</em> Queenstown</div>
+    </div>
+    <div>
+      <div class="label">Distance</div>
+      <div class="value">263 <em>km</em></div>
+    </div>
+    <div>
+      <div class="label">Drive time</div>
+      <div class="value">3h 30m <em>moving</em></div>
+    </div>
+    <div>
+      <div class="label">Stay</div>
+      <div class="value">Hampshire <em>Lakeview</em></div>
+    </div>
+  </div>
+</header>
+
+<!-- ====== ROUTE STRIP ====== -->
+<section class="route-strip">
+  <div class="route-svg-wrap">
+    <svg class="route-svg" viewBox="0 0 1100 200" xmlns="http://www.w3.org/2000/svg" aria-label="Route map">
+      <!-- ridge line -->
+      <path d="M0 130 Q 140 80, 280 110 T 560 95 T 840 135 T 1100 110" fill="none" stroke="#D8C68A" stroke-width="2.5" opacity="0.55"/>
+      <!-- road dashes -->
+      <path d="M40 130 Q 180 90, 320 120 T 600 105 T 880 140 T 1080 115" fill="none" stroke="#A8650C" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/>
+
+      <!-- pins -->
+      <g font-family="DM Mono, monospace" font-size="10" fill="#A8650C" letter-spacing="0.12em">
+        <!-- Glentanner -->
+        <g transform="translate(40,130)">
+          <circle r="7" fill="#FFF8E5" stroke="#A8650C" stroke-width="2"/>
+          <circle r="3" fill="#A8650C"/>
+          <text y="-16" text-anchor="middle">GLENTANNER</text>
+          <text y="28" text-anchor="middle" font-size="9" fill="#9C7B3A">09:00</text>
+        </g>
+        <!-- Twizel fuel -->
+        <g transform="translate(170,108)">
+          <rect x="-6" y="-6" width="12" height="12" fill="#FFF8E5" stroke="#2a2a2a" stroke-width="1.5"/>
+          <text y="-12" text-anchor="middle" fill="#2a2a2a">FUEL · TWIZEL</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">09:45</text>
+        </g>
+        <!-- Omarama -->
+        <g transform="translate(310,118)">
+          <circle r="5" fill="#FFF8E5" stroke="#5C8B8E" stroke-width="2"/>
+          <text y="-12" text-anchor="middle" fill="#5C8B8E">OMARAMA</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">10:30</text>
+        </g>
+        <!-- Lindis -->
+        <g transform="translate(450,96)">
+          <polygon points="0,-9 8,5 -8,5" fill="#FFF8E5" stroke="#5C8B8E" stroke-width="2"/>
+          <text y="-16" text-anchor="middle" fill="#5C8B8E">LINDIS · 971m</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">11:30</text>
+        </g>
+        <!-- Tarras lunch -->
+        <g transform="translate(580,102)">
+          <circle r="6" fill="#FFF8E5" stroke="#C8385C" stroke-width="2"/>
+          <text y="-14" text-anchor="middle" fill="#C8385C">TARRAS · LUNCH</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">12:45</text>
+        </g>
+        <!-- Jones Fruit -->
+        <g transform="translate(720,130)">
+          <circle r="6" fill="#FFF8E5" stroke="#C8385C" stroke-width="2"/>
+          <text y="-14" text-anchor="middle" fill="#C8385C">JONES · FRUIT</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">14:30</text>
+        </g>
+        <!-- Honey Shed -->
+        <g transform="translate(800,138)">
+          <polygon points="-7,0 -3.5,-7 3.5,-7 7,0 3.5,7 -3.5,7" fill="#FFF8E5" stroke="#A8650C" stroke-width="2"/>
+          <text y="-14" text-anchor="middle">HONEY SHED</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">15:25</text>
+        </g>
+        <!-- Kawarau -->
+        <g transform="translate(900,140)">
+          <circle r="6" fill="#FFF8E5" stroke="#B53A2B" stroke-width="2"/>
+          <text y="-14" text-anchor="middle" fill="#B53A2B">KAWARAU · BUNGY</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">16:20</text>
+        </g>
+        <!-- Gibbston -->
+        <g transform="translate(990,128)">
+          <circle r="5" fill="#FFF8E5" stroke="#5E7B3D" stroke-width="2"/>
+          <text y="-12" text-anchor="middle" fill="#5E7B3D">GIBBSTON</text>
+          <text y="22" text-anchor="middle" font-size="9" fill="#9C7B3A">17:00</text>
+        </g>
+        <!-- Queenstown -->
+        <g transform="translate(1060,116)">
+          <circle r="7" fill="#FFF8E5" stroke="#A8650C" stroke-width="2"/>
+          <circle r="3" fill="#A8650C"/>
+          <text y="-14" text-anchor="middle">QUEENSTOWN</text>
+          <text y="26" text-anchor="middle" font-size="9" fill="#9C7B3A">19:30</text>
+        </g>
+      </g>
+
+      <!-- decorative bee -->
+      <g transform="translate(620,50)">
+        <ellipse cx="0" cy="0" rx="6" ry="4" fill="#E8A12C"/>
+        <rect x="-4" y="-3" width="2" height="6" fill="#2A1E0B"/>
+        <rect x="0" y="-3" width="2" height="6" fill="#2A1E0B"/>
+        <ellipse cx="-2" cy="-4" rx="3" ry="2" fill="rgba(230,240,240,0.7)"/>
+        <ellipse cx="2" cy="-4" rx="3" ry="2" fill="rgba(230,240,240,0.7)"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ====== ITINERARY ====== -->
+<section class="section">
+  <div class="section-eyebrow">Itinerary · Hour by Hour</div>
+  <h2>From alpine basin to <em>lake-edge</em>.</h2>
+  <p class="section-lede">
+    A long but unhurried day, sequenced around hard closing times: Kawarau bungy stops at 4 pm,
+    Gibbston cellar doors at 5 pm, and Buzzstop café shuts at 4 pm Tuesday. A 9 am roll-out
+    from Glentanner makes everything fit with daylight to spare.
+  </p>
+
+  <!-- 08:00 Breakfast & pack -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">08:00</div>
+      <div class="duration">60 min</div>
+      <span class="tag opt">PACK · BREW</span>
+    </div>
+    <div class="stop-body">
+      <h3>Coffee, tank check, packing — <span class="place">Glentanner Park Centre</span></h3>
+      <div class="where">3388 Mt Cook Rd, Glentanner ·
+        <a href="https://maps.google.com/?q=Glentanner+Park+Centre+Mount+Cook" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>Slow start. Make a flat-white at the camp kitchen, top up the freshwater tank, dump
+        grey water, and stow the night before's washing. Glentanner's open kitchen has the
+        last decent espresso machine you'll see until Tarras — use it.</p>
+      <div class="why tip">
+        <strong>Pre-departure motorhome checklist</strong>
+        Gas off · windows shut · roof vent down · awning rolled · cab seats rotated forward ·
+        loose jars (honey, salmon, last night's leftovers) stowed in low cupboards. The
+        Lindis corners will rattle anything loose.
+      </div>
+    </div>
+  </div>
+
+  <!-- 09:00 Depart -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">09:00</div>
+      <div class="duration">45 min · 55 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Roll south — <span class="place">SH80 → Pukaki → SH8 to Twizel</span></h3>
+      <div class="where">SH80 south to SH8 junction at Lake Pukaki ·
+        <a href="https://maps.google.com/?q=Glentanner+to+Twizel" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>Last long glances at Aoraki/Mt Cook in the rear-view mirror. The road traces Lake
+        Pukaki's west shore — the turquoise is more intense in morning light than at any other
+        time of day. If you didn't get the <em>Peters Lookout</em> shot yesterday, pull in
+        for one last frame at the southern end of the lake before SH8.</p>
+      <p>Once past the Pukaki junction you swing east-south-east and the landscape pivots
+        from glacial blue to dry Mackenzie yellow.</p>
+    </div>
+  </div>
+
+  <!-- 09:45 Twizel fuel -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">09:45</div>
+      <div class="duration">15 min</div>
+      <span class="tag fuel">FUEL · MUST</span>
+    </div>
+    <div class="stop-body">
+      <h3>Diesel up — <span class="place">McKeown CardFuel 24/7, Twizel</span></h3>
+      <div class="where">1 Ostler Rd, Twizel · 24/7 unmanned high-flow ·
+        <a href="https://maps.google.com/?q=McKeown+CardFuel+Twizel+1+Ostler+Road" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p><strong>Fill the tank fully here.</strong> McKeown's unmanned card pumps run roughly
+        15–25¢/L cheaper than Cromwell and 30–40¢/L cheaper than Queenstown — and they're the
+        last cheap diesel before you cross the Lindis. Pre-pay at the kiosk (set a $200 max-fill
+        or a fixed amount), select your pump, swipe card, fuel. Refunds for unused balance hit
+        the card within a few days.</p>
+      <div class="why">
+        <strong>Why here, not Cromwell</strong>
+        Otago fuel jumps about 20¢/L the moment you cross into wine country. A Maui River
+        burns roughly 39 L on the full Glentanner → Queenstown run — fill 60 L at Twizel
+        prices and you save NZ$12–18 vs. topping up at Cromwell, plus the Twizel pumps are
+        accessible 24/7 with no queue.
+      </div>
+    </div>
+  </div>
+
+  <!-- 10:00 Drive Twizel-Omarama -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">10:00</div>
+      <div class="duration">30 min · 30 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>SH8 south — <span class="place">Twizel → Omarama</span></h3>
+      <div class="where">SH8 along the Wairepo flats and Ahuriri valley ·
+        <a href="https://maps.google.com/?q=Twizel+to+Omarama+SH8" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>Wide-open flats, the Ben Ohau range to your right, willow-lined irrigation
+        canals on the left. About 8 km south of Twizel you'll pass High Country Salmon's
+        floating café on a canal — skip the stop today (we'll buy honey-glazed salmon in
+        Queenstown), but it's a nice scenery marker.</p>
+    </div>
+  </div>
+
+  <!-- 10:30 Omarama -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">10:30</div>
+      <div class="duration">20 min</div>
+      <span class="tag opt">OPTIONAL · STRETCH</span>
+    </div>
+    <div class="stop-body">
+      <h3>Leg-stretch — <span class="place">Omarama</span></h3>
+      <div class="where">Omarama township, SH8/SH83 junction ·
+        <a href="https://maps.google.com/?q=Omarama+New+Zealand" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>The last village before the climb. Pull in at the public toilets behind the
+        domain, use them (Lindis Pass has none for the next 90 min), and stretch the
+        passengers' legs. If anyone wants a hot drink, the <em>Wrinkly Rams</em> café
+        does decent flat whites and home-baked muffins.</p>
+      <div class="why tip">
+        <strong>Optional · 25 min detour</strong>
+        If you have time, drive 4 km up Omarama Station Rd to the
+        <a href="https://maps.google.com/?q=Clay+Cliffs+Omarama" target="_blank" rel="noopener">Clay Cliffs</a> —
+        wind-eroded badlands pinnacles on private land (gold-coin gate fee). It's an
+        unsealed road; fine for the motorhome at low speed. Skip if you're tight on time.
+      </div>
+    </div>
+  </div>
+
+  <!-- 11:00 Lindis Pass drive -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">11:00</div>
+      <div class="duration">30 min · 30 km</div>
+      <span class="tag drive">DRIVE · CLIMB</span>
+    </div>
+    <div class="stop-body">
+      <h3>The Lindis climb — <span class="place">Omarama → Lindis Pass summit</span></h3>
+      <div class="where">SH8 / Omarama–Lindis Pass Rd ·
+        <a href="https://maps.google.com/?q=Lindis+Pass+from+Omarama" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>One of the most photogenic drives on the South Island. The road winds up through
+        the Ahuriri valley, through golden tussock that catches the light in the most
+        improbable ways, and tops out at <strong>971 m</strong> — the highest sealed pass
+        on a NZ state highway. The Maui River will pull noticeably in second/third gear on
+        the climb; expect 14–16 L/100km on this stretch alone.</p>
+      <div class="why">
+        <strong>What to watch for</strong>
+        Sheep on the verge, slow campervans (be one), and the moment the road crests and
+        the whole Otago basin opens up to the south. Cameras ready.
+      </div>
+    </div>
+  </div>
+
+  <!-- 11:30 Lindis Summit -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">11:30</div>
+      <div class="duration">30 min</div>
+      <span class="tag must">MUST · LOOKOUT</span>
+    </div>
+    <div class="stop-body">
+      <h3>Lindis Pass Summit Lookout — <span class="place">971 m a.s.l.</span></h3>
+      <div class="where">Omarama–Lindis Pass Rd · small carpark on the right at the summit ·
+        <a href="https://maps.google.com/?q=Lindis+Pass+Summit+Scenic+Lookout" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>Pull into the gravel carpark just past the summit cairn. A signed dirt path leads
+        200 m to a viewing platform — about a <strong>10-minute easy walk</strong>. The
+        platform view is fine, but the <em>real</em> view is from 50 m further up the slope
+        beside it: scramble the unmarked sheep track for another 5 minutes and you get the
+        full 360° of waves of tussock-gold ridges rolling south toward Otago. Pure
+        High Country.</p>
+      <div class="why">
+        <strong>Photo angle</strong>
+        Best frame: stand on the up-slope side and shoot south so the road snakes through
+        gold tussock toward distant blue mountains. Mid-day light is harsh — if you want
+        moody, come back at sunrise or sunset (you won't, but it's nice to know).
+      </div>
+      <div class="why warning">
+        <strong>Motorhome parking</strong>
+        The summit carpark is small (~5–7 cars) and gravel. If full, the
+        <em>Lindis Pass Viewpoint</em> 200 m further south has a bigger pull-out and the same view.
+        Don't park on the road shoulder — locals do 100 km/h through here.
+      </div>
+    </div>
+  </div>
+
+  <!-- 12:00 Lindis descent -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">12:00</div>
+      <div class="duration">45 min · 50 km</div>
+      <span class="tag drive">DRIVE · DESCENT</span>
+    </div>
+    <div class="stop-body">
+      <h3>Down to Tarras — <span class="place">Lindis Pass → Tarras village</span></h3>
+      <div class="where">SH8 south, descending into Lindis Valley then Tarras flats ·
+        <a href="https://maps.google.com/?q=Lindis+Pass+to+Tarras" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>The south side of the pass descends gently through a long valley dotted with merino
+        runs. Around Lindis Crossing the country opens out completely — you're in Central
+        Otago wine and stone-fruit country now, and the air goes dry and bright.</p>
+    </div>
+  </div>
+
+  <!-- 12:45 Tarras lunch -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">12:45</div>
+      <div class="duration">75 min</div>
+      <span class="tag lunch">MUST · LUNCH</span>
+    </div>
+    <div class="stop-body">
+      <h3>Lunch — <span class="place">Tarras Country Café</span></h3>
+      <div class="where">2792 Tarras–Cromwell Rd, Tarras · open 9 am–3 pm daily ·
+        <a href="https://maps.google.com/?q=Tarras+Country+Cafe" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>A cult roadside café in a village so small it has one café, one general store, one
+        gift shop, and a statue of <strong>Shrek the Sheep</strong> (the famously
+        un-shorn merino, who came from a Tarras farm and grew 27 kg of fleece). Try the
+        lamb panini or the cheese roll — a South Island classic of toasted bread rolled
+        around onion-cheese filling. Vegan/vegetarian options are unusually good for a
+        village this size.</p>
+      <p>Park the motorhome in the gravel lot behind the cafe (plenty of room) and
+        wander next door to the <em>Shrek Statue</em> for a photo, then the gift shop —
+        the merino blanket throws make decent souvenirs.</p>
+      <div class="why tip">
+        <strong>Timing note</strong>
+        Tarras Country Café closes at 3 pm sharp. A 12:45 arrival gives you 75 min to eat,
+        wander, use the toilets, and roll out by 14:00 with everything still open.
+      </div>
+    </div>
+  </div>
+
+  <!-- 14:00 drive to Cromwell -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">14:00</div>
+      <div class="duration">30 min · 32 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Through the fruit belt — <span class="place">Tarras → Cromwell</span></h3>
+      <div class="where">SH8 / Tarras–Cromwell Rd through the orchard country ·
+        <a href="https://maps.google.com/?q=Tarras+to+Cromwell+SH8" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>The road threads through the Cromwell fruit basin: cherry, apricot, peach,
+        nectarine, and apple orchards laid out in long rows against the dry hills. In
+        early November the cherry blossoms are mostly gone but the trees are heavy with
+        green fruit — the first apricots will be a fortnight away. Watch for the big
+        roadside <em>Big Fruit</em> sculpture at Cromwell's edge — it's worth a drive-by photo.</p>
+    </div>
+  </div>
+
+  <!-- 14:30 Jones Fruit -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">14:30</div>
+      <div class="duration">40 min</div>
+      <span class="tag fruit">MUST · FRUIT</span>
+    </div>
+    <div class="stop-body">
+      <h3>Jones Family Fruit Stall — <span class="place">Kawarau Gorge Rd, Cromwell</span></h3>
+      <div class="where">489 SH6 (Kawarau Gorge Rd), Cromwell · open 8:30 am–6 pm daily ·
+        <a href="https://maps.google.com/?q=Jones+Family+Fruit+Stall+Cromwell" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>The most famous fruit stall in New Zealand. The Jones family have been growing here
+        for four generations and the indoor barn-shop is a wall-to-wall riot of stone fruit,
+        apples, pears, asparagus, jams, dried fruit, honey, fudge — and ice cream so good
+        people queue out the door. Order a <strong>real-fruit ice cream</strong> (frozen
+        fruit blended into vanilla soft-serve) — try boysenberry or whichever stone fruit
+        is in season.</p>
+      <p>Buy a punnet of whatever's seasonal for tonight's motorhome dessert. Early November
+        means very early apricots, late hothouse strawberries, last of the winter apples,
+        and excellent dried fruit. Pre-cherry season — but they'll still have last year's
+        frozen cherries and Central Otago cherry jam.</p>
+      <div class="why">
+        <strong>Practical</strong>
+        Big gravel carpark, easy for a 7m motorhome. Card-only at the checkout (no cash).
+        Public toilets out back. The pricing is honest — comparable to or cheaper than
+        New World supermarkets, with fresher fruit and better varieties.
+      </div>
+    </div>
+  </div>
+
+  <!-- 15:10 drive to honey shed -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">15:10</div>
+      <div class="duration">15 min · 10 km</div>
+      <span class="tag drive">DRIVE · DETOUR</span>
+    </div>
+    <div class="stop-body">
+      <h3>Detour to Bannockburn — <span class="place">Cromwell → Bannockburn Rd</span></h3>
+      <div class="where">SH6 north into Cromwell town → SH8B over the dam → right onto Bannockburn Rd ·
+        <a href="https://maps.google.com/?q=Cromwell+to+Bannockburn+Rd" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>A short scenic detour. Cross the Clutha at the Cromwell Dam, swing right at the
+        Bannockburn turn, and drive 5 km into the wine country at the south of Lake Dunstan.
+        This is one of NZ's most distinctive landscapes: gold ridges scarred with old gold-mining
+        sluice channels, vines hugging the slopes.</p>
+    </div>
+  </div>
+
+  <!-- 15:25 Honey Shed -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">15:25</div>
+      <div class="duration">25 min</div>
+      <span class="tag honey">MUST · HONEY</span>
+    </div>
+    <div class="stop-body">
+      <h3>The Local Honey Shed — <span class="place">Bannockburn, Cromwell</span></h3>
+      <div class="where">230 Bannockburn Rd, Cromwell · open 9 am–6 pm daily ·
+        <a href="https://maps.google.com/?q=The+Local+Honey+Shed+Bannockburn+Cromwell" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>A small honesty-box shed in the Bannockburn vineyard country, run by local apiarists
+        Tim and Zoe. Four headline varieties on the shelves: <strong>Mānuka</strong> (the famous
+        antibacterial one), <strong>Rātā</strong> (creamy, from native rātā trees), <strong>Wild
+        Thyme</strong> (Central Otago's flowering thyme on the dry hillsides — herbaceous,
+        savoury, unique to this region), and the prized <strong>Viper's Bugloss</strong> — a
+        pale, almost-white honey from a blue-flowered wildflower that's nearly impossible to
+        find anywhere else.</p>
+      <p>No staff on site — it's a self-service shed with tasting spoons, marked prices,
+        and an honesty till. Pay by card on the EFTPOS machine (PayWave works), or by phone
+        bank transfer using the number on the wall if you need exact change. Buy a 500 g jar
+        of the Viper's Bugloss; it's the one your friends back home will not be able to find.</p>
+      <div class="why">
+        <strong>Detour cost · ~30 min round-trip</strong>
+        Adds about half an hour to the Cromwell → Kawarau leg. Worth every minute. Drive carefully on
+        the gravel apron when leaving — there's an honesty mailbox on the post you don't want to clip.
+      </div>
+      <div class="why tip">
+        <strong>Packing the jars</strong>
+        They're glass. Wrap in a tea towel and stow low in a cupboard before Kawarau Gorge's
+        corners — the twists will rattle anything loose.
+      </div>
+    </div>
+  </div>
+
+  <!-- 15:50 drive to Kawarau -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">15:50</div>
+      <div class="duration">30 min · 25 km</div>
+      <span class="tag drive">DRIVE · GORGE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Into the Kawarau Gorge — <span class="place">Bannockburn → Kawarau Bridge</span></h3>
+      <div class="where">Bannockburn Rd → SH6 west into the gorge ·
+        <a href="https://maps.google.com/?q=Bannockburn+to+Kawarau+Bungy+Centre" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>One of the most dramatic short drives in the country. The road follows the Kawarau
+        River through a narrow schist gorge — turquoise rapids, vine-terraced slopes,
+        decommissioned gold-mining shanties on the cliffs. Take it slow; the corners are
+        tight for a 7 m motorhome and locals overtake aggressively.</p>
+    </div>
+  </div>
+
+  <!-- 16:20 Kawarau Bungy -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">16:20</div>
+      <div class="duration">35 min</div>
+      <span class="tag bungy">MUST · SPECTATE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Watch the leap — <span class="place">AJ Hackett Kawarau Bungy Centre</span></h3>
+      <div class="where">Gibbston Valley, SH6 · jumping until 4 pm, viewing platform free, building open till later ·
+        <a href="https://maps.google.com/?q=AJ+Hackett+Kawarau+Bungy+Centre" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>This is the <strong>world's first commercial bungy jump</strong> — AJ Hackett opened
+        it in 1988 off the old Kawarau gold-rush suspension bridge, and you can still watch
+        jumpers go 43 metres into the turquoise river below. <strong>Free spectator
+        viewing</strong> from a purpose-built platform alongside the bridge; the cafe and
+        shop inside are open later, and there's a small museum about the history of the jump.</p>
+      <p>The last jump of the day is around 4:00 pm — by arriving 16:20 you'll catch the
+        final 20–30 minutes of jumping (the busiest, since it's "I have to do it today"
+        hour). Wander the suspension bridge itself (free, open 24/7 — it's a heritage
+        crossing); the views down the gorge are spectacular.</p>
+      <div class="why warning">
+        <strong>Jumping closes at 4 pm sharp</strong>
+        Even if you arrive 4:30, you can still cross the bridge, but no more jumpers. Plan
+        for a 16:15–16:20 arrival to actually see people leap. If running late, push hard
+        from the honey shed.
+      </div>
+      <div class="why tip">
+        <strong>Want to jump yourself?</strong>
+        Walk-ups are sometimes possible mid-week (~NZ$305 per person, includes a t-shirt
+        and the video). Book online ahead if anyone is serious — the platform fills fast
+        in summer. Min weight 35 kg, max 235 kg, no upper age limit.
+      </div>
+    </div>
+  </div>
+
+  <!-- 16:55 drive to Gibbston -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">16:55</div>
+      <div class="duration">10 min · 8 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Into vine country — <span class="place">Kawarau → Gibbston Valley</span></h3>
+      <div class="where">SH6 west, the Gibbston Highway ·
+        <a href="https://maps.google.com/?q=Kawarau+Bridge+to+Gibbston+Valley+Winery" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>The road climbs out of the gorge and runs along the south-facing slopes of the
+        Gibbston Valley — New Zealand's highest-altitude wine region, all pinot noir on
+        schist scree. Vines on both sides for the next 8 km.</p>
+    </div>
+  </div>
+
+  <!-- 17:05 Gibbston -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">17:05</div>
+      <div class="duration">40 min</div>
+      <span class="tag vine">MUST · WINE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Cellar door — <span class="place">Gibbston Valley Winery</span></h3>
+      <div class="where">1820 SH6, Gibbston Valley · cellar door 10 am–5 pm daily ·
+        <a href="https://maps.google.com/?q=Gibbston+Valley+Winery+%26+Restaurant" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>One of the founding wineries of Central Otago, famous for its <strong>schist-cave
+        barrel hall</strong> — a tunnel dug straight into the mountainside where the pinot
+        ages. The cellar door does flights of 4 wines (~NZ$15–20 per person, redeemable
+        against a bottle purchase). If you can stretch to it, the <em>wine and cheese
+        flight</em> pairs four estate wines with four NZ cheeses — that's your aperitif and
+        first course in one.</p>
+      <p>The terrace looks out over the home vineyard with the Crown Range behind. They have
+        a large carpark for motorhomes at the far end. The driver can do a non-alcohol
+        flight of grape juice and nibble cheese instead — they'll happily do it.</p>
+      <div class="why warning">
+        <strong>Closes at 5 pm sharp</strong>
+        You're arriving at 5:05 — call ahead from Cromwell (<strong>+64 3 442 6910</strong>)
+        and ask if they can hold a quick tasting until 5:30. They usually accommodate. If
+        not, drive straight on to Buzzstop and save the wine for tomorrow's Gibbston shuttle.
+      </div>
+      <div class="why tip">
+        <strong>Plan B — Day 5 wine shuttle</strong>
+        If today runs late, skip the cellar door and book a Gibbston wine bus shuttle for
+        tomorrow afternoon — that way the driver can drink too, and you get 3–4 cellar
+        doors instead of one. Around NZ$140 pp from Queenstown.
+      </div>
+    </div>
+  </div>
+
+  <!-- 17:50 drive Buzzstop -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">17:50</div>
+      <div class="duration">25 min · 18 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>To Frankton — <span class="place">Gibbston → Buzzstop</span></h3>
+      <div class="where">SH6 west, up the Crown Range slope, down into Frankton ·
+        <a href="https://maps.google.com/?q=Gibbston+Valley+to+Buzzstop+Honey+Centre" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>One last climb up the Kawarau slope and the whole Wakatipu basin opens up beneath
+        you — first glimpse of <em>Lake Wakatipu</em> in the distance, with the Remarkables
+        running south. Stunning view; don't crash. Drop down into Frankton (Queenstown's
+        airport suburb) and the Buzzstop is on Hansen Rd, ~2 minutes off SH6.</p>
+    </div>
+  </div>
+
+  <!-- 18:15 Buzzstop -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">18:15</div>
+      <div class="duration">35 min</div>
+      <span class="tag honey">MUST · HONEY</span>
+    </div>
+    <div class="stop-body">
+      <h3>The Buzzstop Honey Centre &amp; Café — <span class="place">Frankton</span></h3>
+      <div class="where">26 Hansen Rd, Frankton · café closes 4 pm Tue, shop and gardens open later ·
+        <a href="https://maps.google.com/?q=The+Buzzstop+Honey+Centre+Cafe" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>An eccentric honey emporium set in a converted 1950s shearing shed. Live observation
+        beehive behind glass, a tasting bar with 20+ varieties of NZ honey (yes, more
+        Mānuka and Rātā, but also weird ones like <strong>Pōhutukawa</strong> and
+        <strong>Tāwari</strong> from the far north), an in-house <em>meadery</em>
+        producing honey wine, and a <em>bee-spirit bar</em> with honey-distilled gin and
+        vodka tastings.</p>
+      <div class="why warning">
+        <strong>Tuesday hours</strong>
+        The Buzzstop café closes at 4 pm on Tuesdays (it closes 4:30 every other day).
+        By 18:15 the café is shut, but the <em>shop, honey tasting bar, and bee gardens</em>
+        stay open until around 5 pm. You'll have time to taste and buy, but not to eat. So
+        eat early at Gibbston or save dinner for Queenstown.
+      </div>
+      <div class="why tip">
+        <strong>What to buy</strong>
+        A small Tāwari (gentle butterscotch flavour) and a Pōhutukawa (more robust, slightly
+        salty) round out the Viper's Bugloss from Bannockburn. A flight of honey vodka in a
+        gift box also works as a fun present for the friend back home who waters your plants.
+      </div>
+    </div>
+  </div>
+
+  <!-- 18:50 drive to camp -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">18:50</div>
+      <div class="duration">15 min · 9 km</div>
+      <span class="tag drive">DRIVE</span>
+    </div>
+    <div class="stop-body">
+      <h3>Last leg into town — <span class="place">Frankton → Queenstown</span></h3>
+      <div class="where">SH6A along the lakefront → Brecon St → Cemetery Rd ·
+        <a href="https://maps.google.com/?q=Buzzstop+Honey+Centre+to+Hampshire+Holiday+Park+Queenstown+Lakeview" target="_blank" rel="noopener">Route ↗</a>
+      </div>
+      <p>One of the most beautiful 9 km in the country. SH6A traces Lake Wakatipu's edge
+        with the Remarkables to your left, then the road climbs gently into Queenstown's CBD.
+        Right turn onto Brecon, left onto Cemetery — Hampshire Holiday Parks is a few
+        hundred metres up.</p>
+    </div>
+  </div>
+
+  <!-- 19:10 Check-in -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">19:10</div>
+      <div class="duration">45 min</div>
+      <span class="tag checkin">CHECK IN</span>
+    </div>
+    <div class="stop-body">
+      <h3>Hampshire Holiday Park — <span class="place">Queenstown Lakeview</span></h3>
+      <div class="where">4 Cemetery Rd, Queenstown · reception 8 am–7 pm ·
+        <a href="https://maps.google.com/?q=Hampshire+Holiday+Parks+Queenstown+Lakeview" target="_blank" rel="noopener">Google Map ↗</a>
+      </div>
+      <p>The most central holiday park in Queenstown — 10 minutes walk to the lakefront,
+        5 minutes to the Skyline Gondola. <strong>Reception closes at 7 pm</strong>, so a
+        19:10 arrival is just inside the window. Phone ahead from Frankton
+        (<strong>+64 3 442 7252</strong>) if you're running tight — they'll leave keys/site
+        details in a late-arrival envelope if needed.</p>
+      <div class="why">
+        <strong>Motorhome site tips</strong>
+        Some powered sites are tight for a 7 m van — when checking in, ask for a corner
+        pitch or one along the back fence, where the manoeuvring room is best. Levelling
+        blocks may be needed; the ground slopes gently. Dump station is on the way out, do
+        it tomorrow morning.
+      </div>
+    </div>
+  </div>
+
+  <!-- 20:00 Dinner -->
+  <div class="stop">
+    <div class="stop-time">
+      <div class="clock">20:00</div>
+      <div class="duration">90 min</div>
+      <span class="tag opt">DINNER</span>
+    </div>
+    <div class="stop-body">
+      <h3>Dinner in town — <span class="place">Queenstown CBD</span></h3>
+      <div class="where">10-min walk down Brecon St into the centre</div>
+      <p>Two options for tonight:</p>
+      <p><strong>1. Cook-in feast at the campground</strong> (recommended after a long
+        drive) — grill the salmon from Gibbston, real-fruit ice cream from Jones, and a
+        glass of pinot from the winery. Half an hour, then bed. The camp kitchen has a
+        Weber grill outside.</p>
+      <p><strong>2. Walk into town</strong> — try <a href="https://maps.google.com/?q=Fergburger+Queenstown" target="_blank" rel="noopener">Fergburger</a>
+        (legendary, expect a 30-min queue), or <a href="https://maps.google.com/?q=Public+Kitchen+Queenstown" target="_blank" rel="noopener">Public Kitchen &amp; Bar</a>
+        on Steamer Wharf for lakefront seafood, or <a href="https://maps.google.com/?q=Erik%27s+Fish+%26+Chips+Queenstown" target="_blank" rel="noopener">Erik's Fish &amp; Chips</a>
+        for the cheap-and-cheerful option in a converted caravan.</p>
+      <div class="why tip">
+        <strong>Sunset timing</strong>
+        On 10 Nov 2026, Queenstown sunset is ~8:40 pm NZDT with civil twilight to 9:15.
+        If you eat fast, you can catch the alpenglow on the Remarkables from the
+        <a href="https://maps.google.com/?q=Queenstown+Gardens" target="_blank" rel="noopener">Queenstown Gardens</a> peninsula at 8:30 — 5 min walk from the centre.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ====== LOGISTICS PANEL ====== -->
+<section class="section">
+  <div class="section-eyebrow">Logistics · Fuel · Stops</div>
+  <h2>The motorhome, <em>handled</em>.</h2>
+
+  <div class="panel">
+
+    <div class="panel-card">
+      <h3>Diesel — estimated burn &amp; the cheapest fill</h3>
+      <div class="row"><span class="k">Total distance</span><span class="v">263 km</span></div>
+      <div class="row"><span class="k">Maui River 6-berth consumption</span><span class="v">~15 L/100 km <em>laden, hills</em></span></div>
+      <div class="row"><span class="k">Estimated diesel used</span><span class="v">~39–42 L</span></div>
+      <div class="row"><span class="k">Lindis Pass climb premium</span><span class="v">+3–4 L <em>second/third gear</em></span></div>
+      <div class="row"><span class="k">Recommended fill</span><span class="v">60 L <em>@ Twizel</em></span></div>
+      <div class="row"><span class="k">Cost saving vs Queenstown</span><span class="v">NZ$15–22 <em>on 60 L</em></span></div>
+
+      <p style="margin-top:18px"><strong>Best station on route:</strong>
+        <a href="https://maps.google.com/?q=McKeown+CardFuel+Twizel+1+Ostler+Road" target="_blank" rel="noopener">McKeown CardFuel 24/7 — Twizel</a>.
+        Unmanned high-flow truck diesel pump, 24/7, accepts international cards (rare
+        for self-serve in NZ). Pre-paid kiosk system — set $200 max-fill, unused balance
+        refunds within 2–5 days. Roughly 15–25¢/L cheaper than the nearest Cromwell pump.
+      </p>
+      <p><strong>Backup if Twizel is unreachable:</strong>
+        <a href="https://maps.google.com/?q=NPD+Cromwell" target="_blank" rel="noopener">NPD Cromwell</a>
+        (167 McNulty Rd, 6 am–10 pm). Still cheaper than Queenstown; reliable card pumps.
+      </p>
+      <p><strong>Avoid filling in Queenstown</strong> — Frankton stations run 25–40¢/L more
+        than Twizel. Tomorrow's Queenstown driving will burn maybe 5 L; you don't need to
+        fill again until Day 6.
+      </p>
+    </div>
+
+    <div class="panel-card">
+      <h3>Day at a glance</h3>
+      <div class="row"><span class="k">Depart Glentanner</span><span class="v">09:00</span></div>
+      <div class="row"><span class="k">Twizel fuel</span><span class="v">09:45</span></div>
+      <div class="row"><span class="k">Lindis Summit lookout</span><span class="v">11:30</span></div>
+      <div class="row"><span class="k">Tarras lunch</span><span class="v">12:45</span></div>
+      <div class="row"><span class="k">Jones Family Fruit Stall</span><span class="v">14:30</span></div>
+      <div class="row"><span class="k">The Local Honey Shed</span><span class="v">15:25</span></div>
+      <div class="row"><span class="k">Kawarau Bungy spectating</span><span class="v">16:20</span></div>
+      <div class="row"><span class="k">Gibbston Valley Winery</span><span class="v">17:05</span></div>
+      <div class="row"><span class="k">Buzzstop Honey Centre</span><span class="v">18:15</span></div>
+      <div class="row"><span class="k">Check in · Hampshire HP</span><span class="v">19:10</span></div>
+      <div class="row"><span class="k">Sunset · Queenstown</span><span class="v">20:40 <em>NZDT</em></span></div>
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:32px">
+
+    <div class="panel-card">
+      <h3>Hard close times — don't slip</h3>
+      <div class="row"><span class="k">Tarras Country Café</span><span class="v">3:00 pm</span></div>
+      <div class="row"><span class="k">Kawarau Bungy <em>(jumping)</em></span><span class="v">4:00 pm</span></div>
+      <div class="row"><span class="k">Buzzstop Café <em>(Tue)</em></span><span class="v">4:00 pm</span></div>
+      <div class="row"><span class="k">Buzzstop shop &amp; gardens</span><span class="v">~5:00 pm</span></div>
+      <div class="row"><span class="k">Gibbston Valley cellar door</span><span class="v">5:00 pm</span></div>
+      <div class="row"><span class="k">Hampshire HP reception</span><span class="v">7:00 pm</span></div>
+      <div class="row"><span class="k">Jones Fruit Stall</span><span class="v">6:00 pm</span></div>
+      <div class="row"><span class="k">Local Honey Shed</span><span class="v">6:00 pm</span></div>
+    </div>
+
+    <div class="panel-card">
+      <h3>If you fall behind</h3>
+      <p><strong>Skip Clay Cliffs detour</strong> — saves 25 min if running late from Omarama.</p>
+      <p><strong>Eat at Jones Fruit Stall instead of Tarras</strong> — they have hot pies
+        and ice cream; saves 30 min if you push past Tarras café's 3 pm closing.</p>
+      <p><strong>Drop Gibbston cellar door</strong> if you'd be arriving after 5 pm. Pick it
+        up tomorrow on a wine shuttle (driver gets to drink too).</p>
+      <p><strong>Last resort:</strong> arrive at Buzzstop before 4 pm (skip Gibbston entirely)
+        — that's the only way to actually eat at the café and do the bee tour.</p>
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <p class="quote">
+      Most places in the world, a road like this would have one thing on it. In Central
+      Otago, you can crest a tussock pass at lunch, eat real-fruit ice cream from a
+      four-generation orchard at three, watch strangers leap off the world's first bungy
+      bridge at four, sip pinot from a cave carved into schist at five, and taste Viper's
+      Bugloss honey before bed — all in a single afternoon.
+    </p>
+    <p class="src">— Field note · Mackenzie to Wakatipu · 10 Nov 2026</p>
+
+    <div class="foot-meta">
+      <div>Day 04 · Glentanner → Queenstown · 263 km</div>
+      <div>South Island Odyssey · Nov 2026</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

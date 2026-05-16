@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 · Christchurch — South Island Road Trip Prelude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+  :root{
+    /* Southland palette — glacial lake, kowhai gold, tussock, alpine sky */
+    --lake-deep:#0b3b4a;
+    --lake:#13647a;
+    --teal:#2e8a8a;
+    --sky:#a8d5d8;
+    --mist:#e8f1f0;
+    --cream:#f6f1e6;
+    --tussock:#c89b4a;
+    --kowhai:#e8b53e;
+    --pohutu:#c0392b;
+    --pine:#1f3b2f;
+    --bark:#3b2a1d;
+    --ink:#0d1e22;
+    --paper:#fbf7ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  /* Grain & atmosphere */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:1000;
+    opacity:0.5;
+  }
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(232,181,62,0.25), transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(168,213,216,0.4), transparent 60%),
+      linear-gradient(180deg,#0b3b4a 0%,#13647a 50%,#2e8a8a 85%,#a8d5d8 100%);
+    color:var(--cream);
+    overflow:hidden;
+    padding:3rem clamp(1.5rem,5vw,5rem) 6rem;
+  }
+  /* Mountain silhouette */
+  .mountains{
+    position:absolute;bottom:0;left:0;right:0;
+    width:100%;height:auto;
+    display:block;
+  }
+  .hero-nav{
+    display:flex;justify-content:space-between;align-items:center;
+    position:relative;z-index:5;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    opacity:0.85;
+  }
+  .hero-nav .badge{
+    border:1px solid rgba(246,241,230,0.4);
+    padding:0.4rem 0.9rem;
+    border-radius:99px;
+  }
+  .hero-content{
+    position:relative;z-index:5;
+    margin-top:8vh;
+    max-width:1100px;
+  }
+  .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.85rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--kowhai);
+    margin-bottom:1.5rem;
+    display:flex;align-items:center;gap:1rem;
+    animation:fadeUp 0.8s ease both;
+  }
+  .kicker::after{content:"";flex:0 0 80px;height:1px;background:var(--kowhai);}
+  h1.title{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(2.8rem,7.5vw,6.5rem);
+    line-height:0.95;
+    letter-spacing:-0.02em;
+    margin-bottom:1.5rem;
+    animation:fadeUp 1s ease 0.1s both;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--kowhai);
+  }
+  .tagline{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:clamp(1.1rem,2vw,1.5rem);
+    max-width:600px;
+    color:rgba(246,241,230,0.85);
+    animation:fadeUp 1s ease 0.2s both;
+  }
+  .meta-grid{
+    margin-top:3.5rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:2rem;
+    max-width:900px;
+    animation:fadeUp 1s ease 0.4s both;
+  }
+  .meta-item{border-top:1px solid rgba(246,241,230,0.3);padding-top:0.8rem}
+  .meta-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    opacity:0.6;
+    margin-bottom:0.3rem;
+  }
+  .meta-value{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500}
+
+  /* OVERVIEW STRIP */
+  .strip{
+    background:var(--pine);
+    color:var(--cream);
+    padding:2.5rem clamp(1.5rem,5vw,5rem);
+    display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:center;
+  }
+  .strip-stat{display:flex;flex-direction:column;gap:0.3rem}
+  .strip-stat .n{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:400;color:var(--kowhai);line-height:1}
+  .strip-stat .l{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.7}
+
+  /* MAIN CONTENT */
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:6rem clamp(1.5rem,5vw,4rem);
+  }
+  .section-head{
+    margin-bottom:3rem;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    border-bottom:1px solid rgba(13,30,34,0.15);
+    padding-bottom:1.5rem;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(2rem,4vw,3rem);
+    line-height:1;
+    color:var(--lake-deep);
+  }
+  .section-head h2 em{font-style:italic;color:var(--teal)}
+  .section-head .note{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--bark);
+    opacity:0.7;
+  }
+
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:0}
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:120px;top:0;bottom:0;
+    width:1px;
+    background:linear-gradient(180deg,
+      transparent,
+      var(--teal) 5%,
+      var(--teal) 95%,
+      transparent);
+  }
+  .stop{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:2.5rem;
+    margin-bottom:3.5rem;
+    position:relative;
+  }
+  .stop::before{
+    content:"";
+    position:absolute;
+    left:114px;top:10px;
+    width:13px;height:13px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--teal);
+    z-index:2;
+  }
+  .stop.must::before{background:var(--kowhai);border-color:var(--tussock)}
+  .stop-time{
+    text-align:right;
+    padding-right:1.5rem;
+    padding-top:0.2rem;
+  }
+  .stop-time .t{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:500;
+    color:var(--lake-deep);
+    line-height:1;
+  }
+  .stop-time .d{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--bark);
+    opacity:0.6;
+    margin-top:0.5rem;
+  }
+  .stop-card{
+    background:#fff;
+    border-radius:14px;
+    padding:1.6rem 1.8rem;
+    box-shadow:
+      0 1px 0 rgba(13,30,34,0.04),
+      0 8px 30px -12px rgba(13,30,34,0.12);
+    border:1px solid rgba(13,30,34,0.06);
+    position:relative;
+    transition:transform 0.3s ease,box-shadow 0.3s ease;
+  }
+  .stop-card:hover{
+    transform:translateY(-3px);
+    box-shadow:
+      0 1px 0 rgba(13,30,34,0.04),
+      0 20px 50px -15px rgba(13,30,34,0.2);
+  }
+  .stop-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.65rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    padding:0.25rem 0.7rem;
+    border-radius:99px;
+    margin-bottom:0.8rem;
+  }
+  .tag-must{background:var(--kowhai);color:var(--bark)}
+  .tag-opt{background:var(--mist);color:var(--teal)}
+  .tag-tr{background:var(--lake-deep);color:var(--cream)}
+  .tag-meal{background:var(--pohutu);color:var(--cream)}
+  .tag-stay{background:var(--pine);color:var(--cream)}
+  .stop-card h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.5rem;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:0.5rem;
+  }
+  .stop-card .addr{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    color:var(--bark);
+    opacity:0.7;
+    margin-bottom:1rem;
+  }
+  .stop-card p{margin-bottom:0.8rem;color:#3d4e52}
+  .stop-card .gmap{
+    display:inline-flex;
+    align-items:center;
+    gap:0.4rem;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid var(--teal);
+    padding-bottom:2px;
+    transition:color 0.2s,border-color 0.2s;
+  }
+  .stop-card .gmap:hover{color:var(--pohutu);border-color:var(--pohutu)}
+  .stop-card .gmap::before{content:"↗";font-size:1rem;line-height:0}
+
+  /* TRANSPORT INFO BOX */
+  .transport-box{
+    background:var(--lake-deep);
+    color:var(--cream);
+    padding:2.5rem;
+    border-radius:18px;
+    margin:4rem 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .transport-box::after{
+    content:"🚌";
+    position:absolute;
+    right:-20px;bottom:-30px;
+    font-size:9rem;
+    opacity:0.07;
+  }
+  .transport-box h3{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:1.8rem;
+    margin-bottom:1rem;
+    color:var(--kowhai);
+  }
+  .transport-box ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem}
+  .transport-box li{font-size:0.95rem;line-height:1.5}
+  .transport-box li strong{color:var(--sky);font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;display:block;margin-bottom:0.3rem;opacity:0.9}
+
+  /* OPTIONAL ALTERNATIVES */
+  .alts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.5rem;
+    margin-top:2rem;
+  }
+  .alt-card{
+    background:var(--cream);
+    border:1px dashed var(--tussock);
+    border-radius:12px;
+    padding:1.3rem 1.5rem;
+  }
+  .alt-card h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.2rem;
+    margin-bottom:0.4rem;
+    color:var(--bark);
+  }
+  .alt-card p{font-size:0.9rem;color:#5a4a3a;margin-bottom:0.6rem}
+  .alt-card a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--tussock);
+    text-decoration:none;
+    border-bottom:1px solid var(--tussock);
+  }
+
+  /* FOOTER */
+  footer{
+    background:var(--lake-deep);
+    color:var(--cream);
+    padding:4rem clamp(1.5rem,5vw,5rem) 2rem;
+    margin-top:6rem;
+    text-align:center;
+  }
+  footer .fern{font-size:2.5rem;margin-bottom:1rem;display:inline-block;animation:sway 6s ease-in-out infinite}
+  footer h3{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:2rem;
+    margin-bottom:0.5rem;
+  }
+  footer h3 em{color:var(--kowhai);font-style:italic}
+  footer p{opacity:0.7;max-width:500px;margin:0 auto;font-size:0.95rem}
+  footer .sig{
+    margin-top:2.5rem;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    opacity:0.4;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes sway{
+    0%,100%{transform:rotate(-3deg)}
+    50%{transform:rotate(3deg)}
+  }
+
+  /* MOBILE */
+  @media (max-width:720px){
+    .timeline::before{left:75px}
+    .stop{grid-template-columns:75px 1fr;gap:1.2rem}
+    .stop::before{left:69px}
+    .stop-time{padding-right:0.5rem}
+    .stop-time .t{font-size:1.15rem}
+    .stop-card{padding:1.3rem 1.4rem}
+    .stop-card h3{font-size:1.25rem}
+    .meta-grid{grid-template-columns:1fr 1fr}
+    .strip{padding:2rem 1.5rem;gap:1.5rem}
+    .strip-stat .n{font-size:1.8rem}
+    main{padding:4rem 1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html" class="active">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+  </ul>
+</nav>
+
+<!-- =========== HERO =========== -->
+<section class="hero">
+  <nav class="hero-nav">
+    <span class="badge">DAY 01 / 14</span>
+    <span>Aotearoa · South Island</span>
+  </nav>
+
+  <svg class="mountains" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="mtnFar" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#1f3b2f" stop-opacity="0.4"/>
+        <stop offset="1" stop-color="#1f3b2f" stop-opacity="0.7"/>
+      </linearGradient>
+      <linearGradient id="mtnNear" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#0d1e22" stop-opacity="0.85"/>
+        <stop offset="1" stop-color="#0d1e22"/>
+      </linearGradient>
+    </defs>
+    <!-- Far ridge -->
+    <path d="M0,180 L120,110 L200,140 L300,80 L400,130 L520,90 L640,135 L760,75 L880,125 L1000,85 L1120,140 L1240,95 L1360,135 L1440,110 L1440,260 L0,260 Z" fill="url(#mtnFar)"/>
+    <!-- Near ridge -->
+    <path d="M0,220 L80,175 L180,200 L280,160 L380,195 L490,150 L600,200 L720,165 L840,205 L960,160 L1080,200 L1200,170 L1320,205 L1440,185 L1440,260 L0,260 Z" fill="url(#mtnNear)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="kicker">7 November 2026 · Friday</div>
+    <h1 class="title">A soft landing<br>before <em>the long road</em><br>south.</h1>
+    <p class="tagline">Six friends, one overnight in the Garden City, and just enough light left in the day to taste Christchurch before the South Island opens up.</p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Arrive</div>
+        <div class="meta-value">14:55 — CHC</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stay</div>
+        <div class="meta-value">LyLo Christchurch</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Group</div>
+        <div class="meta-value">6 adults · 3M 3F</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Mode</div>
+        <div class="meta-value">Metro bus + foot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== STRIP =========== -->
+<section class="strip">
+  <div class="strip-stat"><span class="n">7</span><span class="l">Must-do stops</span></div>
+  <div class="strip-stat"><span class="n">3</span><span class="l">Optional adds</span></div>
+  <div class="strip-stat"><span class="n">$4.20</span><span class="l">Bus fare adult</span></div>
+  <div class="strip-stat"><span class="n">≈3 km</span><span class="l">Walking loop</span></div>
+  <div class="strip-stat"><span class="n">~7 hr</span><span class="l">Sightseeing window</span></div>
+</section>
+
+<!-- =========== MAIN =========== -->
+<main>
+
+  <!-- TRANSPORT -->
+  <div class="transport-box">
+    <h3>Getting around · The Bus Brief</h3>
+    <p style="opacity:0.9">Route <strong style="color:var(--kowhai)">29</strong> is your friend today — the direct airport↔city run via Fendalton. Saturday frequency is roughly every 30 minutes, last bus back from the city around 22:32.</p>
+    <ul>
+      <li><strong>Fare</strong>One-way $4.20 adult. Tap on with contactless card/phone (Apple Pay, Google Pay) at the Motu Move reader on the right when boarding.</li>
+      <li><strong>Boarding · Airport</strong>Exit Door 9 — northern end of International Arrivals, next to the Novotel hotel. Undercover walk all the way.</li>
+      <li><strong>Boarding · LyLo side</strong>Stop "Memorial Ave near Spitfire Square" — about a 5-min walk from LyLo.</li>
+      <li><strong>City terminus</strong>Bus Interchange, Platform C — corner of Lichfield & Colombo. Award-winning, clean, with free toilets.</li>
+      <li><strong>Free transfers</strong>Apply within 2 hours on the same card — useful if you split off.</li>
+    </ul>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-head">
+    <h2>The <em>itinerary</em>, hour by hour</h2>
+    <span class="note">14:55 → 22:00</span>
+  </div>
+
+  <div class="timeline">
+
+    <!-- 1. ARRIVAL -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">14:55</div><div class="d">≈45 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-tr">Arrival</span>
+        <h3>Christchurch International Airport</h3>
+        <div class="addr">30 Durey Road, Harewood · CHC</div>
+        <p>Land, clear customs/biosecurity (declare any food, hiking boots, tent pegs — NZ is strict). Group of 6 usually clears in 30–40 min. Grab cash if anyone needs it, pick up a NZ SIM at one of the kiosks if you haven't already, and head out via Door 9.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJo5Nfg5b0MW0RgLFZZYfvAA8" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 2. LYLO -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">15:40</div><div class="d">≈40 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-stay">Check-in</span>
+        <h3>LyLo Christchurch</h3>
+        <div class="addr">5 Peter Leeming Road, Christchurch Airport · 10-min walk from terminal</div>
+        <p>Follow the green-lit pathway at the end of the airport carpark. Self-check-in terminals make it painless — drop bags in pods/private rooms, freshen up, and meet downstairs at the giant communal lounge. Public toilets, water-bottle fill stations and lockers all on-site.</p>
+        <p style="font-size:0.85rem;opacity:0.7;font-style:italic">Pro tip: lock valuables; you'll be out late.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJX9-CNrj0MW0RzjVYoqPdZzU" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 3. BUS STOP -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">16:20</div><div class="d">≈35 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-tr">Bus Route 29</span>
+        <h3>Memorial Ave near Spitfire Square → City</h3>
+        <div class="addr">5-min walk from LyLo · Route 29 every ~30 min Sat</div>
+        <p>The stop is right outside Spitfire Square. Board the city-bound 29, tap on, settle in for a scenic 30-min ride down Memorial Ave, through leafy Fendalton, skirting Hagley Park and into the Bus Interchange.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJRzJeqrj0MW0RvLYQa5ss0-Y" target="_blank" rel="noopener">Open bus stop in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 4. BUS INTERCHANGE -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">16:55</div><div class="d">≈10 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-tr">City arrival</span>
+        <h3>Christchurch Bus Interchange</h3>
+        <div class="addr">Cnr Lichfield St & Colombo St · Platform C</div>
+        <p>Alight here. Quick toilet stop, regroup, then walk 3 minutes north to Cathedral Square — the natural start of the city loop.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJubR0Wj2KMW0RzYqnZUH7YWY" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 5. CATHEDRAL SQUARE -->
+    <div class="stop must">
+      <div class="stop-time"><div class="t">17:05</div><div class="d">≈20 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-must">Must · Lookout</span>
+        <h3>Cathedral Square</h3>
+        <div class="addr">Cathedral Square, Christchurch Central</div>
+        <p>The geographic and emotional heart of the city. See the still-being-rebuilt ChristChurch Cathedral (heavily damaged in the 2011 quake, slowly returning), the silver Chalice sculpture (commemorating the new millennium), and the open plaza where post-quake life is reclaiming itself. Five minutes here can tell you everything about why Christchurch matters.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJpancuDyKMW0RM3ieq0k_Lfc" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 6. TURANGA -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">17:25</div><div class="d">≈25 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-opt">Optional · View point</span>
+        <h3>Tūranga Central Library — 5th-floor terrace</h3>
+        <div class="addr">60 Cathedral Square · Free entry, open Sat till 17:00</div>
+        <p>Heads up — on Saturdays Tūranga closes at 5 pm, so if you want this one, swing here <em>before</em> Cathedral Square (swap the order). Take the lift to Level 5 for a free rooftop terrace with the city's best central-CBD view, looking straight back at the cathedral construction. Bean bags, plants, fresh wind, and a brilliantly designed civic space.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJHcQ2biKLMW0RtWV5nY4d0ao" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 7. NEW REGENT ST -->
+    <div class="stop must">
+      <div class="stop-time"><div class="t">17:50</div><div class="d">≈25 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-must">Must · Shop & photo</span>
+        <h3>New Regent Street</h3>
+        <div class="addr">New Regent Street, Christchurch Central</div>
+        <p>A single pedestrianised block of pastel Spanish-Mission façades — Christchurch's prettiest street. The heritage tram clinks through every few minutes. Browse the gelato shop (Rollickin' Gelato), boutique craft stores, Kiwi-made jewellery, and Maori art studios. Easily the group's best photo stop of the day; golden-hour light should be perfect.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJKYdNvCSKMW0RlBNrGuHKjdc" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 8. CARDBOARD CATHEDRAL -->
+    <div class="stop must">
+      <div class="stop-time"><div class="t">18:15</div><div class="d">≈15 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-must">Must · Architecture</span>
+        <h3>Cardboard (Transitional) Cathedral</h3>
+        <div class="addr">234 Hereford Street · Closes 12:30 pm Sat — admire exterior</div>
+        <p>Designed by Pritzker Prize-winning Japanese architect Shigeru Ban after the 2011 earthquake. Made of 96 huge cardboard tubes, glass, and steel — yet engineered to last 50+ years. On Saturday afternoons the interior is closed, but the A-frame profile, stained-glass entrance, and the surrounding Memorial Wall are striking from outside, especially as the light softens. A 10-min walk east from New Regent Street.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJTfWAeyGKMW0RPleuecV8uAk" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 9. BRIDGE OF REMEMBRANCE -->
+    <div class="stop must">
+      <div class="stop-time"><div class="t">18:45</div><div class="d">≈15 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-must">Must · View point</span>
+        <h3>Bridge of Remembrance &amp; Avon River</h3>
+        <div class="addr">Cashel Street, over the Avon</div>
+        <p>WWI memorial arch spanning the Ōtākaro/Avon River — restored after the quake and the city's most photogenic landmark at dusk. Walk along the river path (5–10 mins) for views of weeping willows, punt boats gliding past, and reflections of the arch on the water. The group can split here — some stay on the riverside for photos, others wander into the Botanic Gardens just across.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJNw7AwD2KMW0R2fnr9O7eEbM" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 10. BOTANIC GARDENS -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">19:05</div><div class="d">≈35 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-opt">Optional · Light hike</span>
+        <h3>Christchurch Botanic Gardens</h3>
+        <div class="addr">Rolleston Avenue · Open daily until 20:30</div>
+        <p>21 hectares of green calm bordered by the Avon. In early November the Rose Garden is just bursting into bloom (250+ varieties), and the magnolias and rhododendrons are spectacular. Pick the short loop: Bridge of Remembrance → Peacock Fountain → Rose Garden → Cuningham House conservatory → out at the Armagh St gate. About a 30-min easy walk on flat paths — the perfect "stretch the plane legs" warm-up for the road trip. Soft evening light is gorgeous.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJNfFGGdscMm0RRsX9sIs5Dlg" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 11. RIVERSIDE -->
+    <div class="stop must">
+      <div class="stop-time"><div class="t">19:50</div><div class="d">≈70 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-meal">Dinner · Must</span>
+        <h3>Riverside Market</h3>
+        <div class="addr">96 Oxford Terrace · Open Sat till 21:00</div>
+        <p>Christchurch's beating heart for food — 60+ stalls and bars across two levels, every cuisine you can think of (Vietnamese, Mexican, Italian, Japanese, Indian, Greek, Cantonese, vegan, oysters, gelato). Perfect for a group of 6 with mixed tastes: everyone orders separately, then meets at one of the long shared tables to swap bites. Have a craft beer or local Canterbury wine. Highlights: <em>Smokey T's</em> (BBQ), <em>Hikari</em> (sushi train), <em>Buon Appetito</em> (Italian), <em>Rollickin'</em> (gelato dessert). Budget ~NZ$25–35 per person.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJrSTbF0CLMW0RfKhojQI8NEE" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 12. RETURN BUS -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">21:05</div><div class="d">≈10 min</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-tr">Return</span>
+        <h3>Bus Interchange — Route 29 back to airport</h3>
+        <div class="addr">2-min walk from Riverside Market</div>
+        <p>Board the 29 from Platform C, airport-bound. Last departure around 22:32, so you have buffer. Alight at "Memorial Ave near Spitfire Square" — five-minute walk through Spitfire Square back to LyLo.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJubR0Wj2KMW0RzYqnZUH7YWY" target="_blank" rel="noopener">Open Bus Interchange in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 13. BACK AT LYLO -->
+    <div class="stop">
+      <div class="stop-time"><div class="t">21:50</div><div class="d">Rest</div></div>
+      <div class="stop-card">
+        <span class="stop-tag tag-stay">Goodnight</span>
+        <h3>Back at LyLo · Mission accomplished</h3>
+        <div class="addr">5 Peter Leeming Road</div>
+        <p>Shower, charge devices, lay out tomorrow's road-trip kit. Big communal kitchen if anyone wants tea/toast, free coffee machine, hammocks and bean bags in the lounge if you want one last debrief over a drink before bed. Set your alarm — the South Island starts tomorrow.</p>
+        <a class="gmap" href="https://www.google.com/maps/place/?q=place_id:ChIJX9-CNrj0MW0RzjVYoqPdZzU" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ OPTIONAL ALTERNATIVES ============ -->
+  <div class="section-head" style="margin-top:5rem">
+    <h2>Optional <em>swaps &amp; add-ons</em></h2>
+    <span class="note">If time / energy allows</span>
+  </div>
+
+  <div class="alts">
+    <div class="alt-card">
+      <h4>Quake City Museum</h4>
+      <p>If you'd rather a 45-min indoor stop than the Botanic Gardens — small but powerful museum on the 2010/11 earthquakes. Closes 5 pm, so swap in early (before Cathedral Square).</p>
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJl016lj2KMW0R-5Sm217TNnw" target="_blank" rel="noopener">View on map ↗</a>
+    </div>
+    <div class="alt-card">
+      <h4>Christchurch Tram (loop ride)</h4>
+      <p>Hop-on hop-off heritage tram, 18 stops, full loop ~50 min. Catch from Cathedral Junction. NZ$30 adult — splurge option if the group is tired and prefers to sit.</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Christchurch+Tramway+Cathedral+Junction" target="_blank" rel="noopener">View on map ↗</a>
+    </div>
+    <div class="alt-card">
+      <h4>Dinner near LyLo — Lone Star Spitfire</h4>
+      <p>If you'd rather skip the bus back to dinner and stay near the airport, walk to Lone Star Spitfire (BBQ/American, big group-friendly portions) or Little India in Spitfire Square. Both 2 min from LyLo.</p>
+      <a href="https://www.google.com/maps/place/?q=place_id:ChIJcaM9Y8f0MW0Rw1_pOuTUCLE" target="_blank" rel="noopener">View Lone Star on map ↗</a>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section-head" style="margin-top:5rem">
+    <h2>Tips for the <em>six of you</em></h2>
+    <span class="note">Small stuff that matters</span>
+  </div>
+
+  <div class="alts">
+    <div class="alt-card">
+      <h4>Weather, early Nov</h4>
+      <p>Spring shoulder season — average 8°C to 18°C, often windy and changeable. Pack a light rain shell, layers, and sunglasses. Sun is strong even when cool.</p>
+    </div>
+    <div class="alt-card">
+      <h4>Money / payments</h4>
+      <p>NZ is largely cashless. Contactless cards work for buses. Have a small amount of NZD for tips, markets, tram. Riverside Market vendors all take card.</p>
+    </div>
+    <div class="alt-card">
+      <h4>Group logistics</h4>
+      <p>Six is a sweet spot. Agree on a meeting point and time at each transition (Cathedral Square / Riverside / Bus Interchange) so anyone who lingers can rejoin easily. Share a WhatsApp pin.</p>
+    </div>
+    <div class="alt-card">
+      <h4>Daylight, 7 Nov</h4>
+      <p>Sunset around 8:20 pm, civil twilight to 8:55 pm. Golden hour lands beautifully on the Bridge of Remembrance and Botanic Gardens — schedule those for the back half.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <span class="fern">🌿</span>
+  <h3>Tomorrow — the open <em>South</em>.</h3>
+  <p>Rest well. Sleep is the only thing Christchurch's many lessons agree on.</p>
+  <div class="sig">Day 01 · Itinerary prepared for the South Island Road Trip · Nov 2026</div>
+</footer>
+
+</body>
+</html>
