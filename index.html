@@ -150,15 +150,15 @@
   /* Epigraph — Psalm 121:7-8 */
   .epigraph {
     position: relative;
-    margin: 0 0 22px;
-    padding: 16px 0 18px;
-    border-top: 1px solid rgba(60, 50, 30, 0.18);
-    border-bottom: 1px solid rgba(60, 50, 30, 0.18);
+    margin: 0 0 24px;
+    padding: 22px 0 22px;
+    border-top: 1px solid rgba(60, 50, 30, 0.22);
+    border-bottom: 1px solid rgba(60, 50, 30, 0.22);
     font-family: 'Fraunces', serif;
     font-style: italic;
-    font-weight: 600;
-    font-size: clamp(18px, 2vw, 22px);
-    line-height: 1.45;
+    font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 25px);
+    line-height: 1.42;
     color: var(--ink);
     max-width: 46ch;
   }
@@ -167,22 +167,22 @@
     font-style: normal;
     font-weight: 700;
     color: var(--gold);
-    font-size: 1.6em;
+    font-size: 1.7em;
     line-height: 0;
     margin: 0 0.05em;
-    vertical-align: -0.25em;
+    vertical-align: -0.28em;
   }
   .epigraph .closing-mark { margin-left: 0.05em; }
   .epigraph cite {
     display: block;
-    margin-top: 10px;
+    margin-top: 14px;
     font-style: normal;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--gold);
-    font-weight: 600;
+    font-weight: 700;
   }
   .hero-top .dot {
     display: inline-block;
@@ -327,36 +327,59 @@
     font-size: 24px;
     font-weight: 500;
     line-height: 1;
+    position: relative;
+    z-index: 2;
   }
   .day-card .marker .dow {
     font-size: 8px;
     letter-spacing: 0.18em;
     margin-top: 3px;
     opacity: 0.85;
+    position: relative;
+    z-index: 2;
+  }
+  /* Theme icon sitting behind the number */
+  .day-card .marker-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 78%;
+    height: 78%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
   }
   /* Themed marker variants */
   .day-card.day1 .marker {
     background: linear-gradient(135deg, #2c6e49 0%, #4c956c 100%);
   }
+  .day-card.day1 .marker-icon { color: #d4e9d8; opacity: 0.65; }
+
   .day-card.day2 .marker {
     background:
       radial-gradient(ellipse at 30% 30%, rgba(232, 184, 106, 0.5), transparent 60%),
       linear-gradient(180deg, #050817 0%, #11183a 100%);
   }
-  .day-card.day2 .marker::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(0.8px 0.8px at 20% 30%, #fff8d6 50%, transparent),
-      radial-gradient(0.8px 0.8px at 70% 60%, #fff8d6 50%, transparent),
-      radial-gradient(0.8px 0.8px at 40% 80%, #fff8d6 50%, transparent),
-      radial-gradient(0.8px 0.8px at 85% 25%, #fff8d6 50%, transparent);
-    opacity: 0.85;
-    pointer-events: none;
+  .day-card.day2 .marker-icon { color: #f4d068; opacity: 0.75; }
+
+  .day-card.day3 .marker {
+    background:
+      radial-gradient(ellipse at 70% 70%, rgba(232, 155, 124, 0.35), transparent 60%),
+      linear-gradient(135deg, #4FB3D9 0%, #2E86A8 100%);
   }
+  .day-card.day3 .marker-icon { color: #ffffff; opacity: 0.65; }
+
+  .day-card.day4 .marker {
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(255, 248, 229, 0.5), transparent 60%),
+      linear-gradient(135deg, #E8A12C 0%, #A8650C 100%);
+  }
+  .day-card.day4 .marker-icon { color: #FFF8E5; opacity: 0.7; }
+
   .day-card.day1 .marker .num { color: #fff; }
   .day-card.day2 .marker .num { color: #e8b86a; }
+  .day-card.day3 .marker .num { color: #ffffff; text-shadow: 0 1px 4px rgba(11, 59, 74, 0.45); }
+  .day-card.day4 .marker .num { color: #FFF8E5; text-shadow: 0 1px 4px rgba(168, 101, 12, 0.45); }
 
   /* Body inside compact card */
   .day-card .text {
@@ -375,6 +398,8 @@
   }
   .day-card h3 em { font-style: italic; color: var(--green); font-weight: 500; }
   .day-card.day2 h3 em { color: var(--gold); }
+  .day-card.day3 h3 em { color: #2E86A8; }
+  .day-card.day4 h3 em { color: #A8650C; }
   .day-card .date {
     font-family: 'JetBrains Mono', monospace;
     font-size: 9.5px;
@@ -397,6 +422,8 @@
     color: var(--green);
   }
   .day-card.day2:hover .arrow { color: var(--gold); }
+  .day-card.day3:hover .arrow { color: #2E86A8; }
+  .day-card.day4:hover .arrow { color: #A8650C; }
 
   /* Future / placeholder card */
   .day-card.future {
@@ -437,7 +464,7 @@
     .split { padding: 28px 4vw 50px; gap: 36px; }
     .hero { padding: 22px 20px 24px; border-radius: 10px; }
     .hero-top { font-size: 9px; flex-wrap: wrap; gap: 6px; }
-    .epigraph { font-size: 16px; padding: 14px 0 16px; }
+    .epigraph { font-size: 17px; padding: 18px 0 18px; }
     .days { grid-template-columns: 1fr; }
     .day-card { grid-template-columns: 44px 1fr 16px; gap: 12px; padding: 10px 12px; }
     .day-card .marker { width: 44px; height: 44px; }
@@ -658,8 +685,8 @@
     </div>
 
     <blockquote class="epigraph">
-      <span class="quote-mark">“</span>7. The Lord will keep you from all harm— he will watch over your life; 8. the Lord will watch over your coming and going both now and forevermore.<span class="quote-mark closing-mark">”</span>
-      <cite>— Psalm 121:7-8</cite>
+      <span class="quote-mark">“</span>The Lord will keep you from all harm — he will watch over your life; the Lord will watch over your coming and going both now and forevermore.<span class="quote-mark closing-mark">”</span>
+      <cite>— Psalm 121:7–8</cite>
     </blockquote>
 
     <h1>The South Island <em>Odyssey</em>.</h1>
@@ -679,7 +706,14 @@
     <div class="days">
 
       <a href="day1.html" class="day-card day1">
-        <div class="marker"><div class="num">01</div><div class="dow">SAT</div></div>
+        <div class="marker">
+          <svg class="marker-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Plane (arrival) -->
+            <path d="M 4,17 L 14,13 L 22,5 L 26,5 L 21,15 L 28,16 L 28,19 L 19,20 L 16,28 L 13,28 L 14,20 L 6,19 Z" fill="currentColor" opacity="0.45"/>
+          </svg>
+          <div class="num">01</div>
+          <div class="dow">SAT</div>
+        </div>
         <div class="text">
           <h3>Christchurch — <em>Arrival</em></h3>
           <div class="date">7 Nov · Land 14:55 · No driving</div>
@@ -688,7 +722,17 @@
       </a>
 
       <a href="day2.html" class="day-card day2">
-        <div class="marker"><div class="num">02</div><div class="dow">SUN</div></div>
+        <div class="marker">
+          <svg class="marker-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Crescent moon + stars (Bortle 2 stargazing) -->
+            <path d="M 24,16 a 9,9 0 1,1 -7,-8.8 a 7,7 0 0,0 7,8.8 Z" fill="currentColor" opacity="0.5"/>
+            <circle cx="9" cy="9" r="0.8" fill="currentColor" opacity="0.8"/>
+            <circle cx="6" cy="20" r="0.6" fill="currentColor" opacity="0.7"/>
+            <circle cx="22" cy="24" r="0.7" fill="currentColor" opacity="0.7"/>
+          </svg>
+          <div class="num">02</div>
+          <div class="dow">SUN</div>
+        </div>
         <div class="text">
           <h3>Christchurch <em>→ Tekapō</em></h3>
           <div class="date">8 Nov · 227 km · Bortle 2 sky</div>
@@ -696,8 +740,17 @@
         <span class="arrow">→</span>
       </a>
 
-      <a href="day3.html" class="day-card day2">
-        <div class="marker"><div class="num">03</div><div class="dow">MON</div></div>
+      <a href="day3.html" class="day-card day3">
+        <div class="marker">
+          <svg class="marker-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Mountain peaks (Aoraki / Mt Cook) -->
+            <path d="M 2,26 L 11,12 L 16,18 L 21,8 L 30,26 Z" fill="currentColor" opacity="0.5"/>
+            <path d="M 19,12 L 21,8 L 23,12 L 22,13 L 21,12 L 20,13 Z" fill="#ffffff" opacity="0.85"/>
+            <path d="M 10,16 L 11,12 L 12,16 L 11.5,17 L 11,16 Z" fill="#ffffff" opacity="0.7"/>
+          </svg>
+          <div class="num">03</div>
+          <div class="dow">MON</div>
+        </div>
         <div class="text">
           <h3>Tekapō → <em>Aoraki / Mt Cook</em></h3>
           <div class="date">9 Nov · 165 km · 0% moon</div>
@@ -705,8 +758,28 @@
         <span class="arrow">→</span>
       </a>
 
-      <a href="day4.html" class="day-card day2">
-        <div class="marker"><div class="num">04</div><div class="dow">TUE</div></div>
+      <a href="day4.html" class="day-card day4">
+        <div class="marker">
+          <svg class="marker-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Grape cluster (Gibbston wine country) -->
+            <circle cx="16" cy="10" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="12" cy="13" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="20" cy="13" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="10" cy="17" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="14" cy="17" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="18" cy="17" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="22" cy="17" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="12" cy="21" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="16" cy="21" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="20" cy="21" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="14" cy="25" r="2.2" fill="currentColor" opacity="0.55"/>
+            <circle cx="18" cy="25" r="2.2" fill="currentColor" opacity="0.55"/>
+            <!-- Leaf -->
+            <path d="M 18,7 Q 22,4 24,7 Q 22,9 18,9 Z" fill="#5e7b3d" opacity="0.7"/>
+          </svg>
+          <div class="num">04</div>
+          <div class="dow">TUE</div>
+        </div>
         <div class="text">
           <h3>Aoraki <em>→ Queenstown</em></h3>
           <div class="date">10 Nov · 263 km · 3 regions</div>
