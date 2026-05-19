@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Day 6 · Queenstown → Te Anau · 12 Nov 2026</title>
+<meta name="description" content="A motorhome journey from Queenstown down the shores of Lake Wakatipu into Fiordland, ending in the glowworm grottoes of Lake Te Anau." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300;9..144,400;9..144,500;9..144,600;9..144,800;9..144,900&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ======================================================
+     THEME — "Cave of Rushing Water"
+     Te Ana-au means "cave of rushing water" in Māori.
+     Palette is dusk-blue/midnight with a luminous chartreuse
+     glow — the moment between the lake-crossing twilight and
+     the glowworm-lit grotto. Refreshing, atmospheric, alive.
+     ====================================================== */
+  :root {
+    --paper:        #f5f3ea;     /* limestone bone */
+    --paper-2:      #ebe7d5;
+    --ink:          #0a1828;     /* deep-cave ink */
+    --ink-soft:     #1d2f44;
+    --muted:        #6c7a8a;
+
+    --dusk:         #1a3344;     /* lake at twilight */
+    --dusk-2:       #2a4f5e;
+    --water:        #4a8a9a;     /* glacial mint */
+    --mist:         #b8d4d2;
+
+    --glow:         #c8ff3d;     /* bioluminescent chartreuse */
+    --glow-soft:    #e0ff8e;
+    --glow-dim:     #93c81f;
+
+    --moss:         #4e6b2e;
+    --copper:       #d97740;     /* signal accent */
+
+    --line:         rgba(10,24,40,0.12);
+    --line-strong:  rgba(10,24,40,0.28);
+
+    --serif:  'Fraunces', 'Times New Roman', serif;
+    --sans:   'Inter', system-ui, sans-serif;
+    --mono:   'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(900px 700px at 90% -5%, rgba(74,138,154,0.14), transparent 60%),
+      radial-gradient(700px 600px at -5% 105%, rgba(200,255,61,0.08), transparent 65%),
+      var(--paper);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.09 0 0 0 0 0.16 0 0 0 0.18 0'/></filter></defs><rect width='600' height='600' filter='url(%23n)'/></svg>");
+  }
+
+  a { color: inherit; }
+  .map {
+    color: var(--dusk);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--line-strong);
+    transition: color 0.18s, border-color 0.18s;
+    font-weight: 500;
+  }
+  .map:hover { color: var(--copper); border-bottom-color: var(--copper); }
+  .map::before { content: "↗ "; font-family: var(--mono); font-size: 0.85em; }
+
+  /* ============== HEADER ============== */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    background: rgba(245,243,234,0.85);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .top-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.01em;
+  }
+  .brand em { color: var(--water); font-style: normal; font-weight: 800; }
+  .top-meta {
+    display: flex;
+    gap: 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .top-meta span strong { color: var(--ink); font-weight: 500; }
+  @media (max-width: 780px) { .top-meta { display: none; } }
+
+  /* ============== HERO ============== */
+  .hero {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 56px 28px 32px;
+    position: relative;
+  }
+  .day-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dusk);
+    padding: 7px 16px;
+    border: 1px solid var(--dusk);
+    border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .day-tag .pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--glow);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--glow), 0 0 4px var(--glow);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(0.9); }
+    50%      { opacity: 1;   transform: scale(1.1); }
+  }
+
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(46px, 8vw, 108px);
+    line-height: 0.95;
+    margin: 0 0 24px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  h1.title em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--dusk);
+    position: relative;
+  }
+  h1.title .arrow {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.35em;
+    font-weight: 400;
+    color: var(--muted);
+    vertical-align: middle;
+    margin: 0 0.3em;
+    transform: translateY(-0.2em);
+    letter-spacing: -0.05em;
+  }
+
+  .hero-lead {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 740px;
+    font-weight: 400;
+    margin: 0 0 16px;
+  }
+  .hero-lead em { color: var(--dusk); font-style: italic; font-weight: 500; }
+  .hero-lead .glow-text {
+    background: linear-gradient(180deg, transparent 60%, rgba(200,255,61,0.45) 60%);
+    padding: 0 2px;
+    font-style: normal;
+  }
+
+  .hero-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-top: 28px;
+  }
+  .hero-meta span { color: var(--ink); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 32px;
+  }
+  .stat { padding: 22px 16px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .stat .val {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat .val em {
+    font-size: 0.55em;
+    font-style: italic;
+    color: var(--water);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:last-child { border-bottom: none; grid-column: span 2; }
+  }
+
+  /* ============== GLOWWORM TIMING FEATURE ============== */
+  section.glow-feature {
+    max-width: 1240px;
+    margin: 80px auto 0;
+    padding: 0 28px;
+  }
+  .glow-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 48px 44px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(10,24,40,0.5);
+  }
+  .glow-card .ceiling {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .glow-card .ceiling .worm {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--glow);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--glow), 0 0 2px var(--glow-soft);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+  }
+  .glow-card .inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 44px;
+    align-items: start;
+  }
+  @media (max-width: 880px) { .glow-card .inner { grid-template-columns: 1fr; gap: 28px; } }
+
+  .glow-card .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--glow);
+    margin-bottom: 18px;
+  }
+  .glow-card h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 44px);
+    margin: 0 0 22px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--paper);
+  }
+  .glow-card h2 em { color: var(--glow); font-style: italic; font-weight: 500; }
+  .glow-card p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: rgba(245,243,234,0.78);
+    margin: 0 0 14px;
+  }
+  .glow-card p strong { color: var(--paper); font-weight: 500; }
+  .glow-card .māori {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--glow-soft);
+    margin-top: 18px;
+    padding-left: 16px;
+    border-left: 2px solid var(--glow-dim);
+  }
+
+  .times-grid {
+    background: rgba(245,243,234,0.06);
+    border: 1px solid rgba(245,243,234,0.12);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .times-grid h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--glow);
+    margin: 0;
+    padding: 16px 18px 8px;
+    border-bottom: 1px solid rgba(245,243,234,0.10);
+  }
+  .time-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 80px;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(245,243,234,0.08);
+    font-size: 13.5px;
+  }
+  .time-row:last-child { border-bottom: none; }
+  .time-row.pick { background: rgba(200,255,61,0.08); }
+  .time-row .t {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .time-row .desc {
+    color: rgba(245,243,234,0.68);
+    font-size: 12.5px;
+    padding-right: 8px;
+  }
+  .time-row .score {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .time-row.pick .t { color: var(--glow); }
+  .time-row.pick .score { color: var(--glow); font-weight: 500; }
+
+  /* ============== OBJECTIVES ============== */
+  section.objectives {
+    max-width: 1240px;
+    margin: 80px auto 0;
+    padding: 0 28px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--water);
+    letter-spacing: 0.18em;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+  .section-head h2 em { color: var(--dusk); font-style: italic; font-weight: 600; }
+
+  .obj-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 880px) { .obj-grid { grid-template-columns: 1fr; } }
+
+  .obj {
+    padding: 28px 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.15));
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    position: relative;
+  }
+  .obj-icon {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--water);
+    line-height: 1;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .obj h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .obj p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ============== TIMELINE ============== */
+  section.timeline-wrap {
+    max-width: 1240px;
+    margin: 80px auto 0;
+    padding: 0 28px;
+  }
+
+  .leg-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 44px 0 16px;
+    padding-left: 80px;
+  }
+  .leg-label:first-of-type { margin-top: 20px; }
+  .leg-label .pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--paper);
+    background: var(--dusk);
+    padding: 5px 14px;
+    border-radius: 100px;
+  }
+  .leg-label .pill.afternoon { background: var(--water); }
+  .leg-label .pill.evening   {
+    background: var(--ink);
+    box-shadow: 0 0 0 1px var(--glow-dim);
+  }
+  .leg-label .leg-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  @media (max-width: 720px) { .leg-label { padding-left: 0; } }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+  }
+  .stop:last-child { border-bottom: none; }
+
+  .time-col {
+    text-align: right;
+    padding-top: 4px;
+    position: relative;
+  }
+  .time-col::after {
+    content: "";
+    position: absolute;
+    right: -14px;
+    top: 12px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--water);
+  }
+  .stop.must .time-col::after {
+    background: var(--copper);
+    border-color: var(--copper);
+    box-shadow: 0 0 0 4px rgba(217,119,64,0.14);
+  }
+  .stop.glow .time-col::after {
+    background: var(--glow);
+    border-color: var(--glow);
+    box-shadow: 0 0 0 4px rgba(200,255,61,0.22), 0 0 14px var(--glow);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .time-col .clock {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .time-col .duration {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .stop-body { padding-right: 12px; }
+  .stop-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .flag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 4px 10px;
+    border-radius: 3px;
+    background: var(--paper-2);
+    color: var(--ink-soft);
+  }
+  .flag.must     { background: var(--copper); color: #fff; }
+  .flag.optional { background: var(--paper); color: var(--muted); border: 1px solid var(--line); }
+  .flag.glow     { background: var(--glow); color: var(--ink); box-shadow: 0 0 12px rgba(200,255,61,0.45); }
+  .flag.fuel     { background: var(--dusk); color: var(--paper); }
+  .flag.food     { background: var(--water); color: #fff; }
+  .flag.view     { background: var(--mist); color: var(--dusk); }
+  .flag.dark     { background: var(--ink); color: var(--glow); }
+
+  .stop h3 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .stop h3 em { font-style: italic; color: var(--dusk); font-weight: 400; }
+  .stop .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .stop p {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .stop p:last-child { margin-bottom: 0; }
+  .stop .tip {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: rgba(200,255,61,0.10);
+    border-left: 3px solid var(--glow-dim);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    border-radius: 0 4px 4px 0;
+  }
+  .stop .tip strong { color: var(--ink); font-weight: 600; }
+
+  /* The Glowworm Cave stop — special dark treatment */
+  .stop.cave {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 36px 32px;
+    margin: 28px 0;
+    border-bottom: none;
+    box-shadow: 0 30px 60px -30px rgba(10,24,40,0.5);
+    position: relative;
+    overflow: hidden;
+    grid-template-columns: 90px 1fr;
+  }
+  .stop.cave::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px 200px at 80% 0%, rgba(200,255,61,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .stop.cave .ceiling-mini {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .stop.cave .ceiling-mini .worm {
+    position: absolute;
+    width: 2.5px;
+    height: 2.5px;
+    background: var(--glow);
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--glow);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  .stop.cave .time-col { z-index: 1; position: relative; }
+  .stop.cave .time-col .clock { color: var(--paper); }
+  .stop.cave .time-col .duration { color: var(--mist); }
+  .stop.cave .time-col::after {
+    background: var(--glow);
+    border-color: var(--glow);
+    box-shadow: 0 0 0 4px rgba(200,255,61,0.25), 0 0 18px var(--glow);
+  }
+  .stop.cave .stop-body { z-index: 1; position: relative; padding-right: 0; }
+  .stop.cave h3 { color: var(--paper); font-size: 28px; }
+  .stop.cave h3 em { color: var(--glow); }
+  .stop.cave .meta { color: var(--mist); }
+  .stop.cave p { color: rgba(245,243,234,0.78); }
+  .stop.cave .tip {
+    background: rgba(200,255,61,0.10);
+    border-left-color: var(--glow);
+    color: rgba(245,243,234,0.85);
+  }
+  .stop.cave .tip strong { color: var(--paper); }
+  .stop.cave .map { color: var(--glow-soft); border-bottom-color: rgba(224,255,142,0.4); }
+  .stop.cave .map:hover { color: #fff; border-bottom-color: #fff; }
+  .stop.cave .flag.glow { box-shadow: 0 0 18px rgba(200,255,61,0.6); }
+
+  @media (max-width: 720px) {
+    .stop { grid-template-columns: 64px 1fr; gap: 14px; }
+    .stop h3 { font-size: 20px; }
+    .stop.cave { padding: 28px 22px; grid-template-columns: 64px 1fr; }
+    .stop.cave h3 { font-size: 22px; }
+  }
+
+  /* ============== FUEL ============== */
+  section.fuel {
+    max-width: 1240px;
+    margin: 80px auto 0;
+    padding: 0 28px;
+  }
+  .fuel-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 880px) { .fuel-grid { grid-template-columns: 1fr; } }
+
+  .fuel-card {
+    background: var(--dusk);
+    color: var(--paper);
+    padding: 32px 30px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fuel-card::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(closest-side, rgba(200,255,61,0.18), transparent);
+    pointer-events: none;
+  }
+  .fuel-card .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--glow);
+    margin-bottom: 14px;
+  }
+  .fuel-card h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+  .fuel-card h3 em { color: var(--glow-soft); font-style: italic; }
+  .fuel-card p { font-size: 14.5px; color: rgba(245,243,234,0.8); margin: 0 0 10px; line-height: 1.6; }
+  .fuel-card p strong { color: var(--paper); font-weight: 500; }
+  .fuel-card .map { color: var(--glow-soft); border-bottom-color: rgba(224,255,142,0.5); }
+  .fuel-card .map:hover { color: #fff; border-bottom-color: #fff; }
+
+  .fuel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(245,243,234,0.16);
+  }
+  .fuel-stat .l {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(245,243,234,0.5);
+    margin-bottom: 4px;
+  }
+  .fuel-stat .v {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  .fuel-alt {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 28px 26px;
+    background: rgba(255,255,255,0.5);
+  }
+  .fuel-alt h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .fuel-alt ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fuel-alt li {
+    padding: 11px 0;
+    font-size: 14px;
+    border-bottom: 1px dotted var(--line);
+    color: var(--ink-soft);
+  }
+  .fuel-alt li:last-child { border-bottom: none; }
+  .fuel-alt li strong { color: var(--ink); font-weight: 600; }
+  .fuel-alt li .mono { font-family: var(--mono); font-size: 11.5px; color: var(--muted); display: block; margin-top: 3px; }
+
+  /* ============== ACCOMMODATION ============== */
+  section.stay {
+    max-width: 1240px;
+    margin: 80px auto 0;
+    padding: 0 28px;
+  }
+  .stay-card {
+    background: linear-gradient(135deg, var(--dusk), var(--water));
+    color: var(--paper);
+    padding: 40px 36px;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 720px) { .stay-card { grid-template-columns: 1fr; } }
+  .stay-card .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--glow-soft);
+    margin-bottom: 10px;
+  }
+  .stay-card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+  .stay-card h3 em { font-style: italic; font-weight: 600; }
+  .stay-card p {
+    font-size: 15px;
+    color: rgba(245,243,234,0.86);
+    margin: 0 0 14px;
+    line-height: 1.6;
+  }
+  .stay-card .map {
+    color: var(--paper);
+    border-bottom-color: rgba(245,243,234,0.4);
+  }
+  .stay-card .stay-icon {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 96px;
+    text-align: center;
+    color: var(--glow-soft);
+    line-height: 1;
+    opacity: 0.55;
+  }
+
+  footer {
+    max-width: 1240px;
+    margin: 100px auto 60px;
+    padding: 40px 28px 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer em { color: var(--water); font-style: italic; text-transform: none; letter-spacing: 0.02em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero > *, section > * {
+    animation: fadeUp 0.8s ease-out both;
+  }
+  .hero .day-tag { animation-delay: 0.0s; }
+  .hero h1.title { animation-delay: 0.1s; }
+  .hero .hero-lead { animation-delay: 0.2s; }
+  .hero .stats { animation-delay: 0.3s; }
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html" class="active">Day 6</a></li>
+    <li><a href="day7.html">Day 7</a></li>
+  </ul>
+</nav>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">South Island <em>Odyssey</em> · Day Six</div>
+    <div class="top-meta">
+      <span>Thu · <strong>12 Nov 2026</strong></span>
+      <span>Maui River <strong>6-Berth</strong></span>
+      <span><strong>Q'town → Te Anau</strong></span>
+    </div>
+  </div>
+</header>
+
+<!-- ================ HERO ================ -->
+<div class="hero">
+  <span class="day-tag"><span class="pulse"></span>Day 06 · Thursday 12 November</span>
+  <h1 class="title">Queenstown <span class="arrow">━━▶</span><br/><em>Te Anau</em>.</h1>
+  <p class="hero-lead">
+    A late-morning departure from the lakeside adventure capital, then south along the cliff-shore of <em>Lake Wakatipu</em> through Devil's Staircase, Kingston and the high-country settlements of Garston and Athol — finally west across the Mararoa plains into Fiordland, ending under a <span class="glow-text">ceiling of bioluminescent glowworms</span> in a cave on the western shore of Lake Te Anau.
+  </p>
+  <div class="hero-meta">175 KM · ~24 L DIESEL · SH6 → SH97 → SH94 · <span>SUNSET 8:38 PM</span></div>
+  <div class="stats">
+    <div class="stat"><div class="label">Distance</div><div class="val">175<em>km</em></div></div>
+    <div class="stat"><div class="label">Drive Time</div><div class="val">2.5<em>hrs</em></div></div>
+    <div class="stat"><div class="label">Diesel Use</div><div class="val">~24<em>L</em></div></div>
+    <div class="stat"><div class="label">Highways</div><div class="val">SH6<em> · </em>97<em> · </em>94</div></div>
+    <div class="stat"><div class="label">Sleep</div><div class="val">Te Anau<em>Terrace</em></div></div>
+  </div>
+</div>
+
+<!-- ================ GLOWWORM TIMING FEATURE ================ -->
+<section class="glow-feature">
+  <div class="glow-card">
+    <div class="ceiling" id="ceiling"></div>
+    <div class="inner">
+      <div>
+        <div class="eyebrow">⟡ The Headline Decision ⟡</div>
+        <h2>When to enter the <em>cave of rushing water</em></h2>
+        <p>The glowworms <strong>glow all the time</strong> — the caves are pitch-black year-round, so the worms themselves don't care what your watch says. But <strong>three other factors</strong> shift dramatically with time of day, and on <strong>12 November the sun sets at 8:38 PM</strong> with twilight lasting until ~9:30 PM — so an early-evening tour still gets daylight on the lake outbound and a magical dusk return.</p>
+        <p><strong>Eye-adaptation:</strong> RealNZ guides and Maui's own travel guide both recommend late-afternoon or evening tours — your eyes have already begun dark-adapting, so the grotto's glow appears denser and brighter when you arrive.</p>
+        <p><strong>Lake scenery:</strong> the 45-minute catamaran crossing detours past landscape features the captain points out — you want this in daylight or golden light, not full dark.</p>
+        <p><strong>Crowds:</strong> the noon and early-afternoon slots are clogged with Milford Sound day-tripper coaches arriving back into Te Anau. Late afternoon is calm.</p>
+        <p class="māori">"Te Ana-au" — cave of rushing water. The cave was named first; the lake (and then the town) took the name from it. No European recorded entering it until 1948.</p>
+      </div>
+
+      <div class="times-grid">
+        <h4>RealNZ departures · 12 Nov</h4>
+        <div class="time-row">
+          <span class="t">9:00 AM</span>
+          <span class="desc">Daylight, calm — but eyes not dark-adapted</span>
+          <span class="score">★★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">11:30 AM</span>
+          <span class="desc">Busy with morning coaches</span>
+          <span class="score">★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">2:00 PM</span>
+          <span class="desc">Peak crowds, full daylight</span>
+          <span class="score">★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">3:15 PM</span>
+          <span class="desc">Still crowded</span>
+          <span class="score">★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">4:30 PM</span>
+          <span class="desc">Lighter crowds, good daylight</span>
+          <span class="score">★★★★</span>
+        </div>
+        <div class="time-row pick">
+          <span class="t">5:45 PM</span>
+          <span class="desc">★ Sweet spot — daylight out, golden hour back</span>
+          <span class="score">★★★★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">7:00 PM</span>
+          <span class="desc">Daylight out, dusk return; dinner before</span>
+          <span class="score">★★★★</span>
+        </div>
+        <div class="time-row">
+          <span class="t">8:15 PM</span>
+          <span class="desc">Out at sunset, return in dark — no lake views</span>
+          <span class="score">★★★</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================ OBJECTIVES ================ -->
+<section class="objectives">
+  <div class="section-head">
+    <span class="section-num">— 01 —</span>
+    <h2>Main <em>Objectives</em></h2>
+  </div>
+  <div class="obj-grid">
+    <div class="obj">
+      <div class="obj-icon">i</div>
+      <h3>Cruise the Wakatipu shore</h3>
+      <p>Take the spectacular SH6 cliff-road south through Devil's Staircase, with multiple lake-and-Remarkables panoramas — this is one of the South Island's quietly great drives, and the morning light works in your favour heading south.</p>
+    </div>
+    <div class="obj">
+      <div class="obj-icon">ii</div>
+      <h3>Slow stops, no detours</h3>
+      <p>Stay on the SH6 → SH97 → SH94 corridor with a single linear flow — Kingston, Garston, Five Rivers, Mossburn — no back-tracking. Each pause earns its keep: coffee, honey, farm animals, or a viewpoint.</p>
+    </div>
+    <div class="obj">
+      <div class="obj-icon">iii</div>
+      <h3>End under glowing stars</h3>
+      <p>Arrive Te Anau by mid-afternoon — settle the motorhome, refuel diesel, light snack, then the evening's headline: the 5:45 PM RealNZ Glowworm Caves tour by boat across Lake Te Anau, with daylight out and golden-hour return.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================ TIMELINE ================ -->
+<section class="timeline-wrap">
+  <div class="section-head">
+    <span class="section-num">— 02 —</span>
+    <h2>The <em>Day</em>, hour by hour</h2>
+  </div>
+
+  <div class="leg-label">
+    <span class="pill">Morning</span>
+    <span class="leg-text">Queenstown lake-edge, slow start</span>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">08:30</div>
+      <div class="duration">60 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag optional">Optional</span>
+        <span class="flag food">Breakfast</span>
+      </div>
+      <h3>Queenstown <em>breakfast & provisions</em></h3>
+      <div class="meta">Queenstown CBD · stock the motorhome before SH6</div>
+      <p>A proper sit-down breakfast in town or a quick supermarket run for road snacks. Queenstown is the last big-town supermarket until Te Anau, so top up fresh fruit, bread, milk and any cooler items now. Empty the motorhome's grey-water at the depot dump-point if you didn't yesterday.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Queenstown+CBD+New+Zealand" target="_blank" rel="noopener">Queenstown town centre</a></p>
+    </div>
+  </div>
+
+  <div class="stop must">
+    <div class="time-col">
+      <div class="clock">09:45</div>
+      <div class="duration">20 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must Stop</span>
+        <span class="flag view">Lookout</span>
+      </div>
+      <h3>Devil's Staircase <em>Lookout Point</em></h3>
+      <div class="meta">SH6 · 35 km south of Queenstown · roadside pull-off</div>
+      <p>The road climbs and twists above Lake Wakatipu's eastern cliff in a series of switchbacks the early miners named the Devil's Staircase. The pull-off opens onto a sweeping view down the lake toward the Remarkables — emerald water, dry-tussock hills, snow-streaked peaks. Two lay-bys here: if the first is full, the second is moments later.</p>
+      <div class="tip"><strong>Heads-up:</strong> the road narrows as you climb. In the motorhome, take the corners gently and don't be afraid to pull over and let faster traffic past.</div>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Devil%27s+Staircase+Lookout+Point&query_place_id=ChIJg92ioEPC1KkR39NpSfOJ2zI" target="_blank" rel="noopener">Devil's Staircase Lookout Point</a></p>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">10:30</div>
+      <div class="duration">30 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must Stop</span>
+        <span class="flag food">Coffee</span>
+        <span class="flag view">Photo</span>
+      </div>
+      <h3>Kingston <em>& the Flyer Cafe</em></h3>
+      <div class="meta">SH6 · southern tip of Lake Wakatipu · 50 km from Q'town</div>
+      <p>Kingston sits at Wakatipu's southern toe, where the lake ends and the road bends inland. The 1927-built Kingston Flyer steam train is parked beside the heritage station — old carriages and the original platform still stand, good for photos even when not running. Grab a coffee or hot chocolate at the Flyer Cafe & Bar a short walk away (note: cafe's main hours are afternoon onwards, but morning hot-drinks are usually available; if closed, the Kingston Store on SH6 is reliable).</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Flyer+Cafe+%26+Bar+Kingston&query_place_id=ChIJK2lL_37B1KkReK2_188UBAk" target="_blank" rel="noopener">Flyer Cafe & Bar, Kingston</a></p>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">11:15</div>
+      <div class="duration">20 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag optional">Optional</span>
+        <span class="flag">Shop</span>
+      </div>
+      <h3>Garston <em>Hunny Shop</em></h3>
+      <div class="meta">SH6 · Garston · NZ's most-inland village</div>
+      <p>A tiny family operation just off the highway — five or more varieties of New Zealand honey on free tasting: clover, manuka, wild thyme (a local favourite), honeydew, plus lozenges and honey-based skincare. Friendly, unrushed, and the staff will tell you straight which honeys travel well in luggage. Worth 15–20 minutes and a jar or two for the road ahead.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Garston+Hunny+Shop&query_place_id=ChIJPSJ0H-W81KkRBYjlFfEHX0M" target="_blank" rel="noopener">Garston Hunny Shop</a></p>
+    </div>
+  </div>
+
+  <div class="leg-label">
+    <span class="pill afternoon">Midday</span>
+    <span class="leg-text">Junction onto SH94 — the road bends west into Southland</span>
+  </div>
+
+  <div class="stop must">
+    <div class="time-col">
+      <div class="clock">12:00</div>
+      <div class="duration">60 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must Stop</span>
+        <span class="flag food">Lunch</span>
+      </div>
+      <h3>Five Rivers <em>Cafe — lunch</em></h3>
+      <div class="meta">SH6/SH97 junction · the natural turnoff to Te Anau</div>
+      <p>Five Rivers Cafe sits exactly where you turn right off SH6 onto SH97 toward Mossburn — making it both a flavour-stop and a navigational marker. Indoor & outdoor seating with mountain views, a small local art gallery inside, and a paddock of friendly farm animals (alpaca, goats, sheep, mini-horse, chickens) right behind the cafe — kids and adults alike enjoy feeding them. Eggs Benedict and the pancakes get consistent praise; coffee is good. Open 9 AM–3 PM, so you'll arrive within window.</p>
+      <div class="tip"><strong>Why here, not earlier:</strong> you've driven 90 km from Queenstown, the legs need a stretch, and this is your last sit-down option before Te Anau — Mossburn (next town) has fuel and a small shop but limited food.</div>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Five+Rivers+Cafe&query_place_id=ChIJMeNj6fid1KkRzZ3NMvRhNCE" target="_blank" rel="noopener">Five Rivers Cafe</a></p>
+    </div>
+  </div>
+
+  <div class="leg-label">
+    <span class="pill afternoon">Afternoon</span>
+    <span class="leg-text">Across the Southland plains into Fiordland</span>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">13:30</div>
+      <div class="duration">10 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag optional">Optional</span>
+        <span class="flag view">Photo</span>
+      </div>
+      <h3>Mossburn <em>— deer-capital marker</em></h3>
+      <div class="meta">SH94 · "self-proclaimed deer capital of NZ"</div>
+      <p>A quick stretch-the-legs stop in this tidy farming village; there's a small park with a large deer sculpture worth a photo. Public toilets and a Four Square if you need anything. Then it's a straight 65 km west across rolling tussocklands to Te Anau — the Mavora Lakes (LOTR filming) turnoff is signposted but is a 40 km detour off-route, so flag it as a future-trip note rather than today.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Mossburn+Deer+Capital+NZ" target="_blank" rel="noopener">Mossburn village</a></p>
+    </div>
+  </div>
+
+  <div class="stop must">
+    <div class="time-col">
+      <div class="clock">14:45</div>
+      <div class="duration">25 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must Stop</span>
+        <span class="flag view">360° Lookout</span>
+      </div>
+      <h3>Te Anau <em>Lions Lookout</em></h3>
+      <div class="meta">3 km off SH94 · Ramparts Road · first view of Fiordland</div>
+      <p>Just before town, a signposted side-road climbs to a small lookout giving a 360° panorama: Lake Te Anau spread out below, the Kepler and Murchison ranges rising behind, and the farmland of central Southland rolling away east. Almost nobody stops here — you may have it to yourself. The side-road is narrow and unsealed near the top; take it slow in the motorhome and be ready to give way.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Te+Anau+Lions+Lookout+Point&query_place_id=ChIJyViSFycM1KkRZpQlCLCKTtY" target="_blank" rel="noopener">Te Anau Lions Lookout</a></p>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">15:30</div>
+      <div class="duration">15 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag fuel">Refuel Diesel</span>
+      </div>
+      <h3>Caltex Te Anau <em>— top up the tank</em></h3>
+      <div class="meta">Cnr Bowen St & 33 Luxmore Drive · 6 AM – 9 PM</div>
+      <p>Refuel here on arrival — easy access from SH94 as you enter town, generous forecourt for a 7.25 m motorhome, and you'll be set for tomorrow's Milford Sound day-run where there is <strong>no fuel along the entire 240 km return route</strong>. Caltex Te Anau is a manned, "pay-after-fuelling" station, which is rare in NZ and useful for a motorhome where the pump shut-off can be inconvenient with pre-pay.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Caltex+Te+Anau&query_place_id=ChIJrct35UsO1KkR25pgyn52bag" target="_blank" rel="noopener">Caltex Te Anau, Luxmore Drive</a></p>
+    </div>
+  </div>
+
+  <div class="stop must">
+    <div class="time-col">
+      <div class="clock">16:00</div>
+      <div class="duration">45 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must</span>
+        <span class="flag">Check-in</span>
+      </div>
+      <h3>AirBnB check-in <em>· 142 Te Anau Terrace</em></h3>
+      <div class="meta">Te Anau Terrace · 500 m from lakefront</div>
+      <p>Park the motorhome, settle in, plug into mains power (motorhome 240 V), refresh the house batteries, hot showers all round. Walk it out — you're a 5-minute stroll from the lakefront and 10 minutes from the RealNZ wharf.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=142+Te+Anau+Terrace+Te+Anau&query_place_id=ChIJh6iiWbYP1KkRljaQAxjG40g" target="_blank" rel="noopener">142 Te Anau Terrace</a></p>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">16:45</div>
+      <div class="duration">30 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag optional">Optional</span>
+        <span class="flag food">Pre-tour bite</span>
+      </div>
+      <h3>Light snack <em>before the boat</em></h3>
+      <div class="meta">Lakefront cafés · the tour returns at 8:00 PM</div>
+      <p>Since dinner is post-tour, grab something light now — a coffee and slice at Sandfly Café, or a pie from Miles Better Pies if you want a Kiwi classic. Avoid anything heavy: you'll be on a boat in 50 minutes, then on a low-ceilinged cave walk, then back to a proper dinner around 8:30 PM.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Miles+Better+Pies+Te+Anau" target="_blank" rel="noopener">Miles Better Pies</a></p>
+    </div>
+  </div>
+
+  <div class="leg-label">
+    <span class="pill evening">Evening</span>
+    <span class="leg-text">Into the cave of rushing water</span>
+  </div>
+
+  <div class="stop glow">
+    <div class="time-col">
+      <div class="clock">17:25</div>
+      <div class="duration">20 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag glow">Glow Prep</span>
+      </div>
+      <h3>Check-in <em>· RealNZ Visitor Centre</em></h3>
+      <div class="meta">85 Lakefront Drive · arrive 20 min before departure</div>
+      <p>Walk down to the RealNZ wharf — about 10 minutes from the AirBnB. Tour office is right on the lakefront; arrive 20 minutes early to collect tickets, use the bathrooms (no facilities at the cave), and grab a fleece — inside the caves it's 8–12 °C year-round, even in summer.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=RealNZ+Te+Anau+Visitor+Centre&query_place_id=ChIJm7DBdbMP1KkRUYt1bJGPsJ4" target="_blank" rel="noopener">RealNZ Visitor Centre</a></p>
+    </div>
+  </div>
+
+  <div class="stop cave">
+    <div class="ceiling-mini" id="ceiling-cave"></div>
+    <div class="time-col">
+      <div class="clock">17:45</div>
+      <div class="duration">2h 15m</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag glow">The Headline</span>
+        <span class="flag dark">Pre-book online</span>
+      </div>
+      <h3>Te Anau <em>Glowworm Caves</em></h3>
+      <div class="meta">RealNZ · catamaran across the lake → guided cave + grotto punt → return by 8 PM</div>
+      <p>The headline of the day. A 45-minute catamaran cruise crosses Lake Te Anau to the western shore — a coastline accessible only by boat. At Cavern House, your guide leads a small group (12 max per guide) into the limestone cave system; rushing underground water has carved the passages, which are geologically young — only ~12,000 years old, and still being shaped right now. The walk ends at a hidden grotto where you board a small punt in pitch silence — and overhead, thousands of bioluminescent <em>Arachnocampa luminosa</em> larvae light the ceiling like a private star field.</p>
+      <p>The 5:45 PM tour is the sweet spot: outbound across the lake in clear daylight, then the cave for 30 minutes in total darkness while your eyes are already adjusting to evening light, then the return crossing in <strong>golden hour</strong> — sun setting behind the Murchison Mountains, lake water gone metallic.</p>
+      <div class="tip"><strong>Bring:</strong> warm fleece or sweater, non-slip walking shoes, a waterproof if rain is forecast. <strong>Leave behind:</strong> all cameras and phones — no photography permitted in the glowworm grotto, even silent mode (flash and screen-light disturb the worms and ruin everyone else's dark-adaptation). The tour returns to the wharf around <strong>8:00 PM</strong>.</div>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=RealNZ+Te+Anau+Visitor+Centre&query_place_id=ChIJm7DBdbMP1KkRUYt1bJGPsJ4" target="_blank" rel="noopener">Tour departs from RealNZ wharf</a></p>
+    </div>
+  </div>
+
+  <div class="stop must">
+    <div class="time-col">
+      <div class="clock">20:30</div>
+      <div class="duration">90 min</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag must">Must Book</span>
+        <span class="flag food">Dinner</span>
+      </div>
+      <h3>Redcliff <em>Restaurant & Bar</em></h3>
+      <div class="meta">12 Mokonui Street · open until 11:30 PM · book ahead</div>
+      <p>The standout restaurant in Te Anau, occupying a vintage settler's cottage and serving classic South Island plates — venison, hare croquettes, blue cod, lamb. They fill up every night — book a few days ahead and ask for an 8:30 PM table so you're not rushing the post-tour walk back. A warm, characterful room, with original LOTR cast signatures on the wall from the filming days. Wine list is solid; the Central Otago pinots are local.</p>
+      <div class="tip"><strong>Backup options</strong> if Redcliff is full or too late: Sandfly Café (closes earlier, casual), or the Fat Duck Bar & Eatery on the lakefront for relaxed gastropub fare with later hours.</div>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Redcliff+Restaurant+and+Bar+Te+Anau&query_place_id=ChIJycMWibQP1KkRFAaOszjTpWQ" target="_blank" rel="noopener">Redcliff Restaurant & Bar</a></p>
+    </div>
+  </div>
+
+  <div class="stop">
+    <div class="time-col">
+      <div class="clock">22:30</div>
+      <div class="duration">—</div>
+    </div>
+    <div class="stop-body">
+      <div class="stop-flags">
+        <span class="flag">Sleep</span>
+      </div>
+      <h3>Return to AirBnB <em>— rest for Milford</em></h3>
+      <div class="meta">142 Te Anau Terrace · 5-min walk from Redcliff</div>
+      <p>An early-ish night earned. Tomorrow is the Milford Sound run — 240 km return on SH94, the country's third-highest highway, with no fuel and frequent stops. Set an alarm.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================ FUEL ================ -->
+<section class="fuel">
+  <div class="section-head">
+    <span class="section-num">— 03 —</span>
+    <h2>Fuel <em>plan</em></h2>
+  </div>
+  <div class="fuel-grid">
+
+    <div class="fuel-card">
+      <div class="label">Recommended refuel</div>
+      <h3>Caltex Te Anau · <em>Luxmore Drive</em></h3>
+      <p>The best option for the Maui River motorhome: <strong>manned, pay-after-fuelling</strong>, open 6 AM–9 PM daily, with a generous forecourt that easily handles a 7.25 m vehicle. High-flow diesel pump suitable for trucks and large RVs. Sits right at the SH94 entry to town, so it's a no-detour stop on arrival.</p>
+      <p>From here you'll have a full tank for tomorrow's Milford return — critical, as there is <strong>no fuel between Te Anau and Milford Sound</strong> (~240 km round-trip on SH94).</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=Caltex+Te+Anau&query_place_id=ChIJrct35UsO1KkR25pgyn52bag" target="_blank" rel="noopener">Caltex Te Anau — directions</a></p>
+
+      <div class="fuel-stats">
+        <div class="fuel-stat">
+          <div class="l">Today's est. burn</div>
+          <div class="v">~24 L</div>
+        </div>
+        <div class="fuel-stat">
+          <div class="l">Tank capacity</div>
+          <div class="v">71–75 L</div>
+        </div>
+        <div class="fuel-stat">
+          <div class="l">Consumption</div>
+          <div class="v">13–14 L / 100 km</div>
+        </div>
+        <div class="fuel-stat">
+          <div class="l">Today's distance</div>
+          <div class="v">175 km</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fuel-alt">
+      <h4>Backup & en-route options</h4>
+      <ul>
+        <li>
+          <strong>Allied Te Anau (Mobil)</strong> · 80 Town Centre
+          <span class="mono">24-hour self-service · pre-pay · often cheapest in town</span>
+        </li>
+        <li>
+          <strong>McKeown / MGL Te Anau</strong> · 2 Alpine Drive
+          <span class="mono">24/7 truckstop · high-flow diesel + AdBlue</span>
+        </li>
+        <li>
+          <strong>Mossburn fuel</strong> · SH94 (en route)
+          <span class="mono">Unmanned · credit-card only · backup only</span>
+        </li>
+        <li>
+          <strong>Z Truck Stop Cromwell</strong> · not en route today
+          <span class="mono">Flagged for future Wānaka / Mt Cook legs</span>
+        </li>
+      </ul>
+      <h4 style="margin-top: 24px;">Quick consumption math</h4>
+      <ul>
+        <li>
+          <strong>175 km × 13.5 L/100km ≈ 23.6 L</strong>
+          <span class="mono">Gentle highway driving, 4 adults, full water</span>
+        </li>
+        <li>
+          <strong>Top-up to full = ~70 L</strong>
+          <span class="mono">Enough for Milford return + buffer</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================ ACCOMMODATION ================ -->
+<section class="stay">
+  <div class="section-head">
+    <span class="section-num">— 04 —</span>
+    <h2>Tonight's <em>roof</em></h2>
+  </div>
+
+  <div class="stay-card">
+    <div>
+      <div class="label">AirBnB · 1 night</div>
+      <h3>142 Te Anau <em>Terrace</em></h3>
+      <p>Quiet residential street a short walk from the lakefront and the RealNZ wharf. Park the Maui River on-site, plug into mains power, hot showers, and rest before the Milford Sound day. The town's compact enough that you can leave the motorhome and walk to dinner and the cave tour.</p>
+      <p><a class="map" href="https://www.google.com/maps/search/?api=1&query=142+Te+Anau+Terrace+Te+Anau&query_place_id=ChIJh6iiWbYP1KkRljaQAxjG40g" target="_blank" rel="noopener">View on Google Maps</a></p>
+    </div>
+    <div class="stay-icon">Te</div>
+  </div>
+</section>
+
+<footer>
+  <div>Day 06 · <em>Queenstown → Te Anau</em> · Thu 12 Nov 2026</div>
+  <div>Drive 175 km · ~24 L diesel · Maui River 6-Berth</div>
+</footer>
+
+<script>
+  // Sprinkle glowworm dots on the dark cards — both the timing feature
+  // and the timeline cave card. Pure decoration, no interaction.
+  function sprinkle(containerId, count) {
+    const c = document.getElementById(containerId);
+    if (!c) return;
+    for (let i = 0; i < count; i++) {
+      const w = document.createElement('div');
+      w.className = 'worm';
+      w.style.top  = (Math.random() * 70) + '%';
+      w.style.left = (Math.random() * 100) + '%';
+      w.style.animationDelay = (Math.random() * 4) + 's';
+      w.style.animationDuration = (3 + Math.random() * 3) + 's';
+      c.appendChild(w);
+    }
+  }
+  sprinkle('ceiling', 60);
+  sprinkle('ceiling-cave', 40);
+</script>
+
+</body>
+</html>

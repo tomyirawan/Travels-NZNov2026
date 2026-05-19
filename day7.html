@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Day 7 — Te Anau ⇄ Milford Sound | 13 Nov</title>
+<style>
+  :root{
+    --ink:#0b2a3a;
+    --ink-soft:#264a5f;
+    --paper:#f3f8fa;
+    --mist:#e6f0f3;
+    --fjord:#0e6e8a;
+    --fjord-deep:#0a4a5f;
+    --moss:#3b8c6e;
+    --falls:#a9d6e3;
+    --gold:#d4a24c;
+    --line:rgba(11,42,58,0.12);
+    --shadow:0 10px 30px rgba(10,74,95,0.10), 0 2px 8px rgba(10,74,95,0.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:"Inter","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;line-height:1.55}
+  a{color:var(--fjord);text-decoration:none;border-bottom:1px dotted var(--fjord)}
+  a:hover{color:var(--fjord-deep);border-bottom-style:solid}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    min-height:340px;
+    color:#fff;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(10,74,95,0.55) 0%, rgba(10,74,95,0.85) 100%),
+      linear-gradient(180deg,#1d6e88 0%,#0a3e52 100%);
+    padding:64px 24px 56px;
+  }
+  .hero svg.mtns{position:absolute;left:0;right:0;bottom:0;width:100%;height:200px;display:block}
+  .hero .falls{position:absolute;top:0;width:6px;background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0));border-radius:3px;opacity:0.65;filter:blur(0.4px)}
+  .hero-inner{position:relative;max-width:1100px;margin:0 auto;z-index:2}
+  .eyebrow{letter-spacing:.22em;font-size:12px;text-transform:uppercase;color:#bfe3ed;margin-bottom:10px}
+  h1{font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(28px,4.6vw,52px);line-height:1.05;margin:0 0 12px}
+  .sub{font-size:clamp(15px,1.8vw,18px);color:#dff1f6;max-width:740px;margin:0}
+  .chips{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(4px);color:#fff;padding:6px 12px;border-radius:999px;font-size:13px}
+
+  /* Page wrap */
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+
+  /* Cards & sections */
+  section{margin:36px 0}
+  h2{font-family:"Playfair Display",Georgia,serif;font-size:26px;margin:0 0 14px;color:var(--fjord-deep);display:flex;align-items:center;gap:10px}
+  h2 .ico{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--mist);border-radius:8px;color:var(--fjord)}
+  h3{margin:0 0 6px;font-size:18px;color:var(--ink)}
+  p{margin:0 0 10px}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:760px){.grid-2{grid-template-columns:1fr}}
+
+  /* Pros/cons */
+  .pros, .cons{padding:18px 20px;border-radius:12px}
+  .pros{background:linear-gradient(180deg,#eef8f3,#e3f1ea);border:1px solid #cfe7da}
+  .cons{background:linear-gradient(180deg,#fdf3ee,#fbe9df);border:1px solid #f0d3c1}
+  .pros h3{color:#1f7a55}
+  .cons h3{color:#a85a2c}
+  .list{margin:6px 0 0;padding-left:18px}
+  .list li{margin:6px 0}
+
+  /* Recommendation strip */
+  .reco{
+    margin-top:18px;background:linear-gradient(135deg,#0a4a5f 0%,#0e6e8a 100%);color:#fff;
+    border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);
+    display:flex;gap:16px;align-items:flex-start
+  }
+  .reco .badge{background:var(--gold);color:#3a2a08;font-weight:700;padding:4px 10px;border-radius:6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .reco h3{color:#fff;margin-bottom:4px}
+  .reco p{color:#e0f1f6;margin:6px 0 0}
+
+  /* Timeline */
+  .timeline{position:relative;margin:8px 0 0;padding:6px 0 6px 0}
+  .timeline::before{content:"";position:absolute;left:84px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--falls),var(--fjord),var(--moss));border-radius:2px}
+  @media (max-width:700px){.timeline::before{left:60px}}
+  .step{position:relative;display:grid;grid-template-columns:84px 1fr;gap:14px;padding:14px 0}
+  @media (max-width:700px){.step{grid-template-columns:60px 1fr}}
+  .time{font-weight:700;color:var(--fjord-deep);font-variant-numeric:tabular-nums;padding-top:14px;font-size:14px}
+  .dot{position:absolute;left:78px;top:18px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--fjord);box-shadow:0 0 0 4px rgba(14,110,138,0.10)}
+  @media (max-width:700px){.dot{left:54px}}
+  .dot.must{border-color:var(--gold)}
+  .dot.opt{border-color:var(--moss)}
+  .dot.cruise{border-color:#b53a3a}
+  .step-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .step-card .meta{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+  .tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-right:6px;vertical-align:middle}
+  .tag.must{background:#fff5e0;color:#8a5b0a;border:1px solid #f1d699}
+  .tag.opt{background:#e9f5ef;color:#1f6a4a;border:1px solid #c3e2cf}
+  .tag.cruise{background:#fde7e7;color:#8c2828;border:1px solid #f1b9b9}
+  .tag.drive{background:#e6eff5;color:#214a64;border:1px solid #c2d6e3}
+  .tag.fuel{background:#fff0d6;color:#7a4d00;border:1px solid #f3d59e}
+  .tag.food{background:#f3e8f5;color:#5e2469;border:1px solid #dcc1e2}
+  .step-card .links{margin-top:8px;font-size:13.5px}
+
+  /* Fuel table */
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:var(--mist);color:var(--fjord-deep);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  tr:last-child td{border-bottom:none}
+
+  .callout{background:#fff8e8;border:1px solid #f0dca3;border-radius:12px;padding:14px 16px;color:#5a4310}
+  .callout strong{color:#7a5400}
+
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--ink-soft)}
+
+  /* Small icon helper */
+  .pin{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:4px}
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html">Day 6</a></li>
+    <li><a href="day7.html" class="active">Day 7</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <!-- Falling water lines -->
+  <div class="falls" style="left:8%;height:60%"></div>
+  <div class="falls" style="left:18%;height:42%;opacity:.5"></div>
+  <div class="falls" style="left:34%;height:75%;opacity:.6"></div>
+  <div class="falls" style="left:58%;height:55%"></div>
+  <div class="falls" style="left:71%;height:48%;opacity:.55"></div>
+  <div class="falls" style="left:86%;height:65%;opacity:.7"></div>
+
+  <div class="hero-inner">
+    <div class="eyebrow">Day 7 · Thursday, 13 November</div>
+    <h1>Te Anau ⇄ Milford Sound</h1>
+    <p class="sub">A leisurely Fiordland road-trip day on State Highway 94: alpine valleys, mirror tarns and a boutique afternoon cruise into Piopiotahi — back to a warm dinner in Te Anau.</p>
+    <div class="chips">
+      <span class="chip">🚐 Maui River 6-Berth</span>
+      <span class="chip">⛴️ Boutique Small-Boat Cruise</span>
+      <span class="chip">🛏️ Airbnb · 142 Te Anau Terrace</span>
+      <span class="chip">📏 ~240 km round trip</span>
+      <span class="chip">⛽ ~32 L diesel</span>
+    </div>
+  </div>
+
+  <!-- Mountain silhouette -->
+  <svg class="mtns" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,200 L0,140 L90,80 L180,120 L260,60 L360,110 L460,40 L560,100 L660,70 L760,30 L860,90 L960,60 L1060,120 L1180,70 L1290,110 L1380,80 L1440,130 L1440,200 Z"
+          fill="#0a3e52" opacity="0.95"/>
+    <path d="M0,200 L0,170 L120,130 L240,160 L340,120 L440,150 L560,130 L680,160 L800,140 L920,170 L1040,150 L1160,170 L1280,150 L1440,180 L1440,200 Z"
+          fill="#082f3e" opacity="0.9"/>
+  </svg>
+</header>
+
+<div class="wrap">
+
+  <!-- Cruise comparison -->
+  <section>
+    <h2><span class="ico">⛴️</span> Boutique Small-Boat vs Big Cruise</h2>
+    <p>Milford Sound cruises share more or less the same route — down the southern side of the fiord, out toward the Tasman Sea, back along the northern wall, stopping at Stirling Falls, Fairy Falls and seal colonies. The real difference is the <strong>vessel and the crowd</strong>.</p>
+
+    <div class="grid-2" style="margin-top:14px">
+      <div class="pros">
+        <h3>👍 Pros — Boutique Small Boat (e.g. Cruise Milford NZ)</h3>
+        <ul class="list">
+          <li><strong>Capped at 75 passengers</strong> (vessel holds 150) — guaranteed half-empty, room to roam.</li>
+          <li>Closer to <strong>waterfalls, seal rocks and the Hanging Gardens</strong> — the small hull noses in where big boats can’t.</li>
+          <li>The <strong>“Glacial Facial”</strong> under Stirling Falls feels properly immersive on a small deck.</li>
+          <li>Slightly longer cruise — <strong>1 h 45 min</strong> on the water with skipper-led commentary in English only.</li>
+          <li>Higher chance of decent photo angles — no jostling for rail space.</li>
+          <li>Family-owned local operator; commentary is personal, not scripted.</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h3>👎 Cons — Boutique Small Boat</h3>
+        <ul class="list">
+          <li><strong>More expensive</strong> than the standard nature cruises (typically NZ$160–180 pp vs ~NZ$130–150).</li>
+          <li>Smaller indoor lounge — if it’s pouring rain and cold, you have less shelter to retreat into.</li>
+          <li>A smaller hull <strong>rocks a touch more</strong> if the fiord gets choppy near the Tasman Sea entrance.</li>
+          <li>Fewer onboard amenities — coffee/tea/biscuits only, no full café or bar, no buffet lunch option.</li>
+          <li>Fewer departures per day, so less flexibility if you’re running late from the drive.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reco">
+      <div class="badge">Best Pick</div>
+      <div>
+        <h3>Book the early-afternoon boutique departure — around 12:45–1:00 pm</h3>
+        <p>An afternoon ride suits your day well: leave Te Anau mid-morning, photograph the Mirror Lakes and Eglinton Valley in good light, eat lunch before boarding, and you’re back on the road home before the Homer Tunnel queue stacks up at 4–5 pm. The trade-off vs the 9:45 am sailing is that the terminal is busier — but on a small-boat cruise that crowd never gets onto your vessel. <em>Book in advance — boutique seats sell out.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fuel -->
+  <section>
+    <h2><span class="ico">⛽</span> Fuel Plan — Refuel in Te Anau</h2>
+    <p><strong>There are no fuel stations</strong> between Te Anau and Milford Sound (119 km each way). The Maui River runs on a 2.0–2.2L turbo-diesel with a ~70–75 L tank and averages about <strong>13 L/100 km</strong> on a manufacturer-stated basis (real-world hilly driving can lift it to ~14 L/100 km).</p>
+
+    <div class="card" style="margin-top:14px">
+      <table>
+        <thead>
+          <tr><th>Leg</th><th>Distance</th><th>Est. diesel @ 13–14 L/100 km</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Te Anau → Milford Sound</td><td>~119 km</td><td>~15.5–16.7 L</td></tr>
+          <tr><td>Milford Sound → Te Anau</td><td>~119 km</td><td>~15.5–16.7 L</td></tr>
+          <tr><td><strong>Round trip (with stops)</strong></td><td><strong>~240 km</strong></td><td><strong>~31–34 L</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px"><strong>Recommended:</strong> top up to full <em>before</em> leaving Te Anau in the morning. A full 70–75 L tank gives you a comfortable buffer for the round trip plus headroom for any side detours or idle time at Homer Tunnel.</p>
+    </div>
+
+    <h3 style="margin-top:20px">Best refuel stop — high-flow diesel in Te Anau</h3>
+    <div class="card">
+      <p><strong>🥇 Allied Te Anau (formerly Mobil) — 80 Town Centre, Te Anau</strong><br>
+      24-hour self-service, generally cheapest diesel in town, easy pull-through bays that comfortably accommodate a 7.2 m motorhome. About 800 m / 2 min from your Airbnb at 142 Te Anau Terrace.<br>
+      <a href="https://www.google.com/maps/search/?api=1&query=Allied+Te+Anau&query_place_id=ChIJc-7LtLQP1KkR-kOXLrP-vS0" target="_blank" rel="noopener">📍 Open in Google Maps</a></p>
+
+      <p style="margin-top:10px"><strong>🥈 Backup — Z Energy Te Anau, Town Centre</strong><br>
+      Slightly higher pump price but full service forecourt, snacks/toilets if you want to stock the campervan in one stop.<br>
+      <a href="https://www.google.com/maps/search/?api=1&query=Z+Energy+Te+Anau" target="_blank" rel="noopener">📍 Open in Google Maps</a></p>
+
+      <p class="callout" style="margin-top:14px"><strong>Note on RUC:</strong> Maui charges a Road User Charge recovery fee on diesel vehicles (around NZ$8 per 100 km) on return — this is separate from pump diesel and settled at drop-off, not now.</p>
+    </div>
+  </section>
+
+  <!-- Itinerary timeline -->
+  <section>
+    <h2><span class="ico">📍</span> Detailed Itinerary — Stops &amp; Timestamps</h2>
+    <p style="color:var(--ink-soft)">Times are indicative. Allow ~2 h driving each way without stops. Cellphone coverage drops out after Te Anau Downs — download offline maps before you leave.</p>
+
+    <div class="timeline">
+
+      <!-- 08:30 Wake / breakfast -->
+      <div class="step">
+        <div class="time">08:30</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Breakfast</span>
+          <h3>Slow start at the Airbnb · 142 Te Anau Terrace</h3>
+          <p class="meta">Pack the day bag: warm layers, waterproof jacket, sunglasses, water, snacks, charged phone. The cruise terminal has toilets and a café — no need to over-pack.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=142+Te+Anau+Terrace+Te+Anau&query_place_id=ChIJh6iiWbYP1KkRljaQAxjG40g" target="_blank" rel="noopener">142 Te Anau Terrace</a></div>
+        </div>
+      </div>
+
+      <!-- 09:00 Milford Road Merchant -->
+      <div class="step">
+        <div class="time">09:00</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional</span><span class="tag food">Coffee &amp; Pies</span>
+          <h3>Milford Road Merchant — last decent coffee on the road</h3>
+          <p class="meta">~10 min stop. Award-winning pies, sausage rolls, cinnamon scrolls. Stocks snacks &amp; drinks you’ll want for the drive. On your way out of town, on the Milford Road side.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Milford+Road+Merchant+Te+Anau&query_place_id=ChIJY2hNUmgP1KkR86osaNnv0-s" target="_blank" rel="noopener">Milford Road Merchant, 225 Milford Road</a></div>
+        </div>
+      </div>
+
+      <!-- 09:15 Fuel -->
+      <div class="step">
+        <div class="time">09:15</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Must</span><span class="tag fuel">Fuel</span>
+          <h3>Top up diesel — Allied Te Anau</h3>
+          <p class="meta">~10 min. Fill to full. This is your only fuel stop for the day. 24/7 self-service.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Allied+Te+Anau&query_place_id=ChIJc-7LtLQP1KkR-kOXLrP-vS0" target="_blank" rel="noopener">Allied Te Anau, 80 Town Centre</a></div>
+        </div>
+      </div>
+
+      <!-- 09:35 Depart -->
+      <div class="step">
+        <div class="time">09:35</div>
+        <div class="dot"></div>
+        <div class="step-card">
+          <span class="tag drive">Drive</span>
+          <h3>Depart Te Anau on State Highway 94 — the Milford Road</h3>
+          <p class="meta">119 km to Milford Sound. Hugs Lake Te Anau for the first 30 km, then climbs into Fiordland National Park.</p>
+        </div>
+      </div>
+
+      <!-- 10:00 Te Anau Downs -->
+      <div class="step">
+        <div class="time">10:00</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional · 10 min</span>
+          <h3>Te Anau Downs jetty</h3>
+          <p class="meta">Quick photo stop on the lake — the departure point for Milford Track walkers. Skip if morning light is flat; better in calm conditions for reflections.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Te+Anau+Downs+Boat+Launch&query_place_id=ChIJeSsvqGk81KkRhf2CHn1N4Sw" target="_blank" rel="noopener">Te Anau Downs Boat Launch</a></div>
+        </div>
+      </div>
+
+      <!-- 10:35 Eglinton Valley -->
+      <div class="step">
+        <div class="time">10:35</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Must · 15 min</span>
+          <h3>Eglinton Valley &amp; Eglinton Flats</h3>
+          <p class="meta">First “holy moment” of the drive — broad, glacier-carved valley framed by the Earl Mountains. Plenty of safe pull-offs along the highway for the iconic photo. Also a <em>Lord of the Rings</em> filming location (the Misty Mountains).</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Eglinton+Valley&query_place_id=ChIJ2auo2hU21KkRHrfcsYRIP6A" target="_blank" rel="noopener">Eglinton Valley</a></div>
+        </div>
+      </div>
+
+      <!-- 11:00 Mirror Lakes -->
+      <div class="step">
+        <div class="time">11:00</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Must · 20 min</span>
+          <h3>Mirror Lakes boardwalk</h3>
+          <p class="meta">400 m return on a flat boardwalk. On a still day, perfect reflections of the Earl Mountains; the famous upside-down sign is at the far end. Roadside parking suits the motorhome — pull in carefully.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Mirror+Lakes+Fiordland" target="_blank" rel="noopener">Mirror Lakes (Milford Road)</a></div>
+        </div>
+      </div>
+
+      <!-- 11:30 Knobs Flat (toilet) -->
+      <div class="step">
+        <div class="time">11:30</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional · 10 min</span>
+          <h3>Knobs Flat — comfort stop</h3>
+          <p class="meta">Public toilets, dump station, interpretation displays. Useful pause roughly halfway. Skip if everyone’s fine; otherwise it’s the cleanest stop on the route.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Knobs+Flat+Fiordland" target="_blank" rel="noopener">Knobs Flat</a></div>
+        </div>
+      </div>
+
+      <!-- 11:50 Lake Gunn -->
+      <div class="step">
+        <div class="time">11:50</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional Hike · 20–45 min</span>
+          <h3>Lake Gunn Nature Walk</h3>
+          <p class="meta">Easy 1.4 km loop through moss-draped red beech forest to the lake shore. Wheelchair/pram-friendly. If running tight, do the short 20-min spur to the beach and back.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Lake+Gunn+Nature+Walk&query_place_id=ChIJY3Znrf3J1akRkjeLUBgqEPs" target="_blank" rel="noopener">Lake Gunn Nature Walk</a></div>
+        </div>
+      </div>
+
+      <!-- 12:25 Pop's view -->
+      <div class="step">
+        <div class="time">12:25</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional · 5 min</span>
+          <h3>Pop’s View Lookout (Hollyford Valley)</h3>
+          <p class="meta">Quick roadside lookout — birds-eye over the forested Hollyford Valley. Only 4–5 parking spots, can be tight for a 7 m motorhome. <em>Save it for the return drive</em> if it’s full.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Pop%27s+View+Lookout&query_place_id=ChIJzQ5AxZLH1akRx7aLCmWoK9Q" target="_blank" rel="noopener">Pop’s View Lookout</a></div>
+        </div>
+      </div>
+
+      <!-- 12:40 Monkey Creek -->
+      <div class="step">
+        <div class="time">12:40</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Must · 10 min</span>
+          <h3>Monkey Creek</h3>
+          <p class="meta">Crystal-clear glacial water — you can refill your bottle straight from the stream. Watch for cheeky kea (NZ alpine parrots) and the rare whio (blue duck). Don’t feed the kea.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Monkey+Creek+Fiordland&query_place_id=ChIJI0qmSOfF1akRuAPthDkYGB8" target="_blank" rel="noopener">Monkey Creek</a></div>
+        </div>
+      </div>
+
+      <!-- 12:55 Homer Tunnel approach -->
+      <div class="step">
+        <div class="time">12:55</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Must · 10–20 min</span><span class="tag drive">Traffic Light</span>
+          <h3>Homer Tunnel — east portal queue</h3>
+          <p class="meta">1.27 km single-lane tunnel through solid granite — controlled by traffic lights, up to ~15 min wait. Use the wait to scan the cliffs for kea and avalanche scars. The tunnel drops at a 1-in-10 gradient on the Milford side; keep it in low gear.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Homer+Tunnel&query_place_id=ChIJwUznWJHF1akRDpDgG-UMrcw" target="_blank" rel="noopener">Homer Tunnel</a></div>
+        </div>
+      </div>
+
+      <!-- 13:25 The Chasm -->
+      <div class="step">
+        <div class="time">13:25</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional · 20 min</span>
+          <h3>The Chasm walk</h3>
+          <p class="meta">Easy 400 m return loop on a sealed path. Powerful Cleddau River waterfalls have sculpted basins into the rock — viewing bridges right above them. Worth it if you have time before the cruise.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=The+Chasm+Walk+Milford+Sound+Highway" target="_blank" rel="noopener">The Chasm Walk</a></div>
+        </div>
+      </div>
+
+      <!-- 13:50 Arrive Milford -->
+      <div class="step">
+        <div class="time">13:50</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Arrive</span>
+          <h3>Milford Sound — park &amp; walk to terminal</h3>
+          <p class="meta">Paid car park (NZ$10/hour) is ~10 min walk to the terminal; the free car park at Deepwater Basin is ~40 min walk. With the motorhome and cruise timing, <strong>pay for the closer lot</strong> — budget NZ$30–40 for ~3 hours.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Milford+Sound+Visitor+Terminal&query_place_id=ChIJh8bKJgDd1akRmkIYApkID6o" target="_blank" rel="noopener">Milford Sound Visitor Terminal</a></div>
+        </div>
+      </div>
+
+      <!-- 14:00 Lunch -->
+      <div class="step">
+        <div class="time">14:00</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Lunch</span><span class="tag food">Eat</span>
+          <h3>Quick lunch at the terminal café — or packed sandwiches</h3>
+          <p class="meta">~25 min. The Milford Sound Visitor Terminal has a small café with sandwiches, pies, hot drinks. Cheaper option: eat your own from the motorhome before walking in — there are picnic benches outside.</p>
+        </div>
+      </div>
+
+      <!-- 14:25 Check-in -->
+      <div class="step">
+        <div class="time">14:25</div>
+        <div class="dot cruise"></div>
+        <div class="step-card">
+          <span class="tag cruise">Check-in</span>
+          <h3>Cruise Milford NZ counter — 20 min before departure</h3>
+          <p class="meta">Second counter on the left inside the terminal. Have your booking confirmation ready (paper or phone screenshot — cell coverage is patchy).</p>
+        </div>
+      </div>
+
+      <!-- 14:45 Cruise -->
+      <div class="step">
+        <div class="time">14:45</div>
+        <div class="dot cruise"></div>
+        <div class="step-card">
+          <span class="tag cruise">Cruise · 1 h 45 min</span><span class="tag must">Highlight</span>
+          <h3>Milford Sound Boutique Small-Boat Cruise</h3>
+          <p class="meta">Departure time is indicative — confirm the exact afternoon slot when you book (typical afternoon options run between ~12:45 and ~3:00 pm). Down the southern shore, past <strong>Mitre Peak</strong>, <strong>Stirling Falls</strong> (glacial facial!), the <strong>Hanging Gardens</strong>, <strong>seal rocks at Copper Point</strong>, then a turn at the <strong>Tasman Sea</strong> and back along the northern wall past <strong>Fairy Falls</strong> and <strong>Bowen Falls</strong>. Complimentary tea, coffee &amp; biscuits onboard.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Cruise+Milford+NZ+Milford+Sound&query_place_id=ChIJh8bKJgDd1akRmkIYApkID6o" target="_blank" rel="noopener">Cruise Milford NZ — Milford Sound Terminal</a></div>
+        </div>
+      </div>
+
+      <!-- 16:30 Cruise ends -->
+      <div class="step">
+        <div class="time">16:30</div>
+        <div class="dot"></div>
+        <div class="step-card">
+          <span class="tag drive">Depart</span>
+          <h3>Cruise ends · walk back to motorhome · depart for Te Anau</h3>
+          <p class="meta">Aim to be rolling east by 16:50. By 17:00 the worst of the Homer Tunnel queue (return-direction coach traffic) is usually clearing.</p>
+        </div>
+      </div>
+
+      <!-- 17:20 Homer Tunnel return -->
+      <div class="step">
+        <div class="time">17:20</div>
+        <div class="dot"></div>
+        <div class="step-card">
+          <span class="tag drive">Drive</span>
+          <h3>Homer Tunnel west portal — return through</h3>
+          <p class="meta">After the tunnel, look up: the <em>1855 Lookout</em> and <em>Hundred Falls</em> areas on the western side often show late-afternoon waterfalls. Quick photo from the car if light is good.</p>
+        </div>
+      </div>
+
+      <!-- 17:50 Pop's View / Lake Gunn (anything missed) -->
+      <div class="step">
+        <div class="time">17:50</div>
+        <div class="dot opt"></div>
+        <div class="step-card">
+          <span class="tag opt">Optional · 5–10 min</span>
+          <h3>Mop-up stop — Pop’s View or Lake Gunn</h3>
+          <p class="meta">If you skipped a viewpoint on the way in, hit it now in afternoon light. Otherwise drive on — daylight is plentiful in mid-November (sunset ~8:45 pm), so no urgency.</p>
+        </div>
+      </div>
+
+      <!-- 19:30 Arrive Te Anau -->
+      <div class="step">
+        <div class="time">19:30</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Arrive</span>
+          <h3>Back in Te Anau — drop the motorhome at the Airbnb</h3>
+          <p class="meta">Park, freshen up. Walk to dinner — central Te Anau is a 5–10 min walk from your Airbnb.</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=142+Te+Anau+Terrace+Te+Anau&query_place_id=ChIJh6iiWbYP1KkRljaQAxjG40g" target="_blank" rel="noopener">142 Te Anau Terrace</a></div>
+        </div>
+      </div>
+
+      <!-- 20:00 Dinner -->
+      <div class="step">
+        <div class="time">20:00</div>
+        <div class="dot must"></div>
+        <div class="step-card">
+          <span class="tag must">Dinner</span><span class="tag food">Reservation recommended</span>
+          <h3>Redcliff Restaurant &amp; Bar</h3>
+          <p class="meta">Te Anau’s top-rated semi-fine-dining spot in a 1978 settler’s cottage — Fiordland venison, Rakiura salmon, local wines. <strong>Book ahead</strong> (especially mid-November — peak season starting). Alternative: <em>The Fat Duck</em> gastropub (NZ’s Best Gastropub 2025) or <em>Ditto</em> (Asian-fusion, walk-in only).</p>
+          <div class="links">📍 <a href="https://www.google.com/maps/search/?api=1&query=Redcliff+Restaurant+and+bar+Te+Anau&query_place_id=ChIJycMWibQP1KkRFAaOszjTpWQ" target="_blank" rel="noopener">Redcliff Restaurant &amp; Bar</a></div>
+        </div>
+      </div>
+
+      <!-- 22:00 Bed -->
+      <div class="step">
+        <div class="time">22:00</div>
+        <div class="dot"></div>
+        <div class="step-card">
+          <span class="tag opt">Overnight</span>
+          <h3>Back to the Airbnb — 142 Te Anau Terrace</h3>
+          <p class="meta">Charge cameras and phones, plan tomorrow’s leg.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tips -->
+  <section>
+    <h2><span class="ico">💡</span> Practical Tips</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>What to pack for the cruise</h3>
+        <ul class="list">
+          <li>Warm layers + windproof jacket — even in November, the deck wind off the fiord is icy.</li>
+          <li>Waterproof shell — Milford gets ~7 m of rain a year; the falls spray you regardless.</li>
+          <li>Sunglasses, sunscreen, hat — the gap between squalls is intense.</li>
+          <li>Camera + phone in a dry bag or zip-lock. Lens cloth.</li>
+          <li>Refillable bottle (top up at Monkey Creek).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Driving the motorhome</h3>
+        <ul class="list">
+          <li>No cell coverage past Te Anau Downs — pre-download Google Maps offline.</li>
+          <li>Maui River is 3.4 m tall, 7.2 m long, 2.4 m wide — fine through Homer Tunnel (no height issue), but be patient on tight pull-offs.</li>
+          <li>Open-road limit on SH94 is 100 km/h but realistic average is 70–80; let faster cars pass at safe pull-offs.</li>
+          <li>Keep it in a lower gear descending from Homer Tunnel west — engine braking saves your brakes on the 1:10 grade.</li>
+          <li>Heading back, leave Milford by 5 pm to avoid the daily Homer Tunnel queue spike.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Day 7 · 13 November · Te Anau ⇄ Milford Sound · Crafted for a Maui River 6-berth motorhome adventure 🐧⛰️</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
