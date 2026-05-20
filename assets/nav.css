@@ -1,7 +1,7 @@
 /* ============================================================
    Shared site navigation
-   Designed to overlay both the light Day 1 page and
-   the dark cinematic Day 2 page without disrupting them.
+   Light & dark variants. Mobile-safe: brand stays pinned;
+   day links horizontally scroll when they don't fit.
    ============================================================ */
 
 .site-nav {
@@ -11,21 +11,20 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   padding: 12px 22px;
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 13px;
   letter-spacing: 0.04em;
 }
 
-/* Dark variant for the Day 2 cinematic page */
+/* Dark variant */
 .site-nav.dark {
-  background: rgba(8, 13, 31, 0.72);
+  background: rgba(8, 13, 31, 0.78);
   border-bottom: 1px solid rgba(245, 239, 226, 0.08);
   color: rgba(245, 239, 226, 0.92);
 }
@@ -39,25 +38,43 @@
   color: inherit;
   opacity: 0.85;
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 .site-nav .brand:hover { opacity: 1; }
 .site-nav.dark .brand { color: #e8b86a; }
 
+/* Links wrapper: flexes, scrolls horizontally on overflow */
 .site-nav ul {
   list-style: none;
   display: flex;
-  gap: 4px;
+  gap: 2px;
   margin: 0;
   padding: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: flex-end;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / old Edge */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scroll-padding: 12px;
 }
+.site-nav ul::-webkit-scrollbar { display: none; }  /* Chrome / Safari */
+
+.site-nav ul li { flex: 0 0 auto; }
+
 .site-nav ul a {
   display: block;
-  padding: 8px 14px;
+  padding: 7px 13px;
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
   font-weight: 500;
   font-size: 13px;
+  white-space: nowrap;
+  scroll-snap-align: center;
   transition: background 0.18s ease, color 0.18s ease;
 }
 .site-nav ul a:hover {
@@ -75,9 +92,26 @@
   color: #0b1020;
 }
 
-/* Mobile: collapse the brand subtitle but keep links */
-@media (max-width: 540px) {
-  .site-nav { padding: 10px 14px; }
+/* Mobile: drop brand subtitle, scroll links horizontally from left */
+@media (max-width: 640px) {
+  .site-nav {
+    padding: 10px 14px;
+    gap: 10px;
+  }
   .site-nav .brand .sub { display: none; }
-  .site-nav ul a { padding: 7px 10px; font-size: 12px; }
+  .site-nav ul {
+    justify-content: flex-start;
+    gap: 0;
+  }
+  .site-nav ul a {
+    padding: 7px 11px;
+    font-size: 12.5px;
+  }
+}
+
+/* Even narrower phones */
+@media (max-width: 380px) {
+  .site-nav { padding: 8px 12px; gap: 8px; }
+  .site-nav .brand { font-size: 10px; letter-spacing: 0.1em; }
+  .site-nav ul a { padding: 6px 9px; font-size: 12px; }
 }
