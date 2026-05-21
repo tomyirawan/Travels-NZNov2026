@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Day 5 (Hydro Attack edition) · Queenstown, Arrowtown & Glenorchy — 11 Nov 2026</title>
+  <title>Day 5 · Queenstown, Arrowtown & Glenorchy — 11 Nov 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -447,270 +447,31 @@
       letter-spacing: 0;
     }
 
-    /* ============ COMPARISON PANEL ============ */
-    .compare {
-      max-width: 980px;
-      margin: 0 auto 60px;
-      padding: 0 24px;
-    }
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    @media (max-width: 760px) {
-      .compare-grid { grid-template-columns: 1fr; }
-    }
-    .compare-card {
-      position: relative;
-      padding: 30px 28px 26px;
-      background: var(--paper-2);
-      border: 1px solid var(--line);
-      border-radius: 4px;
-    }
-    .compare-card.winner {
-      background: #fff;
-      border: 2px solid var(--lake);
-      box-shadow: 0 18px 36px -22px rgba(43, 127, 184, 0.4);
-    }
-    .compare-tag {
-      position: absolute;
-      top: -11px; left: 22px;
-      padding: 4px 12px;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      background: var(--lake);
-      color: #fff;
-      border-radius: 2px;
-    }
-    .compare-tag.alt {
-      background: var(--schist);
-    }
-    .compare-card h3 {
-      margin: 0 0 18px;
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 26px;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-    .compare-card h3 span {
-      display: block;
-      font-family: var(--sans);
-      font-style: normal;
-      font-weight: 500;
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-    .compare-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 18px;
-    }
-    .compare-card li {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 14px;
-      padding: 9px 0;
-      border-bottom: 1px dashed var(--line);
-      font-size: 13.5px;
-    }
-    .compare-card li:last-child { border-bottom: none; }
-    .compare-card li span {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      text-transform: uppercase;
-      padding-top: 3px;
-    }
-    .compare-card li b {
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--ink);
-      line-height: 1.35;
-    }
-    .compare-card li em {
-      display: block;
-      font-style: italic;
-      font-family: var(--serif);
-      font-size: 12.5px;
-      color: var(--lake-deep);
-      margin-top: 2px;
-    }
-    .compare-note {
-      margin-top: 14px;
-      padding: 14px 16px;
-      background: var(--paper);
-      border-left: 3px solid var(--tussock);
-      font-size: 13.5px;
-      line-height: 1.55;
-      color: var(--ink-soft);
-    }
-    .compare-card.winner .compare-note { border-left-color: var(--lake); }
-    .compare-note strong {
-      display: block;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--tussock);
-      margin-bottom: 4px;
-    }
-    .compare-card.winner .compare-note strong { color: var(--lake-deep); }
-    .compare-verdict {
-      margin-top: 24px;
-      padding: 26px 30px;
-      background: linear-gradient(120deg, var(--tussock-pale) 0%, #f7eed6 100%);
-      border-radius: 4px;
-      border-left: 4px solid var(--tussock);
-    }
-    .verdict-head {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: #6d4d10;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .verdict-head em {
-      font-family: var(--serif);
-      font-style: italic;
-      text-transform: none;
-      letter-spacing: 0;
-      font-size: 14px;
-      color: var(--ink);
-    }
-    .compare-verdict p {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: 16.5px;
-      line-height: 1.6;
-      color: var(--ink);
-    }
-    .compare-verdict strong { font-weight: 700; color: var(--lake-deep); }
-
-    /* ============ COMFORT (WET/DRY + PHYSICAL) GRID ============ */
-    .comfort-grid {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    @media (max-width: 760px) {
-      .comfort-grid { grid-template-columns: 1fr; }
-    }
-    .comfort-card {
-      position: relative;
-      padding: 24px 26px 22px;
-      background: #fff;
-      border-radius: 4px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-    .comfort-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 5px; height: 100%;
-    }
-    .comfort-card.dry::before {
-      background: linear-gradient(180deg, var(--lake) 0%, var(--lake-deep) 100%);
-    }
-    .comfort-card.physical::before {
-      background: linear-gradient(180deg, var(--rose) 0%, #803838 100%);
-    }
-    .comfort-card.dry {
-      background: linear-gradient(135deg, #ffffff 0%, var(--lake-mist) 130%);
-    }
-    .comfort-card.physical {
-      background: linear-gradient(135deg, #ffffff 0%, #f7e4e4 130%);
-    }
-    .comfort-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .comfort-card.dry .comfort-label { color: var(--lake-deep); }
-    .comfort-card.physical .comfort-label { color: var(--rose); }
-    .comfort-card h4 {
-      margin: 0 0 10px;
-      font-family: var(--serif);
-      font-weight: 600;
-      font-size: 19px;
-      line-height: 1.3;
-      color: var(--ink);
-      letter-spacing: -0.005em;
-    }
-    .comfort-card p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--ink-soft);
-    }
-    .comfort-card p em {
-      font-style: italic;
-      color: var(--ink);
-    }
-    .comfort-card p strong {
-      display: block;
-      margin-top: 10px;
-      font-weight: 600;
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.5;
-    }
   </style>
-  <link rel="stylesheet" href="assets/nav.css">
 </head>
 
 <body>
-
-<!-- Shared site navigation -->
-<nav class="site-nav">
-  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
-  <ul>
-    <li><a href="index.html">Overview</a></li>
-    <li><a href="day1.html">Day 1</a></li>
-    <li><a href="day2.html">Day 2</a></li>
-    <li><a href="day3.html">Day 3</a></li>
-    <li><a href="day4.html">Day 4</a></li>
-    <li><a href="day5.html" class="active">Day 5</a></li>
-    <li><a href="day6.html">Day 6</a></li>
-    <li><a href="day7.html">Day 7</a></li>
-  </ul>
-</nav>
-<script defer src="assets/nav.js"></script>
 
   <!-- ============ HERO ============ -->
   <header class="hero">
     <div class="hero-inner">
       <div class="crumb">
-        <span>Day 05 · Hydro Attack edition</span>
+        <span>Day 05</span>
         <b>Wed · 11 Nov 2026</b>
         <span>Queenstown · Arrowtown · Glenorchy</span>
       </div>
-      <h1 class="hero-title">Gold-rush <em>cottages</em>,<br>a shark on the <em>lake</em>,<br>then a road into <em>Paradise</em>.</h1>
+      <h1 class="hero-title">Gold-rush <em>cottages</em>,<br>then a road into <em>Paradise</em>.</h1>
       <p class="hero-lede">
-        Same loop, sharper rhythm. Hydro Attack departs from the Queenstown waterfront — a 2-minute
-        walk from Hampshire — so the adrenaline hit happens with zero driving detour. That recovers
-        a clean 90 minutes versus the Shotover Jet option, and lets Arrowtown and Glenorchy both
-        breathe.
+        A circular day from Hampshire Lakeview — sycamores and stonemasons in the cool of an Arrowtown
+        morning, then a jet boat through the Shotover canyons, then the long curve west along Lake
+        Wakatipu's edge to Glenorchy, where the road runs out at the foot of the Humboldt Mountains.
       </p>
 
       <div class="hero-stats">
         <div><span>distance</span><b>~146 km</b></div>
         <div><span>diesel</span><b>~22 L</b></div>
         <div><span>sunset</span><b>~20:30</b></div>
-        <div><span>activity</span><b>Hydro Attack</b></div>
+        <div><span>activity</span><b>Shotover Jet</b></div>
       </div>
     </div>
   </header>
@@ -743,123 +504,16 @@
         </p>
       </div>
       <div class="why-card green">
-        <h3>Hydro Attack on the lakefront, not a canyon drive</h3>
+        <h3>The loop has only one unavoidable backtrack</h3>
         <p>
-          Swapping Shotover Jet for Hydro Attack saves the round-trip to Arthurs Point —
-          ~75 minutes recovered. That extra time goes straight into Glenorchy's golden hour:
-          you'll reach Bennetts Bluff in good light and have time for the full Glenorchy
-          Walkway loop. Same adrenaline category, far better timing.
+          Hampshire → Arrowtown → Frankton (Buzzstop, Shotover Jet, fuel) → Glenorchy → Hampshire.
+          There is no road around Lake Wakatipu's head — the return from Glenorchy retraces the
+          same highway, but in evening light it's a different drive entirely.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ============ COMPARISON: HYDRO vs SHOTOVER ============ -->
-  <div class="section-head">
-    <span class="label">SWAP ANALYSIS</span>
-    <h2><em>Hydro Attack</em> vs <em>Shotover Jet</em></h2>
-    <span class="line"></span>
-  </div>
-
-  <section class="compare">
-    <div class="compare-grid">
-      <div class="compare-card winner">
-        <div class="compare-tag">RECOMMENDED FOR TODAY</div>
-        <h3>Hydro Attack <span>Seabreacher shark</span></h3>
-        <ul>
-          <li><span>Departs from</span><b>Lapsley Butson Wharf, Earnslaw Park</b><em>2 min walk from Hampshire</em></li>
-          <li><span>Time on water</span><b>15 minutes</b></li>
-          <li><span>Total time door-to-door</span><b>~45 min from the van</b></li>
-          <li><span>Departures</span><b>09:10 — 17:10, regular slots</b></li>
-          <li><span>Check-in</span><b>10 min before</b></li>
-          <li><span>Format</span><b>1-on-1 with pilot, fully customisable</b></li>
-          <li><span>Group dynamic</span><b>Each rider goes solo, runs back-to-back</b></li>
-          <li><span>Price</span><b>NZ$179 pp</b></li>
-          <li><span>Max age</span><b>6+, height ≤195cm, weight ≤105kg</b></li>
-          <li><span>Wet or dry?</span><b>DRY — sealed cockpit</b><em>Pneumatic-sealed canopy &amp; acrylic glass keep you essentially dry. Maybe damp feet. No wet-weather gear needed — just loose clothes &amp; a life jacket. Cockpit can get warm in the sun.</em></li>
-          <li><span>Physical impact</span><b>HIGH — stunt-plane g-forces</b><em>Vertical leaps (5.5m), 1.5m underwater dives, 90° rolls, doughnut spins. Operator literally compares it to a stunt aircraft. Motion sickness risk is real — skip a heavy lunch. Tight 1-person cockpit; not for the claustrophobic. Not recommended for pregnant riders, serious heart conditions, or back/neck injury.</em></li>
-        </ul>
-        <div class="compare-note">
-          <strong>Why it fits today</strong>
-          The location is the whole point. Walk from Hampshire to the wharf, ride, walk back —
-          no drive, no shuttle, no detour. The group can rotate: while one is in the shark, the
-          others have coffee on the lakefront. Total impact on the day's schedule is ~1 hour
-          regardless of group size, versus ~2 hours per cohort for Shotover Jet.
-        </div>
-      </div>
-
-      <div class="compare-card">
-        <div class="compare-tag alt">ALTERNATIVE</div>
-        <h3>Shotover Jet <span>jet boat, Arthurs Point</span></h3>
-        <ul>
-          <li><span>Departs from</span><b>Shotover Jet base, Arthurs Point</b><em>15 min drive + shuttle from town</em></li>
-          <li><span>Time on water</span><b>25 minutes</b></li>
-          <li><span>Total time door-to-door</span><b>~2 hours from the van</b></li>
-          <li><span>Departures</span><b>10:00 — 16:00, hourly</b></li>
-          <li><span>Check-in</span><b>30 min before (or 45 min in town for shuttle)</b></li>
-          <li><span>Format</span><b>14-passenger boat, single fixed route</b></li>
-          <li><span>Group dynamic</span><b>Whole group rides together, single slot</b></li>
-          <li><span>Price</span><b>NZ$159 pp · family $457 (2A+2C)</b></li>
-          <li><span>Min height</span><b>1.0m (can be raised to 1.2m in higher water)</b></li>
-          <li><span>Wet or dry?</span><b>SLIGHTLY WET — open boat</b><em>Open-top boat, spray during 360° spins (especially outer seats). Operator provides full-length waterproof coats over life jackets. Centre seats stay driest. Wind-chill from 85 km/h speed + colder schist canyon air — bring a beanie. Heated handrails in cold months.</em></li>
-          <li><span>Physical impact</span><b>MODERATE — sustained spin/turn forces</b><em>25 min of hard 90 km/h turns, repeated 360° spins, sharp braking inches from the canyon wall. Lateral G-forces, not vertical. Multi-passenger benches mean you're braced against fellow riders — easier on the body than solo cockpit. Minimum 1m height. Not recommended for pregnant or back/neck injury.</em></li>
-        </ul>
-        <div class="compare-note">
-          <strong>Where it would still win</strong>
-          The Shotover canyon experience itself — sheer schist walls, 90 km/h, 360° spins —
-          is genuinely unique. Hydro Attack is fun-park; Shotover Jet is landscape. If the
-          canyon and the boat-as-craft are the appeal, the time cost is justified. The
-          family package also makes it cheaper for groups of 4 (NZ$457 vs $716 for 4×Hydro Attack).
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ WET/PHYSICAL DEEP DIVE ============ -->
-    <div class="comfort-grid">
-      <div class="comfort-card dry">
-        <div class="comfort-label">WET / DRY VERDICT</div>
-        <h4>Hydro Attack is the dry-clothes option</h4>
-        <p>
-          Sealed acrylic cockpit, life jacket only, you step in and step out wearing what you
-          arrived in. Critical because the Glenorchy drive comes immediately after — nobody
-          wants to spend two hours in a motorhome in damp jeans. With Shotover Jet, even with
-          the supplied waterproof coats, your hair and the cuffs of your trousers usually come
-          off the boat damp; allow 15 minutes at base to towel off and warm up before driving.
-          <strong>If staying dry matters → Hydro Attack.</strong>
-        </p>
-      </div>
-
-      <div class="comfort-card physical">
-        <div class="comfort-label">PHYSICAL IMPACT VERDICT</div>
-        <h4>Different categories of intensity</h4>
-        <p>
-          Both have the same contraindications (pregnancy, serious heart conditions, back/neck
-          injury), but the <em>type</em> of force is different. Shotover Jet is sustained
-          lateral G — like a hard-driven sports car for 25 minutes; passengers brace shoulder-to-shoulder.
-          Hydro Attack is intermittent stunt-plane G — vertical leaps and underwater dives,
-          alone in a 1-person cockpit. Motion-sickness reports are higher for Hydro Attack
-          (the operator explicitly recommends no big meal within 2 hours). <strong>For nervous
-          first-timers or anyone prone to seasickness → Shotover Jet feels more contained.
-          For thrill-maximisers → Hydro Attack hits harder per minute.</strong>
-        </p>
-      </div>
-    </div>
-
-    <div class="compare-verdict">
-      <div class="verdict-head">For today's loop · <em>timing, dryness &amp; efficiency winner</em></div>
-      <p>
-        <strong>Hydro Attack wins by ~75 minutes</strong> of recovered day-time, and the recovery
-        comes at the most valuable point — early afternoon, just before the Glenorchy drive. Those
-        minutes go directly into Bob's Cove and golden-hour Glenorchy, the day's headline moments.
-        It also wins on <strong>dryness</strong> — the sealed cockpit keeps you in your day clothes,
-        so you can step out and into the motorhome for the Glenorchy drive without a towelling-off
-        stop. The trade-offs are real but bounded: a fun-park ride on the lake instead of a
-        canyon ride on the river, and slightly higher motion-sickness risk if the pilot goes wild.
-        For an itinerary that already includes Arrowtown <em>and</em> Glenorchy <em>and</em>
-        a fuel-stop, Hydro Attack is the right tool.
-      </p>
-    </div>
-  </section>
 
   <!-- ============ MORNING ============ -->
   <div class="section-head">
@@ -1030,9 +684,9 @@
           <a href="https://maps.google.com/?saddr=Arrowtown&daddr=Buzz+Stop+Honey+Frankton" target="_blank" rel="noopener">Route ↗</a>
         </div>
         <p>
-          Back over the Shotover Bridge, toward Frankton. The next two stops cluster within
-          2 km of each other — Buzzstop honey, then a quick lunch before Hydro Attack on the
-          Queenstown waterfront.
+          Back over the Shotover Bridge, toward Frankton. The next stops cluster within
+          5 km of each other — Buzzstop honey, lunch, then a short drive to Arthurs Point for
+          Shotover Jet.
         </p>
       </div>
     </div>
@@ -1070,7 +724,7 @@
         <p>
           If you've got energy for one more activity, the <strong>Spin Your Own Honey</strong>
           hands-on tour runs at 10:00 and 15:00 — too tight for today's plan. Buy a jar instead
-          and keep moving toward lunch and the Hydro Attack shark on the lake.
+          and keep moving toward lunch and the canyon.
         </p>
         <div class="why">
           <strong>Why the second honey stop is worth it</strong>
@@ -1089,68 +743,77 @@
         <span class="tag food">QUICK LUNCH</span>
       </div>
       <div class="stop-body">
-        <h3>Quick lunch in Frankton — <span class="place">eat &amp; go</span></h3>
-        <div class="where">Five Mile or grab-and-go ·
+        <h3>Lunch in Frankton — <span class="place">eat &amp; go</span></h3>
+        <div class="where">Choose by what suits the group ·
           <a href="https://maps.google.com/?q=Frankton+Queenstown+restaurants" target="_blank" rel="noopener">Area map ↗</a>
         </div>
         <p>
-          Light and fast — Hydro Attack on a full stomach is regrettable, and the day ends with a
+          Light and fast — Shotover Jet on a full stomach is regrettable. The day ends with a
           proper dinner in Glenorchy anyway. Best options:
+        </p>
+        <p>
+          <strong>Quick &amp; light:</strong>
+          <a href="https://maps.google.com/?q=Boat+Shed+Cafe+Frankton" target="_blank" rel="noopener">Boat Shed Café</a>
+          on Marine Parade — lake views, hearty cabinet food, NZ$15–22 mains, plenty of motorhome
+          parking. Quick service, ideal pre-jet boat fuel.
+        </p>
+        <p>
+          <strong>Sit-down + restock:</strong>
           <a href="https://maps.google.com/?q=Fishbone+Bar+%26+Grill+Frankton+Five+Mile" target="_blank" rel="noopener">Five Mile</a>
-          mall (sushi, dumplings, salads, NZ$12–18, big motorhome parking),
-          or <a href="https://maps.google.com/?q=Boat+Shed+Cafe+Frankton" target="_blank" rel="noopener">Boat Shed Café</a>
-          for lake-view cabinet food on Marine Parade.
+          mall — supermarket-cluster lunch (sushi, dumplings, burgers) plus the Pak'nSave next
+          door to restock the van fridge before the Glenorchy run.
         </p>
         <div class="why tip">
           <strong>Alternative: van lunch by the lake</strong>
           Drive 3 min to <a href="https://maps.google.com/?q=Frankton+Beach" target="_blank" rel="noopener">Frankton Beach</a>
           (Hansen Rd end) — gravel beach, public picnic tables, view of the Remarkables across
-          the bay. Reheat last night's dinner + a Buzzstop manuka drizzle. Free, scenic,
-          fastest of all.
+          the bay. Reheat last night's dinner + a Buzzstop manuka drizzle. Free, scenic, fastest
+          of all.
         </div>
       </div>
     </div>
 
-    <!-- 13:00 Hydro Attack -->
+    <!-- 13:30 Shotover Jet -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">13:00</div>
-        <div class="duration">75 min (group of 6)</div>
-        <span class="tag opt">SHARK · ADRENALINE</span>
+        <div class="clock">13:30</div>
+        <div class="duration">2 hr (incl. shuttle &amp; ride)</div>
+        <span class="tag opt">OPTIONAL · ADRENALINE</span>
       </div>
       <div class="stop-body">
-        <h3>Hydro Attack — <span class="place">Lapsley Butson Wharf, Queenstown lakefront</span></h3>
-        <div class="where">Earnslaw Park, Beach St · NZ$179 pp · ages 6+, ≤195cm, ≤105kg ·
-          <a href="https://maps.google.com/?q=Hydro+Attack+Lapsley+Butson+Wharf+Queenstown" target="_blank" rel="noopener">Google Map ↗</a>
+        <h3>Shotover Jet — <span class="place">Arthurs Point</span></h3>
+        <div class="where">Shotover Jet Beach Rd, Arthurs Point · adult NZ$179, child (5–15) NZ$99 ·
+          <a href="https://maps.google.com/?q=Shotover+Jet+Arthurs+Point" target="_blank" rel="noopener">Google Map ↗</a>
         </div>
         <p>
-          Drive the motorhome from Frankton back to Queenstown (12 min) and park at
-          <a href="https://maps.google.com/?q=Boundary+Street+car+park+Queenstown" target="_blank" rel="noopener">Boundary St car park</a>
-          or right at Hampshire (free, 2 min walk to the wharf). Check-in at the kiosk
-          <strong>10 minutes before</strong> your slot — Hydro Attack runs regular departures
-          09:10 to 17:10. Pre-book online to lock the time.
-        </p>
-        <p>
-          Each ride is <strong>1-on-1 with the pilot</strong> in the Seabreacher X cockpit —
-          15 minutes of high-speed lake action: 80 km/h on the surface, 40 km/h underwater
-          dives, 90° rolls, doughnut spins, vertical leaps where the entire 6m shark launches
-          out of the water. The pilot dials it from mild to wild based on your call. For a
-          group of 6, the rides run back-to-back from a single check-in — you'll be done
-          inside 75 minutes from arrival.
+          25 minutes on the boat, 90 minutes start-to-finish. Operating hourly 10:00–16:00,
+          7 days. The world's oldest commercial jet boat (since 1965), and the only operator
+          permitted in the dramatic narrow Shotover River canyons — 85 km/h between sheer
+          schist walls, signature 360° spins on the wide stretches. Free shuttle from the
+          Station Building (Cnr Camp &amp; Shotover Sts, Queenstown) — check in
+          <strong>45 minutes before</strong> your trip time. Or self-drive to the Arthurs
+          Point base (10 min from town, free parking, complimentary lockers) and check in
+          30 minutes prior.
         </p>
         <div class="why tip">
-          <strong>How the group rotates</strong>
-          One person rides, the rest watch from the wharf (rides happen offshore but you can
-          see the dives and leaps clearly) or grab coffee at Perky's Floating Bar or any
-          Beach St café 30 seconds away. Total clock-time impact: ~75 minutes regardless of
-          group size.
+          <strong>What to wear, how wet you get</strong>
+          You will catch some spray during the 360° spins, especially on outer seats —
+          operator provides a full-length waterproof coat under your life jacket, so
+          jeans and tops stay mostly dry, but hair and cuffs do not. Centre seats are driest.
+          Bring a beanie or hood: wind-chill at 85 km/h in the canyon shade is real. Heated
+          handrails on the boats. Lockers at the base for valuables.
+        </div>
+        <div class="why">
+          <strong>Why this time slot</strong>
+          A 13:30 or 14:00 departure leaves you back on the road by 15:00 — enough light to drive
+          to Glenorchy, reach Bennetts Bluff before 16:00, and still make the Glenorchy boat shed
+          golden hour. Any later and you'll be racing the light.
         </div>
         <div class="why warn">
-          <strong>Weather caveat</strong>
-          Hydro Attack is more weather-sensitive than Shotover Jet — Lake Wakatipu gets choppy
-          on windy days. Call 0508 HYDRO ATTACK at least 1 hour before your slot to
-          confirm. If cancelled, they offer a boat-trip-and-shark spectator option or a full
-          refund with 24+ hr notice.
+          <strong>Contraindications</strong>
+          Not recommended for pregnant riders or anyone with serious back/neck issues. Minimum
+          height 1.0m (can be raised to 1.2m if river is running high). Hands free at all times —
+          GoPros must be head-mounted, no handheld phones.
         </div>
       </div>
     </div>
@@ -1166,10 +829,10 @@
 
   <div class="timeline">
 
-    <!-- 14:30 fuel -->
+    <!-- 15:30 fuel -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">14:30</div>
+        <div class="clock">15:30</div>
         <div class="duration">15 min</div>
         <span class="tag fuel">FUEL</span>
       </div>
@@ -1179,25 +842,26 @@
           <a href="https://maps.google.com/?q=BP+Queenstown+Truckstop+131+Gorge+Rd" target="_blank" rel="noopener">Google Map ↗</a>
         </div>
         <p>
-          4 minutes from Hampshire. The only true truckstop in Queenstown — high-flow diesel
-          nozzles, drive-through bays sized for tour buses, and prices typically 15–25¢/L cheaper
-          than the BP Connect or Z on Frankton Rd. There's no fuel between Queenstown and Glenorchy,
-          and you don't want to drive that road on a quarter tank. Top up to full
-          (~40 L for the Maui River — see fuel panel below).
+          On the way back from Arthurs Point, Gorge Road takes you straight past the BP truckstop —
+          the only true high-flow diesel station in Queenstown. Drive-through bays sized for tour
+          buses, prices typically 15–25¢/L cheaper than Frankton Rd forecourts. There's no fuel
+          between Queenstown and Glenorchy, and you don't want to drive that road on a quarter
+          tank. Top up to full (~40 L for the Maui River — see fuel panel below).
         </p>
         <div class="why tip">
           <strong>Why here, not on Frankton Road</strong>
           BP Connect Queenstown (1094 Frankton Rd) and Z Queenstown are both forecourt-only,
           standard nozzles, retail pricing — fine for cars, slow for a Maui's 95-litre tank.
-          Gorge Rd Truckstop fills it in under 4 minutes.
+          Gorge Rd Truckstop fills it in under 4 minutes and is geographically on-route between
+          Shotover Jet at Arthurs Point and the Glenorchy turn-off.
         </div>
       </div>
     </div>
 
-    <!-- 14:45 leave for Glenorchy -->
+    <!-- 15:45 leave for Glenorchy -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">14:45</div>
+        <div class="clock">15:45</div>
         <div class="duration">25 min · 18 km</div>
         <span class="tag drive">DRIVE</span>
       </div>
@@ -1214,21 +878,14 @@
           (4 km from town, gravel bay on the right) — a quick 5 min stop for the first big lake view,
           but skip if it's busy; better viewpoints come.
         </p>
-        <div class="why">
-          <strong>Time bonus</strong>
-          By starting the Glenorchy run at 14:45 (vs 15:45 with Shotover Jet), you arrive at
-          Bennetts Bluff at 16:00 in stronger light, have time for both Bob's Cove AND the
-          Glenorchy Walkway in full, and reach Glenorchy itself before the bakery and café
-          afternoon-tea windows close.
-        </div>
       </div>
     </div>
 
-    <!-- 15:10 Bob's Cove -->
+    <!-- 16:10 Bob's Cove -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">15:10</div>
-        <div class="duration">60 min</div>
+        <div class="clock">16:10</div>
+        <div class="duration">45 min</div>
         <span class="tag hike">SHORT WALK</span>
       </div>
       <div class="stop-body">
@@ -1238,21 +895,24 @@
         </div>
         <p>
           A 1.5 km loop through beech forest opens to a turquoise cove, then a short steep
-          climb to a lookout knoll. Roughly 30 min walking + 15 min at the jetty + 10 min at the
-          lookout — with the Hydro Attack version of today's plan you get the full hour here
-          instead of a rushed half-loop. This is one of the best short walks in the whole
-          Wakatipu basin — the sheltered cove looks tropical on a calm afternoon (lake's still
-          glacier-cold; nobody's swimming in November). Toilets at the car park, easy motorhome
-          parking.
+          climb to a lookout knoll. Roughly 30 min walking + 10–15 min at the jetty + lookout.
+          This is one of the best short walks in the whole Wakatipu basin — the sheltered cove
+          looks tropical on a calm afternoon (lake's still glacier-cold; nobody's swimming in
+          November). Toilets at the car park, easy motorhome parking.
         </p>
+        <div class="why tip">
+          <strong>Skip-it call</strong>
+          If you're behind schedule after Shotover Jet, skip Bob's Cove — Bennetts Bluff
+          (next stop) is non-negotiable and you don't want to rush it.
+        </div>
       </div>
     </div>
 
-    <!-- 16:15 Bennetts Bluff -->
+    <!-- 17:00 Bennetts Bluff -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">16:15</div>
-        <div class="duration">30 min</div>
+        <div class="clock">17:00</div>
+        <div class="duration">25 min</div>
         <span class="tag must">LOOKOUT</span>
       </div>
       <div class="stop-body">
@@ -1265,7 +925,7 @@
           pull-out, a proper purpose-built car park (large enough for the Maui), a 3-minute walk
           to the platform, picnic tables, toilets. Views open south over the Wakatipu narrows
           to Pigeon and Pig Islands, and north up the lake to the Humboldts and Mt Earnslaw.
-          Late afternoon sun (around 16:15–16:45) lights the western flank of the mountains and
+          Late afternoon sun (around 17:00) lights the western flank of the mountains and
           turns the lake aluminium-blue.
         </p>
         <div class="why tip">
@@ -1276,10 +936,10 @@
       </div>
     </div>
 
-    <!-- 16:45 to Glenorchy -->
+    <!-- 17:30 to Glenorchy -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">16:45</div>
+        <div class="clock">17:30</div>
         <div class="duration">25 min · 21 km</div>
         <span class="tag drive">DRIVE</span>
       </div>
@@ -1297,11 +957,11 @@
       </div>
     </div>
 
-    <!-- 17:10 Glenorchy red shed + wharf -->
+    <!-- 17:55 Glenorchy red shed + wharf -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">17:10</div>
-        <div class="duration">90 min</div>
+        <div class="clock">17:55</div>
+        <div class="duration">60 min</div>
         <span class="tag must">PHOTOS + WALK</span>
       </div>
       <div class="stop-body">
@@ -1312,16 +972,14 @@
         <p>
           Park at the lakefront. The famous red boat shed sits on the jetty — once a freight
           depot for the TSS Earnslaw, now the most photographed shed in the South Island. The
-          Humboldt Mountains rise behind it; in afternoon light (~17:30 in mid-November) the
+          Humboldt Mountains rise behind it; in afternoon light (~18:00 in mid-November) the
           peaks are still in sun while the shed sits in shadow — perfect for a silhouette shot.
         </p>
         <p>
           Then the <strong>Glenorchy Walkway</strong> — a flat, easy 1-hour loop on a boardwalk
           through the lagoon wetland behind town. Bird life (paradise ducks, scaup, the occasional
           fernbird), 360° mountain views, almost no tourists. The Mt Earnslaw glacier glows pink
-          at sunset. This is the moment you remember the trip for. With the Hydro Attack plan
-          you have the full 90 minutes here — enough for the walkway AND a slow coffee on the
-          waterfront before dinner.
+          at sunset. This is the moment you remember the trip for.
         </p>
         <div class="why">
           <strong>Lord of the Rings note</strong>
@@ -1332,12 +990,12 @@
       </div>
     </div>
 
-    <!-- 18:45 Glenorchy dinner -->
+    <!-- 18:55 Glenorchy dinner -->
     <div class="stop">
       <div class="stop-time">
-        <div class="clock">18:45</div>
-        <div class="duration">75 min</div>
-        <span class="tag food">DINNER</span>
+        <div class="clock">18:55</div>
+        <div class="duration">60 min</div>
+        <span class="tag food">EARLY DINNER</span>
       </div>
       <div class="stop-body">
         <h3>Dinner at <span class="place">Mrs Woolly's General Store or Glenorchy Café</span></h3>
@@ -1349,7 +1007,7 @@
           Two solid choices, both walking distance from the wharf:
           <strong>Mrs Woolly's</strong> — beautifully restored, woodfired pizzas (NZ$22–28),
           curated NZ wines and craft beer, fire roaring inside. Closes 19:00 sharp in
-          shoulder season, so arrive by 18:45. <strong>Glenorchy Café</strong> — homier, more
+          shoulder season, so order by 18:30. <strong>Glenorchy Café</strong> — homier, more
           pies/burgers/lamb, open later until 20:00 most nights.
         </p>
         <div class="why tip">
@@ -1434,46 +1092,6 @@
       </div>
     </div>
 
-    <!-- alternative: queenstown hill -->
-    <div class="stop">
-      <div class="stop-time">
-        <div class="clock">SWAP</div>
-        <div class="duration">2.5–3 hr</div>
-        <span class="tag opt">QUEENSTOWN HILL</span>
-      </div>
-      <div class="stop-body">
-        <h3>How to fit <span class="place">Queenstown Hill</span> in</h3>
-        <div class="where">Trailhead at top of Belfast Terrace · 5.6 km return, 430 m climb ·
-          <a href="https://maps.google.com/?q=Queenstown+Hill+Walking+Track+Belfast+Terrace" target="_blank" rel="noopener">Google Map ↗</a>
-        </div>
-        <p>
-          The Queenstown Hill "Time Walk" to the Basket of Dreams sculpture is a 2–3 hour return
-          hike with 360° views of Lake Wakatipu, the Remarkables and Cecil Peak. It earns
-          inclusion on a Queenstown day — and the Hydro Attack version of this plan gives you
-          slightly more room to consider it.
-        </p>
-        <p><strong>Two ways to swap it in:</strong></p>
-        <p>
-          <strong>Option A — sunrise hike (best fit):</strong> Start at 06:00 from Hampshire
-          (10-min walk to Belfast Terrace trailhead). Summit by 07:15, back down by 08:30.
-          Then proceed with the day as planned — Arrowtown departure shifts to 09:15.
-          Best views, no crowds, parking guaranteed, no impact on Hydro Attack or Glenorchy.
-        </p>
-        <p>
-          <strong>Option B — swap Hydro Attack:</strong> Skip the shark ride, do the hike instead
-          starting 12:30. Summit by 13:45, back to van by 15:00. This saves NZ$179pp and gets
-          you a much bigger physical adventure, but you lose the "wow" moment of the
-          adrenaline activity and lose the quirky group photo. Fuel can still slot in at 15:00.
-        </p>
-        <div class="why warn">
-          <strong>Don't try to do all three on the same day</strong>
-          Arrowtown + Glenorchy + Hydro Attack + Queenstown Hill on one day will feel rushed
-          and you'll lose the slow Glenorchy golden-hour moment, which is the day's headline.
-          Sunrise hike (Option A) is the only clean way to fit all four.
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ============ FUEL PANEL ============ -->
@@ -1482,7 +1100,7 @@
     <div class="fuel-grid">
       <div>
         <label>Total distance</label>
-        <b>~133 km</b>
+        <b>~146 km</b>
       </div>
       <div>
         <label>Maui River avg</label>
@@ -1490,7 +1108,7 @@
       </div>
       <div>
         <label>Day 5 burn</label>
-        <b>~20 L</b>
+        <b>~22 L</b>
       </div>
       <div>
         <label>Recommended refuel</label>
@@ -1500,10 +1118,9 @@
     <p>
       The Maui River 6-berth on a 5.0L Mercedes Sprinter chassis burns roughly 13–17 L/100km depending
       on hills and load — the Glenorchy road has gentle gradients, so today comes in around
-      15 L/100km. Distance breakdown: Hampshire → Arrowtown (22 km) → Frankton (22 km) → Queenstown
-      lakefront for Hydro Attack (5 km) → Gorge Rd Truckstop (3 km) → Glenorchy (47 km) →
-      Hampshire (47 km). Total ~146 km, ~22 L for the day — a few km extra over the Shotover-Jet
-      version because the activity is in town, but no different in practice.
+      15 L/100km. Distance breakdown: Hampshire → Arrowtown (22 km) → Frankton (22 km) → Shotover Jet
+      base at Arthurs Point (~5 km out-and-back) → Gorge Rd Truckstop (~3 km) → Glenorchy (47 km) →
+      Hampshire (47 km). Total ~146 km, ~22 L for the day.
     </p>
     <p>
       <strong>Recommended refuel:</strong>
