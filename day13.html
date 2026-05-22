@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 13 · Kaikōura → Christchurch · 19 Nov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=DM+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --abyss: #03131c;
+    --deep:  #0a2a3d;
+    --mid:   #144d6e;
+    --tide:  #2a8fb0;
+    --foam:  #b6e3e8;
+    --pearl: #f4f1ea;
+    --sand:  #e9dcc4;
+    --coral: #e85c3a;
+    --kelp:  #163d2a;
+    --gold:  #d9a441;
+    --ink:   #051820;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    background: var(--abyss);
+    color: var(--pearl);
+    line-height: 1.55;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(42,143,176,0.18), transparent 50%),
+      radial-gradient(ellipse at 80% 30%, rgba(20,77,110,0.25), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(232,92,58,0.06), transparent 60%);
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 95vh;
+    padding: 4rem 6vw 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(182,227,232,0.15);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, var(--abyss) 100%),
+      radial-gradient(ellipse at 30% 60%, rgba(42,143,176,0.35), transparent 60%);
+  }
+
+  /* SVG waves */
+  .waves {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 38vh;
+    z-index: 1;
+    opacity: 0.55;
+  }
+  .waves svg { width: 100%; height: 100%; display: block; }
+  .wave-path { animation: drift 14s ease-in-out infinite alternate; }
+  .wave-path-2 { animation: drift 18s ease-in-out infinite alternate-reverse; }
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-40px); }
+  }
+
+  /* Whale silhouette */
+  .whale {
+    position: absolute;
+    right: -2vw;
+    top: 22%;
+    width: 52vw;
+    max-width: 720px;
+    z-index: 1;
+    opacity: 0.22;
+    animation: float 9s ease-in-out infinite alternate;
+  }
+  @keyframes float {
+    from { transform: translateY(0) rotate(-2deg); }
+    to   { transform: translateY(-18px) rotate(1deg); }
+  }
+
+  .eyebrow {
+    position: relative;
+    z-index: 2;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--foam);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--foam), transparent);
+    max-width: 240px;
+  }
+
+  .title-wrap {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+  }
+
+  h1.title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 9vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--pearl);
+    margin-bottom: 1.5rem;
+  }
+  h1.title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--foam);
+    background: linear-gradient(180deg, var(--foam) 0%, var(--tide) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  h1.title .amp {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--coral);
+    font-size: 0.7em;
+    vertical-align: 0.05em;
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    color: var(--sand);
+    max-width: 560px;
+    line-height: 1.4;
+  }
+
+  .hero-meta {
+    position: relative;
+    z-index: 2;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem 2rem;
+    max-width: 900px;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(182,227,232,0.2);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--tide);
+  }
+  .meta-value {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    color: var(--pearl);
+    font-weight: 500;
+  }
+
+  /* ===== ALERT BANNER ===== */
+  .alerts {
+    background: linear-gradient(180deg, rgba(232,92,58,0.12), rgba(232,92,58,0.04));
+    border-top: 1px solid rgba(232,92,58,0.4);
+    border-bottom: 1px solid rgba(232,92,58,0.4);
+    padding: 2.5rem 6vw;
+  }
+  .alerts h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .alerts h2::before {
+    content: '◆';
+    color: var(--coral);
+  }
+  .alert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+  }
+  .alert-card {
+    padding: 1.2rem 1.4rem;
+    background: rgba(3,19,28,0.5);
+    border-left: 2px solid var(--coral);
+  }
+  .alert-card strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--coral);
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+  .alert-card p {
+    font-size: 0.92rem;
+    color: var(--pearl);
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline-section {
+    padding: 5rem 6vw 4rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+    text-align: center;
+  }
+  .section-header .eyebrow { justify-content: center; }
+  .section-header .eyebrow::after { display: none; }
+  .section-header .eyebrow::before {
+    content: '~';
+    color: var(--tide);
+    font-size: 1.4em;
+    line-height: 0;
+  }
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: var(--pearl);
+    margin-top: 0.8rem;
+    letter-spacing: -0.02em;
+  }
+  .section-header h2 em {
+    font-style: italic;
+    color: var(--foam);
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      var(--tide) 6%,
+      var(--tide) 94%,
+      transparent 100%);
+  }
+
+  .stop {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    align-items: start;
+  }
+
+  .stop-time {
+    text-align: right;
+    padding-right: 1.5rem;
+    padding-top: 0.3rem;
+    position: relative;
+  }
+  .stop-time .clock {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--foam);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .stop-time .duration {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--sand);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    opacity: 0.7;
+  }
+
+  .stop-dot {
+    position: absolute;
+    left: 7rem;
+    top: 0.6rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--abyss);
+    border: 2px solid var(--tide);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .stop.must .stop-dot {
+    background: var(--coral);
+    border-color: var(--coral);
+    box-shadow: 0 0 0 4px rgba(232,92,58,0.18);
+  }
+  .stop.fuel .stop-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .stop-content {
+    padding: 0.3rem 0 0 1.5rem;
+  }
+  .stop-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    margin-bottom: 0.7rem;
+  }
+  .tag-must     { background: var(--coral); color: var(--pearl); }
+  .tag-optional { background: transparent; color: var(--foam); border: 1px solid var(--foam); }
+  .tag-fuel     { background: var(--gold); color: var(--ink); }
+  .tag-final    { background: var(--foam); color: var(--ink); }
+
+  .stop h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    color: var(--pearl);
+    letter-spacing: -0.01em;
+  }
+  .stop h3 a {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--foam), var(--foam));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 0.4s ease;
+    padding-bottom: 2px;
+  }
+  .stop h3 a:hover {
+    background-size: 100% 1px;
+  }
+
+  .stop .blurb {
+    color: var(--pearl);
+    opacity: 0.85;
+    font-size: 1.02rem;
+    margin-bottom: 0.9rem;
+    line-height: 1.6;
+  }
+  .stop .blurb em {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--foam);
+    font-size: 1.08em;
+  }
+
+  .stop .details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--sand);
+    margin-top: 0.7rem;
+  }
+  .stop .details span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .stop .details span::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--tide);
+    border-radius: 50%;
+  }
+
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--foam);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(182,227,232,0.3);
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .map-link:hover {
+    color: var(--coral);
+    border-color: var(--coral);
+  }
+  .map-link::after {
+    content: '↗';
+    font-size: 1.1em;
+  }
+
+  /* ===== FUEL PANEL ===== */
+  .fuel-panel {
+    background: linear-gradient(180deg, var(--deep) 0%, var(--abyss) 100%);
+    padding: 5rem 6vw;
+    border-top: 1px solid rgba(217,164,65,0.2);
+    border-bottom: 1px solid rgba(217,164,65,0.2);
+  }
+  .fuel-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .fuel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .fuel-card {
+    background: rgba(3,19,28,0.6);
+    border: 1px solid rgba(217,164,65,0.25);
+    padding: 1.8rem 1.6rem;
+    position: relative;
+  }
+  .fuel-card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .fuel-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+    color: var(--pearl);
+  }
+  .fuel-card p {
+    font-size: 0.92rem;
+    opacity: 0.8;
+    line-height: 1.55;
+    margin-bottom: 0.6rem;
+  }
+  .fuel-card .est {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+
+  .fuel-calc {
+    margin-top: 2.5rem;
+    padding: 1.8rem 2rem;
+    background: rgba(3,19,28,0.45);
+    border-left: 3px solid var(--gold);
+  }
+  .fuel-calc h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .fuel-calc table {
+    width: 100%;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+    border-collapse: collapse;
+  }
+  .fuel-calc td {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(182,227,232,0.12);
+    color: var(--pearl);
+  }
+  .fuel-calc td:last-child {
+    text-align: right;
+    color: var(--foam);
+  }
+  .fuel-calc tr:last-child td {
+    border-bottom: none;
+    padding-top: 0.9rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    padding: 5rem 6vw 4rem;
+    text-align: center;
+    color: var(--sand);
+  }
+  .footer .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    color: var(--foam);
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    line-height: 1.4;
+  }
+  .footer .sources {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--tide);
+    text-transform: uppercase;
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 720px) {
+    .hero { padding: 3rem 5vw 4rem; }
+    .timeline::before { left: 4rem; }
+    .stop { grid-template-columns: 4rem 1fr; gap: 1rem; }
+    .stop-dot { left: 4rem; }
+    .stop-content { padding-left: 1rem; }
+    .stop-time { padding-right: 0.6rem; }
+    .stop-time .clock { font-size: 0.78rem; }
+    .whale { width: 90vw; right: -10vw; opacity: 0.15; }
+    h1.title { font-size: clamp(2.5rem, 12vw, 4rem); }
+  }
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav dark">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html">Day 6</a></li>
+    <li><a href="day7.html">Day 7</a></li>
+    <li><a href="day8.html">Day 8</a></li>
+    <li><a href="day9.html">Day 9</a></li>
+    <li><a href="day10.html">Day 10</a></li>
+    <li><a href="day11.html">Day 11</a></li>
+    <li><a href="day12.html">Day 12</a></li>
+    <li><a href="day13.html" class="active">Day 13</a></li>
+    <li><a href="day14.html">Day 14</a></li>
+  </ul>
+</nav>
+<script defer src="assets/nav.js"></script>
+
+
+<!-- ====================== HERO ====================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Whale silhouette -->
+  <svg class="whale" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#b6e3e8" opacity="0.9" d="M40,160 C90,100 170,80 260,90 C330,98 390,118 440,140 C475,155 510,170 545,160 C555,158 565,150 568,140 C570,135 575,138 575,144 C575,170 555,195 520,200 C470,208 415,195 370,180 C330,167 305,165 280,180 C260,192 240,210 215,212 C175,215 130,200 95,180 C70,166 50,158 40,160 Z M520,135 Q535,128 545,135 Q540,138 535,138 Q528,138 520,135 Z M180,178 L170,200 L165,178 Z M205,182 L200,205 L195,182 Z"/>
+    <!-- Spout -->
+    <path fill="#b6e3e8" opacity="0.5" d="M450,135 Q455,110 470,95 Q455,108 458,130 Z M460,138 Q470,118 488,108 Q468,118 470,135 Z"/>
+  </svg>
+
+  <!-- Bottom waves -->
+  <div class="waves">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave-path-2" fill="#144d6e" opacity="0.6"
+        d="M0,120 C150,80 300,160 450,120 C600,80 750,160 900,120 C1050,80 1200,140 1350,120 L1350,200 L0,200 Z"/>
+      <path class="wave-path" fill="#2a8fb0" opacity="0.55"
+        d="M0,150 C150,110 300,180 450,150 C600,120 750,180 900,150 C1050,120 1200,170 1350,150 L1350,200 L0,200 Z"/>
+      <path fill="#03131c" opacity="0.85"
+        d="M0,175 C150,150 300,195 450,175 C600,155 750,195 900,175 C1050,155 1200,185 1350,175 L1350,200 L0,200 Z"/>
+    </svg>
+  </div>
+
+  <div class="eyebrow">
+    <span>Day 13 · 19 November 2025</span>
+  </div>
+
+  <div class="title-wrap">
+    <h1 class="title">
+      Kaikōura<br>
+      <em>to Christchurch</em>
+    </h1>
+    <p class="subtitle">A final morning at sea with the sperm whales of the Kaikōura Canyon, then south through the wild coast to retire the motorhome and rest under a city sky.</p>
+  </div>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Distance</span>
+      <span class="meta-value">~183 km</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Drive Time</span>
+      <span class="meta-value">2h 30m</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Vehicle</span>
+      <span class="meta-value">Maui River 6-berth</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tonight</span>
+      <span class="meta-value">Novotel Cathedral Sq</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ALERTS ====================== -->
+<section class="alerts">
+  <h2>Read this first — timing risks</h2>
+  <div class="alert-grid">
+    <div class="alert-card">
+      <strong>Verify your booking time</strong>
+      <p>Whale Watch Kaikōura lists 7:45 AM as a <em>departure</em>; check-in opens 30 min prior (7:15 AM) and <strong>closes 5 min before departure</strong> — no late entries. Cross-check your confirmation email.</p>
+    </div>
+    <div class="alert-card">
+      <strong>Tour can be cancelled by weather</strong>
+      <p>Operators have an 80% refund policy if a whale isn't sighted, and full refund if cancelled for sea conditions. Have a backup plan (e.g. Wings Over Whales scenic flight, or Seal Colony walk).</p>
+    </div>
+    <div class="alert-card">
+      <strong>Return-day rules (Maui)</strong>
+      <p>You have the <strong>Drop &amp; Go pack</strong> — waste/grey water/toilet cassette and cleaning are <em>covered</em>. You still need to return with <em>full diesel</em> and <em>full LPG bottle</em> with a dated receipt (within 24 hrs). Verify your specific pack inclusions on your rental agreement.</p>
+    </div>
+    <div class="alert-card">
+      <strong>The schedule is comfortable now</strong>
+      <p>Tour returns ~11:00 AM → ~2h 30m drive → 20 min for fuel/LPG = arrival at depot ~2:30 PM. With Drop &amp; Go covering the waste dump, you have a comfortable <strong>~1 hr buffer</strong> before the 3:30 PM return.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TIMELINE ====================== -->
+<section class="timeline-section">
+  <div class="section-header">
+    <div class="eyebrow">The Day, Unfolded</div>
+    <h2>A morning with whales,<br><em>an afternoon on the highway</em></h2>
+  </div>
+
+  <div class="timeline">
+
+    <!-- 06:30 -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">06:30</div>
+        <div class="duration">~30 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-must">Prep · Required</span>
+        <h3>Wake, pack the motorhome, drive to check-in</h3>
+        <p class="blurb">Pre-pack everything tonight so morning is just coffee + keys. From most Kaikōura holiday parks it's a 5–10 min drive to the Whaleway Station. Park in the operator lot.</p>
+        <div class="details">
+          <span>Coffee + light breakfast on board</span>
+          <span>Bring seasickness tablets 1hr before</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07:15 -->
+    <div class="stop must">
+      <div class="stop-time">
+        <div class="clock">07:15</div>
+        <div class="duration">30 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-must">Must · Check-in</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Whale+Watch+Kaikoura&query_place_id=ChIJF6ZOJQtWN20RtCiTpN-KtV8" target="_blank" rel="noopener">Whale Watch Kaikōura — Check-in</a></h3>
+        <p class="blurb">Old Railway Station, Whaleway Station Road. Ticketing, safety video, brief on sea conditions, then shuttle bus to South Bay marina. <em>Check-in closes 5 minutes before departure.</em></p>
+        <div class="details">
+          <span>Whaleway Station Rd, Kaikōura 7300</span>
+          <span>+64 3 319 6767</span>
+          <span>VIP Captain's Cabin (12 pax max)</span>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Whale+Watch+Kaikoura&query_place_id=ChIJF6ZOJQtWN20RtCiTpN-KtV8" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 07:45 -->
+    <div class="stop must">
+      <div class="stop-time">
+        <div class="clock">07:45</div>
+        <div class="duration">~2h 30m at sea</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-must">Headline event</span>
+        <h3>Departure — Catamaran to the Kaikōura Canyon</h3>
+        <p class="blurb"><em>The reason you flew across the world.</em> From the VIP Captain's Cabin you sit alongside the skipper as hydrophones listen for sperm whale clicks in the 2-km deep trench just offshore. Expect 1–3 whale dives, dusky dolphin pods (often in the hundreds), NZ fur seals, and wandering albatross. Total experience including transfers ≈ 3h 15m. <strong>80% refund if no whale is sighted.</strong></p>
+        <div class="details">
+          <span>~2h on the water</span>
+          <span>Catamaran to South Bay marina</span>
+          <span>Whale sighting rate ~95%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11:00 -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">11:00</div>
+        <div class="duration">15 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Optional</span>
+        <h3>Quick browse — Whale Watch gift shop / coffee cart</h3>
+        <p class="blurb">If the tour ends early, grab a coffee and use restrooms here before driving. Skip if running late.</p>
+      </div>
+    </div>
+
+    <!-- 11:20 OPTIONAL SEAL COLONY -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">11:20</div>
+        <div class="duration">25–40 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Optional · 5 min detour</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Kaikoura+Seal+Colony+Point+Kean&query_place_id=ChIJiUyCmbdXN20REQj4lZiq8J0" target="_blank" rel="noopener">Point Kean Seal Colony</a></h3>
+        <p class="blurb">A free, walk-up colony at the tip of the Kaikōura Peninsula. Dozens of NZ fur seals lounge on the rocks, often within a few metres. <em>Mind the 10 m distance rule and never get between a seal and the sea.</em> Skip this if the boat ride ran long — you've already seen plenty of seals from the water.</p>
+        <div class="details">
+          <span>Free · 24h access</span>
+          <span>Easy 5–15 min walk</span>
+          <span>Public toilets at car park</span>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kaikoura+Seal+Colony+Point+Kean&query_place_id=ChIJiUyCmbdXN20REQj4lZiq8J0" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 12:00 LUNCH -->
+    <div class="stop must">
+      <div class="stop-time">
+        <div class="clock">12:00</div>
+        <div class="duration">45–60 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-must">Lunch</span>
+        <h3>Two lunch options — pick one and enjoy it</h3>
+        <p class="blurb"><em>With Drop &amp; Go covering your waste dump, you have a comfortable hour for a proper lunch.</em><br><br><strong>Option A · Kaikōura town</strong> — sit-down at <a href="https://www.google.com/maps/search/?api=1&query=The+Pier+Hotel+Kaikoura" target="_blank" rel="noopener">The Pier Hotel</a> or <a href="https://www.google.com/maps/search/?api=1&query=Kaikoura+Seafood+BBQ+Kiosk" target="_blank" rel="noopener">Kaikōura Seafood BBQ Kiosk</a> (cheap, fresh crayfish-by-the-half, takeaway).<br><br><strong>Option B · The iconic stop</strong> — drive 30 min south then grab takeaway crayfish, mussels and paua patties at <a href="https://www.google.com/maps/search/?api=1&query=Nins+Bin+Kaikoura&query_place_id=ChIJWcvjGQblOW0RvOOQwsJygfk" target="_blank" rel="noopener">Nin's Bin</a> — the iconic blue caravan on SH1. <strong>Recommended</strong> — eat on the picnic tables overlooking the surf. <em>Closed Mondays — check the day.</em></p>
+        <div class="details">
+          <span>Crayfish ~NZD $80–$120/whole</span>
+          <span>Cash + card</span>
+          <span>Picnic tables on the coast</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13:00 DRIVE -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">12:45</div>
+        <div class="duration">~2h drive</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">In transit · SH1 south</span>
+        <h3>Kaikōura coastal highway — scenic but don't linger</h3>
+        <p class="blurb">SH1 hugs the coast for the first 40 km — railway on one side, surf on the other. The road was rebuilt after the 2016 earthquake. <em>Tempting to stop everywhere, but the clock is ticking.</em> Pick at most one short pull-over below.</p>
+      </div>
+    </div>
+
+    <!-- OPTIONAL Ohau Point -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">13:10</div>
+        <div class="duration">10 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Optional pull-over · only if ahead of schedule</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Ohau+Point+Seal+Colony+Lookout" target="_blank" rel="noopener">Ohau Point Lookout</a></h3>
+        <p class="blurb">Roadside lookout 25 km north of Kaikōura town (note: technically <em>north</em> — only worth it if you took the southern route. If you're heading straight to Christchurch via SH1 south, skip this and use the south-coast viewpoints instead). Seal pups sometimes seen on rocks below.</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Ohau+Point+Seal+Colony+Lookout" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 14:00 hr buffer? -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">14:00</div>
+        <div class="duration">5 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Optional · stretch break</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Cheviot+Hotel+SH1" target="_blank" rel="noopener">Cheviot — bathroom + coffee stop</a></h3>
+        <p class="blurb">Roughly the halfway driving point. Quick break only — restrooms, dump rubbish, refresh.</p>
+      </div>
+    </div>
+
+    <!-- 14:50 ARRIVE CHCH -->
+    <div class="stop fuel">
+      <div class="stop-time">
+        <div class="clock">14:50</div>
+        <div class="duration">20 min</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-fuel">Required · Fuel + LPG</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Z+Sawyers+Arms+Service+Station&query_place_id=ChIJ3YEupKmMMW0RZlHl0paO5es" target="_blank" rel="noopener">Z Sawyers Arms — Diesel + LPG Swap'n'Go</a></h3>
+        <p class="blurb"><em>The standard fleet-return stop.</em> 2 km from the Maui depot, 24-hour high-flow diesel pumps that accommodate motorhomes, and Z's Swap'n'Go service for the 9 kg LPG bottle (Maui's FAQ confirms swap is acceptable). <strong>Keep the receipts — fuel must be ≤24 hrs old, LPG receipt goes on the passenger seat.</strong></p>
+        <div class="details">
+          <span>530 Sawyers Arms Rd, Bishopdale</span>
+          <span>24 hours</span>
+          <span>Diesel + Swap'n'Go LPG</span>
+          <span>~2 km / 4 min from depot</span>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Z+Sawyers+Arms+Service+Station&query_place_id=ChIJ3YEupKmMMW0RZlHl0paO5es" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 15:15 RETURN -->
+    <div class="stop must">
+      <div class="stop-time">
+        <div class="clock">15:15</div>
+        <div class="duration">30 min handover</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-final">Final · Return</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Maui+Motorhome+Rental+Christchurch&query_place_id=ChIJoUu4Ysf0MW0RL0mV0Lkf5QY" target="_blank" rel="noopener">Maui Depot — 3:30 PM Return Slot</a></h3>
+        <p class="blurb">Arrive 5–10 min early to your 3:30 PM slot. Smooth returns complete in under 20 minutes; longer if damage walk-through is needed. <em>Photograph the vehicle inside and out before handing over keys.</em> The depot offers a complimentary shuttle to Christchurch Airport / nearby hotels.</p>
+        <div class="details">
+          <span>159 Orchard Road, Harewood 8051</span>
+          <span>+64 800 688 558</span>
+          <span>Open until 4:30 PM</span>
+          <span>Free shuttle available</span>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Maui+Motorhome+Rental+Christchurch&query_place_id=ChIJoUu4Ysf0MW0RL0mV0Lkf5QY" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 16:00 HOTEL -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">16:15</div>
+        <div class="duration">Check-in</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Hotel</span>
+        <h3><a href="https://www.google.com/maps/search/?api=1&query=Novotel+Christchurch+Cathedral+Square&query_place_id=ChIJm_lbTSOKMW0RQm-Faqb1TFo" target="_blank" rel="noopener">Novotel Christchurch Cathedral Square</a></h3>
+        <p class="blurb">Take the Maui shuttle to the airport, then Uber/taxi (~15 min, NZD $25–30) or the airport bus (purple route) to the city. Drop bags, hot shower, recalibrate.</p>
+        <div class="details">
+          <span>52 Cathedral Square</span>
+          <span>+64 3 372 2111</span>
+          <span>Check-in from 2 PM</span>
+        </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Novotel+Christchurch+Cathedral+Square&query_place_id=ChIJm_lbTSOKMW0RQm-Faqb1TFo" target="_blank" rel="noopener">Open in Google Maps</a>
+      </div>
+    </div>
+
+    <!-- 18:30 DINNER -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">18:30</div>
+        <div class="duration">1.5–2 hr</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">Dinner</span>
+        <h3>Dinner — three picks within 10 min walk</h3>
+        <p class="blurb"><strong>Special occasion</strong> · <a href="https://www.google.com/maps/search/?api=1&query=Inati+Christchurch" target="_blank" rel="noopener">Inati</a> — shared-plates degustation, one of CHCH's most acclaimed restaurants (book ahead).<br><strong>Casual + reliable</strong> · <a href="https://www.google.com/maps/search/?api=1&query=Riverside+Market+Christchurch" target="_blank" rel="noopener">Riverside Market</a> — food hall with everything from dumplings to oysters; perfect for a tired family.<br><strong>Local craft beer + pizza</strong> · <a href="https://www.google.com/maps/search/?api=1&query=Cassels+%26+Sons+Brewery+Tannery" target="_blank" rel="noopener">Cassels & Sons Brewery</a> — short Uber to the Tannery; wood-fired pizza in a heritage brewery.</p>
+      </div>
+    </div>
+
+    <!-- BED -->
+    <div class="stop">
+      <div class="stop-time">
+        <div class="clock">22:00</div>
+        <div class="duration">—</div>
+      </div>
+      <div class="stop-dot"></div>
+      <div class="stop-content">
+        <span class="stop-tag tag-optional">End of day</span>
+        <h3>Lights out — first night in a real bed in two weeks</h3>
+        <p class="blurb"><em>You earned this one.</em></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================== FUEL & COST PANEL ====================== -->
+<section class="fuel-panel">
+  <div class="fuel-inner">
+    <div class="section-header">
+      <div class="eyebrow">Fuel · LPG · Costings</div>
+      <h2>The numbers,<br><em>read with caution</em></h2>
+    </div>
+
+    <div class="fuel-grid">
+      <div class="fuel-card">
+        <div class="num">12.5L</div>
+        <h4>Maui River consumption</h4>
+        <p>Per 100 km — official Maui figure. Real-world reviewers reported <strong>13.5–14.5 L/100km</strong> depending on driver, load, and headwinds.</p>
+        <p class="est">[medium confidence — varies]</p>
+      </div>
+
+      <div class="fuel-card">
+        <div class="num">23–27L</div>
+        <h4>Fuel needed today</h4>
+        <p>For the 183 km Kaikōura → Christchurch leg at 12.5–14.5 L/100km. Tank capacity is 70–75 L, so a single top-up at Z Sawyers Arms refills whatever you've burned across the trip.</p>
+        <p class="est">[high confidence on distance]</p>
+      </div>
+
+      <div class="fuel-card">
+        <div class="num">$3.31</div>
+        <h4>Diesel price NZD/litre</h4>
+        <p>National average per MBIE, 11 May 2026. Christchurch pump prices typically sit within ±10c of national. <strong>Use Gaspy app on the day to verify.</strong></p>
+        <p class="est">[high confidence as of May 2026]</p>
+      </div>
+
+      <div class="fuel-card">
+        <div class="num">$35–45</div>
+        <h4>LPG bottle swap (9kg)</h4>
+        <p>Z Swap'n'Go pricing in 2026 sits in this band. Refill (same bottle) is cheaper at ~$25–30 but slower and not all stations offer it.</p>
+        <p class="est">[medium confidence — needs verification at pump]</p>
+      </div>
+    </div>
+
+    <div class="fuel-calc">
+      <h4>Estimated cost — Day 13 refuel + LPG</h4>
+      <table>
+        <tr><td>Diesel (25 L average × $3.31)</td><td>~NZD $83</td></tr>
+        <tr><td>LPG 9 kg bottle swap</td><td>~NZD $40</td></tr>
+        <tr><td>Waste dump (covered by Drop &amp; Go)</td><td>$0</td></tr>
+        <tr><td>Hotel taxi (airport → Novotel)</td><td>~NZD $30</td></tr>
+        <tr><td>Day 13 fuel-related total (est.)</td><td>~NZD $153</td></tr>
+      </table>
+    </div>
+
+    <div class="fuel-calc" style="border-left-color: var(--coral); margin-top: 1.2rem;">
+      <h4 style="color: var(--coral);">Don't forget — Road User Charges</h4>
+      <p style="font-family: 'Fraunces', serif; font-size: 0.95rem; opacity: 0.9; line-height: 1.6;">
+        Diesel motorhomes in NZ pay <strong>RUC</strong> separately from pump diesel — Maui passes this through at <strong>NZD $8.04 per 100 km</strong> for 4–6 berths, billed at hire end based on the odometer reading. For ~183 km today that's roughly <strong>$14.70</strong>, on top of pump diesel. Across your full 13-day trip this adds up to a substantial line item — make sure your final invoice reflects it.
+      </p>
+      <p class="est" style="margin-top: 0.6rem;">[medium-high confidence — Maui RUC rates published 2025]</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+  <p class="quote">"It was a whale that led the Māori ancestor Paikea to New Zealand. Fittingly, the whale continues to guide the people of Kaikōura and the visitors they host."</p>
+  <p style="opacity: 0.7; font-family: 'Cormorant Garamond', serif; font-style: italic;">— Whale Watch Kaikōura</p>
+
+  <p class="sources">
+    Confidence notes · whale watch times, depot address, fuel consumption: high confidence (verified from operator FAQ / MBIE / Maui review). Diesel pump pricing &amp; LPG cost bands: medium confidence — verify same-day via Gaspy app. Restaurant openings: verify before booking. <br><br>
+    Timings assume calm seas &amp; on-time tour. Build in buffers; if the boat is delayed, sacrifice optional stops first.
+  </p>
+</footer>
+
+</body>
+</html>

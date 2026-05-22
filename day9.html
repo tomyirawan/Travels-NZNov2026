@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Day 9 · Wānaka · 15 Nov</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lake:#0d6f8e;
+    --lake-deep:#0a4a63;
+    --lake-soft:#7cc5d6;
+    --alpine:#e8f4f2;
+    --snow:#f9fbfb;
+    --tussock:#d4a55a;
+    --lavender:#9a8bc4;
+    --lavender-deep:#5b4d8a;
+    --lavender-soft:#e6dff5;
+    --sky:#fdf6ec;
+    --ink:#0e2533;
+    --ink-soft:#3d556a;
+    --line:#cfe1e6;
+    --hot:#e6643a;
+    --moss:#3d6b4f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter Tight',sans-serif;
+    background:var(--sky);
+    color:var(--ink);
+    line-height:1.55;
+    font-weight:400;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(154,139,196,.13), transparent 35%),
+      radial-gradient(circle at 88% 4%, rgba(124,197,214,.18), transparent 40%),
+      radial-gradient(circle at 50% 95%, rgba(212,165,90,.08), transparent 50%);
+    background-attachment:fixed;
+  }
+
+  /* ====== HERO ====== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    padding:3rem 6vw 4rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, #fdf6ec 0%, #f1f7f8 50%, #d9ebf0 100%);
+    z-index:-2;
+  }
+  /* mountain silhouette */
+  .hero svg.mountains{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    width:100%;height:55vh;
+    z-index:-1;
+  }
+  /* lake reflection */
+  .hero::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:0;
+    height:22vh;
+    background:linear-gradient(180deg,
+      rgba(13,111,142,.0) 0%,
+      rgba(13,111,142,.18) 40%,
+      rgba(10,74,99,.35) 100%);
+    z-index:-1;
+  }
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .topbar .dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--hot);margin-right:.5rem;animation:pulse 2.5s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(230,100,58,.5)}
+    50%{box-shadow:0 0 0 8px rgba(230,100,58,0)}
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(3.5rem, 11vw, 9rem);
+    line-height:.92;
+    letter-spacing:-.04em;
+    color:var(--lake-deep);
+    margin-top:8vh;
+    font-variation-settings:"opsz" 144;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--lavender-deep);
+    font-variation-settings:"opsz" 144;
+  }
+  .hero .subtitle{
+    margin-top:1.2rem;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:clamp(1.1rem,2.2vw,1.6rem);
+    color:var(--ink-soft);
+    max-width:600px;
+    font-weight:300;
+  }
+  .hero-foot{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.5rem;
+    margin-top:auto;
+    padding-top:3rem;
+  }
+  .stat{
+    border-top:1px solid var(--lake-deep);
+    padding-top:.8rem;
+  }
+  .stat .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.65rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .stat .val{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    color:var(--lake-deep);
+    font-weight:500;
+    margin-top:.3rem;
+  }
+
+  /* === Highlight chips — the four icons === */
+  .highlights{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-top:2rem;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    padding:.55rem 1.1rem .55rem .7rem;
+    border:1px solid var(--lake);
+    border-radius:999px;
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(8px);
+    font-size:.82rem;
+    font-weight:500;
+    color:var(--lake-deep);
+    transition:transform .3s ease, background .3s ease;
+  }
+  .chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.95)}
+  .chip svg{width:22px;height:22px}
+
+  /* ====== SECTIONS ====== */
+  section{padding:6rem 6vw}
+  .section-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--lake);
+    margin-bottom:1rem;
+    display:flex;align-items:center;gap:.8rem;
+  }
+  .section-tag::before{
+    content:"";width:30px;height:1px;background:var(--lake);
+  }
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(2rem,4.5vw,3.5rem);
+    line-height:1.05;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    margin-bottom:2.5rem;
+    max-width:900px;
+  }
+  h2 em{font-style:italic;color:var(--lavender-deep);font-weight:500}
+
+  /* === TIMELINE === */
+  .timeline{
+    position:relative;
+    padding-left:0;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:7.5rem;
+    top:0;bottom:0;
+    width:1px;
+    background:linear-gradient(180deg,var(--lake-soft),var(--lavender-soft));
+  }
+  @media (max-width:720px){
+    .timeline::before{left:0}
+  }
+  .stop{
+    display:grid;
+    grid-template-columns:7rem 1fr;
+    gap:0;
+    padding:1.5rem 0 2rem;
+    position:relative;
+  }
+  @media (max-width:720px){
+    .stop{grid-template-columns:1fr;padding-left:1.5rem}
+  }
+  .stop .time{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.85rem;
+    color:var(--lake-deep);
+    font-weight:500;
+    padding-top:.2rem;
+  }
+  .stop .time .duration{
+    display:block;
+    font-size:.65rem;
+    color:var(--ink-soft);
+    margin-top:.2rem;
+    letter-spacing:.05em;
+  }
+  .stop .marker{
+    position:absolute;
+    left:7.5rem;
+    top:1.8rem;
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--snow);
+    border:2px solid var(--lake);
+    transform:translateX(-5px);
+    z-index:1;
+  }
+  @media (max-width:720px){.stop .marker{left:0}}
+  .stop.must .marker{background:var(--hot);border-color:var(--hot);box-shadow:0 0 0 5px rgba(230,100,58,.15)}
+  .stop.optional .marker{background:var(--snow);border-style:dashed}
+  .stop .card{
+    margin-left:2.5rem;
+    padding:1.4rem 1.6rem 1.5rem;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(10px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    transition:all .35s ease;
+  }
+  @media (max-width:720px){.stop .card{margin-left:0;margin-top:.5rem}}
+  .stop .card:hover{
+    background:rgba(255,255,255,.95);
+    border-color:var(--lake);
+    transform:translateX(4px);
+  }
+  .stop .card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:1rem;
+    margin-bottom:.5rem;
+    flex-wrap:wrap;
+  }
+  .stop h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:1.35rem;
+    color:var(--ink);
+    letter-spacing:-.01em;
+    line-height:1.2;
+  }
+  .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    padding:.3rem .7rem;
+    border-radius:999px;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .badge.must{background:var(--hot);color:white}
+  .badge.optional{background:transparent;color:var(--ink-soft);border:1px dashed var(--ink-soft)}
+  .badge.eat{background:var(--tussock);color:white}
+  .badge.fuel{background:var(--moss);color:white}
+  .badge.view{background:var(--lake);color:white}
+  .badge.activity{background:var(--lavender-deep);color:white}
+  .stop .meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    color:var(--ink-soft);
+    margin-bottom:.6rem;
+    letter-spacing:.03em;
+  }
+  .stop p{
+    color:var(--ink-soft);
+    font-size:.95rem;
+    line-height:1.6;
+  }
+  .stop .maplink{
+    display:inline-flex;
+    align-items:center;
+    gap:.4rem;
+    margin-top:.9rem;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    color:var(--lake);
+    text-decoration:none;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease;
+  }
+  .stop .maplink:hover{border-color:var(--lake)}
+  .stop .maplink svg{width:13px;height:13px}
+
+  /* === WINERY COMPARE === */
+  .compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    margin-top:2rem;
+  }
+  @media (max-width:900px){.compare{grid-template-columns:1fr}}
+  .vineyard{
+    padding:2rem 1.6rem;
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--line);
+    border-radius:14px;
+    position:relative;
+    transition:all .35s ease;
+  }
+  .vineyard.winner{
+    background:linear-gradient(180deg,#fff,rgba(255,255,255,.85));
+    border-color:var(--hot);
+    box-shadow:0 14px 30px -10px rgba(230,100,58,.25);
+  }
+  .vineyard.winner::before{
+    content:"PICK";
+    position:absolute;
+    top:-12px;left:1.5rem;
+    background:var(--hot);
+    color:white;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.65rem;
+    letter-spacing:.2em;
+    padding:.3rem .8rem;
+    border-radius:999px;
+  }
+  .vineyard h4{
+    font-family:'Fraunces',serif;
+    font-size:1.4rem;
+    font-weight:500;
+    color:var(--ink);
+    margin-bottom:.3rem;
+  }
+  .vineyard .loc{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    color:var(--ink-soft);
+    margin-bottom:1rem;
+    letter-spacing:.05em;
+  }
+  .vineyard ul{
+    list-style:none;
+    margin-top:1rem;
+    font-size:.88rem;
+  }
+  .vineyard li{
+    padding:.4rem 0;
+    border-bottom:1px dashed var(--line);
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    gap:.5rem;
+  }
+  .vineyard li strong{
+    color:var(--ink);
+    font-weight:500;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+  }
+  .vineyard .verdict{
+    margin-top:1.2rem;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:.95rem;
+    color:var(--ink);
+    padding-top:1rem;
+    border-top:1px solid var(--line);
+  }
+
+  /* === FUEL CARD === */
+  .fuel-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:2rem;
+    margin-top:2rem;
+  }
+  @media (max-width:900px){.fuel-grid{grid-template-columns:1fr}}
+  .fuel-card{
+    padding:2rem;
+    background:linear-gradient(135deg,#0d6f8e,#0a4a63);
+    color:white;
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .fuel-card::before{
+    content:"";
+    position:absolute;
+    top:-50%;right:-30%;
+    width:300px;height:300px;
+    background:radial-gradient(circle,rgba(124,197,214,.3),transparent 70%);
+    border-radius:50%;
+  }
+  .fuel-card h3{
+    font-family:'Fraunces',serif;
+    font-size:1.8rem;
+    font-weight:500;
+    margin-bottom:.4rem;
+    position:relative;
+  }
+  .fuel-card .addr{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    opacity:.8;
+    margin-bottom:1.5rem;
+    position:relative;
+  }
+  .fuel-card .pumps{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1rem;
+    margin-top:1.5rem;
+    position:relative;
+  }
+  .fuel-card .pumps div{
+    border-top:1px solid rgba(255,255,255,.3);
+    padding-top:.7rem;
+  }
+  .fuel-card .pumps .lab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;
+    letter-spacing:.2em;
+    opacity:.7;
+    text-transform:uppercase;
+  }
+  .fuel-card .pumps .v{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    margin-top:.2rem;
+  }
+  .fuel-est{
+    padding:2rem;
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--line);
+    border-radius:18px;
+  }
+  .fuel-est h4{
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    margin-bottom:1rem;
+    font-weight:500;
+  }
+  .fuel-est .row{
+    display:flex;
+    justify-content:space-between;
+    padding:.5rem 0;
+    border-bottom:1px dashed var(--line);
+    font-size:.88rem;
+  }
+  .fuel-est .row:last-child{
+    border-bottom:none;
+    border-top:2px solid var(--ink);
+    margin-top:.5rem;
+    padding-top:.8rem;
+    font-weight:600;
+    font-family:'Fraunces',serif;
+    font-size:1.05rem;
+  }
+  .fuel-est .row span:first-child{color:var(--ink-soft);font-family:'JetBrains Mono',monospace;font-size:.78rem}
+
+  /* === SUMMARY GRID === */
+  .summary{
+    background:linear-gradient(180deg, var(--lavender-soft), #f5f0fb);
+    margin:5rem -6vw 0;
+    padding:5rem 6vw;
+    border-top:1px solid var(--lavender);
+    border-bottom:1px solid var(--lavender);
+  }
+  .grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.5rem;
+    margin-top:2rem;
+  }
+  @media (max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.grid-4{grid-template-columns:1fr}}
+  .pill{
+    background:white;
+    padding:1.4rem 1.2rem;
+    border-radius:12px;
+    border-left:3px solid var(--lavender);
+  }
+  .pill .num{
+    font-family:'Fraunces',serif;
+    font-size:2.4rem;
+    color:var(--lavender-deep);
+    font-weight:500;
+    line-height:1;
+  }
+  .pill .l{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    color:var(--ink-soft);
+    margin-top:.5rem;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:3rem 6vw;
+    text-align:center;
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  footer em{font-family:'Fraunces',serif;font-style:italic;text-transform:none;letter-spacing:0;color:var(--lake-deep);font-size:.95rem}
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html">Day 6</a></li>
+    <li><a href="day7.html">Day 7</a></li>
+    <li><a href="day8.html">Day 8</a></li>
+    <li><a href="day9.html" class="active">Day 9</a></li>
+    <li><a href="day10.html">Day 10</a></li>
+    <li><a href="day11.html">Day 11</a></li>
+    <li><a href="day12.html">Day 12</a></li>
+    <li><a href="day13.html">Day 13</a></li>
+    <li><a href="day14.html">Day 14</a></li>
+  </ul>
+</nav>
+<script defer src="assets/nav.js"></script>
+
+
+<!-- ====================== HERO ====================== -->
+<header class="hero">
+
+  <!-- Rocky Mountain ridge + Diamond Lake + skydiver scene -->
+  <svg class="mountains" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- soft cloud wisps (high atmosphere) -->
+    <g opacity=".55">
+      <ellipse cx="180" cy="80"  rx="90" ry="9" fill="#ffffff"/>
+      <ellipse cx="240" cy="92"  rx="60" ry="6" fill="#ffffff"/>
+      <ellipse cx="1100" cy="60" rx="110" ry="8" fill="#ffffff"/>
+      <ellipse cx="1180" cy="74" rx="70" ry="6" fill="#ffffff"/>
+      <ellipse cx="620" cy="40" rx="50" ry="5" fill="#ffffff"/>
+    </g>
+
+    <!-- ===== SKYDIVER (right side, upper third) ===== -->
+    <g transform="translate(1100, 130)">
+      <!-- canopy (parachute) -->
+      <path d="M -55,-2 Q 0,-45 55,-2 Z" fill="#9a8bc4" />
+      <path d="M -55,-2 Q -28,-30 0,-30 Q 28,-30 55,-2"
+            fill="none" stroke="#5b4d8a" stroke-width="1.2" opacity=".6"/>
+      <!-- canopy panel seams -->
+      <line x1="-30" y1="-23" x2="-22" y2="-2" stroke="#5b4d8a" stroke-width=".6" opacity=".55"/>
+      <line x1="0"   y1="-30" x2="0"   y2="-2" stroke="#5b4d8a" stroke-width=".6" opacity=".55"/>
+      <line x1="30"  y1="-23" x2="22"  y2="-2" stroke="#5b4d8a" stroke-width=".6" opacity=".55"/>
+      <!-- suspension lines -->
+      <line x1="-50" y1="-3" x2="-6" y2="40" stroke="#3d556a" stroke-width=".7"/>
+      <line x1="-25" y1="-12" x2="-3" y2="40" stroke="#3d556a" stroke-width=".7"/>
+      <line x1="25"  y1="-12" x2="3"  y2="40" stroke="#3d556a" stroke-width=".7"/>
+      <line x1="50"  y1="-3"  x2="6"  y2="40" stroke="#3d556a" stroke-width=".7"/>
+      <!-- harness/body -->
+      <ellipse cx="0" cy="46" rx="6" ry="9" fill="#0a4a63"/>
+      <!-- legs -->
+      <line x1="-2" y1="54" x2="-4" y2="68" stroke="#0a4a63" stroke-width="3" stroke-linecap="round"/>
+      <line x1="2"  y1="54" x2="4"  y2="68" stroke="#0a4a63" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- tiny second skydiver (free-fall dot, smaller, further left) -->
+    <g transform="translate(360, 200)" opacity=".75">
+      <path d="M -22,0 Q 0,-18 22,0 Z" fill="#9a8bc4"/>
+      <line x1="-20" y1="0" x2="-2" y2="16" stroke="#3d556a" stroke-width=".5"/>
+      <line x1="20"  y1="0" x2="2"  y2="16" stroke="#3d556a" stroke-width=".5"/>
+      <circle cx="0" cy="20" r="3" fill="#0a4a63"/>
+    </g>
+
+    <!-- ===== FAR RANGE (Southern Alps in distance) ===== -->
+    <path d="M0,340 L80,280 L160,310 L240,250 L330,300 L420,240 L510,290 L600,230 L700,280 L790,220 L890,270 L990,225 L1090,275 L1190,235 L1290,275 L1380,245 L1440,275 L1440,600 L0,600 Z"
+      fill="#a8c8d4" opacity=".55"/>
+
+    <!-- ===== MID RANGE (jagged Rocky Mountain ridge) ===== -->
+    <path d="M0,420 L70,360 L130,395 L195,310 L260,365 L325,295 L390,345 L460,275 L540,330 L620,260 L710,315 L800,255 L890,310 L975,265 L1060,320 L1145,275 L1230,330 L1320,290 L1400,340 L1440,320 L1440,600 L0,600 Z"
+      fill="#6b97a8" opacity=".82"/>
+
+    <!-- snow caps on mid range -->
+    <g fill="#f9fbfb" opacity=".95">
+      <path d="M250,365 L260,355 L268,360 L264,366 Z" opacity=".7"/>
+      <path d="M450,285 L460,275 L475,283 L468,294 L460,288 Z"/>
+      <path d="M610,270 L620,260 L635,268 L628,278 L620,272 Z"/>
+      <path d="M790,265 L800,255 L815,263 L808,273 L800,267 Z"/>
+      <path d="M965,275 L975,265 L990,273 L983,283 L975,277 Z"/>
+      <path d="M1135,285 L1145,275 L1160,283 L1153,293 L1145,287 Z"/>
+      <path d="M1310,300 L1320,290 L1335,298 L1328,308 L1320,302 Z"/>
+    </g>
+
+    <!-- ===== ROCKY MOUNTAIN — dominant left peak ===== -->
+    <path d="M0,500 L100,430 L180,470 L260,380 L340,450 L420,400 L500,455 L580,420 L660,460 L740,440 L820,475 L900,455 L1000,495 L1100,475 L1200,510 L1300,495 L1440,520 L1440,600 L0,600 Z"
+      fill="#4d7d8f"/>
+
+    <!-- Rocky Mountain summit highlight + cairn marker -->
+    <g>
+      <!-- highlight ridge -->
+      <path d="M180,470 L260,380 L340,450" fill="none" stroke="#3d6273" stroke-width="1.2" opacity=".7"/>
+      <!-- snow on Rocky Mtn summit -->
+      <path d="M248,395 L260,380 L274,394 L268,400 L262,394 L256,400 Z" fill="#f9fbfb"/>
+      <!-- summit cairn dot -->
+      <circle cx="260" cy="378" r="2.5" fill="#0e2533"/>
+      <!-- small label line -->
+      <line x1="260" y1="378" x2="260" y2="358" stroke="#0e2533" stroke-width=".7" opacity=".4"/>
+    </g>
+
+    <!-- ===== DIAMOND LAKE (small lake nestled in front of Rocky Mtn) ===== -->
+    <g>
+      <!-- lake shape -->
+      <ellipse cx="320" cy="540" rx="95" ry="14" fill="#0d6f8e" opacity=".85"/>
+      <ellipse cx="320" cy="538" rx="85" ry="10" fill="#7cc5d6" opacity=".55"/>
+      <!-- lake highlight glints -->
+      <line x1="270" y1="540" x2="290" y2="540" stroke="#ffffff" stroke-width=".7" opacity=".7"/>
+      <line x1="330" y1="542" x2="355" y2="542" stroke="#ffffff" stroke-width=".7" opacity=".6"/>
+      <line x1="370" y1="540" x2="382" y2="540" stroke="#ffffff" stroke-width=".7" opacity=".5"/>
+      <!-- shoreline -->
+      <ellipse cx="320" cy="540" rx="95" ry="14" fill="none" stroke="#0a4a63" stroke-width=".6" opacity=".5"/>
+      <!-- "Diamond Lake" sub-label dot (decorative pin) -->
+      <circle cx="320" cy="540" r="2" fill="#e6643a"/>
+      <circle cx="320" cy="540" r="6" fill="none" stroke="#e6643a" stroke-width=".5" opacity=".5"/>
+    </g>
+
+    <!-- subtle tussock grass strokes (Central Otago texture, foreground) -->
+    <g stroke="#8a9d6e" stroke-width=".8" opacity=".45" stroke-linecap="round" fill="none">
+      <line x1="60"   y1="585" x2="62"  y2="572"/>
+      <line x1="68"   y1="585" x2="71"  y2="575"/>
+      <line x1="78"   y1="585" x2="76"  y2="570"/>
+      <line x1="500"  y1="585" x2="503" y2="572"/>
+      <line x1="508"  y1="585" x2="506" y2="574"/>
+      <line x1="700"  y1="585" x2="702" y2="570"/>
+      <line x1="708"  y1="585" x2="706" y2="575"/>
+      <line x1="900"  y1="585" x2="903" y2="573"/>
+      <line x1="908"  y1="585" x2="906" y2="572"/>
+      <line x1="1180" y1="585" x2="1183" y2="572"/>
+      <line x1="1188" y1="585" x2="1186" y2="575"/>
+      <line x1="1380" y1="585" x2="1383" y2="572"/>
+    </g>
+  </svg>
+
+  <div class="topbar">
+    <span><span class="dot"></span>Day 09 · 15 November 2026</span>
+    <span>Wānaka · Otago · NZ</span>
+  </div>
+
+  <div>
+    <h1>A day in <em>Wānaka.</em></h1>
+    <p class="subtitle">Skydive at sunrise, lavender by mid-morning, a hike where everyone else is on Roy's Peak, and a Pinot at the most scenic cellar door in the country.</p>
+
+    <div class="highlights">
+      <!-- Skydive icon -->
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11c2-5 7-5 9-5s7 0 9 5"/><path d="M3 11l4 3"/><path d="M21 11l-4 3"/><path d="M12 6l-3 8"/><path d="M12 6l3 8"/><circle cx="12" cy="17" r="1.5"/></svg>
+        Skydive 12,000ft
+      </span>
+      <!-- Tree icon -->
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="9" rx="6" ry="5"/><path d="M12 14v7"/><path d="M9 21h6"/></svg>
+        That Wānaka Tree
+      </span>
+      <!-- Mountain icon -->
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l5-9 4 6 3-4 6 7z"/><circle cx="16" cy="6" r="1.5"/></svg>
+        Rocky Mountain
+      </span>
+      <!-- Lavender icon -->
+      <span class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><circle cx="12" cy="8" r="1.2"/><circle cx="10.5" cy="6" r="1"/><circle cx="13.5" cy="6" r="1"/><circle cx="12" cy="4" r="1"/><path d="M9 21h6"/></svg>
+        Lavender Farm
+      </span>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="stat">
+      <div class="label">Sleep</div>
+      <div class="val">Hampshire HP</div>
+    </div>
+    <div class="stat">
+      <div class="label">Ride</div>
+      <div class="val">Maui 6-Berth</div>
+    </div>
+    <div class="stat">
+      <div class="label">Drive</div>
+      <div class="val">≈ 115 km</div>
+    </div>
+    <div class="stat">
+      <div class="label">Diesel</div>
+      <div class="val">≈ 18 L</div>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== ITINERARY ====================== -->
+<section id="itinerary">
+  <div class="section-tag">The Itinerary</div>
+  <h2>One day, <em>two squads.</em><br>The jumper jumps. The rest roam.</h2>
+
+  <div class="timeline">
+
+    <!-- 07:30 -->
+    <div class="stop">
+      <div class="time">07:30
+        <span class="duration">30 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Depart Hampshire Holiday Park</h3>
+          <span class="badge view">Start</span>
+        </div>
+        <div class="meta">212 Brownston St · Wānaka</div>
+        <p>Drop the skydiver at Wānaka Airport first (15 km, ~17 min). Whole party rides together — the others continue on after drop-off.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJvzXrJFJP1akRVFxT3qXGVWI" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 08:20 -->
+    <div class="stop must">
+      <div class="time">08:20
+        <span class="duration">3 h on-site</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Skydive Wānaka — Drop-off</h3>
+          <span class="badge must">Must · Skydive</span>
+        </div>
+        <div class="meta">14 Mustang Lane · Wānaka Airport · 8:30 jump slot</div>
+        <p>Check in 10 min early. Closed shoes, warm layers. Operator allows 3 hours from check-in through video review. The jumper stays here; the rest of the party leaves for activities and circles back for pickup around 11:15.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJN_dEIYNL1akRk92H20SP_sA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 08:50 -->
+    <div class="stop must">
+      <div class="time">08:50
+        <span class="duration">75 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Wānaka Lavender Farm</h3>
+          <span class="badge must">Must · View · Shop</span>
+        </div>
+        <div class="meta">36 Morris Rd · 6 min from airport · Opens 9:00</div>
+        <p>20 acres of lavender, alpacas and pigs, gift shop with honey + lavender skincare, and the (genuinely good) lavender ice-cream. Mid-November is shoulder bloom — full purple peaks late Dec, but you'll catch first colour with no crowds. Self-guided, ~1 hr is plenty.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJvfb5MchO1akRdsieOg01VH8" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 10:20 -->
+    <div class="stop must">
+      <div class="time">10:20
+        <span class="duration">30 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>#ThatWānakaTree</h3>
+          <span class="badge view">Must · Photo Stop</span>
+        </div>
+        <div class="meta">Roys Bay foreshore · 5-min flat walk from car park</div>
+        <p>The lone willow growing out of Lake Wānaka — the most photographed tree in NZ. Park along Lakeside Rd, walk west along the shore. Morning light is much softer than midday. Quick stop only.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJE8sfvvhF1akRtID-3q4IQDk" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 11:15 -->
+    <div class="stop">
+      <div class="time">11:15
+        <span class="duration">30 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Skydive Wānaka — Pickup</h3>
+          <span class="badge activity">Reunite</span>
+        </div>
+        <div class="meta">14 Mustang Lane · Reunion + photo/video collection</div>
+        <p>By now the jumper has reviewed photos and bought the package. Quick coffee on-site if needed, then back to town for lunch.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJN_dEIYNL1akRk92H20SP_sA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 12:00 lunch -->
+    <div class="stop">
+      <div class="time">12:00
+        <span class="duration">45 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Lunch · Big Fig Wānaka</h3>
+          <span class="badge eat">Lunch</span>
+        </div>
+        <div class="meta">105 Ardmore St · Pick-your-portion slow food</div>
+        <p>Wholesome, fresh, fast, easy on the post-skydive stomach. Small ($17) / Medium ($24) / Large ($31) — choose 1 protein + sides. Keep portions modest — you've got a wine tasting and a hike right after. <em>Alt: Federal Diner (47 Helwick St) for brunch staples.</em></p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJ93xLBkVP1akR9Yv3wjPW0bY" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 13:00 rippon -->
+    <div class="stop must">
+      <div class="time">13:00
+        <span class="duration">45 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Rippon Vineyard — Tasting</h3>
+          <span class="badge must">Must · Winery</span>
+        </div>
+        <div class="meta">246 Mt Aspiring Rd · BOOK 13:00 SLOT in advance · Free</div>
+        <p>Sits between lunch in town and the hike trailhead — a 7-min drive from each. Biodynamic, family-run since 1912, 6 wine varieties, and arguably the most cinematic vineyard view on earth: Lake Wānaka stretching below, Southern Alps behind. Tastings are 30 min, max 6 people, by appointment only — booking is mandatory at rippon.co.nz. Free unless you upgrade to the $45 private tour. <strong style="color:var(--hot)">Designated driver only — 6-berth motorhome rule.</strong></p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJ8Tu-2OZF1akRuy74XrGFL8w" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 14:00 hike -->
+    <div class="stop must">
+      <div class="time">14:00
+        <span class="duration">3 hrs</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Diamond Lake & Rocky Mountain Track</h3>
+          <span class="badge must">Must · Hike</span>
+        </div>
+        <div class="meta">Mt Aspiring Rd · 15 min from Rippon (same road) · 7.3 km loop · ~520 m ascent</div>
+        <p>The smarter alternative to Roy's Peak: shorter, quieter, every bit as scenic. Continue west on the same road you took from Rippon — no doubling back. Three layered viewpoints stack on top of each other:</p>
+        <ul style="margin-top:.8rem;list-style:none;font-size:.88rem;color:var(--ink-soft)">
+          <li style="padding:.3rem 0">🌿 <strong style="color:var(--ink)">Diamond Lake Lookout</strong> — 1 hr return, easy</li>
+          <li style="padding:.3rem 0">🏔 <strong style="color:var(--ink)">Lake Wānaka Lookout</strong> — 2 hr return, moderate (bench at the top)</li>
+          <li style="padding:.3rem 0">⛰ <strong style="color:var(--ink)">Rocky Mountain Summit</strong> — 3 hr return, 775 m, full 360° payoff</li>
+        </ul>
+        <p style="margin-top:.7rem"><em>Recommendation:</em> go up the East track for views, summit Rocky Mountain, descend via the West track — no backtrack. Bring water + windproof. Sandflies at the summit.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJDwLVawBD1akRZZNDRud3FK4" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 17:30 fuel -->
+    <div class="stop must">
+      <div class="time">17:30
+        <span class="duration">15 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Refuel · McKeown CardFuel 24/7</h3>
+          <span class="badge fuel">Must · Diesel</span>
+        </div>
+        <div class="meta">73 Ballantyne Rd · Big forecourt, 24/7, cheapest in district</div>
+        <p>Cheapest diesel in Wānaka by 10–15c/L. High-flow truck-stop pumps, easy room for a 6-berth motorhome to manoeuvre. Unmanned card-pay (have a Visa/Mastercard with chip ready). <em>Alt: Caltex on Ardmore St (more central but pricier).</em></p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJtxWF-DJP1akRkIqsV3AIkV4" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 18:00 dinner -->
+    <div class="stop">
+      <div class="time">18:00
+        <span class="duration">75 min</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Dinner · Kai Whakapai</h3>
+          <span class="badge eat">Dinner</span>
+        </div>
+        <div class="meta">121 Ardmore St · Lakefront · 16 beers on tap · Open until 22:00</div>
+        <p>Lake-facing pub-eatery. Pizzas, sharing plates, big steaks, casual vibe — perfect for tired hikers who jumped from a plane that morning. No bookings needed for a group of 6. <em>Splurge alt: Bistro Gentil (76A Golf Course Rd) — refined French, book ahead, closed Mondays.</em></p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJl7LoUEVP1akRiaJvEJ3ddyA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- 19:30 back -->
+    <div class="stop">
+      <div class="time">19:30
+        <span class="duration">Overnight</span>
+      </div>
+      <div class="marker"></div>
+      <div class="card">
+        <div class="card-head">
+          <h3>Hampshire Holiday Park · Sleep</h3>
+          <span class="badge view">End</span>
+        </div>
+        <div class="meta">212 Brownston St · 3 min walk from town centre</div>
+        <p>Powered site for the motorhome. Reception closes 20:00 — check in before dinner if you haven't already. Clean kitchen, no-timer showers.</p>
+        <a class="maplink" href="https://www.google.com/maps/place/?q=place_id:ChIJvzXrJFJP1akRVFxT3qXGVWI" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====================== WINERY COMPARE ====================== -->
+<section id="wineries" style="background:linear-gradient(180deg,transparent,rgba(154,139,196,.06));">
+  <div class="section-tag">Cellar Door Decision</div>
+  <h2>Three vineyards, <em>one stop.</em><br>Here's why Rippon wins on a Wānaka day.</h2>
+
+  <div class="compare">
+    <!-- Rippon -->
+    <div class="vineyard winner">
+      <h4>Rippon</h4>
+      <div class="loc">246 Mt Aspiring Rd · 10 min west of town</div>
+      <ul>
+        <li><strong>Drive</strong> <span>10 min from town</span></li>
+        <li><strong>Tasting</strong> <span>FREE (30 min · max 6)</span></li>
+        <li><strong>View</strong> <span>★★★★★ Lake + Alps</span></li>
+        <li><strong>Hours</strong> <span>11–17 daily, by appt</span></li>
+        <li><strong>Vibe</strong> <span>Biodynamic, family</span></li>
+        <li><strong>Best for</strong> <span>Pinot Noir, Riesling</span></li>
+        <li><strong>Detour</strong> <span>ZERO — on the way back from Diamond Lake</span></li>
+      </ul>
+      <div class="verdict">"Possibly the most picturesque cellar door in the world." Already on your route — no backtrack, no detour, free.</div>
+    </div>
+    <!-- Nanny Goat -->
+    <div class="vineyard">
+      <h4>Nanny Goat</h4>
+      <div class="loc">68 Queensberry Terrace · 15 min south-east</div>
+      <ul>
+        <li><strong>Drive</strong> <span>20 min from town</span></li>
+        <li><strong>Tasting</strong> <span>$15 (waived w/ purchase)</span></li>
+        <li><strong>View</strong> <span>★★★ Vines + Clutha</span></li>
+        <li><strong>Hours</strong> <span>11–17 (Closed Tue/Wed)</span></li>
+        <li><strong>Vibe</strong> <span>Pinot specialist + grazing</span></li>
+        <li><strong>Best for</strong> <span>Pinot Noir, Cross Breed</span></li>
+        <li><strong>Detour</strong> <span>Wrong direction from hike — adds 30 min</span></li>
+      </ul>
+      <div class="verdict">Best wines of the three (Pinot magic), but the detour kills it on a packed day.</div>
+    </div>
+    <!-- Aitken's -->
+    <div class="vineyard">
+      <h4>Aitken's Folly</h4>
+      <div class="loc">246 Riverbank Rd · 10 min south-east</div>
+      <ul>
+        <li><strong>Drive</strong> <span>12 min from town</span></li>
+        <li><strong>Tasting</strong> <span>Modest fee (waived w/ purchase)</span></li>
+        <li><strong>View</strong> <span>★★ Pleasant, no lake</span></li>
+        <li><strong>Hours</strong> <span>12–17 daily</span></li>
+        <li><strong>Vibe</strong> <span>Tiny, unpretentious, host-led</span></li>
+        <li><strong>Best for</strong> <span>Blanc de Noir, Chardonnay</span></li>
+        <li><strong>Detour</strong> <span>Doable but opens at 12:00 — clashes with lunch</span></li>
+      </ul>
+      <div class="verdict">Charming hidden gem (highest TripAdvisor score, 4.9), but no view, no late open, no convenience.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FUEL ====================== -->
+<section id="fuel">
+  <div class="section-tag">Fuel Math</div>
+  <h2>Diesel for the <em>Maui 6-berth.</em></h2>
+
+  <div class="fuel-grid">
+    <div class="fuel-card">
+      <h3>McKeown CardFuel 24/7</h3>
+      <div class="addr">73 Ballantyne Rd, Wānaka · +64 800 800 908</div>
+      <p style="position:relative;opacity:.92">Wānaka's reliably cheapest diesel — locals' worst-kept secret. Self-service card-pay, high-flow truck-stop pumps that comfortably take a 6-berth motorhome with no awkward angles.</p>
+      <div class="pumps">
+        <div><div class="lab">Type</div><div class="v">Truck-stop card</div></div>
+        <div><div class="lab">Diesel</div><div class="v">High-flow</div></div>
+        <div><div class="lab">Hours</div><div class="v">24 / 7</div></div>
+        <div><div class="lab">Saving vs Caltex</div><div class="v">~10–15c/L</div></div>
+      </div>
+    </div>
+
+    <div class="fuel-est">
+      <h4>Estimated day burn</h4>
+      <div class="row"><span>Total drive</span><span>115 km</span></div>
+      <div class="row"><span>Maui 6-berth avg</span><span>15 L / 100 km</span></div>
+      <div class="row"><span>Estimated diesel</span><span>≈ 18 L</span></div>
+      <div class="row"><span>@ NZ$2.10/L</span><span>≈ NZ$38</span></div>
+      <div class="row"><span>Day total</span><span>NZ$ 35–40</span></div>
+    </div>
+  </div>
+
+  <p style="margin-top:1.5rem;font-size:.85rem;color:var(--ink-soft);font-style:italic">Backup options: <strong>Caltex Wānaka</strong> (19 Ardmore St, central, 6am–10pm) · <strong>Allied UCT Truckstop</strong> (78 Ballantyne Rd, neighbour to McKeown). The Z Energy in Cromwell is cheaper still but only worth detouring to on travel days.</p>
+</section>
+
+<!-- ====================== SUMMARY ====================== -->
+<section class="summary" style="padding:5rem 6vw;">
+  <div class="section-tag" style="color:var(--lavender-deep)"><span style="background:var(--lavender-deep);color:white;font-weight:700">  </span> By the Numbers</div>
+  <h2>The whole <em>day, distilled.</em></h2>
+  <div class="grid-4">
+    <div class="pill"><div class="num">8</div><div class="l">Stops total</div></div>
+    <div class="pill"><div class="num">5</div><div class="l">Must-do anchors</div></div>
+    <div class="pill"><div class="num">3h</div><div class="l">Hike (Rocky Mtn)</div></div>
+    <div class="pill"><div class="num">12k</div><div class="l">Skydive feet</div></div>
+    <div class="pill"><div class="num">25L</div><div class="l">Estimated diesel</div></div>
+    <div class="pill"><div class="num">0</div><div class="l">Backtracks</div></div>
+    <div class="pill"><div class="num">1</div><div class="l">Iconic willow tree</div></div>
+    <div class="pill"><div class="num">115</div><div class="l">Total km</div></div>
+  </div>
+</section>
+
+<footer>
+  <p><em>Wānaka, Otago · 15 November 2026</em></p>
+  <p style="margin-top:.5rem">Day 9 of the South Island motorhome itinerary · prepared with care</p>
+</footer>
+
+</body>
+</html>

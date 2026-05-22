@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 10 — Wānaka to Franz Josef · Sunset Kayak · 16 Nov 2026</title>
+<style>
+  :root {
+    --glacier-ice:   #e8f4f8;
+    --glacier-blue:  #6fb7d4;
+    --deep-fjord:    #1e4d6b;
+    --kayak-teal:    #2a9d8f;
+    --mapourika:     #0d5c75;
+    --forest-moss:   #4a7c59;
+    --sunset-glow:   #f4a261;
+    --sunset-deep:   #e76f51;
+    --snow-white:    #fafdfe;
+    --text-dark:     #1a2e3a;
+    --text-soft:     #5a7180;
+    --shadow:        0 4px 20px rgba(30, 77, 107, 0.15);
+    --shadow-strong: 0 8px 32px rgba(30, 77, 107, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: var(--text-dark);
+    background:
+      linear-gradient(180deg,
+        var(--glacier-ice) 0%,
+        #d4e8f0 30%,
+        #b8dde8 60%,
+        #c5e3eb 100%);
+    background-attachment: fixed;
+    line-height: 1.6;
+  }
+
+  /* HERO — Sunset kayak scene */
+  .hero {
+    position: relative;
+    min-height: 80vh;
+    overflow: hidden;
+    color: white;
+    /* Sunset sky: deep violet at top → orange → golden horizon */
+    background: linear-gradient(180deg,
+      #2d1b4e 0%,
+      #5d2e6b 15%,
+      #c5476b 35%,
+      #e76f51 55%,
+      #f4a261 70%,
+      #f9c784 82%,
+      #d4a574 90%,
+      #6b4a5a 100%);
+  }
+
+  /* SUN — glowing disc just above horizon */
+  .sun {
+    position: absolute;
+    bottom: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff5b8 0%, #ffd770 30%, #ff9a4d 60%, rgba(255,154,77,0) 80%);
+    box-shadow:
+      0 0 60px rgba(255, 215, 112, 0.6),
+      0 0 120px rgba(255, 154, 77, 0.4),
+      0 0 200px rgba(231, 111, 81, 0.3);
+    z-index: 1;
+    animation: sunGlow 4s ease-in-out infinite alternate;
+  }
+  @keyframes sunGlow {
+    from { box-shadow: 0 0 60px rgba(255, 215, 112, 0.6), 0 0 120px rgba(255, 154, 77, 0.4), 0 0 200px rgba(231, 111, 81, 0.3); }
+    to   { box-shadow: 0 0 80px rgba(255, 215, 112, 0.8), 0 0 160px rgba(255, 154, 77, 0.5), 0 0 240px rgba(231, 111, 81, 0.4); }
+  }
+
+  /* GLACIER MOUNTAINS — layered behind sun */
+  .glacier-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .glacier-layer svg { width: 100%; height: auto; display: block; }
+  .glacier-far { bottom: 35%; opacity: 0.55; }
+  .glacier-mid { bottom: 33%; opacity: 0.85; }
+  .glacier-near { bottom: 32%; opacity: 1; }
+
+  /* LAKE — water surface with reflection */
+  .lake {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: linear-gradient(180deg,
+      rgba(255, 154, 77, 0.55) 0%,
+      rgba(197, 71, 107, 0.45) 25%,
+      rgba(93, 46, 107, 0.6) 60%,
+      rgba(45, 27, 78, 0.85) 100%);
+    z-index: 3;
+    overflow: hidden;
+  }
+
+  /* Sun reflection streak on water */
+  .lake::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(180deg,
+      rgba(255, 215, 112, 0.7) 0%,
+      rgba(255, 154, 77, 0.5) 40%,
+      rgba(255, 154, 77, 0.2) 70%,
+      transparent 100%);
+    filter: blur(8px);
+    animation: shimmer 5s ease-in-out infinite alternate;
+  }
+  @keyframes shimmer {
+    from { width: 60px; opacity: 0.7; }
+    to   { width: 100px; opacity: 1; }
+  }
+
+  /* Ripple lines on lake */
+  .ripples {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(180deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(255, 255, 255, 0.04) 6px,
+        rgba(255, 255, 255, 0.04) 7px);
+    pointer-events: none;
+  }
+
+  /* KAYAKER — silhouette in foreground */
+  .kayak-silhouette {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: auto;
+    z-index: 4;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    animation: gentlePaddle 6s ease-in-out infinite;
+  }
+  @keyframes gentlePaddle {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(-4px); }
+  }
+
+  /* Stars in upper sky */
+  .stars { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .star:nth-child(1) { width: 2px; height: 2px; left: 8%;  top: 5%;  animation-delay: 0s;   }
+  .star:nth-child(2) { width: 1px; height: 1px; left: 18%; top: 8%;  animation-delay: 1.2s; }
+  .star:nth-child(3) { width: 2px; height: 2px; left: 32%; top: 4%;  animation-delay: 2.5s; }
+  .star:nth-child(4) { width: 1px; height: 1px; left: 78%; top: 6%;  animation-delay: 0.8s; }
+  .star:nth-child(5) { width: 2px; height: 2px; left: 88%; top: 12%; animation-delay: 1.8s; }
+  .star:nth-child(6) { width: 1px; height: 1px; left: 92%; top: 3%;  animation-delay: 2.2s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px 30px;
+    text-align: center;
+  }
+  .day-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.6),
+      0 4px 30px rgba(45, 27, 78, 0.8);
+  }
+  .hero .route {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 400;
+    opacity: 1;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+  }
+  .hero .date {
+    font-size: 1rem;
+    opacity: 0.95;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .highlight {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    transition: transform 0.3s, background 0.3s;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .highlight:hover { transform: translateY(-4px); background: rgba(0, 0, 0, 0.45); }
+  .highlight-icon { font-size: 2rem; margin-bottom: 8px; }
+  .highlight-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .highlight-sub { font-size: 0.85rem; opacity: 0.95; }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .info-banner {
+    margin-top: -40px;
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, #e8f5f2, #d4f1ed);
+    border-left: 5px solid var(--kayak-teal);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 20;
+  }
+  .info-banner h3 {
+    color: var(--kayak-teal);
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+  }
+  .info-banner p { font-size: 0.92rem; color: #1a4d44; }
+  .info-banner ul { margin: 8px 0 0 20px; font-size: 0.92rem; color: #1a4d44; }
+
+  .overview-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+  }
+  .stat { text-align: center; padding: 8px; }
+  .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); margin-bottom: 4px; }
+  .stat-value { font-size: 1.3rem; font-weight: 700; color: var(--deep-fjord); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 20px;
+    color: var(--deep-fjord);
+  }
+  .section-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .section-header::before {
+    content: '';
+    width: 6px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--kayak-teal), var(--glacier-blue));
+    border-radius: 3px;
+  }
+
+  /* STOPS */
+  .timeline { position: relative; }
+  .stop {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--glacier-blue);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stop:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-strong);
+  }
+  .stop.must { border-left-color: var(--sunset-deep); }
+  .stop.objective {
+    border-left-color: var(--kayak-teal);
+    background: linear-gradient(135deg, white, #e8f5f2);
+  }
+  .stop.fuel { border-left-color: #6a994e; }
+  .stop.meal { border-left-color: var(--sunset-glow); }
+  .stop.tomorrow {
+    border-left-color: #9b59b6;
+    background: linear-gradient(135deg, white, #f4ecf7);
+  }
+
+  .stop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .stop-time {
+    background: var(--deep-fjord);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .stop.objective .stop-time { background: var(--kayak-teal); }
+  .stop.must .stop-time { background: var(--sunset-deep); }
+  .stop.fuel .stop-time { background: #6a994e; }
+  .stop.meal .stop-time { background: var(--sunset-glow); color: var(--text-dark); }
+  .stop.tomorrow .stop-time { background: #9b59b6; }
+
+  .stop-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--deep-fjord);
+    flex: 1;
+    min-width: 200px;
+  }
+  .stop-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .tag-must { background: #ffe5e0; color: #c1431e; }
+  .tag-objective { background: #d4f1ed; color: var(--kayak-teal); }
+  .tag-optional { background: #f0f0f0; color: #666; }
+  .tag-duration { background: #e3f2f8; color: var(--deep-fjord); }
+  .tag-tomorrow { background: #f4ecf7; color: #9b59b6; }
+
+  .stop-details { font-size: 0.92rem; color: var(--text-soft); margin-bottom: 10px; }
+  .stop-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--glacier-blue);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .stop-link:hover { background: var(--deep-fjord); }
+
+  /* INFO CARDS */
+  .info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .info-card h3 {
+    color: var(--deep-fjord);
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+  }
+  .fuel-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .fuel-table th, .fuel-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e3eff5;
+  }
+  .fuel-table th { background: var(--glacier-ice); color: var(--deep-fjord); font-weight: 700; }
+  .fuel-table .recommended { background: #e8f5f2; font-weight: 600; }
+
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 10px 0 10px 32px;
+    position: relative;
+    border-bottom: 1px solid #f0f5f8;
+    font-size: 0.95rem;
+  }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-size: 1.3rem;
+    color: var(--glacier-blue);
+  }
+  .checklist li:last-child { border-bottom: none; }
+
+  /* Sunrise teaser */
+  .sunrise-teaser {
+    background: linear-gradient(135deg, #fff4e6 0%, #ffd9b3 50%, #ffb380 100%);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    color: #6b3410;
+    position: relative;
+    overflow: hidden;
+  }
+  .sunrise-teaser::before {
+    content: '🌄';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    opacity: 0.15;
+  }
+  .sunrise-teaser h3 {
+    color: #c1431e;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    position: relative;
+  }
+  .sunrise-teaser p { font-size: 0.95rem; position: relative; }
+
+  footer {
+    margin-top: 60px;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 0.85rem;
+    background: linear-gradient(180deg, transparent, rgba(30, 77, 107, 0.1));
+  }
+  footer .quote {
+    font-style: italic;
+    color: var(--deep-fjord);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-content { padding: 60px 16px 30px; }
+    main { padding: 0 16px; }
+    .stop { padding: 16px; }
+    .stop-header { flex-direction: column; align-items: flex-start; }
+    .overview-strip { grid-template-columns: repeat(2, 1fr); }
+    .sunrise-teaser::before { font-size: 4rem; right: 10px; }
+  }
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html">Day 6</a></li>
+    <li><a href="day7.html">Day 7</a></li>
+    <li><a href="day8.html">Day 8</a></li>
+    <li><a href="day9.html">Day 9</a></li>
+    <li><a href="day10.html" class="active">Day 10</a></li>
+    <li><a href="day11.html">Day 11</a></li>
+    <li><a href="day12.html">Day 12</a></li>
+    <li><a href="day13.html">Day 13</a></li>
+    <li><a href="day14.html">Day 14</a></li>
+  </ul>
+</nav>
+<script defer src="assets/nav.js"></script>
+
+
+<header class="hero">
+
+  <!-- Stars in upper sky -->
+  <div class="stars">
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+    <div class="star"></div><div class="star"></div><div class="star"></div>
+  </div>
+
+  <!-- Setting sun -->
+  <div class="sun"></div>
+
+  <!-- Glacier mountains: far range (snow-capped, faded) -->
+  <div class="glacier-layer glacier-far">
+    <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Distant snow peaks, lavender silhouette -->
+      <path d="M0,220 L0,140 L70,80 L120,100 L180,50 L240,90 L310,40 L380,85 L450,55 L520,95 L600,45 L680,80 L760,50 L840,90 L920,55 L1000,85 L1080,50 L1160,90 L1240,60 L1320,95 L1400,70 L1440,90 L1440,220 Z"
+            fill="#8a6a9a"/>
+      <!-- Snow caps highlight -->
+      <path d="M180,50 L195,60 L210,55 L225,65 L235,70 L240,90 Z M310,40 L325,55 L345,50 L365,65 L380,85 Z M600,45 L615,58 L635,52 L655,68 L680,80 Z M760,50 L775,62 L795,57 L815,72 L840,90 Z M1080,50 L1095,62 L1115,55 L1140,70 L1160,90 Z"
+            fill="#e8d4f0" opacity="0.75"/>
+    </svg>
+  </div>
+
+  <!-- Glacier mountains: mid range with glacier flow -->
+  <div class="glacier-layer glacier-mid">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Mid mountain range -->
+      <path d="M0,200 L0,160 L90,110 L160,140 L240,90 L330,125 L420,80 L510,120 L600,75 L700,115 L790,70 L880,110 L970,80 L1060,120 L1160,85 L1260,125 L1360,95 L1440,115 L1440,200 Z"
+            fill="#5d3a6b"/>
+      <!-- Glacier ice/snow on peaks -->
+      <path d="M240,90 L260,105 L280,100 L300,115 L330,125 Z
+               M420,80 L445,95 L470,90 L495,108 L510,120 Z
+               M600,75 L625,92 L650,87 L680,107 L700,115 Z
+               M790,70 L815,88 L840,82 L870,103 L880,110 Z
+               M970,80 L995,98 L1020,92 L1050,112 L1060,120 Z
+               M1160,85 L1185,103 L1215,97 L1245,118 L1260,125 Z"
+            fill="#d8c5e0" opacity="0.85"/>
+      <!-- Hint of glacier flowing down a valley (Franz Josef nod) -->
+      <path d="M420,80 L415,100 L420,125 L425,150 L420,175 L430,200 L470,200 L465,175 L470,150 L465,125 L470,108 L495,108 L510,120 L420,120 Z"
+            fill="#c2d8e8" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Glacier mountains: near silhouette (darkest) -->
+  <div class="glacier-layer glacier-near">
+    <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,160 L0,130 L100,100 L200,125 L290,85 L380,115 L470,90 L560,118 L660,82 L760,112 L860,88 L960,118 L1060,92 L1170,122 L1280,98 L1380,125 L1440,108 L1440,160 Z"
+            fill="#3a2347"/>
+    </svg>
+  </div>
+
+  <!-- Lake surface with sun reflection -->
+  <div class="lake">
+    <div class="ripples"></div>
+  </div>
+
+  <!-- Kayaker silhouette in foreground -->
+  <svg class="kayak-silhouette" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+    <!-- Kayak hull -->
+    <ellipse cx="100" cy="65" rx="85" ry="8" fill="#1a0d2e"/>
+    <ellipse cx="100" cy="62" rx="80" ry="5" fill="#2d1b4e"/>
+    <!-- Reflection of kayak (lighter, inverted) -->
+    <ellipse cx="100" cy="78" rx="75" ry="4" fill="#1a0d2e" opacity="0.35"/>
+    <!-- Person torso -->
+    <path d="M88,62 Q88,45 95,40 L105,40 Q112,45 112,62 Z" fill="#1a0d2e"/>
+    <!-- Head -->
+    <circle cx="100" cy="35" r="6" fill="#1a0d2e"/>
+    <!-- Paddle -->
+    <line x1="65" y1="28" x2="135" y2="55" stroke="#1a0d2e" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Paddle blades -->
+    <ellipse cx="63" cy="27" rx="6" ry="3" fill="#1a0d2e" transform="rotate(-25 63 27)"/>
+    <ellipse cx="137" cy="56" rx="6" ry="3" fill="#1a0d2e" transform="rotate(-25 137 56)"/>
+    <!-- Water drip from paddle -->
+    <circle cx="63" cy="35" r="1" fill="#ffd770" opacity="0.6"/>
+    <circle cx="60" cy="40" r="0.8" fill="#ffd770" opacity="0.4"/>
+  </svg>
+
+  <div class="hero-content">
+    <span class="day-badge">Day 10 · 16 November 2026 · Kayak Focus</span>
+    <h1>Wānaka → Franz Josef</h1>
+    <p class="route">Across Haast Pass to Glacier Country</p>
+    <p class="date">via Lake Hawea · Blue Pools · Haast · West Coast</p>
+
+    <div class="highlights">
+      <div class="highlight">
+        <div class="highlight-icon">🛶</div>
+        <div class="highlight-title">Sunset Kayak</div>
+        <div class="highlight-sub">Lake Mapourika · 5pm departure</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-icon">💧</div>
+        <div class="highlight-title">Haast Pass Waterfalls</div>
+        <div class="highlight-sub">Blue Pools · Thunder Creek · Fantail</div>
+      </div>
+      <div class="highlight">
+        <div class="highlight-icon">🏔️</div>
+        <div class="highlight-title">West Coast Drive</div>
+        <div class="highlight-sub">Lake Hawea · Knights Point · Tasman Sea</div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main>
+
+  <div class="info-banner">
+    <h3>🛶 Focused day — one main objective, generous margins</h3>
+    <p>Today is built around the <strong>5pm Sunset Kayak on Lake Mapourika</strong>. Everything else is a relaxed Haast Pass scenic drive with multiple optional stops. No Fox Glacier detour today.</p>
+    <ul>
+      <li><strong>90 min buffer</strong> before kayak check-in — relaxed arrival.</li>
+      <li><strong>Full Blue Pools walk</strong> and proper Hard Antler lunch — no rushing.</li>
+      <li><strong>Reception still open</strong> when you check in to Top 10.</li>
+      <li><strong>Sleep in tomorrow</strong> — no dawn alarm needed.</li>
+    </ul>
+  </div>
+
+  <div class="overview-strip">
+    <div class="stat"><div class="stat-label">Distance</div><div class="stat-value">~360 km</div></div>
+    <div class="stat"><div class="stat-label">Drive Time</div><div class="stat-value">~5 hrs</div></div>
+    <div class="stat"><div class="stat-label">Total Day</div><div class="stat-value">~13 hrs</div></div>
+    <div class="stat"><div class="stat-label">Fuel Est.</div><div class="stat-value">~50 L</div></div>
+    <div class="stat"><div class="stat-label">Fuel Cost</div><div class="stat-value">~NZ$95</div></div>
+  </div>
+
+  <!-- MORNING -->
+  <div class="section-header"><h2>🌅 Morning · Wānaka & Haast Pass</h2></div>
+  <div class="timeline">
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">07:00</span>
+        <span class="stop-name">Depart Hampshire Holiday Park Wānaka</span>
+        <span class="stop-tags"><span class="tag tag-duration">—</span></span>
+      </div>
+      <p class="stop-details">Pre-pack last night. Empty grey/black water, top up fresh. Quick breakfast in the van.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJvzXrJFJP1akRVFxT3qXGVWI" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop fuel">
+      <div class="stop-header">
+        <span class="stop-time">07:10</span>
+        <span class="stop-name">⛽ McKeown CardFuel 24/7 — FILL FULL TANK</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">15 min</span></span>
+      </div>
+      <p class="stop-details">Cheapest diesel for hundreds of km. Open 24/7. Fill to brim — next cheap fuel is Hokitika (Day 11 evening). Avoid Haast/Fox/Franz Josef pumps.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJtxWF-DJP1akRkIqsV3AIkV4" target="_blank">📍 73 Ballantyne Rd</a>
+    </div>
+
+    <div class="stop meal">
+      <div class="stop-header">
+        <span class="stop-time">07:30</span>
+        <span class="stop-name">☕ Pembroke Patisserie — Breakfast & Coffee</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">30 min</span></span>
+      </div>
+      <p class="stop-details">Opens 07:30 (Monday confirmed). Famous almond croissants. Sit down if you have time, otherwise takeaway. Stock up on extra pastries for snacks on the road.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJX3RMf29P1akREW0CmgYahm0" target="_blank">📍 20 Alison Ave</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">08:30</span>
+        <span class="stop-name">📷 Lake Wānaka Lookout</span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">10 min</span></span>
+      </div>
+      <p class="stop-details">Quick scenic pull-off above Lake Wānaka along SH6.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJS4ktqZRN1WwRprOq1OociIg" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop must">
+      <div class="stop-header">
+        <span class="stop-time">08:45</span>
+        <span class="stop-name">📷 The Neck — Lake Hawea Lookout</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">Iconic twin-lake panorama from the isthmus between Lake Wānaka and Lake Hawea. Take time for photos here — morning light is excellent.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJ89TSvxhT1WwRneRTgeqpK8I" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">09:40</span>
+        <span class="stop-name">☕ Makarora Country Cafe</span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">Last proper toilet + coffee before Haast Pass. Charming old-school cafe with a fireplace. Card-only emergency pump on-site.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJ_3AW3jtF1WwR2A9EDlCu_lc" target="_blank">📍 5507 Makarora-Lake Hawea Rd</a>
+    </div>
+
+    <div class="stop must">
+      <div class="stop-header">
+        <span class="stop-time">10:30</span>
+        <span class="stop-name">💧 Blue Pools Walk</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">60 min</span></span>
+      </div>
+      <p class="stop-details">1.5 km return through beech forest, over two swing bridges to electric-blue glacial pools. Bring towel if anyone wants to brave the cold dip. Now you have time to do it properly.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJ2_yKs9dn1WwRgNRSPMp25HQ" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">11:45</span>
+        <span class="stop-name">💦 Fantail Falls</span>
+        <span class="stop-tags"><span class="tag tag-optional">Recommended</span><span class="tag tag-duration">15 min</span></span>
+      </div>
+      <p class="stop-details">2-min walk from carpark to a delicate fan-shaped waterfall. Easy stretch break.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJUYJf1GadKm0Ri0IGVzcz-OI" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">12:05</span>
+        <span class="stop-name">🌉 Gates of Haast Bridge</span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">5 min</span></span>
+      </div>
+      <p class="stop-details">Drive-by photo of the roaring Haast River rapids. Pull off only if safe — no formal carpark.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:EkhTdGF0ZSBId3kgNiAmIEdhdGVzIG9mIEhhYXN0IEJyaWRnZSwgV2VzdCBDb2FzdCBSZWdpb24gOTM4MiwgTmV3IFplYWxhbmQ" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop must">
+      <div class="stop-header">
+        <span class="stop-time">12:15</span>
+        <span class="stop-name">💧 Thunder Creek Falls</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">5-min walk to a 28m single-drop waterfall plunging into a gorge. Best waterfall on the Haast Pass route — many say the best stop between Wānaka and Franz Josef.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJ09awCgB91WwRfzlQcNMQn7g" target="_blank">📍 Open in Maps</a>
+    </div>
+  </div>
+
+  <!-- MIDDAY -->
+  <div class="section-header"><h2>🍴 Midday · Haast & West Coast Drive</h2></div>
+  <div class="timeline">
+
+    <div class="stop meal">
+      <div class="stop-header">
+        <span class="stop-time">13:30</span>
+        <span class="stop-name">🍔 The Hard Antler, Haast — LUNCH</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">60 min</span></span>
+      </div>
+      <p class="stop-details">Best meal between Wānaka and Franz Josef. Try the whitebait sandwich (West Coast specialty) or venison burger. Open 11am–10pm. Toilets across road. Big garlic butter on every steak.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJv-bA2Wd11WwRlOqA1WKCbIw" target="_blank">📍 5 Marks Rd, Haast</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">14:30</span>
+        <span class="stop-name">🏛️ Awarua/Haast Visitor Centre</span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">Small but well-curated museum on West Coast history & ecology. DOC staff can confirm SH6 road conditions ahead. Clean toilets.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJEziMFlOZ1WwRcXEsmV9O4bU" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop must">
+      <div class="stop-header">
+        <span class="stop-time">15:15</span>
+        <span class="stop-name">🌊 Knights Point Lookout</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">First sweeping Tasman Sea view — dramatic rocky coastline and rolling forested headlands. Public toilets, large carpark. Good leg-stretch.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJJ-jw2L6P1WwR89OUXDfduU4" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">15:50</span>
+        <span class="stop-name">🌳 Ship Creek Walk</span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">30 min</span></span>
+      </div>
+      <p class="stop-details">Choose one: the sand dune walk along the Tasman, or the kahikatea swamp boardwalk through ancient forest. Both are short and stunning.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:EjxTdGF0ZSBIaWdod2F5IDYgJiBTaGlwIENyZWVrIEJyaWRnZSwgSGFhc3QgNzg4NiwgTmV3IFplYWxhbmQ" target="_blank">📍 Open in Maps</a>
+    </div>
+  </div>
+
+  <!-- AFTERNOON -->
+  <div class="section-header"><h2>🏕️ Late Afternoon · Arrive Franz Josef</h2></div>
+  <div class="timeline">
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">16:30</span>
+        <span class="stop-name">🏕️ Check in: Franz Josef Top 10 Holiday Park</span>
+        <span class="stop-tags"><span class="tag tag-must">Reception open</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details">Reception open until 17:00 — you arrive comfortably in time. Get site number, plug in motorhome, sort gear before kayak. Mountain & rainforest setting.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJgdR2UfnVK20RhRy2GqQb9UI" target="_blank">📍 2902 Franz Josef Highway</a>
+    </div>
+  </div>
+
+  <!-- EVENING -->
+  <div class="section-header"><h2>🛶 Evening · Sunset Kayak (Main Objective)</h2></div>
+  <div class="timeline">
+
+    <div class="stop objective">
+      <div class="stop-header">
+        <span class="stop-time">16:45</span>
+        <span class="stop-name">🛶 Franz Josef Wilderness Tours — Check-in</span>
+        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">15 min early</span></span>
+      </div>
+      <p class="stop-details">Meet at 30 Main Road for the <strong>5pm Sunset Classic Kayak</strong>. Use the buffer to use bathroom, layer up, leave valuables in motorhome. Walk over from Top 10 (~12 min) or drive (~3 min, parking on Main Rd).</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJD0nGUKnmpb8Rjt8aLJlBfyQ" target="_blank">📍 30 Main Rd</a>
+    </div>
+
+    <div class="stop objective">
+      <div class="stop-header">
+        <span class="stop-time">17:00</span>
+        <span class="stop-name">🌅 Sunset Classic Kayak — Lake Mapourika</span>
+        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">3 hrs</span></span>
+      </div>
+      <p class="stop-details">Transfer to Lake Mapourika (~10 min drive). Glide across glassy water with Southern Alps and glaciers reflected. Paddle into the Ōkārito Kiwi Sanctuary edge. Sunset around 20:30 — golden hour over the alps. Wet weather gear provided. <strong>Call +64 3 752 0230 if delayed.</strong></p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJD0nGUKnmpb8Rjt8aLJlBfyQ" target="_blank">📍 Booking office</a>
+    </div>
+
+    <div class="stop meal">
+      <div class="stop-header">
+        <span class="stop-time">20:30</span>
+        <span class="stop-name">🍜 SnakeBite Brewery — Late Dinner</span>
+        <span class="stop-tags"><span class="tag tag-must">Tight</span><span class="tag tag-duration">60 min</span></span>
+      </div>
+      <p class="stop-details">Closes 20:30 — last orders before 20:00. Two safer options:
+      <br>① <strong>Pre-order by phone</strong> during your kayak transfer back (+64 3 752 0234) so food is ready.
+      <br>② <strong>Cook in motorhome</strong> — pull pre-prepped pasta/curry from fridge for a faster evening.
+      <br>Asian fusion menu: panang curry, nasi goreng, calamari salad.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJQYcdquDVK20RWtZsG4tu6bs" target="_blank">📍 28 Main Rd</a>
+    </div>
+  </div>
+
+  <!-- FUEL -->
+  <div class="section-header"><h2>⛽ Fuel Strategy</h2></div>
+  <div class="info-card">
+    <p style="margin-bottom: 16px; color: var(--text-soft);"><strong>Maui River 6-berth</strong> · ~80 L tank · estimated consumption <strong>13.5–14.5 L/100 km</strong> for the Haast Pass climb with full load. Expected day total: <strong>~50 L</strong> (less than yesterday's plan because no 60 km Fox Glacier backtrack).</p>
+    <table class="fuel-table">
+      <thead>
+        <tr><th>Station</th><th>When</th><th>Price band</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr class="recommended">
+          <td><strong>McKeown Wanaka 24/7</strong> ⭐</td>
+          <td>Fill before departure</td>
+          <td>~$1.85–1.95/L</td>
+          <td>Cheapest. Open 24/7. Motorhome-friendly forecourt. <strong>Fill to brim.</strong></td>
+        </tr>
+        <tr>
+          <td>Makarora Country Cafe</td>
+          <td>Emergency mid-route</td>
+          <td>~$2.50+/L</td>
+          <td>Card-only pump. Avoid unless low.</td>
+        </tr>
+        <tr>
+          <td>Z Energy Haast</td>
+          <td>Backup if missed Wanaka</td>
+          <td>~$2.30–2.50/L</td>
+          <td>Reasonable backup.</td>
+        </tr>
+        <tr>
+          <td>Glacier Motors (Franz Josef) / Fox</td>
+          <td>Avoid tonight & tomorrow</td>
+          <td>~$2.50–2.80/L</td>
+          <td>Most expensive on the route. Wait for Hokitika Day 11 evening.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 16px; font-size: 0.9rem; color: var(--text-soft);"><em>Prices are bands based on recent reports — needs verification on the day.</em></p>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section-header"><h2>✅ Pre-Trip Checklist (Do Tonight in Wānaka)</h2></div>
+  <div class="info-card">
+    <ul class="checklist">
+      <li>Confirm 5pm Sunset Classic Kayak booking — Franz Josef Wilderness Tours <strong>+64 3 752 0230</strong></li>
+      <li>Confirm Franz Josef Top 10 booking — <strong>+64 3 752 0735</strong></li>
+      <li>Fill fresh water tank, empty grey/black at Hampshire dump station before departure</li>
+      <li>Pre-cook dinner option for after-kayak (pasta sauce, curry, etc.) as SnakeBite backup</li>
+      <li>Charge phones + power banks + camera batteries for kayak sunset photos</li>
+      <li>Check West Coast weather + SH6 road status (NZTA Journey Planner) — Haast Pass closes after slips</li>
+      <li>Print or screenshot kayak booking confirmation (West Coast cell signal is patchy)</li>
+    </ul>
+  </div>
+
+  <!-- CONFIDENCE -->
+  <div class="info-card" style="background: linear-gradient(135deg, #f0f8fa, #e8f4f8);">
+    <h3>📊 Confidence notes</h3>
+    <p style="font-size: 0.9rem; color: var(--text-soft);">
+      <strong>[High confidence]</strong> Geography & distances · McKeown cheapest in Wanaka · Haast Pass route via SH6 is the only option · SnakeBite closes 20:30 · Franz Josef Wilderness Tours 5pm Sunset Classic exists and runs 3 hours.<br><br>
+      <strong>[Medium confidence]</strong> Sunset ~20:30 on 16 Nov at Franz Josef latitude · Maui River 13.5–14.5 L/100km · Fuel price bands · Pembroke Patisserie Monday 07:30 open.<br><br>
+      <strong>Needs verification on the day</strong> Live fuel prices · SH6 road conditions · Kayak weather call · Current kayak price per person.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <p class="quote">"The best photos come to those who wake before the wind."</p>
+  <p>Day 10 of South Island Road Trip · 16 November 2026 · Maui River 6-berth</p>
+</footer>
+
+</body>
+</html>
