@@ -60,14 +60,14 @@ body::before {
   overflow: hidden;
   background:
     linear-gradient(180deg,
-      #1a1830 0%,          /* deep pre-dawn sky */
-      #2d2548 18%,         /* indigo */
-      #4a3560 38%,         /* dusky purple */
-      #8a5470 55%,         /* peach-rose horizon */
-      #c97a6a 65%,         /* alpenglow band */
-      #6a5070 72%,         /* reflection transition */
-      #3a3a5a 82%,         /* mirrored sky in water */
-      #1a1830 100%);       /* dark lake depths */
+      #d8e6c8 0%,          /* pale forest sky, filtered light */
+      #a8c088 15%,         /* upper canopy light */
+      #6a8a5a 32%,         /* deeper canopy */
+      #3a5a48 48%,         /* dense forest floor */
+      #4ec4c5 62%,         /* GORGE — turquoise water begins */
+      #2e9899 74%,         /* deeper gorge water */
+      #1a5a5c 86%,         /* shadow depths */
+      #0e2a2d 100%);       /* rock bed */
 }
 
 .hero-scene {
@@ -91,8 +91,8 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 30%, rgba(0,0,0,0.35) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.2) 100%);
+    radial-gradient(ellipse at 25% 35%, rgba(10, 30, 25, 0.5) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(20, 40, 30, 0.2) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.25) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -132,12 +132,12 @@ body::before {
 .hero-title .italic {
   font-style: italic;
   font-weight: 400;
-  color: #ffd9b5;
+  color: #7bd8d9;
 }
 .hero-title .arrow {
   font-style: normal;
   font-weight: 200;
-  color: rgba(255, 247, 225, 0.7);
+  color: rgba(215, 245, 240, 0.7);
   margin: 0 0.2em;
 }
 
@@ -157,9 +157,9 @@ body::before {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 32px;
-  max-width: 780px;
+  max-width: 920px;
   padding-top: 32px;
   border-top: 1px solid rgba(245, 240, 230, 0.4);
   opacity: 0;
@@ -201,13 +201,14 @@ body::before {
   background: var(--paper);
 }
 .flags-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1px;
   background: var(--ink);
   border: 1px solid var(--ink);
 }
 .flag {
+  flex: 1 1 300px;
   background: var(--paper-warm);
   padding: 28px 24px;
   position: relative;
@@ -617,14 +618,13 @@ footer .accent {
       <span class="arrow">→</span><span class="italic">Castle Hill</span>
     </h1>
     <p class="hero-subtitle">
-      A dawn reflection at Lake Matheson, the Ngāi Tahu creation story carved in stone,
-      turquoise water in a rainforest gorge, and limestone giants under alpine light —
-      all in one long, beautiful drive.
+      Turquoise glacial water in a rainforest gorge, a 131-metre waterfall in the beech forest of
+      Arthur's Pass, and limestone giants under alpine light — one long, beautiful drive.
     </p>
     <div class="hero-stats">
       <div>
         <div class="stat-label">Total Distance</div>
-        <div class="stat-value">~475<span class="unit">km</span></div>
+        <div class="stat-value">~465<span class="unit">km</span></div>
       </div>
       <div>
         <div class="stat-label">Driving Time</div>
@@ -632,201 +632,255 @@ footer .accent {
       </div>
       <div>
         <div class="stat-label">Stops</div>
-        <div class="stat-value">8<span class="unit">key</span></div>
+        <div class="stat-value">6<span class="unit">key</span></div>
       </div>
       <div>
         <div class="stat-label">Diesel Needed</div>
-        <div class="stat-value">~71<span class="unit">L</span></div>
+        <div class="stat-value">~70<span class="unit">L</span></div>
+      </div>
+      <div>
+        <div class="stat-label">Diesel Cost</div>
+        <div class="stat-value">~$199<span class="unit">NZD</span></div>
       </div>
     </div>
   </div>
 
-  <!-- Lake Matheson at dawn — sky, mountains, reflection, forest -->
+  <!-- Hokitika Gorge — filtered forest light, suspension bridge, turquoise water, tree ferns -->
   <svg class="hero-scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <!-- Subtle alpenglow on highest peaks -->
-      <linearGradient id="peakGlow" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#f4a47f" stop-opacity="0.95"/>
-        <stop offset="40%" stop-color="#c9756a" stop-opacity="0.7"/>
-        <stop offset="100%" stop-color="#3a2940" stop-opacity="0.9"/>
+      <!-- Light shafts through canopy -->
+      <linearGradient id="lightShaft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f0f4d8" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#f0f4d8" stop-opacity="0"/>
       </linearGradient>
-      <!-- Back mountains (lit edges) -->
-      <linearGradient id="backRange" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#4a3552" stop-opacity="0.85"/>
-        <stop offset="100%" stop-color="#1f1830" stop-opacity="1"/>
+      <!-- Back canopy layer -->
+      <linearGradient id="canopyBack" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7a9860" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#3a5a48" stop-opacity="0.9"/>
       </linearGradient>
-      <!-- Mid mountains -->
-      <linearGradient id="midRange" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#26203a" stop-opacity="0.95"/>
-        <stop offset="100%" stop-color="#0e0a1a" stop-opacity="1"/>
+      <!-- Mid canopy -->
+      <linearGradient id="canopyMid" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a6a48" stop-opacity="0.85"/>
+        <stop offset="100%" stop-color="#1e3a28" stop-opacity="1"/>
       </linearGradient>
-      <!-- Forest silhouette -->
-      <linearGradient id="forest" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0a0814" stop-opacity="1"/>
-        <stop offset="100%" stop-color="#050308" stop-opacity="1"/>
+      <!-- Front foliage -->
+      <linearGradient id="foliageFront" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e3a28" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#0a1a12" stop-opacity="1"/>
       </linearGradient>
-      <!-- Reflection mountains (softer, slightly tinted) -->
-      <linearGradient id="reflectBack" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1f1830" stop-opacity="0.6"/>
-        <stop offset="100%" stop-color="#3a2c4a" stop-opacity="0.3"/>
+      <!-- Water — the turquoise glacial signature -->
+      <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7bd8d9" stop-opacity="0.9"/>
+        <stop offset="30%" stop-color="#4ec4c5" stop-opacity="1"/>
+        <stop offset="70%" stop-color="#2e9899" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#1a5a5c" stop-opacity="1"/>
       </linearGradient>
-      <linearGradient id="reflectMid" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0e0a1a" stop-opacity="0.7"/>
-        <stop offset="100%" stop-color="#26203a" stop-opacity="0.25"/>
+      <!-- Water highlight (foam near rocks) -->
+      <radialGradient id="foam" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f0f8f6" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#f0f8f6" stop-opacity="0"/>
+      </radialGradient>
+      <!-- Rocks -->
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#8a8878" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#3a3a2d" stop-opacity="1"/>
       </linearGradient>
-      <linearGradient id="reflectPeak" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#c9756a" stop-opacity="0.45"/>
-        <stop offset="60%" stop-color="#7a4858" stop-opacity="0.25"/>
-        <stop offset="100%" stop-color="#3a2940" stop-opacity="0"/>
-      </linearGradient>
-      <!-- Lake water tone overlay -->
-      <linearGradient id="lakeTone" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#3a3a5a" stop-opacity="0"/>
-        <stop offset="20%" stop-color="#1f1830" stop-opacity="0.3"/>
-        <stop offset="100%" stop-color="#0a0814" stop-opacity="0.7"/>
-      </linearGradient>
-      <!-- Mist filter -->
-      <filter id="mistBlur">
-        <feGaussianBlur stdDeviation="3"/>
-      </filter>
-      <!-- Water ripple distortion (very subtle) -->
+      <!-- Water ripple filter -->
       <filter id="ripple">
-        <feTurbulence type="fractalNoise" baseFrequency="0.02 0.6" numOctaves="2" result="turb"/>
-        <feDisplacementMap in="SourceGraphic" in2="turb" scale="3"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.5" numOctaves="2" result="turb"/>
+        <feDisplacementMap in="SourceGraphic" in2="turb" scale="2.5"/>
+      </filter>
+      <!-- Subtle blur for atmosphere -->
+      <filter id="atmoBlur">
+        <feGaussianBlur stdDeviation="2"/>
       </filter>
     </defs>
 
-    <!-- Faint stars in upper sky (Southern Cross hint) -->
-    <g opacity="0.5">
-      <circle cx="280" cy="80" r="0.9" fill="#fff"/>
-      <circle cx="520" cy="45" r="1.1" fill="#fff"/>
-      <circle cx="680" cy="110" r="0.7" fill="#fff"/>
-      <circle cx="890" cy="65" r="0.9" fill="#fff"/>
-      <circle cx="1150" cy="90" r="0.8" fill="#fff"/>
-      <circle cx="1300" cy="40" r="1" fill="#fff"/>
-      <!-- Southern Cross approximate (decorative) -->
-      <circle cx="200" cy="180" r="1.3" fill="#fff"/>
-      <circle cx="215" cy="220" r="1.5" fill="#fff"/>
-      <circle cx="195" cy="250" r="1.1" fill="#fff"/>
-      <circle cx="235" cy="245" r="1" fill="#fff"/>
+    <!-- ========== SKY / UPPER CANOPY LIGHT ========== -->
+
+    <!-- Light shafts through canopy (angled beams of filtered sun) -->
+    <g opacity="0.6">
+      <path fill="url(#lightShaft)" d="M200,0 L280,0 L420,300 L360,300 Z"/>
+      <path fill="url(#lightShaft)" d="M540,0 L610,0 L720,280 L670,280 Z"/>
+      <path fill="url(#lightShaft)" d="M900,0 L975,0 L1080,320 L1020,320 Z"/>
+      <path fill="url(#lightShaft)" d="M1180,0 L1240,0 L1330,290 L1280,290 Z"/>
     </g>
 
-    <!-- ========== ABOVE WATERLINE (water at y=560) ========== -->
+    <!-- ========== BACK CANOPY (distant forest ridge) ========== -->
+    <path fill="url(#canopyBack)" d="
+      M0,340
+      L0,220 L40,200 L90,215 L150,180 L210,210 L280,175 L350,195 L420,165
+      L490,190 L570,155 L640,180 L720,145 L800,175 L880,150 L960,180
+      L1040,145 L1120,175 L1200,150 L1280,180 L1360,155 L1440,185
+      L1440,340 Z" opacity="0.85"/>
 
-    <!-- Back range: distant silhouette -->
-    <path fill="url(#backRange)" d="
-      M0,500
-      L0,420 L60,400 L130,380 L210,395 L290,360 L380,375 L460,340
-      L540,330 L620,310 L700,260 L780,290 L860,250 L940,300
-      L1020,275 L1100,320 L1180,290 L1260,340 L1340,310 L1440,360
-      L1440,500 Z"/>
+    <!-- Individual tree tops in back canopy (rounded organic shapes) -->
+    <g fill="url(#canopyBack)" opacity="0.6">
+      <ellipse cx="120" cy="200" rx="55" ry="70"/>
+      <ellipse cx="260" cy="175" rx="65" ry="85"/>
+      <ellipse cx="440" cy="185" rx="70" ry="80"/>
+      <ellipse cx="620" cy="170" rx="60" ry="90"/>
+      <ellipse cx="820" cy="180" rx="65" ry="75"/>
+      <ellipse cx="1020" cy="175" rx="70" ry="85"/>
+      <ellipse cx="1220" cy="170" rx="60" ry="80"/>
+      <ellipse cx="1380" cy="185" rx="55" ry="75"/>
+    </g>
 
-    <!-- Aoraki / Mt Tasman alpenglow peaks (center, lit by pre-sunrise) -->
-    <!-- Mt Tasman -->
-    <path fill="url(#peakGlow)" d="M580,560 L640,310 L680,270 L720,295 L755,270 L780,300 L815,330 L850,560 Z" opacity="0.75"/>
-    <!-- Aoraki/Mt Cook (slightly taller, central) -->
-    <path fill="url(#peakGlow)" d="M680,560 L740,270 L785,210 L815,235 L850,260 L890,300 L940,560 Z" opacity="0.9"/>
+    <!-- ========== MID CANOPY (denser trees framing the gorge) ========== -->
+    <path fill="url(#canopyMid)" d="
+      M0,420
+      L0,280 L60,260 L130,290 L200,255 L280,285 L360,250
+      L420,280 L480,265 L540,290 L600,270
+      L680,300 L740,285 L800,310 L860,290
+      L940,320 L1000,300 L1080,325 L1140,305
+      L1220,330 L1290,315 L1380,335 L1440,320
+      L1440,420 Z"/>
 
-    <!-- Sharp dark peak silhouettes over the alpenglow base -->
-    <path fill="url(#midRange)" d="
-      M0,560
-      L0,470 L80,450 L160,440 L230,460 L310,420 L380,440 L450,400
-      L520,420 L580,395 L640,350 L680,310 L720,335 L755,300 L780,335
-      L815,365 L860,330 L905,380 L950,355 L1010,400 L1075,375
-      L1140,410 L1215,385 L1290,425 L1370,400 L1440,440
-      L1440,560 Z"/>
+    <!-- Left side dense forest wall (framing the gorge) -->
+    <path fill="url(#canopyMid)" d="
+      M0,900 L0,340
+      C 30,320 60,310 90,325 L 110,300
+      C 140,290 170,310 200,300 L 220,320 L 240,305
+      C 270,315 290,340 310,335 L 330,360 L 350,345
+      C 380,360 400,385 420,380 L 435,410
+      C 425,440 415,470 420,500 L 400,530
+      C 380,560 360,590 355,620 L 335,650
+      C 315,680 290,710 285,740 L 265,770
+      C 245,800 220,830 215,860 L 195,890 L 175,900 L 0,900 Z"/>
 
-    <!-- A touch of snow highlight on Aoraki summit -->
-    <path fill="#f8d4b8" opacity="0.45" d="M780,250 L795,225 L815,235 L808,255 Z"/>
-    <path fill="#f8d4b8" opacity="0.35" d="M715,300 L728,285 L740,295 L730,310 Z"/>
+    <!-- Right side dense forest wall -->
+    <path fill="url(#canopyMid)" d="
+      M1440,900 L1440,340
+      C 1410,320 1380,310 1350,325 L 1330,300
+      C 1300,290 1270,310 1240,300 L 1220,320 L 1200,305
+      C 1170,315 1150,340 1130,335 L 1110,360 L 1090,345
+      C 1060,360 1040,385 1020,380 L 1005,410
+      C 1015,440 1025,470 1020,500 L 1040,530
+      C 1060,560 1080,590 1085,620 L 1105,650
+      C 1125,680 1150,710 1155,740 L 1175,770
+      C 1195,800 1220,830 1225,860 L 1245,890 L 1265,900 L 1440,900 Z"/>
 
-    <!-- Low mist band over the water (atmospheric) -->
-    <ellipse cx="720" cy="555" rx="900" ry="14" fill="#d8a890" opacity="0.18" filter="url(#mistBlur)"/>
-    <ellipse cx="500" cy="558" rx="500" ry="8" fill="#e0baa0" opacity="0.22" filter="url(#mistBlur)"/>
-    <ellipse cx="1000" cy="558" rx="450" ry="6" fill="#c89880" opacity="0.18" filter="url(#mistBlur)"/>
+    <!-- ========== SUSPENSION BRIDGE (iconic yellow-orange steel) ========== -->
+    <g>
+      <!-- Bridge cables (upper suspension curve) -->
+      <path d="M 240,485 Q 720,435 1200,485"
+        stroke="#c9863a" stroke-width="3" fill="none" opacity="0.95"/>
+      <path d="M 240,490 Q 720,440 1200,490"
+        stroke="#8a5a24" stroke-width="1.5" fill="none" opacity="0.6"/>
 
-    <!-- Waterline / lake edge -->
-    <line x1="0" y1="560" x2="1440" y2="560" stroke="#f4c2a8" stroke-opacity="0.25" stroke-width="0.8"/>
+      <!-- Bridge deck (thin horizontal line) -->
+      <line x1="240" y1="540" x2="1200" y2="540"
+        stroke="#3a2818" stroke-width="4" opacity="0.9"/>
+      <line x1="240" y1="544" x2="1200" y2="544"
+        stroke="#7a5238" stroke-width="1.5" opacity="0.7"/>
 
-    <!-- ========== REFLECTION (mirrored, with ripple distortion) ========== -->
+      <!-- Vertical hangers from cable to deck -->
+      <g stroke="#8a5a24" stroke-width="1" opacity="0.75">
+        <line x1="300" y1="475" x2="300" y2="540"/>
+        <line x1="380" y1="465" x2="380" y2="540"/>
+        <line x1="460" y1="457" x2="460" y2="540"/>
+        <line x1="540" y1="450" x2="540" y2="540"/>
+        <line x1="620" y1="445" x2="620" y2="540"/>
+        <line x1="700" y1="442" x2="700" y2="540"/>
+        <line x1="780" y1="442" x2="780" y2="540"/>
+        <line x1="860" y1="445" x2="860" y2="540"/>
+        <line x1="940" y1="450" x2="940" y2="540"/>
+        <line x1="1020" y1="457" x2="1020" y2="540"/>
+        <line x1="1100" y1="465" x2="1100" y2="540"/>
+        <line x1="1140" y1="475" x2="1140" y2="540"/>
+      </g>
 
+      <!-- Bridge anchor towers (left and right) -->
+      <path d="M 235,540 L 235,470 L 245,470 L 245,540 Z" fill="#3a2818" opacity="0.9"/>
+      <path d="M 1195,540 L 1195,470 L 1205,470 L 1205,540 Z" fill="#3a2818" opacity="0.9"/>
+    </g>
+
+    <!-- ========== WATER (the turquoise gorge) ========== -->
+
+    <!-- Main water body -->
+    <path fill="url(#water)" d="
+      M0,560 L0,780
+      L 100,790 L 220,795 L 340,790 L 460,798 L 580,795 L 700,800
+      L 820,795 L 940,798 L 1060,792 L 1180,796 L 1300,790 L 1440,795
+      L 1440,560 Z"/>
+
+    <!-- Subtle horizontal current lines (with ripple filter) -->
     <g filter="url(#ripple)">
-      <!-- Mirrored back range -->
-      <path fill="url(#reflectBack)" d="
-        M0,620
-        L0,700 L60,720 L130,740 L210,725 L290,760 L380,745 L460,780
-        L540,790 L620,810 L700,860 L780,830 L860,870 L940,820
-        L1020,845 L1100,800 L1180,830 L1260,780 L1340,810 L1440,760
-        L1440,620 Z" opacity="0.55"/>
-
-      <!-- Mirrored alpenglow peaks (much fainter) -->
-      <path fill="url(#reflectPeak)" d="M680,560 L740,850 L785,910 L815,885 L850,860 L890,820 L940,560 Z" opacity="0.55"/>
-      <path fill="url(#reflectPeak)" d="M580,560 L640,810 L680,850 L720,825 L755,850 L780,820 L815,790 L850,560 Z" opacity="0.4"/>
-
-      <!-- Mirrored sharp peaks -->
-      <path fill="url(#reflectMid)" d="
-        M0,560
-        L0,650 L80,670 L160,680 L230,660 L310,700 L380,680 L450,720
-        L520,700 L580,725 L640,770 L680,810 L720,785 L755,820 L780,785
-        L815,755 L860,790 L905,740 L950,765 L1010,720 L1075,745
-        L1140,710 L1215,735 L1290,695 L1370,720 L1440,680
-        L1440,560 Z" opacity="0.7"/>
+      <g stroke="#a8e8e8" stroke-opacity="0.4" stroke-width="0.8" fill="none">
+        <path d="M 40,600 Q 400,595 800,605 T 1400,600"/>
+        <path d="M 20,640 Q 380,635 780,645 T 1420,640"/>
+        <path d="M 60,680 Q 420,675 820,685 T 1380,680"/>
+        <path d="M 0,720 Q 360,715 760,725 T 1440,720"/>
+      </g>
+      <g stroke="#7bd8d9" stroke-opacity="0.25" stroke-width="0.5" fill="none">
+        <path d="M 100,620 Q 460,617 860,625 T 1340,622"/>
+        <path d="M 80,660 Q 440,657 840,665 T 1360,662"/>
+        <path d="M 40,700 Q 400,697 800,705 T 1400,702"/>
+      </g>
     </g>
 
-    <!-- Water tone overlay (darkens the bottom, gives depth) -->
-    <rect x="0" y="560" width="1440" height="340" fill="url(#lakeTone)"/>
+    <!-- Foam highlights around the base of the bridge tower / rocks -->
+    <ellipse cx="240" cy="570" rx="45" ry="10" fill="url(#foam)" opacity="0.6"/>
+    <ellipse cx="1200" cy="570" rx="45" ry="10" fill="url(#foam)" opacity="0.6"/>
+    <ellipse cx="720" cy="640" rx="80" ry="12" fill="url(#foam)" opacity="0.35"/>
 
-    <!-- Subtle horizontal water lines -->
-    <g stroke="#d8a890" stroke-opacity="0.06" stroke-width="0.5" fill="none">
-      <line x1="0" y1="600" x2="1440" y2="600"/>
-      <line x1="0" y1="640" x2="1440" y2="640"/>
-      <line x1="0" y1="690" x2="1440" y2="690"/>
-      <line x1="0" y1="750" x2="1440" y2="750"/>
-      <line x1="0" y1="820" x2="1440" y2="820"/>
+    <!-- Rocks in the water -->
+    <g>
+      <ellipse cx="180" cy="605" rx="55" ry="20" fill="url(#rock)" opacity="0.9"/>
+      <ellipse cx="1260" cy="600" rx="60" ry="22" fill="url(#rock)" opacity="0.9"/>
+      <ellipse cx="720" cy="660" rx="70" ry="18" fill="url(#rock)" opacity="0.75"/>
+      <ellipse cx="480" cy="695" rx="50" ry="15" fill="url(#rock)" opacity="0.6"/>
+      <ellipse cx="980" cy="700" rx="55" ry="16" fill="url(#rock)" opacity="0.6"/>
     </g>
 
-    <!-- ========== FOREGROUND FOREST SILHOUETTE ========== -->
-    <!-- Dark podocarp/rainforest shoreline framing the lake -->
-    <path fill="url(#forest)" d="
-      M0,900 L0,820
-      C 30,815 50,790 70,795
-      C 80,780 95,785 105,775
-      C 115,760 125,770 135,755
-      C 145,740 160,765 170,750
-      C 180,735 195,755 210,745
-      L 220,760 L 235,750 L 250,768 L 265,755 L 280,772 L 295,760
-      C 310,750 325,770 340,762
-      L 355,775 L 370,765
-      C 385,758 400,775 415,770 L 430,785 L 445,775 L 460,790
-      C 475,785 490,795 505,790
-      L 520,800 L 545,795 L 570,805 L 600,798 L 640,808
-      L 700,802 L 760,810 L 820,805
-      L 880,812 L 940,807 L 1000,815
-      C 1020,810 1040,818 1060,812
-      L 1080,820 L 1100,815
-      C 1120,808 1140,820 1160,815 L 1180,825 L 1200,818
-      C 1220,810 1240,822 1260,815 L 1280,828 L 1305,818
-      C 1325,808 1345,820 1365,812
-      L 1390,825 L 1410,815 L 1440,822
-      L 1440,900 Z"/>
+    <!-- Foam around rocks -->
+    <ellipse cx="180" cy="600" rx="65" ry="8" fill="#f0f8f6" opacity="0.4"/>
+    <ellipse cx="1260" cy="595" rx="70" ry="8" fill="#f0f8f6" opacity="0.4"/>
 
-    <!-- Tree silhouettes (more depth) -->
-    <g fill="#050308">
-      <!-- left cluster -->
-      <ellipse cx="40" cy="800" rx="35" ry="55"/>
-      <ellipse cx="95" cy="790" rx="28" ry="48"/>
-      <ellipse cx="150" cy="780" rx="32" ry="50"/>
-      <!-- tall conifer hints -->
-      <path d="M180,820 L175,720 L185,725 L182,820 Z"/>
-      <path d="M240,810 L237,740 L245,745 L243,810 Z"/>
-      <path d="M320,815 L318,755 L324,758 L322,815 Z"/>
-      <!-- right cluster -->
-      <ellipse cx="1280" cy="800" rx="38" ry="55"/>
-      <ellipse cx="1340" cy="795" rx="30" ry="48"/>
-      <ellipse cx="1395" cy="790" rx="35" ry="52"/>
-      <path d="M1230,815 L1227,745 L1235,748 L1233,815 Z"/>
-      <path d="M1170,810 L1167,750 L1174,753 L1172,810 Z"/>
+    <!-- ========== FOREGROUND: TREE FERNS (very West Coast NZ) ========== -->
+
+    <!-- Left foreground fern -->
+    <g fill="url(#foliageFront)" opacity="0.95">
+      <!-- Trunk -->
+      <path d="M 85,900 L 80,720 L 92,720 L 88,900 Z"/>
+      <!-- Fronds radiating -->
+      <g transform="translate(86,720)">
+        <path d="M 0,0 Q -40,-25 -95,-35 Q -60,-15 -30,5 Z"/>
+        <path d="M 0,0 Q -30,-45 -70,-75 Q -45,-35 -20,-15 Z"/>
+        <path d="M 0,0 Q -5,-55 5,-105 Q 5,-55 8,-15 Z"/>
+        <path d="M 0,0 Q 30,-45 70,-75 Q 45,-35 20,-15 Z"/>
+        <path d="M 0,0 Q 40,-25 95,-35 Q 60,-15 30,5 Z"/>
+        <path d="M 0,0 Q 45,5 90,20 Q 55,10 25,10 Z"/>
+        <path d="M 0,0 Q -45,5 -90,20 Q -55,10 -25,10 Z"/>
+      </g>
     </g>
+
+    <!-- Right foreground fern -->
+    <g fill="url(#foliageFront)" opacity="0.95">
+      <path d="M 1355,900 L 1350,700 L 1362,700 L 1358,900 Z"/>
+      <g transform="translate(1356,700)">
+        <path d="M 0,0 Q -45,-25 -100,-38 Q -65,-15 -32,5 Z"/>
+        <path d="M 0,0 Q -35,-45 -75,-80 Q -50,-35 -22,-15 Z"/>
+        <path d="M 0,0 Q -5,-60 5,-110 Q 5,-60 8,-15 Z"/>
+        <path d="M 0,0 Q 32,-48 75,-80 Q 48,-35 22,-15 Z"/>
+        <path d="M 0,0 Q 45,-25 100,-38 Q 65,-15 32,5 Z"/>
+        <path d="M 0,0 Q 48,5 95,20 Q 58,10 26,10 Z"/>
+        <path d="M 0,0 Q -48,5 -95,20 Q -58,10 -26,10 Z"/>
+      </g>
+    </g>
+
+    <!-- Smaller ferns and dark foreground foliage -->
+    <g fill="url(#foliageFront)">
+      <ellipse cx="30" cy="850" rx="55" ry="45"/>
+      <ellipse cx="180" cy="870" rx="45" ry="35"/>
+      <ellipse cx="270" cy="880" rx="50" ry="30"/>
+      <ellipse cx="1250" cy="875" rx="50" ry="35"/>
+      <ellipse cx="1420" cy="855" rx="55" ry="40"/>
+    </g>
+
+    <!-- Very dark foreground shadow band -->
+    <path fill="#050e0a" opacity="0.85" d="M0,900 L0,870 Q 200,865 400,878 T 800,875 T 1200,880 T 1440,872 L 1440,900 Z"/>
+
   </svg>
 </section>
 
@@ -840,38 +894,26 @@ footer .accent {
     <div class="flags-grid">
       <div class="flag">
         <div class="flag-num">RISK 01</div>
-        <div class="flag-title">The dawn reflection is weather-dependent</div>
-        <div class="flag-body">Lake Matheson's iconic mirror only happens with near-zero wind AND clear skies over Aoraki/Mt Cook. Even in fair-weather November, success rate is roughly 1-in-4 mornings. Have a backup plan: if it's windy/cloudy, the lake walk is still beautiful — and you'll save 90 min for a slower start.</div>
+        <div class="flag-title">Franz Josef diesel is the most expensive on your route</div>
+        <div class="flag-body">Glacier Motors in Franz Josef has been called out by multiple recent reviewers as the most expensive fuel on the South Island. Do NOT fill up before leaving — refuel at Hokitika bp Truckstop instead (cheapest high-flow diesel on the West Coast, ~$0.30–0.40/L less).</div>
         <div class="flag-conf">high confidence</div>
       </div>
       <div class="flag">
         <div class="flag-num">RISK 02</div>
-        <div class="flag-title">Franz Josef diesel is the most expensive on your route</div>
-        <div class="flag-body">Glacier Motors in Franz Josef has been called out by multiple recent reviewers as the most expensive fuel on the South Island. Do NOT fill up before leaving — refuel at Hokitika bp Truckstop instead (cheapest high-flow diesel on the West Coast).</div>
-        <div class="flag-conf">high confidence</div>
-      </div>
-      <div class="flag">
-        <div class="flag-num">RISK 03</div>
-        <div class="flag-title">This is a long driving day for a 6-berth motorhome</div>
-        <div class="flag-body">SH6 between Franz Josef and Hokitika is mostly one-lane-each-way with frequent one-way bridges. The Otira Gorge climb is steep (max 16% grade). At motorhome pace, allow 6.5 hours total driving — don't try to add Pancake Rocks or Punakaiki on this day.</div>
-        <div class="flag-conf">high confidence</div>
-      </div>
-      <div class="flag">
-        <div class="flag-num">RISK 04</div>
         <div class="flag-title">Hokitika Sandwich Co closes at 2 PM, closed Sunday</div>
         <div class="flag-body">17 Nov 2026 is a Monday, so they're open — but only until 2 PM. If you're running late, fallback to Thatcher &amp; Small next door (open 7 AM–8 PM daily). Stock up at Hokitika New World before driving inland — no real food options between Hokitika and Castle Hill.</div>
         <div class="flag-conf">high confidence</div>
       </div>
       <div class="flag">
-        <div class="flag-num">RISK 05</div>
+        <div class="flag-num">RISK 03</div>
         <div class="flag-title">Devils Punchbowl: first bridge reported closed (March 2026)</div>
         <div class="flag-body">As of March 2026, AllTrails and DOC have reported the Bealey River footbridge — the very first bridge on the track — is closed for damage repairs. The waterfall is still visible from the car park and lower viewpoints. The full 1-hour climb to the upper platform may not be possible. <strong>Check doc.govt.nz the morning of 17 Nov.</strong></div>
         <div class="flag-conf">high confidence</div>
       </div>
       <div class="flag">
-        <div class="flag-num">RISK 06</div>
-        <div class="flag-title">Live-verify before you go</div>
-        <div class="flag-body">Diesel prices in NZ are volatile — verify on the Gaspy app the day before. DOC track closures on the Hokitika Gorge loop have happened (one bridge was out as recently as Feb 2025). Check doc.govt.nz the morning of. Weather: check metservice.com for Lake Matheson wind forecast at 5 AM.</div>
+        <div class="flag-num">RISK 04</div>
+        <div class="flag-title">Long driving day — verify conditions before you go</div>
+        <div class="flag-body">SH6 is one-lane-each-way with frequent one-way bridges; the Otira Gorge climb is steep (max 16% grade). Allow the full 6.5 hours and don't try to add Pancake Rocks or Punakaiki. Verify Gaspy NZ for diesel prices, doc.govt.nz for Hokitika Gorge track status (one bridge was out as recently as Feb 2025), and metservice.com for Arthur's Pass conditions.</div>
         <div class="flag-conf med">medium confidence</div>
       </div>
     </div>
@@ -887,89 +929,35 @@ footer .accent {
 <section class="timeline">
   <div class="timeline-rail"></div>
 
-  <!-- 1: Lake Matheson -->
-  <div class="stop must">
-    <div class="stop-time">
-      05:25
-      <span class="stop-duration">2 hr</span>
-    </div>
-    <div class="stop-marker"></div>
-    <div class="stop-body">
-      <span class="stop-tag must">Must — Main Objective</span>
-      <div class="stop-name">
-        <a href="https://www.google.com/maps/place/?q=place_id:ChIJY37kzOAuKm0Rbcq0lW30va0" target="_blank">
-          Lake Matheson — Reflection Island<span class="ext">↗ map</span>
-        </a>
-      </div>
-      <p class="stop-desc">
-        Drive 25 min from your Franz Josef base to the Lake Matheson car park (arrive ~5:25 AM, sunrise 5:55 AM).
-        Walk by headlamp 25 min through podocarp rainforest to the Reflection Island / View of Views jetty.
-        On a calm, clear morning you'll see Aoraki/Mt Cook and Mt Tasman mirrored in tannin-dark water,
-        with pre-dawn alpenglow turning the peaks rose-gold. Loop back via the full 2.6 km circuit (~1.5 hr total).
-      </p>
-      <div class="stop-meta">
-        <span>Easy 2.6 km loop</span>
-        <span>Headlamps essential</span>
-        <span>Sunrise 05:55 NZDT</span>
-        <span>Backup: skip if very windy</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2: Te Kopikopiko -->
-  <div class="stop must">
-    <div class="stop-time">
-      08:00
-      <span class="stop-duration">45 min</span>
-    </div>
-    <div class="stop-marker"></div>
-    <div class="stop-body">
-      <span class="stop-tag must">Must — Main Objective</span>
-      <div class="stop-name">
-        <a href="https://www.google.com/maps/place/?q=place_id:ChIJDUyPcYYlKm0R3UAiytdt5RQ" target="_blank">
-          Te Kopikopiko o te Waka (Fox Glacier Viewpoint)<span class="ext">↗ map</span>
-        </a>
-      </div>
-      <p class="stop-desc">
-        Just 8 min further down Cook Flat Road from Lake Matheson. Formerly Peak View, redeveloped in 2022 as a
-        Tohu Whenua cultural heritage site. A carved waka tells the Ngāi Tahu creation story:
-        Aoraki and his brothers turned to stone after their canoe capsized — the petrified hull became the South Island.
-        Short flat walk on landscaped paths. On a clear morning, panoramic view of Fox Glacier and the Southern Alps.
-      </p>
-      <div class="stop-meta">
-        <span>Free, wheelchair-friendly paths</span>
-        <span>~15 min on site</span>
-        <span>Big motorhome car park</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3: Breakfast Fox Glacier -->
+  <!-- 1: Depart & Breakfast Fox Glacier -->
   <div class="stop">
     <div class="stop-time">
-      09:00
+      08:30
       <span class="stop-duration">60 min</span>
     </div>
     <div class="stop-marker"></div>
     <div class="stop-body">
-      <span class="stop-tag">Breakfast Stop</span>
+      <span class="stop-tag">Depart · Breakfast</span>
       <div class="stop-name">
         <a href="https://www.google.com/maps/search/?api=1&query=Fox+Glacier+township" target="_blank">
           Fox Glacier Township<span class="ext">↗ map</span>
         </a>
       </div>
       <p class="stop-desc">
-        Hot breakfast at Cook Saddle Cafe &amp; Saloon or grab pastries at Last Kitchen. Empty motorhome waste tanks at the
-        Fox Glacier dump station if needed. Do NOT fill up on fuel here — wait for Hokitika. Hit the road by 10 AM.
+        Civilised start: depart Franz Josef ~7:45 AM, 25-min drive to Fox Glacier township. Hot breakfast at
+        Cook Saddle Cafe &amp; Saloon or grab pastries at Last Kitchen. Empty motorhome waste tanks at the
+        Fox Glacier dump station if needed. <strong>Do NOT fill up on fuel here</strong> — wait for Hokitika.
+        Hit the road by 9:30 AM.
       </p>
       <div class="stop-meta">
         <span>Last decent food before Hokitika</span>
-        <span>Skip fuel</span>
+        <span>Skip fuel here</span>
+        <span>Dump station available</span>
       </div>
     </div>
   </div>
 
-  <!-- 4: Lunch (Lake Ianthe stop removed to tighten schedule) -->
+  <!-- 2: Lunch -->
   <div class="stop">
     <div class="stop-time">
       12:30
@@ -1167,30 +1155,58 @@ footer .accent {
         </p>
         <div class="fuel-numbers">
           <div class="fuel-stat">
+            <div class="fuel-stat-label">Diesel needed</div>
+            <div class="fuel-stat-value">~70<span class="unit">L</span></div>
+            <div class="fuel-stat-note">≈ One full tank. Refuel mandatory.</div>
+          </div>
+          <div class="fuel-stat">
+            <div class="fuel-stat-label">Diesel cost</div>
+            <div class="fuel-stat-value">~$199<span class="unit">NZD</span></div>
+            <div class="fuel-stat-note">70 L × $2.85/L est. at Hokitika bp Truckstop. Range $186–$210.</div>
+          </div>
+          <div class="fuel-stat">
             <div class="fuel-stat-label">Total distance</div>
-            <div class="fuel-stat-value">475<span class="unit">km</span></div>
-            <div class="fuel-stat-note">SH6 + SH73 + side trips to Lake Matheson, Te Kopikopiko, Hokitika Gorge.</div>
+            <div class="fuel-stat-value">465<span class="unit">km</span></div>
+            <div class="fuel-stat-note">SH6 + SH73 + Hokitika Gorge side trip.</div>
           </div>
           <div class="fuel-stat">
             <div class="fuel-stat-label">Consumption</div>
             <div class="fuel-stat-value">15<span class="unit">L/100km</span></div>
             <div class="fuel-stat-note">Conservative due to Otira climb &amp; full payload.</div>
           </div>
-          <div class="fuel-stat">
-            <div class="fuel-stat-label">Diesel needed</div>
-            <div class="fuel-stat-value">~71<span class="unit">L</span></div>
-            <div class="fuel-stat-note">≈ One full tank. Refuel mandatory.</div>
-          </div>
-          <div class="fuel-stat">
-            <div class="fuel-stat-label">Est. fuel cost</div>
-            <div class="fuel-stat-value">$190<span class="unit">NZD</span></div>
-            <div class="fuel-stat-note">At ~$2.69/L at Hokitika bp Truckstop. NZ national avg currently ~$3.31/L — West Coast varies wildly.</div>
-          </div>
         </div>
-        <p style="color:rgba(245,240,230,0.55);font-size:11px;line-height:1.5;margin-top:24px;font-family:'DM Mono',monospace;letter-spacing:0.05em;">
-          ⚠ Diesel prices change weekly. Verify on the Gaspy NZ app the day before.
-          Maui motorhomes also incur Road User Charges (RUC) ≈ NZD $8.50/100km — usually included in your rental,
-          but confirm with your rental contract.
+
+        <!-- TOTAL COST BREAKDOWN -->
+        <div style="background:rgba(201, 169, 107, 0.12); border:1px solid rgba(201, 169, 107, 0.35); padding:24px; margin-top:32px; border-radius:4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--limestone);margin-bottom:16px;">Total driving cost — Day 11</div>
+          <table style="width:100%; border-collapse:collapse; color:rgba(245,240,230,0.9); font-size:14px;">
+            <tr style="border-bottom:1px solid rgba(245,240,230,0.15);">
+              <td style="padding:10px 0; font-family:'Fraunces',serif; font-size:15px;">Diesel (70 L × ~$2.85/L)</td>
+              <td style="padding:10px 0; text-align:right; font-family:'DM Mono',monospace;">$199</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(245,240,230,0.15);">
+              <td style="padding:10px 0; font-family:'Fraunces',serif; font-size:15px;">RUC recovery (465 km × $0.08/km)<br><span style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(245,240,230,0.55);">Only if you're NOT on Maui Premium Pack</span></td>
+              <td style="padding:10px 0; text-align:right; font-family:'DM Mono',monospace; vertical-align:top;">$37</td>
+            </tr>
+            <tr style="border-top:2px solid var(--limestone);">
+              <td style="padding:14px 0 6px; font-family:'Fraunces',serif; font-size:20px; font-weight:500;">Total (with RUC)</td>
+              <td style="padding:14px 0 6px; text-align:right; font-family:'Fraunces',serif; font-size:22px; color:var(--limestone);">$236</td>
+            </tr>
+            <tr>
+              <td style="padding:2px 0 6px; font-family:'DM Mono',monospace; font-size:11px; color:rgba(245,240,230,0.6);">Per person (÷ 6 adults)</td>
+              <td style="padding:2px 0 6px; text-align:right; font-family:'DM Mono',monospace; font-size:12px; color:rgba(245,240,230,0.7);">~$39</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0 0; font-family:'DM Mono',monospace; font-size:11px; color:rgba(245,240,230,0.55); border-top:1px solid rgba(245,240,230,0.1);">Sensitivity range (diesel $2.60–$3.00/L)</td>
+              <td style="padding:12px 0 0; text-align:right; font-family:'DM Mono',monospace; font-size:12px; color:rgba(245,240,230,0.65); border-top:1px solid rgba(245,240,230,0.1);">$223 – $247</td>
+            </tr>
+          </table>
+        </div>
+
+        <p style="color:rgba(245,240,230,0.55);font-size:11px;line-height:1.5;margin-top:20px;font-family:'DM Mono',monospace;letter-spacing:0.05em;">
+          ⚠ Numbers reflect August 2026 data (NZ national diesel avg ~$2.70/L, rising). Diesel prices change weekly —
+          verify on the Gaspy NZ app the day before. RUC line applies only if your Maui rental does NOT include the
+          Premium Pack ($65/day, which bundles RUC). Confirm which pack you have on your rental contract.
         </p>
       </div>
 
@@ -1246,15 +1262,17 @@ footer .accent {
       <div class="note-icon">①</div>
       <div class="note-title">Night before</div>
       <div class="note-body">
-        Pre-pack day bag with <strong>headlamps</strong> (one each), warm layer, camera, tripod if you have one.
-        Set alarm 4:50 AM. Check the metservice.com forecast for wind at Lake Matheson — under 5 km/h and clear is the postcard window.
+        Set alarm 7:00 AM for a civilised departure. Check
+        <strong>metservice.com/arthurs-pass</strong> for weather over the alpine crossing,
+        and <strong>doc.govt.nz</strong> for Hokitika Gorge and Devils Punchbowl track status.
+        Pre-pack sandfly repellent, warm layer, sunscreen — the West Coast can serve all four seasons in a day.
       </div>
     </div>
     <div class="note">
       <div class="note-icon">②</div>
       <div class="note-title">Sandfly defense</div>
       <div class="note-body">
-        West Coast sandflies are brutal at Hokitika Gorge and dawn at Lake Matheson.
+        West Coast sandflies are brutal at Hokitika Gorge and around Devils Punchbowl.
         Buy <strong>DEET-based repellent</strong> in Franz Josef the night before — sold at every dairy. Long sleeves help.
       </div>
     </div>
@@ -1284,14 +1302,6 @@ footer .accent {
     </div>
     <div class="note">
       <div class="note-icon">⑥</div>
-      <div class="note-title">Plan B if weather kills the dawn</div>
-      <div class="note-body">
-        If wind/cloud at 5 AM, sleep in. Lake Matheson is still gorgeous in late morning. You'll save 90 min —
-        use it for a quieter Hokitika Gorge visit and a full Devils Punchbowl track climb (if the bridge has reopened).
-      </div>
-    </div>
-    <div class="note">
-      <div class="note-icon">⑦</div>
       <div class="note-title">Tomorrow morning at Castle Hill</div>
       <div class="note-body">
         Castle Hill / Kura Tāwhiti is a <strong>10-min walk from your Airbnb</strong>. Head over at

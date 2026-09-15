@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 10 — Wānaka to Franz Josef · Sunset Kayak · 16 Nov 2026</title>
+<title>Day 10 — Wānaka to Franz Josef · Lake Matheson Sunset · 16 Nov 2026</title>
 <style>
   :root {
     --glacier-ice:   #e8f4f8;
@@ -141,21 +141,16 @@
     pointer-events: none;
   }
 
-  /* KAYAKER — silhouette in foreground */
+  /* FIGURE — lakeshore viewer silhouette */
   .kayak-silhouette {
     position: absolute;
-    bottom: 12%;
+    bottom: 22%;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: 160px;
     height: auto;
     z-index: 4;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-    animation: gentlePaddle 6s ease-in-out infinite;
-  }
-  @keyframes gentlePaddle {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%      { transform: translateX(-50%) translateY(-4px); }
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
   }
 
   /* Stars in upper sky */
@@ -568,48 +563,55 @@
     <div class="ripples"></div>
   </div>
 
-  <!-- Kayaker silhouette in foreground -->
-  <svg class="kayak-silhouette" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
-    <!-- Kayak hull -->
-    <ellipse cx="100" cy="65" rx="85" ry="8" fill="#1a0d2e"/>
-    <ellipse cx="100" cy="62" rx="80" ry="5" fill="#2d1b4e"/>
-    <!-- Reflection of kayak (lighter, inverted) -->
-    <ellipse cx="100" cy="78" rx="75" ry="4" fill="#1a0d2e" opacity="0.35"/>
-    <!-- Person torso -->
-    <path d="M88,62 Q88,45 95,40 L105,40 Q112,45 112,62 Z" fill="#1a0d2e"/>
+  <!-- Jetty viewpoint silhouette with figure -->
+  <svg class="kayak-silhouette" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg">
+    <!-- Wooden jetty platform -->
+    <rect x="35" y="55" width="90" height="4" fill="#1a0d2e"/>
+    <!-- Jetty posts -->
+    <rect x="42" y="55" width="3" height="18" fill="#1a0d2e"/>
+    <rect x="115" y="55" width="3" height="18" fill="#1a0d2e"/>
+    <!-- Rail line -->
+    <line x1="35" y1="48" x2="125" y2="48" stroke="#1a0d2e" stroke-width="1.5"/>
+    <rect x="42" y="48" width="1.5" height="7" fill="#1a0d2e"/>
+    <rect x="80" y="48" width="1.5" height="7" fill="#1a0d2e"/>
+    <rect x="115" y="48" width="1.5" height="7" fill="#1a0d2e"/>
+    <!-- Figure standing on jetty -->
+    <!-- Body -->
+    <path d="M78,55 L78,32 Q78,28 82,28 L82,55 Z" fill="#1a0d2e"/>
     <!-- Head -->
-    <circle cx="100" cy="35" r="6" fill="#1a0d2e"/>
-    <!-- Paddle -->
-    <line x1="65" y1="28" x2="135" y2="55" stroke="#1a0d2e" stroke-width="2.5" stroke-linecap="round"/>
-    <!-- Paddle blades -->
-    <ellipse cx="63" cy="27" rx="6" ry="3" fill="#1a0d2e" transform="rotate(-25 63 27)"/>
-    <ellipse cx="137" cy="56" rx="6" ry="3" fill="#1a0d2e" transform="rotate(-25 137 56)"/>
-    <!-- Water drip from paddle -->
-    <circle cx="63" cy="35" r="1" fill="#ffd770" opacity="0.6"/>
-    <circle cx="60" cy="40" r="0.8" fill="#ffd770" opacity="0.4"/>
+    <circle cx="80" cy="24" r="4" fill="#1a0d2e"/>
+    <!-- Small hint of camera raised -->
+    <rect x="82" y="26" width="5" height="3" fill="#1a0d2e"/>
+    <!-- Reflection of jetty in water (fainter, inverted below) -->
+    <rect x="35" y="62" width="90" height="2" fill="#1a0d2e" opacity="0.3"/>
+    <rect x="42" y="64" width="3" height="6" fill="#1a0d2e" opacity="0.2"/>
+    <rect x="115" y="64" width="3" height="6" fill="#1a0d2e" opacity="0.2"/>
+    <!-- Person reflection -->
+    <path d="M78,64 L78,72 Q78,74 82,74 L82,64 Z" fill="#1a0d2e" opacity="0.25"/>
+    <circle cx="80" cy="77" r="2.5" fill="#1a0d2e" opacity="0.25"/>
   </svg>
 
   <div class="hero-content">
-    <span class="day-badge">Day 10 · 16 November 2026 · Kayak Focus</span>
+    <span class="day-badge">Day 10 · 16 November 2026 · Mirror Lake</span>
     <h1>Wānaka → Franz Josef</h1>
     <p class="route">Across Haast Pass to Glacier Country</p>
     <p class="date">via Lake Hawea · Blue Pools · Haast · West Coast</p>
 
     <div class="highlights">
       <div class="highlight">
+        <div class="highlight-icon">🪞</div>
+        <div class="highlight-title">Lake Matheson</div>
+        <div class="highlight-sub">Golden-hour reflection · Aoraki + Mt Tasman</div>
+      </div>
+      <div class="highlight">
         <div class="highlight-icon">🛶</div>
-        <div class="highlight-title">Sunset Kayak</div>
-        <div class="highlight-sub">Lake Mapourika · 5pm departure</div>
+        <div class="highlight-title">Te Kopikopiko o te Waka</div>
+        <div class="highlight-sub">Ngāi Tahu glacier lookout · Fox Glacier</div>
       </div>
       <div class="highlight">
         <div class="highlight-icon">💧</div>
         <div class="highlight-title">Haast Pass Waterfalls</div>
         <div class="highlight-sub">Blue Pools · Thunder Creek · Fantail</div>
-      </div>
-      <div class="highlight">
-        <div class="highlight-icon">🏔️</div>
-        <div class="highlight-title">West Coast Drive</div>
-        <div class="highlight-sub">Lake Hawea · Knights Point · Tasman Sea</div>
       </div>
     </div>
   </div>
@@ -619,22 +621,22 @@
 <main>
 
   <div class="info-banner">
-    <h3>🛶 Focused day — one main objective, generous margins</h3>
-    <p>Today is built around the <strong>5pm Sunset Kayak on Lake Mapourika</strong>. Everything else is a relaxed Haast Pass scenic drive with multiple optional stops. No Fox Glacier detour today.</p>
+    <h3>🪞 Golden-hour Lake Matheson — cost-effective & iconic</h3>
+    <p>Swapped the paid kayak (~NZ$900+ group total) for a <strong>golden-hour walk at Lake Matheson</strong>. You get the iconic Aoraki/Mt Tasman mirror reflection at the best light of the day, plus Te Kopikopiko o te Waka's Ngāi Tahu glacier lookout on the same detour.</p>
     <ul>
-      <li><strong>90 min buffer</strong> before kayak check-in — relaxed arrival.</li>
-      <li><strong>Full Blue Pools walk</strong> and proper Hard Antler lunch — no rushing.</li>
-      <li><strong>Reception still open</strong> when you check in to Top 10.</li>
-      <li><strong>Sleep in tomorrow</strong> — no dawn alarm needed.</li>
+      <li><strong>Free</strong> — save ~NZ$900+ for other experiences.</li>
+      <li><strong>Golden hour timing</strong> — arrive Reflection Island ~18:00–19:00 for warm reflection light.</li>
+      <li><strong>Proper dinner</strong> at SnakeBite by 19:30 (comfortably before 20:30 close).</li>
+      <li><strong>Lower energy demand</strong> than 3 hrs of paddling after a 5-hr drive.</li>
     </ul>
   </div>
 
   <div class="overview-strip">
-    <div class="stat"><div class="stat-label">Distance</div><div class="stat-value">~360 km</div></div>
-    <div class="stat"><div class="stat-label">Drive Time</div><div class="stat-value">~5 hrs</div></div>
-    <div class="stat"><div class="stat-label">Total Day</div><div class="stat-value">~13 hrs</div></div>
-    <div class="stat"><div class="stat-label">Fuel Est.</div><div class="stat-value">~50 L</div></div>
-    <div class="stat"><div class="stat-label">Fuel Cost</div><div class="stat-value">~NZ$95</div></div>
+    <div class="stat"><div class="stat-label">Distance</div><div class="stat-value">~420 km</div></div>
+    <div class="stat"><div class="stat-label">Drive Time</div><div class="stat-value">~6 hrs</div></div>
+    <div class="stat"><div class="stat-label">Total Day</div><div class="stat-value">~14 hrs</div></div>
+    <div class="stat"><div class="stat-label">Fuel Est.</div><div class="stat-value">~58 L</div></div>
+    <div class="stat"><div class="stat-label">Fuel Cost</div><div class="stat-value">~NZ$115</div></div>
   </div>
 
   <!-- MORNING -->
@@ -766,84 +768,103 @@
       <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJEziMFlOZ1WwRcXEsmV9O4bU" target="_blank">📍 Open in Maps</a>
     </div>
 
-    <div class="stop must">
-      <div class="stop-header">
-        <span class="stop-time">15:15</span>
-        <span class="stop-name">🌊 Knights Point Lookout</span>
-        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">20 min</span></span>
-      </div>
-      <p class="stop-details">First sweeping Tasman Sea view — dramatic rocky coastline and rolling forested headlands. Public toilets, large carpark. Good leg-stretch.</p>
-      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJJ-jw2L6P1WwR89OUXDfduU4" target="_blank">📍 Open in Maps</a>
-    </div>
-
     <div class="stop">
       <div class="stop-header">
-        <span class="stop-time">15:50</span>
+        <span class="stop-time">15:00</span>
         <span class="stop-name">🌳 Ship Creek Walk</span>
-        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">30 min</span></span>
+        <span class="stop-tags"><span class="tag tag-optional">Optional</span><span class="tag tag-duration">25 min</span></span>
       </div>
-      <p class="stop-details">Choose one: the sand dune walk along the Tasman, or the kahikatea swamp boardwalk through ancient forest. Both are short and stunning.</p>
+      <p class="stop-details">Choose one loop: the sand dune walk along the Tasman, or the kahikatea swamp boardwalk through ancient forest. Both short, both stunning. Skip if running behind.</p>
       <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:EjxTdGF0ZSBIaWdod2F5IDYgJiBTaGlwIENyZWVrIEJyaWRnZSwgSGFhc3QgNzg4NiwgTmV3IFplYWxhbmQ" target="_blank">📍 Open in Maps</a>
+    </div>
+
+    <div class="stop must">
+      <div class="stop-header">
+        <span class="stop-time">15:45</span>
+        <span class="stop-name">🌊 Knights Point Lookout</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">15 min</span></span>
+      </div>
+      <p class="stop-details">First sweeping Tasman Sea view — dramatic rocky coastline and rolling forested headlands. Public toilets, large carpark. Quick leg-stretch before the ~90 min drive to Fox Glacier.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJJ-jw2L6P1WwR89OUXDfduU4" target="_blank">📍 Open in Maps</a>
     </div>
   </div>
 
   <!-- AFTERNOON -->
-  <div class="section-header"><h2>🏕️ Late Afternoon · Arrive Franz Josef</h2></div>
-  <div class="timeline">
-
-    <div class="stop">
-      <div class="stop-header">
-        <span class="stop-time">16:30</span>
-        <span class="stop-name">🏕️ Check in: Franz Josef Top 10 Holiday Park</span>
-        <span class="stop-tags"><span class="tag tag-must">Reception open</span><span class="tag tag-duration">20 min</span></span>
-      </div>
-      <p class="stop-details">Reception open until 17:00 — you arrive comfortably in time. Get site number, plug in motorhome, sort gear before kayak. Mountain & rainforest setting.</p>
-      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJgdR2UfnVK20RhRy2GqQb9UI" target="_blank">📍 2902 Franz Josef Highway</a>
-    </div>
-  </div>
-
-  <!-- EVENING -->
-  <div class="section-header"><h2>🛶 Evening · Sunset Kayak (Main Objective)</h2></div>
+  <div class="section-header"><h2>🏔️ Late Afternoon · Fox Glacier Detour</h2></div>
   <div class="timeline">
 
     <div class="stop objective">
       <div class="stop-header">
         <span class="stop-time">16:45</span>
-        <span class="stop-name">🛶 Franz Josef Wilderness Tours — Check-in</span>
-        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">15 min early</span></span>
+        <span class="stop-name">🛶 Te Kopikopiko o te Waka</span>
+        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">30 min</span></span>
       </div>
-      <p class="stop-details">Meet at 30 Main Road for the <strong>5pm Sunset Classic Kayak</strong>. Use the buffer to use bathroom, layer up, leave valuables in motorhome. Walk over from Top 10 (~12 min) or drive (~3 min, parking on Main Rd).</p>
-      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJD0nGUKnmpb8Rjt8aLJlBfyQ" target="_blank">📍 30 Main Rd</a>
+      <p class="stop-details">"The capsized canoe" — Ngāi Tahu cultural lookout developed in 2022. Turn onto Cook Flat Road just past Fox Glacier village. Panoramic Fox Glacier and Southern Alps view; carved waka tells the creation story of the South Island. <strong>Free.</strong> Late-afternoon sun still lights the glacier face.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJDUyPcYYlKm0R3UAiytdt5RQ" target="_blank">📍 Cook Flat Rd, Fox Glacier</a>
     </div>
 
     <div class="stop objective">
       <div class="stop-header">
-        <span class="stop-time">17:00</span>
-        <span class="stop-name">🌅 Sunset Classic Kayak — Lake Mapourika</span>
-        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">3 hrs</span></span>
+        <span class="stop-time">17:20</span>
+        <span class="stop-name">🪞 Lake Matheson — Full Loop Walk</span>
+        <span class="stop-tags"><span class="tag tag-objective">Main objective</span><span class="tag tag-duration">90 min</span></span>
       </div>
-      <p class="stop-details">Transfer to Lake Mapourika (~10 min drive). Glide across glassy water with Southern Alps and glaciers reflected. Paddle into the Ōkārito Kiwi Sanctuary edge. Sunset around 20:30 — golden hour over the alps. Wet weather gear provided. <strong>Call +64 3 752 0230 if delayed.</strong></p>
-      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJD0nGUKnmpb8Rjt8aLJlBfyQ" target="_blank">📍 Booking office</a>
+      <p class="stop-details">5 min drive from Te Kopikopiko. Cross the Clearwater suspension bridge, walk through ancient kahikatea and rimu forest. Full loop is <strong>4.4 km, ~1.5 hrs</strong>. Key stops:
+      <br>• <strong>Jetty Lookout</strong> (~20 min in) — first mirror view of Aoraki + Mt Tasman
+      <br>• <strong>Reflection Island</strong> (~35 min in) — the iconic postcard shot
+      <br>• <strong>View of Views</strong> (~45 min in) — elevated panorama at the top of the lake
+      <br><strong>Golden hour peaks ~18:30–19:00.</strong> Sunset at 20:30 — you'll be back at car park by 18:50 with warm light still on the peaks. Wind usually drops in the evening for better reflections.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJhTd6ytguKm0ReV2hfqynq_w" target="_blank">📍 Lake Matheson car park</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">18:50</span>
+        <span class="stop-name">🚐 Depart Lake Matheson → Franz Josef</span>
+        <span class="stop-tags"><span class="tag tag-duration">30 min drive</span></span>
+      </div>
+      <p class="stop-details">25 km north on SH6. Golden light on the drive if lucky. Total daylight remaining ~1.5 hrs.</p>
+    </div>
+  </div>
+
+  <!-- EVENING -->
+  <div class="section-header"><h2>🍽️ Evening · Franz Josef Village</h2></div>
+  <div class="timeline">
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">19:20</span>
+        <span class="stop-name">🏕️ Check in: Franz Josef Top 10 Holiday Park</span>
+        <span class="stop-tags"><span class="tag tag-must">Call ahead today</span><span class="tag tag-duration">20 min</span></span>
+      </div>
+      <p class="stop-details"><strong>Reception closes 17:00</strong> — you arrive ~19:20. Must call <strong>+64 3 752 0735</strong> today to arrange after-hours check-in and site number. Mountain-and-rainforest setting, immaculate facilities. Plug in, quick freshen up before dinner.</p>
+      <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJgdR2UfnVK20RhRy2GqQb9UI" target="_blank">📍 2902 Franz Josef Highway</a>
     </div>
 
     <div class="stop meal">
       <div class="stop-header">
-        <span class="stop-time">20:30</span>
-        <span class="stop-name">🍜 SnakeBite Brewery — Late Dinner</span>
-        <span class="stop-tags"><span class="tag tag-must">Tight</span><span class="tag tag-duration">60 min</span></span>
+        <span class="stop-time">19:45</span>
+        <span class="stop-name">🍜 SnakeBite Brewery — DINNER</span>
+        <span class="stop-tags"><span class="tag tag-must">Must</span><span class="tag tag-duration">75 min</span></span>
       </div>
-      <p class="stop-details">Closes 20:30 — last orders before 20:00. Two safer options:
-      <br>① <strong>Pre-order by phone</strong> during your kayak transfer back (+64 3 752 0234) so food is ready.
-      <br>② <strong>Cook in motorhome</strong> — pull pre-prepped pasta/curry from fridge for a faster evening.
-      <br>Asian fusion menu: panang curry, nasi goreng, calamari salad.</p>
+      <p class="stop-details">Proper sit-down dinner. Well within 20:30 close — no more rushing. Asian fusion menu: panang curry, nasi goreng, calamari salad, local brews. Walk from Top 10 (~12 min) or short drive with parking on Main Rd. <strong>Book by phone if arriving after 19:30 on a busy Monday</strong> (+64 3 752 0234).</p>
       <a class="stop-link" href="https://www.google.com/maps/place/?q=place_id:ChIJQYcdquDVK20RWtZsG4tu6bs" target="_blank">📍 28 Main Rd</a>
+    </div>
+
+    <div class="stop">
+      <div class="stop-header">
+        <span class="stop-time">21:15</span>
+        <span class="stop-name">😴 Return to Top 10 · Rest</span>
+        <span class="stop-tags"><span class="tag tag-duration">—</span></span>
+      </div>
+      <p class="stop-details">Early night. Day 11 is Franz Josef → Castle Hill via Hokitika (long day). Aim for lights out by 22:30.</p>
     </div>
   </div>
 
   <!-- FUEL -->
   <div class="section-header"><h2>⛽ Fuel Strategy</h2></div>
   <div class="info-card">
-    <p style="margin-bottom: 16px; color: var(--text-soft);"><strong>Maui River 6-berth</strong> · ~80 L tank · estimated consumption <strong>13.5–14.5 L/100 km</strong> for the Haast Pass climb with full load. Expected day total: <strong>~50 L</strong> (less than yesterday's plan because no 60 km Fox Glacier backtrack).</p>
+    <p style="margin-bottom: 16px; color: var(--text-soft);"><strong>Maui River 6-berth</strong> · ~80 L tank · estimated consumption <strong>13.5–14.5 L/100 km</strong> for the Haast Pass climb with full load. Expected day total: <strong>~58 L</strong> (includes ~60 km Fox Glacier detour for Te Kopikopiko + Lake Matheson).</p>
     <table class="fuel-table">
       <thead>
         <tr><th>Station</th><th>When</th><th>Price band</th><th>Notes</th></tr>
@@ -882,13 +903,14 @@
   <div class="section-header"><h2>✅ Pre-Trip Checklist (Do Tonight in Wānaka)</h2></div>
   <div class="info-card">
     <ul class="checklist">
-      <li>Confirm 5pm Sunset Classic Kayak booking — Franz Josef Wilderness Tours <strong>+64 3 752 0230</strong></li>
-      <li>Confirm Franz Josef Top 10 booking — <strong>+64 3 752 0735</strong></li>
+      <li><strong>Call Franz Josef Top 10 for after-hours check-in</strong> — <strong>+64 3 752 0735</strong> (reception closes 17:00; you arrive ~19:20)</li>
+      <li>Book SnakeBite Brewery table for 19:45 if possible — <strong>+64 3 752 0234</strong></li>
       <li>Fill fresh water tank, empty grey/black at Hampshire dump station before departure</li>
-      <li>Pre-cook dinner option for after-kayak (pasta sauce, curry, etc.) as SnakeBite backup</li>
-      <li>Charge phones + power banks + camera batteries for kayak sunset photos</li>
-      <li>Check West Coast weather + SH6 road status (NZTA Journey Planner) — Haast Pass closes after slips</li>
-      <li>Print or screenshot kayak booking confirmation (West Coast cell signal is patchy)</li>
+      <li>Charge phones + power banks + camera batteries for Lake Matheson golden hour photos</li>
+      <li>Check West Coast weather + wind forecast for Lake Matheson (Windy app; ideally &lt;10 km/h for reflections)</li>
+      <li>Check SH6 road status via NZTA Journey Planner — Haast Pass closes after slips</li>
+      <li>Pack light layers + insect repellent for Lake Matheson (sandflies at dusk)</li>
+      <li>Confirm Pembroke Patisserie opens 07:30 on Monday 16 Nov (verify night before)</li>
     </ul>
   </div>
 
@@ -896,16 +918,16 @@
   <div class="info-card" style="background: linear-gradient(135deg, #f0f8fa, #e8f4f8);">
     <h3>📊 Confidence notes</h3>
     <p style="font-size: 0.9rem; color: var(--text-soft);">
-      <strong>[High confidence]</strong> Geography & distances · McKeown cheapest in Wanaka · Haast Pass route via SH6 is the only option · SnakeBite closes 20:30 · Franz Josef Wilderness Tours 5pm Sunset Classic exists and runs 3 hours.<br><br>
-      <strong>[Medium confidence]</strong> Sunset ~20:30 on 16 Nov at Franz Josef latitude · Maui River 13.5–14.5 L/100km · Fuel price bands · Pembroke Patisserie Monday 07:30 open.<br><br>
-      <strong>Needs verification on the day</strong> Live fuel prices · SH6 road conditions · Kayak weather call · Current kayak price per person.
+      <strong>[High confidence]</strong> Geography & distances · McKeown cheapest in Wanaka · Haast Pass route via SH6 is the only option · SnakeBite closes 20:30 · Lake Matheson full loop is 4.4 km / ~1.5 hrs · Dawn AND dusk are recommended windows for reflections · Te Kopikopiko o te Waka is on Cook Flat Rd, 9 km west of Fox Glacier village.<br><br>
+      <strong>[Medium confidence]</strong> Sunset ~20:30 on 16 Nov at Franz Josef latitude · Golden-hour reflection window ~18:30–19:00 · Maui River 13.5–14.5 L/100km on hilly load · Fuel price bands · Pembroke Patisserie Monday 07:30 open · Knights Point → Fox Glacier ~90 min drive.<br><br>
+      <strong>Needs verification on the day</strong> Live fuel prices · SH6 road conditions · <strong>Wind forecast for Lake Matheson evening</strong> (calm = reflections, breezy = pretty walk only) · Sandfly conditions at dusk · Top 10 after-hours check-in process.
     </p>
   </div>
 
 </main>
 
 <footer>
-  <p class="quote">"The best photos come to those who wake before the wind."</p>
+  <p class="quote">"On calm evenings, the mountains bow to their own reflection."</p>
   <p>Day 10 of South Island Road Trip · 16 November 2026 · Maui River 6-berth</p>
 </footer>
 
