@@ -447,6 +447,103 @@
       letter-spacing: 0;
     }
 
+    /* ============ SPLIT ACTIVITY BLOCK ============ */
+    .split-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 720px) {
+      .split-wrap { grid-template-columns: 1fr; }
+    }
+    .split-card {
+      padding: 20px 22px;
+      border-radius: 4px;
+      position: relative;
+    }
+    .split-card.a {
+      background: linear-gradient(135deg, #ffffff 0%, var(--lake-mist) 130%);
+      border: 1px solid var(--lake);
+      border-left: 4px solid var(--lake);
+    }
+    .split-card.b {
+      background: linear-gradient(135deg, #ffffff 0%, var(--tussock-pale) 130%);
+      border: 1px solid var(--tussock);
+      border-left: 4px solid var(--tussock);
+    }
+    .split-card .grouplabel {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .split-card.a .grouplabel { color: var(--lake-deep); }
+    .split-card.b .grouplabel { color: #8a6a1e; }
+    .split-card h4 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0 0 4px;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .split-card .subline {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-family: var(--mono);
+      letter-spacing: 0.03em;
+    }
+    .split-card p {
+      margin: 0 0 8px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .split-card ol, .split-card ul {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .split-card li { margin-bottom: 3px; }
+    .split-card .price {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      border-radius: 2px;
+    }
+    .split-card.a .price { background: var(--lake); color: #fff; }
+    .split-card.b .price { background: var(--tussock); color: #fff; }
+
+    .reunite {
+      margin: 8px 0 4px;
+      padding: 12px 18px;
+      background: var(--beech-pale, #e9efe1);
+      border-left: 3px solid var(--beech);
+      border-radius: 2px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .reunite strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--beech);
+      margin-bottom: 4px;
+    }
+
+    :root { --beech-pale: #e9efe1; }
   </style>
 <link rel="stylesheet" href="assets/nav.css">
 </head>
@@ -488,16 +585,16 @@
       <h1 class="hero-title">Gold-rush <em>cottages</em>,<br>then a road into <em>Paradise</em>.</h1>
       <p class="hero-lede">
         A circular day from Hampshire Lakeview — sycamores and stonemasons in the cool of an
-        Arrowtown morning, then a slow 90-minute cruise on the 1912 TSS Earnslaw across Lake
-        Wakatipu, then the long curve west along the lake's edge to Glenorchy, where the road
-        runs out at the foot of the Humboldt Mountains.
+        Arrowtown morning, then the group of 6 splits into two threes for the 13:00 activity
+        slot (TSS Earnslaw for one three, Skyline Luge for the other), reconvenes at Hampshire
+        by 14:40, and drives together west along Lake Wakatipu&rsquo;s edge to Glenorchy.
       </p>
 
       <div class="hero-stats">
         <div><span>distance</span><b>~140 km</b></div>
         <div><span>diesel</span><b>~21 L</b></div>
         <div><span>fuel cost</span><b>~NZ$65</b></div>
-        <div><span>TSS sailing</span><b>13:00</b></div>
+        <div><span>13:00 split</span><b>Earnslaw + Luge</b></div>
       </div>
     </div>
   </header>
@@ -530,11 +627,12 @@
         </p>
       </div>
       <div class="why-card green">
-        <h3>The loop has only one unavoidable backtrack</h3>
+        <h3>The 1pm split works because both venues are on the same street</h3>
         <p>
-          Hampshire → Arrowtown → Queenstown (lunch + TSS Earnslaw) → fuel → Glenorchy →
-          Hampshire. There is no road around Lake Wakatipu's head — the return from Glenorchy
-          retraces the same highway, but in evening light it's a different drive entirely.
+          Hampshire is on Brecon St. Steamer Wharf is 5 min downhill; Skyline Gondola is 2 min
+          uphill. The group of 6 splits into two threes at 12:35, does parallel activities,
+          and reunites at Hampshire by 14:40 — a 4-min drive from the fuel stop and the
+          Glenorchy road. Neither group has to compromise; both fit inside the same afternoon.
         </p>
       </div>
     </div>
@@ -753,77 +851,128 @@
       </div>
     </div>
 
-    <!-- 12:35 walk to wharf + check-in -->
+    <!-- 12:35 GROUPS SPLIT -->
     <div class="stop">
       <div class="stop-time">
         <div class="clock">12:35</div>
         <div class="duration">10 min</div>
-        <span class="tag drive">WALK + CHECK-IN</span>
+        <span class="tag drive">SPLIT · WALK</span>
       </div>
       <div class="stop-body">
-        <h3>Walk to Steamer Wharf, check in at <span class="place">RealNZ Visitor Centre</span></h3>
-        <div class="where">88 Beach St · 5-min walk from Hampshire ·
-          <a href="https://maps.google.com/?q=RealNZ+Visitor+Centre+Steamer+Wharf+Queenstown" target="_blank" rel="noopener">Google Map ↗</a>
+        <h3>Group of 6 splits into two threes — <span class="place">two venues, ~2 hours apart</span></h3>
+        <div class="where">Hampshire (Brecon St) → Steamer Wharf OR Skyline base ·
+          <a href="https://maps.google.com/?q=Hampshire+Holiday+Parks+Queenstown+Lakeview+Brecon+St" target="_blank" rel="noopener">Hampshire Map ↗</a>
         </div>
         <p>
-          Down Brecon St → Camp St → cross The Mall → Beach St → Steamer Wharf. Straightforward
-          5-min walk. Check-in closes at <strong>12:45 sharp</strong> — 15 min before the 13:00
-          sailing. RealNZ will not hold departure.
+          At lunch or on the walk back to Hampshire, the group splits. Confirm the meeting time
+          (14:40 at Hampshire) and phone numbers before separating. Both groups walk from
+          Hampshire — one downhill to Steamer Wharf, one uphill to Skyline base.
         </p>
+
+        <div class="split-wrap">
+          <div class="split-card a">
+            <div class="grouplabel">GROUP A · 3 PAX</div>
+            <h4>TSS Earnslaw</h4>
+            <div class="subline">Steamer Wharf · 5–8 min walk down · card only at bar</div>
+            <p>
+              Down Brecon St → Camp St → cross The Mall → Beach St → Steamer Wharf.
+              Check-in at
+              <a href="https://maps.google.com/?q=RealNZ+Visitor+Centre+Steamer+Wharf+Queenstown" target="_blank" rel="noopener">RealNZ Visitor Centre (88 Beach St)</a>
+              closes <strong>12:45 sharp</strong> — 15 min before the 13:00 sailing.
+              RealNZ will not hold departure.
+            </p>
+            <span class="price">NZ$69 pp × 3 = NZ$207</span>
+          </div>
+
+          <div class="split-card b">
+            <div class="grouplabel">GROUP B · 3 PAX</div>
+            <h4>Skyline Gondola + 3 Luge Rides</h4>
+            <div class="subline">Brecon St · ~2 min walk up · Nov peak queue 15–30 min</div>
+            <p>
+              Straight up Brecon St to the
+              <a href="https://maps.google.com/?q=Skyline+Queenstown+Gondola+Base" target="_blank" rel="noopener">Skyline Gondola base</a>
+              (adjacent to Hampshire). Pre-book online for a small discount and
+              queue-jump. Wear closed shoes for the luge; skirts/dresses awkward on the sled.
+            </p>
+            <span class="price">NZ$94 pp × 3 = NZ$282</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 12:45 board TSS Earnslaw -->
+    <!-- 12:45 SPLIT ACTIVITY -->
     <div class="stop">
       <div class="stop-time">
         <div class="clock">12:45</div>
-        <div class="duration">1h 45m (15-min board + 90-min cruise)</div>
-        <span class="tag opt">STEAMSHIP · RELAXING</span>
+        <div class="duration">~2 hours (parallel)</div>
+        <span class="tag opt">SPLIT ACTIVITY</span>
       </div>
       <div class="stop-body">
-        <h3>TSS Earnslaw 13:00 sailing — <span class="place">Steamer Wharf, Queenstown</span></h3>
-        <div class="where">RealNZ Visitor Centre, 88 Beach St · NZ$69 pp adult (~$414 for 6) ·
-          <strong>13:00 sailing (only slot available today — pre-booked)</strong> ·
-          <a href="https://maps.google.com/?q=RealNZ+Visitor+Centre+Steamer+Wharf+Queenstown" target="_blank" rel="noopener">Google Map ↗</a>
+        <h3>Two activities running in parallel — <span class="place">meet back at Hampshire 14:40</span></h3>
+        <div class="where">Steamer Wharf lakefront · &amp; · Bob&rsquo;s Peak elevated · Hampshire rendezvous ·
+          <a href="https://maps.google.com/?q=Hampshire+Holiday+Parks+Queenstown+Lakeview" target="_blank" rel="noopener">Rendezvous ↗</a>
         </div>
-        <p>
-          Board from 12:45. Sails at 13:00, back at Steamer Wharf at 14:30. The Earnslaw is one
-          of the oldest working steamships in the world — launched 1912, coal-fired, hand-stoked,
-          and still on her original triple-expansion engines. The 90-minute cruise-only route
-          loops out toward Walter Peak and back, 45 minutes each way. Open decks fore and aft
-          for photos, indoor lounges if it turns wet, the working engine room open to inspect
-          from a mezzanine (you can watch the stokers shovel coal), a small onboard museum, and
-          the Promenade Café &amp; Bar with wine, beer, coffee, and cabinet food.
-        </p>
-        <div class="why tip">
-          <strong>How to spend the 90 minutes</strong>
-          Ten minutes on deck at departure for the Queenstown skyline shot; ten in the engine
-          room (it's genuinely mesmerising — steam gauges, brass, the smell of hot oil); then
-          settle at the Promenade with lunch/drinks and watch Walter Peak grow, Cecil Peak
-          reflect, the Remarkables recede. On the return leg, the sun angle lights the
-          Queenstown approach beautifully. Six adults with drinks + views + no schedule
-          pressure — this is the day's slow moment before Glenorchy.
+
+        <div class="split-wrap">
+          <div class="split-card a">
+            <div class="grouplabel">GROUP A · TSS EARNSLAW</div>
+            <h4>13:00 sailing, dockside 14:30</h4>
+            <div class="subline">1912 coal-fired steamship · seated · card-only bar</div>
+            <p>
+              90-min cruise-only loop toward Walter Peak and back. Open decks fore &amp; aft,
+              indoor lounges if wet, engine room mezzanine (stokers shovelling coal in real
+              time), Promenade Café &amp; Bar with wine, beer, coffee, cabinet food.
+            </p>
+            <p>
+              <strong>Ten-minute rhythm:</strong> deck for departure shot, engine room for
+              the brass-and-hot-oil moment, then settle at the Promenade with a drink for
+              Walter Peak growing then receding. Return leg lights the Queenstown approach
+              beautifully.
+            </p>
+            <p>
+              <strong>Different lake angle from Bennetts Bluff</strong> — Earnslaw goes
+              <em>west</em> across the lake at water level; Bennetts is elevated <em>north</em>
+              view. Not view-redundant.
+            </p>
+          </div>
+
+          <div class="split-card b">
+            <div class="grouplabel">GROUP B · SKYLINE LUGE</div>
+            <h4>3 rides, back at base ~14:20</h4>
+            <div class="subline">Bob&rsquo;s Peak 480m up · gondola + chairlift + sled</div>
+            <p>
+              Steepest cable car in the Southern Hemisphere — 10 min up. At the top: chairlift
+              to luge start, three 15-min rides each including the ride back up. Try blue
+              (mellow) then red (fast banked corners), then repeat the favourite.
+            </p>
+            <p>
+              <strong>Views</strong> — 360° over Wakatipu, Remarkables, Coronet, and the
+              whole Queenstown basin. Better light than Bennetts Bluff will give later, but
+              similar angle. The gondola-station observation deck is the Instagram shot.
+            </p>
+            <p>
+              <strong>Weather fallback:</strong> if the luge closes (red first, then blue in
+              heavy rain/wind), stay for gondola + Stratosfare café at the top, meet Group A
+              back at Hampshire at 14:40 anyway.
+            </p>
+          </div>
         </div>
-        <div class="why">
-          <strong>Different lake angle from Bennetts Bluff</strong>
-          Bennetts Bluff (later this afternoon) looks <em>north</em> up Wakatipu toward the
-          Humboldts. The Earnslaw takes you <em>west</em> across the lake's widest section
-          toward Walter and Cecil Peaks. Two very different perspectives on the same lake —
-          not view-redundant.
+
+        <div class="reunite">
+          <strong>REUNITE · 14:40 at Hampshire</strong>
+          Group B (Luge) typically arrives back ~15 min ahead of Group A (Earnslaw). Coffee at
+          the Hampshire kitchen or pack the van for the Glenorchy drive while waiting. If
+          Earnslaw is delayed docking, Group A texts Group B and the van waits — the fuel
+          stop is only 4 min drive; departure can slip 15 min without hurting Bob&rsquo;s
+          Cove or Bennetts.
         </div>
+
         <div class="why warn">
           <strong>Verify before booking</strong>
-          [medium confidence] The TSS Earnslaw had scheduled annual maintenance mid-2026;
-          she should be fully back in service by 11 November, but confirm at the RealNZ
-          booking page before you pay. If she's out for any reason, the Spirit of Queenstown
-          catamaran runs the same route — same duration, same views, no coal smoke or engine
-          room but still relaxing.
-        </div>
-        <div class="why warn">
-          <strong>Accessibility &amp; comfort</strong>
-          Ramp boarding, so wheelchair and pram accessible on the main deck (upper decks are
-          stairs only). Bar accepts card only — no cash. Warm layer worth bringing for open
-          decks even in November; wind on the lake is noticeable at 12–14 knots cruising speed.
+          [medium confidence] TSS Earnslaw had scheduled annual maintenance mid-2026; confirm
+          she&rsquo;s back in service on 11 Nov via RealNZ. Skyline runs regardless of the
+          Earnslaw status — the split can proceed with either combo. If Earnslaw is out, the
+          Spirit of Queenstown catamaran runs the same route as a backup for Group A.
         </div>
       </div>
     </div>
@@ -852,12 +1001,12 @@
           <a href="https://maps.google.com/?q=BP+Queenstown+Truckstop+131+Gorge+Rd" target="_blank" rel="noopener">Google Map ↗</a>
         </div>
         <p>
-          Earnslaw docks 14:30. Walk from Steamer Wharf back to Hampshire (3 min), collect the
-          van, then 4 min drive to Gorge Rd. The only true truckstop in Queenstown — high-flow
+          Both groups back at Hampshire by 14:40 (Group B ~15 min ahead of Group A). Collect
+          the van and drive 4 min to Gorge Rd. The only true truckstop in Queenstown — high-flow
           diesel nozzles, drive-through bays sized for tour buses, and prices typically 15–25¢/L
           cheaper than the BP Connect or Z on Frankton Rd. There's no fuel between Queenstown
-          and Glenorchy, and you don't want to drive that road on a quarter tank. Top up to full
-          (~40 L for the Maui River — see fuel panel below).
+          and Glenorchy, and you don't want to drive that road on a quarter tank. Top up to
+          full (~40 L for the Maui River — see fuel panel below).
         </p>
         <div class="why tip">
           <strong>Why here, not on Frankton Road</strong>
@@ -889,11 +1038,12 @@
           view, or skip if you want to reach Bob's Cove sooner.
         </p>
         <div class="why">
-          <strong>The 13:00 sailing works in your favour</strong>
-          The 13:00 sailing returns at 14:30, which puts you on the Glenorchy road by 15:00 —
-          in time for Bob's Cove full 60-min loop, Bennetts Bluff in good afternoon light, and
-          a full 75-min Glenorchy Wharf window. With Buzz Stop and the Lakes District Museum
-          both cut, the morning is unhurried and the afternoon is generous.
+          <strong>Both activities land you on the Glenorchy road by 15:00</strong>
+          Earnslaw returns 14:30, Skyline group typically back ~14:20 — both groups reconvene
+          at Hampshire by 14:40, fuel by 15:00, on the Glenorchy road. That&rsquo;s time for
+          Bob&rsquo;s Cove full 60-min loop, Bennetts Bluff in good afternoon light, and a
+          full 75-min Glenorchy Wharf window with the walkway. The split doesn&rsquo;t cost
+          the afternoon anything.
         </div>
       </div>
     </div>
@@ -984,11 +1134,11 @@
         </div>
         <p>
           Park at the lakefront. The famous red boat shed sits on the jetty — once a freight
-          depot for the TSS Earnslaw itself (which you were on 3 hours ago — she used to run
-          all the way up here delivering supplies to remote farm stations before the road was
-          built in 1962), now the most photographed shed in the South Island. The Humboldt
-          Mountains rise behind it; in afternoon light (~17:40) the peaks are still in sun
-          while the shed sits in shadow — perfect for a silhouette shot.
+          depot for the TSS Earnslaw (Group A rode her 4 hours ago; she used to run all the
+          way up here delivering supplies to remote farm stations before the road was built
+          in 1962). Now the most photographed shed in the South Island. The Humboldt Mountains
+          rise behind it; in afternoon light (~17:40) the peaks are still in sun while the
+          shed sits in shadow — perfect for a silhouette shot.
         </p>
         <p>
           Then the <strong>Glenorchy Walkway</strong> — with the 13:00 Earnslaw sailing you
@@ -1112,6 +1262,42 @@
     </div>
 
   </div>
+
+  <!-- ============ ACTIVITY COST SUMMARY ============ -->
+  <section class="fuel-panel" style="background: linear-gradient(135deg, #2b5b6e 0%, #1f3a4a 100%);">
+    <h2>13:00 <em>split activity cost</em></h2>
+    <div class="fuel-grid">
+      <div>
+        <label>Group A · Earnslaw (3 pax)</label>
+        <b>NZ$207</b>
+      </div>
+      <div>
+        <label>Group B · Skyline 3-luge (3 pax)</label>
+        <b>NZ$282</b>
+      </div>
+      <div>
+        <label>Total activity cost</label>
+        <b>NZ$489</b>
+      </div>
+      <div>
+        <label>Vs whole-group Earnslaw</label>
+        <b>+NZ$75</b>
+      </div>
+    </div>
+    <p>
+      Group A: 3 × NZ$69 (TSS Earnslaw cruise-only, RealNZ). Group B: 3 × NZ$94 (Skyline
+      Gondola + 3 luge rides, pre-booked online). Total NZ$489 across the group — roughly
+      NZ$82 per person on average. The whole-group-does-Earnslaw baseline was NZ$414
+      (6 × NZ$69), so the split costs the group NZ$75 more overall — the price of
+      everyone getting their preferred activity.
+    </p>
+    <p>
+      <strong>Book both in advance.</strong> [high confidence] TSS Earnslaw 13:00 sailings
+      sell out in November; Skyline luge combos are cheaper pre-booked online than at the
+      counter. Confirm 3 seats on the Earnslaw at the same time as 3 Skyline combos so
+      neither group is stranded if one venue fills.
+    </p>
+  </section>
 
   <!-- ============ FUEL PANEL ============ -->
   <section class="fuel-panel">
