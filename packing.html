@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NZ Motorhome Packlist</title>
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+
+  :root{
+    /* light — alpine paper */
+    --bg:#eef1ee;
+    --surface:#f8faf7;
+    --surface-2:#e6ebe6;
+    --ink:#1b2b25;
+    --ink-soft:#4a5b53;
+    --ink-faint:#7c8a82;
+    --line:#d3dbd4;
+    --line-strong:#c1cbc2;
+    --accent:#2e6b57;        /* bush green */
+    --accent-ink:#1d4c3d;
+    --sg:#b34a2f;            /* bring from SG — terracotta */
+    --sg-bg:#f4e2db;
+    --nz:#2e6b57;            /* buy in NZ — green */
+    --nz-bg:#dcebe3;
+    --either:#8a6d1f;        /* either — tussock gold */
+    --either-bg:#efe6cf;
+    --shadow:0 1px 2px rgba(27,43,37,.06),0 4px 14px rgba(27,43,37,.05);
+    --done-veil:rgba(120,138,130,.5);
+    --on-accent:#ffffff;
+  }
+  :root:not([data-theme="light"]){ }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#131a17;
+      --surface:#1b2521;
+      --surface-2:#232f2a;
+      --ink:#e7ede9;
+      --ink-soft:#aebbb4;
+      --ink-faint:#7d8b83;
+      --line:#2c3833;
+      --line-strong:#3a4a43;
+      --accent:#69b79a;
+      --accent-ink:#9fd6c1;
+      --sg:#e08a6f;
+      --sg-bg:#3a231b;
+      --nz:#6fbf9c;
+      --nz-bg:#183329;
+      --either:#d8b968;
+      --either-bg:#332b14;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.28);
+      --done-veil:rgba(125,139,131,.4);
+      --on-accent:#0f1613;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131a17;
+    --surface:#1b2521;
+    --surface-2:#232f2a;
+    --ink:#e7ede9;
+    --ink-soft:#aebbb4;
+    --ink-faint:#7d8b83;
+    --line:#2c3833;
+    --line-strong:#3a4a43;
+    --accent:#69b79a;
+    --accent-ink:#9fd6c1;
+    --sg:#e08a6f;
+    --sg-bg:#3a231b;
+    --nz:#6fbf9c;
+    --nz-bg:#183329;
+    --either:#d8b968;
+    --either-bg:#332b14;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.28);
+    --done-veil:rgba(125,139,131,.4);
+    --on-accent:#0f1613;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 64px}
+
+  /* ---- sticky header ---- */
+  header.top{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+    background:color-mix(in srgb,var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    margin-inline:-16px;padding:14px 16px 12px;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin:0 0 2px;
+  }
+  h1{
+    font-family:"Fraunces",Georgia,serif;
+    font-weight:600;font-size:clamp(22px,5vw,30px);
+    line-height:1.05;margin:0;letter-spacing:-.01em;text-wrap:balance;
+    color:var(--ink);
+  }
+  .progline{display:flex;align-items:center;gap:12px;margin-top:12px}
+  .bar{flex:1;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;border:1px solid var(--line)}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--nz));transition:width .35s ease}
+  .count{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .count b{color:var(--ink)}
+
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+  .chip{
+    appearance:none;border:1px solid var(--line-strong);background:var(--surface);
+    color:var(--ink-soft);font:inherit;font-size:12.5px;font-weight:600;
+    padding:6px 12px;border-radius:99px;cursor:pointer;line-height:1.2;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+  .chip .dot{width:8px;height:8px;border-radius:99px}
+  .chip[data-f="sg"] .dot{background:var(--sg)}
+  .chip[data-f="nz"] .dot{background:var(--nz)}
+
+  .spacer{flex:1}
+  .txtbtn{
+    appearance:none;background:none;border:none;font:inherit;font-size:12.5px;
+    color:var(--ink-faint);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:6px 2px;
+  }
+  .txtbtn:hover{color:var(--sg)}
+
+  /* traveller stepper */
+  .travellers{
+    display:flex;align-items:center;gap:0;border:1px solid var(--line-strong);
+    border-radius:99px;background:var(--surface);overflow:hidden;
+  }
+  .travellers button{
+    appearance:none;border:none;background:none;color:var(--accent);
+    font-size:18px;font-weight:700;width:32px;height:30px;cursor:pointer;line-height:1;
+  }
+  .travellers button:hover{background:var(--surface-2)}
+  .travellers button:disabled{color:var(--ink-faint);cursor:not-allowed}
+  .travellers .n{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;min-width:70px;text-align:center;color:var(--ink);font-variant-numeric:tabular-nums}
+  .travellers .n small{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+
+  /* ---- intro note ---- */
+  .note{
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:12px 14px;margin-top:16px;font-size:13.5px;color:var(--ink-soft);
+    box-shadow:var(--shadow);
+  }
+  .note strong{color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:10px;font-size:12.5px}
+  .legend span{display:inline-flex;align-items:center;gap:7px;color:var(--ink-soft)}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .legend .l-sg{background:var(--sg)}
+  .legend .l-nz{background:var(--nz)}
+  .legend .l-either{background:var(--either)}
+  .split{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line-strong);font-size:13px;color:var(--ink);line-height:1.55}
+  .split .lead{font-weight:600;color:var(--ink)}
+  .split b{color:var(--accent-ink);font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600}
+  .split .wash{color:var(--sg);font-weight:600}
+
+  /* ---- sections ---- */
+  section{margin-top:26px}
+  .sechead{display:flex;align-items:baseline;gap:10px;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .sechead h2{
+    font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:18px;margin:0;color:var(--ink);letter-spacing:-.01em;
+  }
+  .sechead .sc{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;margin-left:auto}
+  .perperson{font-size:11px;font-weight:600;color:var(--accent-ink);background:var(--nz-bg);padding:2px 8px;border-radius:99px;letter-spacing:.02em}
+
+  ul.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  li.item{
+    display:flex;align-items:flex-start;gap:12px;padding:9px 10px;border-radius:9px;cursor:pointer;
+    transition:background .12s;
+  }
+  li.item:hover{background:var(--surface)}
+  li.item input{
+    appearance:none;flex:none;width:20px;height:20px;margin-top:1px;border:1.5px solid var(--line-strong);
+    border-radius:6px;background:var(--surface);cursor:pointer;position:relative;transition:.15s;
+  }
+  li.item input:hover{border-color:var(--accent)}
+  li.item input:checked{background:var(--accent);border-color:var(--accent)}
+  li.item input:checked::after{
+    content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  li.item input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .body{flex:1;min-width:0}
+  .row1{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .name{font-size:15px;color:var(--ink);font-weight:500}
+  .qty{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent-ink);background:var(--surface-2);padding:1px 7px;border-radius:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .tag.sg{color:var(--sg);background:var(--sg-bg)}
+  .tag.nz{color:var(--nz);background:var(--nz-bg)}
+  .tag.either{color:var(--either);background:var(--either-bg)}
+  .itemnote{font-size:12.5px;color:var(--ink-faint);margin-top:2px;line-height:1.4}
+  li.item.done .name{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--done-veil)}
+  li.item.done .qty,li.item.done .itemnote{opacity:.55}
+  li.item.hide{display:none}
+
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);text-align:center;line-height:1.6}
+
+  @media (max-width:520px){
+    .controls{gap:7px}
+    .txtbtn{padding:6px 0}
+    .spacer{flex-basis:100%;height:0}
+  }
+
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+</head>
+<body>
+
+<!-- Shared site navigation -->
+<nav class="site-nav">
+  <a href="index.html" class="brand">SI · Nov 2026 <span class="sub">— Itinerary</span></a>
+  <ul>
+    <li><a href="index.html">Overview</a></li>
+    <li><a href="packing.html" class="active">Packing</a></li>
+    <li><a href="day1.html">Day 1</a></li>
+    <li><a href="day2.html">Day 2</a></li>
+    <li><a href="day3.html">Day 3</a></li>
+    <li><a href="day4.html">Day 4</a></li>
+    <li><a href="day5.html">Day 5</a></li>
+    <li><a href="day6.html">Day 6</a></li>
+    <li><a href="day7.html">Day 7</a></li>
+    <li><a href="day8.html">Day 8</a></li>
+    <li><a href="day9.html">Day 9</a></li>
+    <li><a href="day10.html">Day 10</a></li>
+    <li><a href="day11.html">Day 11</a></li>
+    <li><a href="day12.html">Day 12</a></li>
+    <li><a href="day13.html">Day 13</a></li>
+    <li><a href="day14.html">Day 14</a></li>
+  </ul>
+</nav>
+<script defer src="assets/nav.js"></script>
+
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">South Island · Motorhome · Nov 2026</p>
+    <h1>NZ Road-Trip Packlist</h1>
+    <div class="progline">
+      <div class="bar"><i id="fill"></i></div>
+      <div class="count"><b id="cdone">0</b>/<span id="ctot">0</span> packed</div>
+    </div>
+    <div class="controls">
+      <button class="chip" data-f="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="sg"><span class="dot"></span>Bring from SG</button>
+      <button class="chip" data-f="nz"><span class="dot"></span>Buy in NZ</button>
+      <span class="spacer"></span>
+      <div class="travellers" title="Scales the per-person clothing quantities">
+        <button id="tminus" aria-label="Fewer travellers">−</button>
+        <span class="n"><span id="tnum">1</span><small>traveller</small></span>
+        <button id="tplus" aria-label="More travellers">+</button>
+      </div>
+      <div class="travellers" title="More washes = fewer clothes to carry (max 3)">
+        <button id="lminus" aria-label="Fewer laundry stops">−</button>
+        <span class="n"><span id="lnum">2</span><small>laundry</small></span>
+        <button id="lplus" aria-label="More laundry stops">+</button>
+      </div>
+      <button class="txtbtn" id="reset">Reset</button>
+    </div>
+  </header>
+
+  <div class="note">
+    Daily-wear clothing (tops, underwear, socks) scales with <strong>how often you do laundry</strong> — most holiday parks (Lakes Edge, Glentanner, Hampshire) have coin laundry. Set your travellers and laundry stops above; quantities update live. November is late spring: mild lowlands, but cold, wet and wind-exposed at Milford, the glaciers, Mt Cook and the passes — pack layers, not bulk.
+    <div class="legend">
+      <span><i class="l-sg"></i> <strong style="color:var(--sg)">Bring from SG</strong> — cheaper/better at home, or needed on arrival</span>
+      <span><i class="l-nz"></i> <strong style="color:var(--nz)">Buy in NZ</strong> — bulky, perishable, or can't fly with it</span>
+      <span><i class="l-either"></i> <strong style="color:var(--either)">Either</strong> — bring, or grab there if you'd rather</span>
+    </div>
+    <div class="split" id="split"></div>
+  </div>
+
+  <main id="list"></main>
+
+  <footer>
+    Tick state and traveller count save automatically in this browser.<br>
+    Confirm the fresh 10-day forecast ~2 weeks out, and check what bedding &amp; towels your motorhome rental includes before finalising.
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  { title:"Clothing", perPerson:true, items:[
+    {n:"T-shirts / tops", q:7, s:"sg", daily:true, spare:0, note:"Merino or synthetic — dries fast, skip cotton. NZ clothing is dear."},
+    {n:"Long-sleeve base layers", q:2, s:"either", note:"NZ merino (Icebreaker, Macpac) is superb but pricey — buy one there as a souvenir if you like."},
+    {n:"Fleece / mid-layer", q:2, s:"sg"},
+    {n:"Light puffer / insulated jacket", q:1, s:"sg", note:"Essential for Milford & Mt Cook mornings; packs small."},
+    {n:"Waterproof rain shell", q:1, s:"sg", note:"Non-negotiable — the West Coast is rainforest. Don't rely on shopping day 1."},
+    {n:"Waterproof over-trousers", q:1, s:"either"},
+    {n:"Hiking pants / trousers", q:2, s:"sg", note:"One convertible pair is handy."},
+    {n:"Jeans / casual pants", q:1, s:"sg"},
+    {n:"Shorts", q:2, s:"sg"},
+    {n:"Underwear", q:8, s:"sg", daily:true, spare:1},
+    {n:"Socks (incl. 2 thick/hiking)", q:8, s:"sg", daily:true, spare:1},
+    {n:"Beanie + gloves", q:1, s:"either", note:"Yes, in November. Cheap to grab in any NZ town if forgotten."},
+    {n:"Sun hat + sunglasses", q:1, s:"sg", note:"NZ UV is fierce even when the air is cold."},
+    {n:"Swimwear", q:1, s:"sg", note:"Hot pools, Tekapo, Glentanner."},
+    {n:"Sleepwear (warm)", q:2, s:"sg", note:"Motorhomes get cold overnight."},
+    {n:"Hiking shoes / boots", q:1, s:"sg", note:"Broken in before you fly."},
+    {n:"Camp / casual shoes", q:1, s:"sg"},
+    {n:"Jandals / sandals", q:1, s:"sg", note:"Showers, quick stops."},
+    {n:"One smart-casual outfit", q:1, s:"sg", note:"Date nights, TSS Earnslaw, wineries."},
+  ]},
+  { title:"Documents & Money", perPerson:false, items:[
+    {n:"Passports", q:null, s:"sg"},
+    {n:"Driver's licence + International Driving Permit", q:null, s:"sg", note:"Get the IDP in SG before you go if your licence isn't in English."},
+    {n:"Motorhome rental & insurance docs", q:null, s:"sg"},
+    {n:"Booking confirmations (holiday parks, activities)", q:null, s:"sg", note:"Keep offline copies too."},
+    {n:"Credit / debit cards", q:null, s:"sg"},
+    {n:"Some NZD cash", q:null, s:"either", note:"For rural fuel, small shops and DOC honesty boxes. Exchange a little in SG or withdraw on arrival."},
+    {n:"Travel insurance policy + emergency numbers", q:null, s:"sg"},
+  ]},
+  { title:"Tech & Navigation", perPerson:false, items:[
+    {n:"Phones + charging cables", q:null, s:"sg"},
+    {n:"Power bank(s)", q:null, s:"sg", note:"Carry-on only — never in checked luggage."},
+    {n:"NZ / universal power adapter (Type I plug)", q:null, s:"sg", note:"NZ uses the same slanted-pin plug as Australia. Bring 2 — cheaper than buying there."},
+    {n:"12V / USB car charger + inverter check", q:null, s:"sg", note:"Confirm what the motorhome already has."},
+    {n:"Camera + spare batteries / cards", q:null, s:"sg", note:"Lake Matheson, Castle Hill, glowworms."},
+    {n:"Headlamp / torch (each)", q:null, s:"either", note:"Real use at glowworm caves & dawn starts. Macpac/Kathmandu stock them in NZ."},
+    {n:"Local SIM / eSIM", q:null, s:"nz", note:"One NZ, Spark or Skinny — buy at the airport or activate an eSIM on landing. Coverage is patchy on the West Coast regardless."},
+    {n:"Offline maps + apps downloaded", q:null, s:"sg", note:"Google Maps South Island offline, plus Gaspy, NZTA Journey Planner, CamperMate."},
+  ]},
+  { title:"Health & Toiletries", perPerson:false, items:[
+    {n:"Personal medications + copies of prescriptions", q:null, s:"sg", note:"Bring enough for 14+ days in original packaging — prescription meds are hard to get on the road."},
+    {n:"Motion-sickness tablets", q:null, s:"either", note:"For the Milford road, Crown Range and winding passes."},
+    {n:"Sunscreen SPF 50+", q:null, s:"nz", note:"Buy there — bulky liquid, and NZ sells strong local brands. Beats carry-on limits."},
+    {n:"Insect repellent (sandfly-strength)", q:null, s:"nz", note:"West Coast & Milford sandflies are brutal — local DEET repellents work best. Liquid, so buy on arrival."},
+    {n:"Lip balm", q:null, s:"either"},
+    {n:"First-aid kit + blister plasters", q:null, s:"either", note:"Bring the basics; top up at any NZ pharmacy."},
+    {n:"Toiletries", q:null, s:"either", note:"Travel sizes from home, refill at a NZ supermarket."},
+    {n:"Quick-dry towels", q:null, s:"either", note:"Motorhomes rarely supply enough — check your rental first."},
+    {n:"Reusable water bottles", q:null, s:"sg", note:"Tap water is safe to refill everywhere."},
+  ]},
+  { title:"Motorhome & Kitchen", perPerson:false, items:[
+    {n:"Pantry basics (oil, salt, coffee, snacks)", q:null, s:"nz", note:"Stock up at the first big-town supermarket — Pak'nSave or Countdown."},
+    {n:"Dish soap, sponge, tea towels", q:null, s:"nz", note:"Cheap there, or often supplied by the rental."},
+    {n:"Bin bags", q:null, s:"nz"},
+    {n:"Firelighters / matches / lighter", q:null, s:"nz", note:"You can't fly with these — buy at any NZ supermarket."},
+    {n:"Reusable shopping bags", q:null, s:"either", note:"NZ supermarkets charge for bags — bring a couple."},
+    {n:"Food containers for the fridge", q:null, s:"either", note:"Handy for your cooked-salmon plan (safe 1–2 days in the 130L fridge)."},
+    {n:"Extra blanket", q:null, s:"either", note:"Only if the rental's bedding is thin — confirm on booking."},
+    {n:"Multi-tool, gaffer tape, ziplock bags", q:null, s:"sg", note:"Multi-tool in checked luggage only."},
+  ]},
+  { title:"Activity-specific", perPerson:false, items:[
+    {n:"Daypack for hikes", q:null, s:"sg"},
+    {n:"Dry-bag for wet-weather days", q:null, s:"either"},
+    {n:"Closed shoes + fleece for Skydive Wānaka", q:null, s:"sg", note:"No loose items on the day."},
+    {n:"Waterproofs + headlamp for glowworm caves", q:null, s:"either", note:"Already on the list above — just don't leave them in the van."},
+  ]},
+];
+
+const TRIP_DAYS = 14;
+const KEY = "nz-packlist-v3";
+let state = { checked:{}, travellers:1, laundry:2, filter:"all" };
+try { const raw = localStorage.getItem(KEY); if(raw) state = Object.assign(state, JSON.parse(raw)); } catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+const listEl = document.getElementById("list");
+
+// build
+DATA.forEach((sec, si)=>{
+  const section = document.createElement("section");
+  const head = document.createElement("div");
+  head.className = "sechead";
+  head.innerHTML = `<h2>${sec.title}</h2>` +
+    (sec.perPerson ? `<span class="perperson">per person</span>` : "") +
+    `<span class="sc" data-sc="${si}"></span>`;
+  section.appendChild(head);
+
+  const ul = document.createElement("ul");
+  ul.className = "items";
+  sec.items.forEach((it, ii)=>{
+    const id = `i-${si}-${ii}`;
+    const li = document.createElement("li");
+    li.className = "item";
+    li.dataset.src = it.s;
+    li.dataset.id = id;
+    const tagTxt = it.s==="sg" ? "Bring · SG" : it.s==="nz" ? "Buy · NZ" : "Either";
+    li.innerHTML =
+      `<input type="checkbox" id="${id}" ${state.checked[id] ? "checked":""}>` +
+      `<div class="body"><div class="row1">` +
+        `<span class="name">${it.n}</span>` +
+        (it.q!=null ? `<span class="qty" data-base="${it.q}"${it.daily?` data-daily="1" data-spare="${it.spare||0}"`:""}></span>` : "") +
+        `<span class="tag ${it.s}">${tagTxt}</span>` +
+      `</div>` +
+      (it.note ? `<div class="itemnote">${it.note}</div>` : "") +
+      `</div>`;
+    if(state.checked[id]) li.classList.add("done");
+    ul.appendChild(li);
+  });
+  section.appendChild(ul);
+  listEl.appendChild(section);
+});
+
+// interactions
+listEl.addEventListener("click", (e)=>{
+  const li = e.target.closest("li.item");
+  if(!li) return;
+  const cb = li.querySelector("input");
+  if(e.target !== cb) cb.checked = !cb.checked;
+  const id = li.dataset.id;
+  state.checked[id] = cb.checked;
+  li.classList.toggle("done", cb.checked);
+  save(); refresh();
+});
+
+// filters
+const chips = [...document.querySelectorAll(".chip")];
+chips.forEach(c=>c.addEventListener("click",()=>{
+  state.filter = c.dataset.f;
+  chips.forEach(x=>x.setAttribute("aria-pressed", x===c ? "true":"false"));
+  save(); applyFilter();
+}));
+
+// travellers
+const tnum = document.getElementById("tnum");
+document.getElementById("tplus").addEventListener("click",()=>setTravellers(state.travellers+1));
+document.getElementById("tminus").addEventListener("click",()=>setTravellers(state.travellers-1));
+function setTravellers(v){
+  state.travellers = Math.max(1, Math.min(9, v));
+  save(); renderQty();
+}
+
+// laundry stops
+const lnum = document.getElementById("lnum");
+document.getElementById("lplus").addEventListener("click",()=>setLaundry(state.laundry+1));
+document.getElementById("lminus").addEventListener("click",()=>setLaundry(state.laundry-1));
+function setLaundry(v){
+  state.laundry = Math.max(1, Math.min(3, v));
+  save(); renderQty();
+}
+
+function daysPerBlock(){ return Math.ceil(TRIP_DAYS / (state.laundry + 1)); }
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(!confirm("Uncheck everything and clear saved progress?")) return;
+  state.checked = {};
+  document.querySelectorAll("li.item").forEach(li=>{
+    li.classList.remove("done"); li.querySelector("input").checked = false;
+  });
+  save(); refresh();
+});
+
+function renderQty(){
+  tnum.textContent = state.travellers;
+  const tlbl = document.querySelector(".travellers .n small");
+  if(tlbl) tlbl.textContent = state.travellers===1 ? "traveller" : "travellers";
+  document.getElementById("tminus").disabled = state.travellers<=1;
+  document.getElementById("tplus").disabled = state.travellers>=9;
+
+  lnum.textContent = state.laundry;
+  document.getElementById("lminus").disabled = state.laundry<=1;
+  document.getElementById("lplus").disabled = state.laundry>=3;
+
+  const dpb = daysPerBlock();
+  document.querySelectorAll(".qty").forEach(q=>{
+    const li = q.closest("li.item");
+    const per = li.closest("section").querySelector(".perperson");
+    let base = q.dataset.daily ? dpb + (+q.dataset.spare||0) : +q.dataset.base;
+    const total = per ? base*state.travellers : base;
+    q.textContent = per && state.travellers>1 ? `×${total}  (${base}ea)` : `×${total}`;
+  });
+
+  renderSplit(dpb);
+}
+
+function renderSplit(dpb){
+  const blocks = state.laundry + 1;
+  const days = [];
+  for(let i=1;i<=state.laundry;i++) days.push(Math.round(TRIP_DAYS/blocks*i));
+  const washTxt = days.map(d=>`Day ${d}`).join(", ");
+  document.getElementById("split").innerHTML =
+    `<span class="lead">${TRIP_DAYS} days</span> · <b>${state.laundry}</b> laundry ${state.laundry===1?"stop":"stops"} ` +
+    `→ <b>${blocks}</b> wearing blocks of <b>~${dpb} days</b> each. ` +
+    `Wash around <span class="wash">${washTxt}</span>, so carry <b>~${dpb} days</b> of daily clothes.`;
+}
+
+function applyFilter(){
+  document.querySelectorAll("li.item").forEach(li=>{
+    const show = state.filter==="all" || li.dataset.src===state.filter ||
+                 (li.dataset.src==="either"); // 'either' items belong to both SG and NZ views
+    const match = state.filter==="all" ? true
+                : state.filter==="sg" ? (li.dataset.src==="sg"||li.dataset.src==="either")
+                : (li.dataset.src==="nz"||li.dataset.src==="either");
+    li.classList.toggle("hide", !match);
+  });
+  // hide empty sections + update section counts
+  document.querySelectorAll("section").forEach(sec=>{
+    const vis = [...sec.querySelectorAll("li.item")].filter(l=>!l.classList.contains("hide"));
+    sec.style.display = vis.length ? "" : "none";
+  });
+  refresh();
+}
+
+function refresh(){
+  // overall progress counts only visible items
+  const vis = [...document.querySelectorAll("li.item")].filter(l=>!l.classList.contains("hide"));
+  const done = vis.filter(l=>l.querySelector("input").checked).length;
+  document.getElementById("cdone").textContent = done;
+  document.getElementById("ctot").textContent = vis.length;
+  document.getElementById("fill").style.width = vis.length ? (done/vis.length*100)+"%" : "0%";
+  // per-section counts
+  DATA.forEach((_, si)=>{
+    const scEl = document.querySelector(`[data-sc="${si}"]`);
+    const secLis = [...document.querySelectorAll("li.item")].filter(l=>l.dataset.id.startsWith(`i-${si}-`) && !l.classList.contains("hide"));
+    const d = secLis.filter(l=>l.querySelector("input").checked).length;
+    if(scEl) scEl.textContent = secLis.length ? `${d}/${secLis.length}` : "";
+  });
+}
+
+// init
+chips.forEach(x=>x.setAttribute("aria-pressed", x.dataset.f===state.filter ? "true":"false"));
+renderQty();
+applyFilter();
+
+</script>
+
+</body>
+</html>
