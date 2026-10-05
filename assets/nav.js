@@ -1,18 +1,14 @@
-/* Center the active nav pill in the horizontally scrollable list (mobile) */
+/* Center the active nav pill in the horizontally scrollable tab strip (mobile).
+   Only the strip itself is scrolled, never the page, so a page can't open
+   shifted sideways even if some content is wider than the screen. */
 (function () {
   var nav = document.querySelector('.site-nav ul');
   if (!nav) return;
   var active = nav.querySelector('a.active');
   if (!active) return;
-  // Wait a tick so layout settles, then scroll the active item into view
   requestAnimationFrame(function () {
-    try {
-      active.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'instant' });
-    } catch (e) {
-      // older browsers — fallback
-      var navRect = nav.getBoundingClientRect();
-      var actRect = active.getBoundingClientRect();
-      nav.scrollLeft = (actRect.left - navRect.left) - (navRect.width / 2) + (actRect.width / 2);
-    }
+    var navRect = nav.getBoundingClientRect();
+    var actRect = active.getBoundingClientRect();
+    nav.scrollLeft += (actRect.left - navRect.left) - (navRect.width - actRect.width) / 2;
   });
 })();

@@ -477,6 +477,14 @@
     .stop-header { flex-direction: column; align-items: flex-start; }
     .overview-strip { grid-template-columns: repeat(2, 1fr); }
     .sunrise-teaser::before { font-size: 4rem; right: 10px; }
+    /* fuel table → stacked cards so it fits a phone screen */
+    .fuel-table thead { display: none; }
+    .fuel-table, .fuel-table tbody, .fuel-table tr, .fuel-table td { display: block; width: 100%; }
+    .fuel-table tr { border: 1px solid #e3eff5; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; }
+    .fuel-table td { border: none; padding: 3px 0; }
+    .fuel-table td:first-child { font-size: 1rem; padding-bottom: 6px; }
+    .fuel-table td:nth-child(2)::before { content: "When · "; color: var(--text-soft); font-weight: 400; }
+    .fuel-table td:nth-child(3)::before { content: "Price · "; color: var(--text-soft); font-weight: 400; }
   }
 </style>
 <link rel="stylesheet" href="assets/nav.css">

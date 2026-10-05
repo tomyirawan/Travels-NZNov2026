@@ -495,7 +495,7 @@
   /* === SUMMARY GRID === */
   .summary{
     background:linear-gradient(180deg, var(--lavender-soft), #f5f0fb);
-    margin:5rem -6vw 0;
+    margin:5rem 0 0;
     padding:5rem 6vw;
     border-top:1px solid var(--lavender);
     border-bottom:1px solid var(--lavender);
@@ -542,6 +542,22 @@
     color:var(--ink-soft);
   }
   footer em{font-family:'Fraunces',serif;font-style:italic;text-transform:none;letter-spacing:0;color:var(--lake-deep);font-size:.95rem}
+
+  /* ===== PHONE LAYOUT ===== */
+  @media (max-width:640px){
+    .hero{padding:2rem 1.25rem 3rem}
+    section{padding:4rem 1.25rem}
+    .summary{padding:4rem 1.25rem;margin-top:1rem}
+    .grid-4{grid-template-columns:repeat(2,1fr);gap:.8rem}
+    .pill{padding:1.1rem 1rem}
+    .pill .num{font-size:2rem}
+    .pill .l{letter-spacing:.1em}
+    footer{padding:2.5rem 1.25rem}
+    .topbar{flex-direction:column;align-items:flex-start;gap:.4rem;letter-spacing:.14em}
+    .hero-foot{grid-template-columns:repeat(2,1fr);gap:1.25rem 1rem}
+    .stat .val{font-size:1.25rem}
+    .highlights{gap:.6rem}
+  }
 </style>
 <link rel="stylesheet" href="assets/nav.css">
 </head>
@@ -1060,7 +1076,7 @@
 </section>
 
 <!-- ====================== SUMMARY ====================== -->
-<section class="summary" style="padding:5rem 6vw;">
+<section class="summary">
   <div class="section-tag" style="color:var(--lavender-deep)"><span style="background:var(--lavender-deep);color:white;font-weight:700">  </span> By the Numbers</div>
   <h2>The whole <em>day, distilled.</em></h2>
   <div class="grid-4">
